@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>关于API文档</title>
+      <link href="/2022/11/11/%E5%85%B3%E4%BA%8EAPI%E6%96%87%E6%A1%A3/"/>
+      <url>/2022/11/11/%E5%85%B3%E4%BA%8EAPI%E6%96%87%E6%A1%A3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="关于API文档"><a href="#关于API文档" class="headerlink" title="关于API文档"></a>关于API文档</h2><h3 id="生成API文档"><a href="#生成API文档" class="headerlink" title="生成API文档"></a>生成API文档</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springdoc<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springdoc-openapi-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>启动程序后，访问<code>/swagger-ui/index.html</code>，就会显示API文档页面。</p><p>也可访问<code>/v3/api-docs</code>，返回的是API文档的<code>JSON</code>结构数据。可以用该数据生成其它风格的API文档页面，比如可以提供给<code>Apifox</code>生成API文档。</p><p>文档生成的原理是通过扫描源代码中的<code>Controller</code>，根据<code>RequestMapping</code>和相应方法的参数生成文档。</p><h3 id="API注解"><a href="#API注解" class="headerlink" title="API注解"></a>API注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Tag(name = &quot;ArticleController&quot;, description = &quot;文章接口&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArticleController</span> &#123;</span><br><span class="line">    <span class="meta">@Operation(summary = &quot;根据文章ID获取文章对象&quot;)</span></span><br><span class="line">    <span class="meta">@ApiResponses(value = &#123;@ApiResponse(description = &quot;文章对象&quot;)&#125;)</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/article/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Article <span class="title function_">getArticleById</span><span class="params">(<span class="meta">@Parameter(description = &quot;文章ID&quot;, required = true)</span> <span class="meta">@PathVariable(&quot;id&quot;)</span> Integer id)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>类注释：<code>@Tag(name = &quot;ArticleController&quot;, description = &quot;文章接口&quot;)</code></li><li>方法注释：<code>@Operation(summary = &quot;根据文章ID获取文章对象&quot;)</code></li><li>参数注释：<code>@Parameter(description = &quot;文章ID&quot;, required = true)</code></li><li>返回值: <code>@ApiResponses(value = &#123;@ApiResponse(description = &quot;文章对象&quot;)&#125;)</code></li></ul><h3 id="SpringDoc-配置"><a href="#SpringDoc-配置" class="headerlink" title="SpringDoc 配置"></a>SpringDoc 配置</h3><p>常用配置项：</p><ul><li><code>springdoc.api-docs.enabled</code>：api-docs是否开启。默认开启。</li><li><code>springdoc.swagger-ui.enabled</code>: swagger-ui是否开启。默认开启。</li><li><code>springdoc.packages-to-scan</code>: API文档的包扫描路径。默认扫描所有包。</li><li><code>springdoc.paths-to-match</code>: API文档的包含的请求路径。默认包含所有请求路径。</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/11/08/hello-world/"/>
+      <url>/2022/11/08/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
