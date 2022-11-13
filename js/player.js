@@ -23,38 +23,17 @@ class Musics {
     constructor() {
         this.songs = [{
                 id: 1,
-                title: '越权访问-崩坏：星穹铁道 - Hanser',
-                singer: '越权访问-崩坏：星穹铁道 - Hanser',
+                title: '打上花火',
+                singer: '七爷',
                 songUrl: './songs/1.mp3',
-                imageUrl: './images/songs/1.webp'
+                imageUrl: './images/songs/cd.png'
             },
             {
                 id: 2,
-                title: '妄想Reality（翻自 洛天依） - 炎祾',
-                singer: '妄想Reality（翻自 洛天依） - 炎祾',
+                title: '你从未离去',
+                singer: '白挺',
                 songUrl: './songs/2.mp3',
-                imageUrl: './images/songs/2.webp'
-            },
-			{
-                id: 3,
-                title: '人间失宠 - 昔诺',
-                singer: '人间失宠 - 昔诺',
-                songUrl: './songs/3.mp3',
-                imageUrl: './images/songs/3.webp'
-            },
-            {
-                id: 4,
-                title: '崩坏世界的歌姬 (Movie Ver.) - 小林未郁',
-                singer: '崩坏世界的歌姬 (Movie Ver.) - 小林未郁',
-                songUrl: './songs/4.mp3',
-                imageUrl: './images/songs/4.webp'
-            },
-			{
-                id: 5,
-                title: '玛德琳娜电塔 - 花玲',
-                singer: '玛德琳娜电塔 - 花玲',
-                songUrl: './songs/5.mp3',
-                imageUrl: './images/songs/5.webp'
+                imageUrl: './images/songs/cd.png'
             },
         ]
     }
