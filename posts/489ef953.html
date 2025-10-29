@@ -1,0 +1,891 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Spring面试题 | 北川的个人博客</title><meta name="keywords" content="Spring,SpringMVC,Springboot"><meta name="author" content="北川,1656473414@qq.com"><meta name="copyright" content="北川"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Spring面试题"><meta name="application-name" content="Spring面试题"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Spring面试题"><meta property="og:url" content="https://gukeyang.github.io/posts/489ef953.html"><meta property="og:site_name" content="北川的个人博客"><meta property="og:description" content="聊聊你对spring框架的理解？Spring 是一种轻量级开发框架，旨在提高开发人员的 开发效率以及系统的可维护性，其中有几个核心概念：依赖注入、IOC(控制反转)、AOP（面向切面编程）、事务管理。 IOC（控制反转）它是一种创建对象和获取对象的一个技术思想，将对象交给Spring容器进行管理。我"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s2.loli.net/2025/10/23/5MFUXBI3EhCAx6y.jpg?_r_=e11426c7-2fb5-927a-c21e-00c94e3371d0"><meta property="article:author" content="北川"><meta property="article:tag" content="博客,笔记,学习"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s2.loli.net/2025/10/23/5MFUXBI3EhCAx6y.jpg?_r_=e11426c7-2fb5-927a-c21e-00c94e3371d0"><meta name="description" content="聊聊你对spring框架的理解？Spring 是一种轻量级开发框架，旨在提高开发人员的 开发效率以及系统的可维护性，其中有几个核心概念：依赖注入、IOC(控制反转)、AOP（面向切面编程）、事务管理。 IOC（控制反转）它是一种创建对象和获取对象的一个技术思想，将对象交给Spring容器进行管理。我"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://gukeyang.github.io/posts/489ef953"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":"3932F24FA213E964B6B1B0FD091F88CE"},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://friends.anheyu.com/"},
+  navMusic: true,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 设计开发一条龙","🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    simplehomepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: 北川","link":"链接: ","source":"来源: 北川的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '北川的个人博客',
+  title: 'Spring面试题',
+  postAI: '',
+  pageFillDescription: '聊聊你对spring框架的理解？, 单例Bean 生命周期的核心阶段, 1. Bean 定义加载与解析, 2. Bean 实例化（创建对象）, 3. 属性注入（依赖注入DI）, 4. 初始化前（Aware 接口回调）, 5. 初始化前置处理, 6. 初始化方法执行, 7. 初始化后置处理, 8. Bean 就绪（可使用）, 9. 销毁前准备, 10. 销毁方法执行, Spring 中的单例 bean 的线程安全问题了解吗？(重要), spring bean是线程安全的吗, spring是如何解决循环依赖的？, Spring事务, 事务的实现方式, Transactional的五个属性, 事务的失效的场景, @Component 和 @Bean 的区 别是什么？, @Autowired 和 @Resource 有什么区别, Spring 中有哪些设计模式？, 1. 单例模式（Singleton Pattern）, 2. 工厂模式（Factory Pattern）, 3. 代理模式（Proxy Pattern）, 4. 观察者模式（Observer Pattern）, 5. 模板方法模式（Template Method Pattern）, 6. 适配器模式（Adapter Pattern）, 7. 策略模式（Strategy Pattern）, 8. 装饰器模式（Decorator Pattern）, 9. 组合模式（Composite Pattern）, 10. 其他常用模式聊聊你对框架的理解是一种轻量级开发框架旨在提高开发人员的开发效率以及系统的可维护性其中有几个核心概念依赖注入控制反转面向切面编程事务管理控制反转它是一种创建对象和获取对象的一个技术思想将对象交给容器进行管理我们不用手动的创建对象而是由容器来帮我实现实例化对象核心的话是通过依赖注入依赖注入有三种方式注解配置构造器注入的底层的话是通过反射机制工厂模式配置解析容器启动时首先会加载并解析描述对象及其依赖关系的配置信息容器根据解析后的配置通过反射机制动态创建对象而非硬编码操作对象创建后容器会根据配置或注解解析其依赖项如依赖并自动完成依赖注入面向切面编程是面向切面编程能够将那些与业务无关却为业务模块所共同调用的逻辑封装起来以减少系统的重复代码降低模块间的耦合度在里面有几个概念横切关注点系统中分散在多个模块且与核心业务逻辑无关的通用功能例如日志记录性能监控事务管理权限校验等切面封装横切关注点的模块是的核心载体它定义了做什么如日志逻辑和在何时何地做通过通知和切点指定连接点程序执行过程中可插入切面逻辑的特定点如方法调用异常抛出字段访问等在中连接点通常指方法的执行因为基于动态代理主要支持方法级别的拦截切点用于定位连接点的规则表达式决定哪些连接点会被切面拦截通知切面在连接点执行的具体逻辑并定义了执行时机常见通知类型前置通知在连接点执行前执行后置通知在连接点执行后无论是否异常执行返回通知在连接点正常返回后执行异常通知在连接点抛出异常后执行环绕通知包裹连接点可在执行前后自定义逻辑甚至控制是否执行连接点目标对象被切面拦截的原始对象即业务逻辑对象通过代理对其增强代理对象在目标对象基础上创建的代理实例织入将切面逻辑嵌入到目标对象的过程生成代理对象织入时机分为编译期通过编译器将切面织入如类加载期在类加载时织入需特殊类加载器运行期通过动态代理在运行时织入如最常见就是基于动态代理的如果要代理的对象实现了某个接口那么会使用去创建代理对象而对于没有实现接口的对象就无法使用去进行代理了这时候会使用生成一个被代理对象的子类来作为代理的原理是通过动态代理实现的在程序运行时动态生成目标对象的代理对象通过代理对象间接调用目标方法并在调用过程中嵌入切面逻辑动态代理有两种方式动态代理基于的类和接口实现要求目标对象必须实现接口代理对象是接口的实现类代理基于字节码生成库实现无需对象实现接口通过继承目标类生成代理子类实现的的应用常见场景最常见的是事务管理的声明式事务就是基于实现的我们只需要在方法上面标注就会通过在方法执行前开启事务执行后根据是否有异常决定提交或回滚然后就是日志记录可以定义一个切面通过获取参数获取返回值统计执行时间还有权限校验如果有需要特定角色权限访问可以定义一个切面检查用户权限单例生命周期的核心阶段定义加载与解析容器启动时通过配置注解如或配置类加载的定义信息解析为对象包含类名属性依赖作用域等元数据并注册到中实例化创建对象容器根据的信息通过反射调用的构造方法无参或有参有参时需先解析依赖创建的实例内存中生成对象但尚未设置属性注意此阶段仅完成对象的创建属性尤其是依赖的其他尚未注入属性注入依赖注入容器根据中定义的属性信息如中的将依赖的或基本数据类型值注入到当前的对应字段或方法中依赖注入的核心是解决对象之间的依赖关系确保在使用前拥有所需的资源初始化前接口回调若实现了提供的系列接口如等容器会调用对应的回调方法向传递容器相关的信息注入当前在容器中的名称注入当前所属的注入当前应用的初始化前置处理若容器中注册了后置处理器会调用其方法对进行初始化前的增强处理如修改的属性替换实例等这是提供的扩展点允许在初始化前自定义处理逻辑例如的代理生成可能在此阶段介入初始化方法执行执行的初始化逻辑有两种方式优先级注解接口注解标注在方法上容器会在属性注入完成后自动调用该方法接口实现接口的方法容器会在属性注入后调用配置的在标签中通过指定初始化方法容器会调用该方法初始化方法通常用于完成的资源加载状态初始化等操作如连接数据库初始化缓存初始化后置处理再次调用的方法对进行初始化后的增强处理典型应用在此阶段为生成代理对象若该被切面拦截最终返回的可能是代理对象而非原始实例就绪可使用经过上述步骤后已完全初始化被放入容器的缓存中单例供应用程序通过方法获取并使用销毁前准备当容器关闭时如应用停止单例会进入销毁阶段若实现了接口容器会先调用其方法的前置逻辑销毁方法执行执行的销毁逻辑有两种方式优先级注解接口注解标注在方法上容器关闭时自动调用接口实现接口的方法容器关闭时调用配置的在标签中通过指定销毁方法容器关闭时调用销毁方法通常用于释放资源如关闭数据库连接释放文件句柄等中的单例的线程安全问题了解吗重要在框架中的默认作用域是单例这意味着在容器启动时会创建一个实例并在整个应用生命周期中只维护这一个实例如果是无状态的即没有成员变量或只有查询操作而没有修改操作那么它在多线程环境下是线程安全的因为多个线程访问同一个无状态时不会修改其状态因此不会引发线程安全问题如果是有状态的即包含可变数据如实例变量并且多个线程同时访问并修改这些状态那么可能会引发线程安全问题常见的两种解决办法尽量避免定义可变的成员变量在类中定义一个成员变量将可变成员变量保存在中推荐可以通过使用等同步机制来保证单例内部的可变状态的线程安全性可以使用来确保可变状态的线程安全性是线程安全的吗单例作用域这是的默认作用域意味着在整个容器中仅存在一个该类型的实例如果这个单例是无状态的即不包含任何成员变量或只包含不可变的成员变量那么它是线程安全的如果单例包含可变的状态信息并且这种状态被多个线程共享则需要采取额外措施来确保线程安全比如使用同步机制或设计成不可变对象等方法来保护数据的一致性原型作用域每次请求时都会创建一个新的实例在这种情况下每个线程都有自己的副本因此通常不需要担心线程安全问题但如果多个线程访问同一个的共享资源例如静态变量或其他全局状态仍需注意线程安全是如何解决循环依赖的假设有两个类和依赖同时又依赖这就形成了循环依赖通过三级缓存机制来解决单例的构造器循环依赖构造器注入除外当依赖又依赖时会提前把的代理对象暴露到三级缓存中等注入时就能从三级缓存中获取的早期引用从而打破循环依赖一级缓存这是一个用于存放完全初始化好的单例即已经经历了实例化属性赋值和初始化等所有阶段的当从容器中获取时首先会从这个缓存中查找如果找到了直接返回二级缓存也是一个用于存放早期暴露的单例即已经完成实例化但还未进行属性赋值和初始化的当一个实例化后会将其提前暴露到这个缓存中目的是让其他依赖它的可以提前获取到这个的引用即使它还没有完全初始化三级缓存同样是存放的是通过这个工厂可以获取到早期暴露的单例是一个接口只有一个方法用于创建对象在创建时如果发现存在循环依赖会将一个放入三级缓存这个工厂在需要时可以返回早期暴露的过程创建先实例化此时没有进行属性赋值和初始化将的放入到三级缓存中在为进行属性赋值时发现依赖于于是开始创建实例化将的放入三级缓存在为属性赋值时发现依赖此时从三级缓存中获取的通过获取早期暴露的将其放入到二级缓存中并从三级缓存中移出对应的然后将暴露注入到完成属性赋值和初始化将放入到一级缓存回到的创建过程由于已经创建了继续完成的属性赋值和初始化最后将放入到一级缓存事务事务的实现方式中有两种实现方式一种是声明式事务一种是编程式事务声明式事务因非侵入性成为主流声明式事务基于注解在需要事务的方法或类上标注通过动态增强方法自动管理事务编程式事务手动通过或控制事务侵入性强适用于复杂的事务逻辑的五个属性传播行为定义当一个事务方法调用另一个事务方法时事务如何嵌套执行默认若当前存在事务则加入该事务若不存在则新建事务无论当前是否有事务都新建一个独立事务原事务挂起若当前有事务则嵌套在当前事务中子事务可独立回滚不影响父事务若无则同若当前有事务加入否则以非事务方式执行必须在事务中执行否则抛异常以非事务方式执行若当前有事务则挂起以非事务方式执行若当前有事务则抛异常隔离级别控制多个并发事务之间的相互影响解决脏读不可重复读幻读等问题默认使用数据库默认隔离级别如默认为默认为允许读取未提交的数据可能导致脏读不可重复读幻读只能读取已提交的数据避免脏读可能出现不可重复读幻读保证多次读取同一数据结果一致避免脏读不可重复读可能出现幻读最高隔离级别事务串行执行避免所有并发问题但性能极低回滚规则指定哪些异常触发事务回滚哪些异常不触发需要回滚的异常类型默认只回滚及其子类例所有都回滚需要回滚的异常类名字符串形式如不需要回滚的异常类型即使发生也不回滚例自定义业务异常不回滚不需要回滚的异常类名字符串形式超时时间设置事务的最大执行时间秒若超过该时间未完成则自动回滚并释放资源避免长期占用数据库连接只读属性标记事务是否为只读事务用于优化只读操作如查询的性能事务的失效的场景方法访问权限问题仅对方法生效非方法的注解会被忽略因代理机制限制解决将方法改为或通过配置强制增强非方法不推荐自调用问题同一类内方法调用若类内部无事务的方法调用有事务的方法因未经过代理对象直接调用原始对象方法的事务会失效解决注入自身代理对象再调用从容器中获取代理对象异常被捕获且未抛出若事务方法中异常被捕获且未重新抛出无法感知异常不会触发回滚解决捕获后重新抛出异常错误配置回滚规则默认只回滚及其子类若方法抛出异常如未通过指定则事务不回滚解决显式配置数据库引擎不支持事务如使用引擎默认不支持事务需改为引擎错误的传播行为若配置非事务方式执行或会导致事务失效和的区别是什么作用于类上用于标识一个类是组件会自动扫描并通过类的默认构造方法创建其实例并注册到容器中用于自定义类的注册当类是自己编写的可直接修改源码通过在类上标注配合的组件扫描即可自动注册到容器无需手动编写创建逻辑依赖的组件扫描机制作用于方法上用于将方法的返回值对象注册到容器中用于第三方类或无法修改源码的类的注册方法必须定义在标注了的配置类中依赖方法的执行和有什么区别来源是框架提供的注解用于依赖注入是规范引入中的注解和框架都支持使用注入方式默认按类型匹配进行依赖注入如果容器中存在多个相同类型的会根据的名称进行匹配如果名称也不唯一则会抛出异常可以通过注解指定要注入的的名称来解决歧义例如默认按名称匹配进行依赖注入如果找不到指定名称的则按类型匹配例如如果没有指定属性会根据变量名或方法名来匹配的名称所属包不同属于包属于包这也体现了更具通用性可在环境中使用而是特有的中有哪些设计模式单例模式核心思想确保一个类仅有一个实例并提供全局访问点应用容器中的默认是单例模式由容器负责创建和管理唯一实例避免重复创建对象带来的资源消耗可通过改为原型模式每次获取时创建新实例工厂模式核心思想通过工厂类封装对象的创建逻辑解耦对象创建与使用应用是最基础的容器作为工厂负责创建和管理通过方法获取实例继承自扩展了更多功能如事件发布国际化等本质上也是工厂模式的实现代理模式核心思想通过代理对象增强目标对象的功能且不修改目标对象代码应用是的核心实现方式当需要被切面增强时会动态生成代理对象动态代理或代理在目标方法执行前后插入横切逻辑如日志事务观察者模式核心思想定义对象间的一对多依赖当一个对象状态变化时所有依赖它的对象会收到通知并自动更新例如是事件源如表示容器刷新完成是观察者监听特定事件并执行回调逻辑作为事件广播器负责将事件转发给所有观察者模板方法模式核心思想父类定义算法骨架将可变步骤延迟到子类实现避免重复代码应用封装了的固定流程如获取连接释放资源将执行结果映射等可变逻辑通过回调接口如交给用户实现类似的还有等均通过模板方法简化数据访问层代码适配器模式核心思想将一个类的接口转换为客户端期望的另一个接口使不兼容的类可以一起工作应用中的适配不同类型的处理器如将其统一转换为可处理的接口避免直接依赖各种处理器类型适配不同的通知类型如统一转换为代理可执行的逻辑策略模式核心思想定义一系列算法封装每个算法并使它们可互换客户端根据需求选择算法应用事务管理是策略接口不同的实现类如用于事务用于事务对应不同的事务管理策略用户可按需配置中的认证策略可集成多种认证策略如用户名密码认证认证装饰器模式核心思想动态给对象添加额外功能不改变其原始结构应用对对象进行包装提供属性访问类型转换等增强功能同时不修改原始的拦截器本质是对处理器的装饰在请求处理前后添加日志权限校验等逻辑组合模式核心思想将对象组合成树形结构统一处理单个对象和组合对象应用的层次结构可包含多个形成父子容器通过组合模式统一管理上下文中的链多个可组合成一个链会依次查找适合的处理器统一处理映射逻辑其他常用模式注册表模式负责注册和管理的元数据提供注册查询删除等操作是容器初始化的核心组件委托模式作为的前端控制器将请求委托给等组件处理自身不直接处理业务逻辑桥接模式接口作为抽象层其实现类如对应不同数据库连接池的具体实现通过桥接模式分离抽象与实现方便替换数据源',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-29 08:51:10',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">北川的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src="/./img/wechat.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/./img/alipay.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 1.05rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 1.05rem;">JVM调优<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 1.05rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 1.05rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 1.05rem;">函数<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.05rem;">反射<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">复习<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0-%E5%8F%98%E9%87%8F/" style="font-size: 1.05rem;">复习 变量<sup>1</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 1.05rem;">并发<sup>1</sup></a><a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 1.05rem;">情感<sup>1</sup></a><a href="/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB-%E6%8E%A5%E5%8F%A3/" style="font-size: 1.05rem;">抽象类 接口<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>1</sup></a><a href="/tags/%E6%AF%8F%E6%97%A5%E9%9D%A2%E8%AF%95/" style="font-size: 1.05rem;">每日面试<sup>2</sup></a><a href="/tags/%E7%94%B5%E5%95%86-%E8%AE%A2%E5%8D%95/" style="font-size: 1.05rem;">电商,订单<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96-%E5%BA%93%E5%AD%98/" style="font-size: 1.05rem;">超卖 , 库存<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.05rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">面试题</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Spring/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Spring</span></a><a class="article-meta__tags" href="/tags/SpringMVC/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SpringMVC</span></a><a class="article-meta__tags" href="/tags/Springboot/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Springboot</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Spring面试题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-10-28T10:31:36.000Z" title="发表于 2025-10-28 18:31:36">2025-10-28</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-10-29T00:51:10.943Z" title="更新于 2025-10-29 08:51:10">2025-10-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Spring面试题"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为新乡"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>新乡</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/489ef953.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/posts/489ef953.html" itemprop="commentCount"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s2.loli.net/2025/10/23/5MFUXBI3EhCAx6y.jpg?_r_=e11426c7-2fb5-927a-c21e-00c94e3371d0"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://gukeyang.github.io/posts/489ef953.html"><header><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">面试题</a><a href="/tags/Spring/" tabindex="-1" itemprop="url">Spring</a><a href="/tags/SpringMVC/" tabindex="-1" itemprop="url">SpringMVC</a><a href="/tags/Springboot/" tabindex="-1" itemprop="url">Springboot</a><h1 id="CrawlerTitle" itemprop="name headline">Spring面试题</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">北川</span><time itemprop="dateCreated datePublished" datetime="2025-10-28T10:31:36.000Z" title="发表于 2025-10-28 18:31:36">2025-10-28</time><time itemprop="dateCreated datePublished" datetime="2025-10-29T00:51:10.943Z" title="更新于 2025-10-29 08:51:10">2025-10-29</time></header><h2 id="聊聊你对spring框架的理解？"><a href="#聊聊你对spring框架的理解？" class="headerlink" title="聊聊你对spring框架的理解？"></a>聊聊你对spring框架的理解？</h2><p>Spring 是一种轻量级开发框架，旨在提高开发人员的 开发效率以及系统的可维护性，其中有几个核心概念：依赖注入、IOC(控制反转)、AOP（面向切面编程）、事务管理。</p>
+<p><strong>IOC（控制反转）</strong>它是一种创建对象和获取对象的一个技术思想，将对象交给Spring容器进行管理。我们不用手动的创建对象，而是由IOC容器来帮我实现实例化对象。</p>
+<p>核心的话是通过依赖注入，依赖注入有三种方式：注解、XML配置、构造器注入</p>
+<p>IOC的底层的话是通过反射机制+工厂模式+配置解析：</p>
+<ul>
+<li>​	IOC 容器启动时，首先会加载并解析描述对象（Bean）及其依赖关系的配置信息。</li>
+<li>​	容器根据解析后的配置，通过<strong>反射机制</strong>动态创建对象（Bean），而非硬编码 <code>new</code> 操作。</li>
+<li>​	对象创建后，容器会根据配置或注解解析其依赖项（如 <code>UserService</code> 依赖 <code>UserDao</code>），并自动完成依赖注入。</li>
+</ul>
+<p><strong>AOP（面向切面编程）</strong>是面向切面编程，能够将那些与业务无关，却为业务模块所共同调用的逻辑封装起来，以减少系统的重复代码，降低模块间的耦合度。</p>
+<p>在AOP里面有几个概念：</p>
+<p><strong>横切关注点</strong>：系统中分散在多个模块、且与核心业务逻辑无关的通用功能，例如日志记录、性能监控、事务管理、权限校验等。</p>
+<p><strong>切面（Aspect）</strong>：封装横切关注点的模块，是 AOP 的核心载体。它定义了 “做什么”（如日志逻辑）和 “在何时何地做”（通过通知和切点指定）。</p>
+<p><strong>连接点（Join Point）</strong>：程序执行过程中可插入切面逻辑的<strong>特定点</strong>，如方法调用、异常抛出、字段访问等。在 Spring AOP 中，连接点通常指方法的执行（因为 Spring AOP 基于动态代理，主要支持方法级别的拦截）。</p>
+<p><strong>切点（Pointcut）</strong>：用于<strong>定位连接点</strong>的规则（表达式），决定哪些连接点会被切面拦截。</p>
+<p><strong>通知（Advice）</strong>：</p>
+<p>切面在连接点执行的<strong>具体逻辑</strong>，并定义了执行时机。常见通知类型：</p>
+<ul>
+<li><strong>前置通知（Before）</strong>：在连接点执行前执行；</li>
+<li><strong>后置通知（After）</strong>：在连接点执行后（无论是否异常）执行；</li>
+<li><strong>返回通知（After Returning）</strong>：在连接点正常返回后执行；</li>
+<li><strong>异常通知（After Throwing）</strong>：在连接点抛出异常后执行；</li>
+<li><strong>环绕通知（Around）</strong>：包裹连接点，可在执行前后自定义逻辑，甚至控制是否执行连接点。</li>
+</ul>
+<p><strong>目标对象（Target Object）</strong>：被切面拦截的原始对象（即业务逻辑对象），AOP 通过代理对其增强。</p>
+<p><strong>代理对象（Proxy）</strong>：AOP 在目标对象基础上创建的代理实例</p>
+<p><strong>织入（Weaving）</strong>：</p>
+<p>将切面逻辑嵌入到目标对象的过程，生成代理对象。织入时机分为：</p>
+<ul>
+<li>编译期：通过编译器将切面织入（如 AspectJ）；</li>
+<li>类加载期：在类加载时织入（需特殊类加载器）；</li>
+<li>运行期：通过动态代理在运行时织入（如 Spring AOP，最常见）。</li>
+</ul>
+<p>Spring AOP 就是基于动态代理的，如果要代理的对象，实现了某个接口，那么 Spring AOP 会使用 JDK Proxy，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候 Spring AOP 会使用 Cglib 生成一个被代理对象的子类来作为代理。</p>
+<p><strong>AOP的原理</strong>是通过动态代理实现的，在程序运行时动态生成目标对象的代理对象，通过代理对象间接调用目标方法，并在调用过程中嵌入切面逻辑。</p>
+<p>动态代理有两种方式：</p>
+<ul>
+<li><p><strong>JDK动态代理</strong>：</p>
+<p>基于java的<code>java.lang.reflect.Proxy</code>类和<code>InvocationHandler</code>接口实现，要求目标对象必须实现接口，代理对象是接口的实现类。</p>
+</li>
+<li><p><strong>CGLIB 代理</strong>：</p>
+<p>基于字节码生成库（Code Generation Library）实现，无需对象实现接口，通过继承目标类生成代理子类实现的。</p>
+</li>
+</ul>
+<p><strong>AOP的应用常见场景</strong></p>
+<p>最常见的是事务管理,Spring的声明式事务就是基于AOP实现的。我们只需要在方法上面标注@Transactional，Spring就会通过AOP在方法执行前开启事务，执行后根据是否有异常决定提交或回滚</p>
+<p>然后就是日志记录，可以定义一个切面，通过@Before获取参数 ，@AfterReturning获取返回值，@Around统计执行时间。</p>
+<p>还有权限校验，如果有需要特定角色权限访问 ，可以定义一个切面 ，检查用户权限</p>
+<h2 id="单例Bean-生命周期的核心阶段"><a href="#单例Bean-生命周期的核心阶段" class="headerlink" title="单例Bean 生命周期的核心阶段"></a><strong>单例Bean 生命周期的核心阶段</strong></h2><h3 id="1-Bean-定义加载与解析"><a href="#1-Bean-定义加载与解析" class="headerlink" title="1. Bean 定义加载与解析"></a>1. <strong>Bean 定义加载与解析</strong></h3><ul>
+<li>Spring 容器启动时，通过 XML 配置、注解（如<code>@Component</code>）或 Java 配置类（<code>@Configuration</code>）加载 Bean 的定义信息，解析为<code>BeanDefinition</code>对象（包含类名、属性、依赖、作用域等元数据），并注册到<code>BeanDefinitionRegistry</code>中。</li>
+</ul>
+<h3 id="2-Bean-实例化（创建对象）"><a href="#2-Bean-实例化（创建对象）" class="headerlink" title="2. Bean 实例化（创建对象）"></a>2. <strong>Bean 实例化（创建对象）</strong></h3><ul>
+<li>容器根据<code>BeanDefinition</code>的信息，通过反射调用 Bean 的构造方法（无参或有参，有参时需先解析依赖），创建 Bean 的实例（内存中生成对象，但尚未设置属性）。</li>
+<li><strong>注意</strong>：此阶段仅完成对象的创建，属性（尤其是依赖的其他 Bean）尚未注入。</li>
+</ul>
+<h3 id="3-属性注入（依赖注入，DI）"><a href="#3-属性注入（依赖注入，DI）" class="headerlink" title="3. 属性注入（依赖注入，DI）"></a>3. <strong>属性注入（依赖注入，DI）</strong></h3><ul>
+<li>容器根据<code>BeanDefinition</code>中定义的属性信息（如<code>@Autowired</code>、XML 中的<code>&lt;property&gt;</code>），将依赖的 Bean 或基本数据类型值注入到当前 Bean 的对应字段或 setter 方法中。</li>
+<li>依赖注入的核心是解决 “对象之间的依赖关系”，确保 Bean 在使用前拥有所需的资源。</li>
+</ul>
+<h3 id="4-初始化前（Aware-接口回调）"><a href="#4-初始化前（Aware-接口回调）" class="headerlink" title="4. 初始化前（Aware 接口回调）"></a>4. <strong>初始化前（Aware 接口回调）</strong></h3><ul>
+<li>若 Bean 实现了 Spring 提供的Aware系列接口（如BeanNameAware、BeanFactoryAware、ApplicationContextAware等），容器会调用对应的回调方法，向 Bean 传递容器相关的信息：<ul>
+<li><code>BeanNameAware</code>：注入当前 Bean 在容器中的名称（<code>setBeanName(String name)</code>）；</li>
+<li><code>BeanFactoryAware</code>：注入当前 Bean 所属的 BeanFactory（<code>setBeanFactory(BeanFactory factory)</code>）；</li>
+<li><code>ApplicationContextAware</code>：注入当前应用的 ApplicationContext（<code>setApplicationContext(ApplicationContext context)</code>）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-初始化前置处理"><a href="#5-初始化前置处理" class="headerlink" title="5. 初始化前置处理"></a>5. <strong>初始化前置处理</strong></h3><ul>
+<li>若容器中注册了<code>BeanPostProcessor</code>（Bean 后置处理器），会调用其<code>postProcessBeforeInitialization</code>方法，对 Bean 进行初始化前的增强处理（如修改 Bean 的属性、替换 Bean 实例等）。</li>
+<li>这是 Spring 提供的扩展点，允许在初始化前自定义处理逻辑（例如 Spring 的 AOP 代理生成可能在此阶段介入）。</li>
+</ul>
+<h3 id="6-初始化方法执行"><a href="#6-初始化方法执行" class="headerlink" title="6. 初始化方法执行"></a>6. <strong>初始化方法执行</strong></h3><ul>
+<li>执行 Bean 的初始化逻辑，有两种方式（优先级：注解 &gt; 接口 &gt; XML）：<ol>
+<li><strong><code>@PostConstruct</code>注解</strong>：标注在方法上，容器会在属性注入完成后自动调用该方法；</li>
+<li><strong><code>InitializingBean</code>接口</strong>：实现接口的<code>afterPropertiesSet()</code>方法，容器会在属性注入后调用；</li>
+<li>**XML 配置的<code>init-method</code>**：在<code>&lt;bean&gt;</code>标签中通过<code>init-method</code>指定初始化方法，容器会调用该方法。</li>
+</ol>
+</li>
+<li>初始化方法通常用于完成 Bean 的资源加载、状态初始化等操作（如连接数据库、初始化缓存）。</li>
+</ul>
+<h3 id="7-初始化后置处理"><a href="#7-初始化后置处理" class="headerlink" title="7. 初始化后置处理"></a>7. <strong>初始化后置处理</strong></h3><ul>
+<li>再次调用<code>BeanPostProcessor</code>的<code>postProcessAfterInitialization</code>方法，对 Bean 进行初始化后的增强处理。</li>
+<li><strong>典型应用</strong>：Spring AOP 在此阶段为 Bean 生成代理对象（若该 Bean 被切面拦截），最终返回的可能是代理对象而非原始 Bean 实例。</li>
+</ul>
+<h3 id="8-Bean-就绪（可使用）"><a href="#8-Bean-就绪（可使用）" class="headerlink" title="8. Bean 就绪（可使用）"></a>8. <strong>Bean 就绪（可使用）</strong></h3><ul>
+<li>经过上述步骤后，Bean 已完全初始化，被放入 Spring 容器的缓存中（单例 Bean），供应用程序通过<code>getBean()</code>方法获取并使用。</li>
+</ul>
+<h3 id="9-销毁前准备"><a href="#9-销毁前准备" class="headerlink" title="9. 销毁前准备"></a>9. <strong>销毁前准备</strong></h3><ul>
+<li>当容器关闭时（如应用停止），单例 Bean 会进入销毁阶段。若 Bean 实现了<code>DisposableBean</code>接口，容器会先调用其<code>destroy()</code>方法的前置逻辑。</li>
+</ul>
+<h3 id="10-销毁方法执行"><a href="#10-销毁方法执行" class="headerlink" title="10. 销毁方法执行"></a>10. <strong>销毁方法执行</strong></h3><ul>
+<li>执行 Bean 的销毁逻辑，有两种方式（优先级：注解 &gt; 接口 &gt; XML）：<ol>
+<li><strong><code>@PreDestroy</code>注解</strong>：标注在方法上，容器关闭时自动调用；</li>
+<li><strong><code>DisposableBean</code>接口</strong>：实现接口的<code>destroy()</code>方法，容器关闭时调用；</li>
+<li>**XML 配置的<code>destroy-method</code>**：在<code>&lt;bean&gt;</code>标签中通过<code>destroy-method</code>指定销毁方法，容器关闭时调用。</li>
+</ol>
+</li>
+<li>销毁方法通常用于释放资源（如关闭数据库连接、释放文件句柄等）。</li>
+</ul>
+<h2 id="Spring-中的单例-bean-的线程安全问题了解吗？-重要"><a href="#Spring-中的单例-bean-的线程安全问题了解吗？-重要" class="headerlink" title="Spring 中的单例 bean 的线程安全问题了解吗？(重要)"></a>Spring 中的单例 bean 的线程安全问题了解吗？(重要)</h2><p>在Spring框架中Bean的默认作用域是单例 （Singleton）。这意味着在容器启动时，会创建一个 Bean实例，并在整个应用生命周期中只维护这一个实例。</p>
+<ul>
+<li>如果Bean是无状态的（即没有成员变量，或只有 查询操作而没有修改操作），那么它在多线程环境 下是线程安全的。因为多个线程访问同一个无状态 Bean时，不会修改其状态，因此不会引发线程安全问题。</li>
+<li>如果Bean是有状态的（即包含可变数据，如实例 变量），并且多个线程同时访问并修改这些状态， 那么可能会引发线程安全问题。</li>
+</ul>
+<p>常见的两种解决办法：</p>
+<ul>
+<li>尽量避免定义可变的成员变量</li>
+<li>在类中定义一个ThreadLocal成员变量，将可变成员变量保存在ThreadLocal中（推荐）</li>
+<li>可以通过使用synchronized等同步机制来保证单例Bean内部的可变状态的线程安全性</li>
+<li>可以使用ConcurrentHashMap来确保可变状态的线程安全性</li>
+</ul>
+<h2 id="spring-bean是线程安全的吗"><a href="#spring-bean是线程安全的吗" class="headerlink" title="spring bean是线程安全的吗"></a>spring bean是线程安全的吗</h2><p><strong>单例作用域（Singleton）</strong> </p>
+<ul>
+<li>这是Spring的默认作用域，意味着在整个Spring  IoC容器中仅存在一个该类型的Bean实例。 </li>
+<li>如果这个单例Bean是无状态的（即不包含任何成 员变量或只包含不可变的成员变量），那么它是线程安全的。 </li>
+<li>如果单例Bean包含可变的状态信息，并且这种状 态被多个线程共享，则需要采取额外措施来确保线程安全，比如使用同步机制或设计成不可变对象等 方法来保护数据的一致性。</li>
+</ul>
+<p><strong>原型作用域（Prototype）</strong> </p>
+<ul>
+<li>每次请求时都会创建一个新的Bean实例。 </li>
+<li>在这种情况下，每个线程都有自己的Bean副本， 因此通常不需要担心线程安全问题。</li>
+<li>但如果多个线程访问同一个Prototype Bean的共享 资源（例如静态变量或其他全局状态），仍需注意 线程安全。</li>
+</ul>
+<h2 id="spring是如何解决循环依赖的？"><a href="#spring是如何解决循环依赖的？" class="headerlink" title="spring是如何解决循环依赖的？"></a><strong>spring是如何解决循环依赖的？</strong></h2><p>假设有两个类A和B，A依赖B，同时B又依赖A，这就形成了循环依赖。</p>
+<p>Spring 通过<strong>三级缓存机制</strong>来解决<strong>单例 Bean 的构造器循环依赖</strong>（构造器注入除外）：</p>
+<p>当 A 依赖 B，B 又依赖 A 时，Spring 会提前把 A 的代理对象暴露到三级缓存中，等 B 注入 A 时就能从三级缓存中获取 A 的早期引用，从而<strong>打破循环依赖</strong>。</p>
+<ul>
+<li>一级缓存（singletonObjects）：这是一个 ConcurrentHashMap，用于存放完全初始化好的单例 Bean，即已经经历了实例化、属性赋值和初始化等所有阶段的 Bean。当 Spring 从容器中获取 Bean 时，首先会从这个缓存中查找，如果找到了直接返回。</li>
+<li>二级缓存（earlySingletonObjects）：也是一个 ConcurrentHashMap，用于存放早期暴露的单例 Bean，即已经完成实例化，但还未进行属性赋值和初始化的 Bean。当一个 Bean 实例化后，会将其提前暴露到这个缓存中，目的是让其他依赖它的 Bean 可以提前获取到这个 Bean 的引用，即使它还没有完全初始化。</li>
+<li>三级缓存（singletonFactories）：同样是 ConcurrentHashMap，存放的是 ObjectFactory，通过这个工厂可以获取到早期暴露的单例 Bean。ObjectFactory 是一个接口，只有一个 getObject 方法，用于创建对象。在创建 Bean 时，如果发现存在循环依赖，会将一个 ObjectFactory 放入三级缓存，这个工厂在需要时可以返回早期暴露的 Bean。</li>
+</ul>
+<p>过程:</p>
+<p>1.spring创建a，先实例化a，此时a没有进行属性赋值和初始化，将a的ObjectFactory放入到三级缓存中</p>
+<p>2，在为a进行属性赋值时，发现a依赖于b，于是开始创建b</p>
+<p>3.spring实例化b，将b的ObjectFactory放入三级缓存singletonFactories</p>
+<p>4.在为b属性赋值时，发现b依赖a，此时从三级缓存中获取a的ObjectFactory，通过ObjectFactory获取早期暴露的a将其放入到二级缓存 earllySingletonObjects中，并从三级缓存中移出对应的ObjectFactory，然后将暴露a注入到b</p>
+<p>5.b完成属性赋值和初始化，将b放入到一级缓存singletonObjects</p>
+<p>6.回到a的创建过程，由于已经创建了b，继续完成a的属性赋值和初始化，最后将a放入到一级缓存singletonObjects</p>
+<h2 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h2><h3 id="事务的实现方式"><a href="#事务的实现方式" class="headerlink" title="事务的实现方式"></a>事务的实现方式</h3><p>Spring中有两种实现方式一种是声明式事务，一种是编程式事务。声明式事务因非侵入性成为主流。</p>
+<p>声明式事务：**基于注解 <code>@Transactional</code>**，在需要事务的方法或类上标注 <code>@Transactional</code>，Spring 通过 AOP 动态增强方法，自动管理事务。</p>
+<p>编程式事务：手动通过 <code>TransactionTemplate</code> 或 <code>PlatformTransactionManager</code> 控制事务，侵入性强，适用于复杂的事务逻辑。</p>
+<h3 id="Transactional的五个属性"><a href="#Transactional的五个属性" class="headerlink" title="Transactional的五个属性"></a>Transactional的五个属性</h3><ul>
+<li><p>传播行为：</p>
+<p>定义当一个事务方法调用另一个事务方法时，事务如何嵌套执行</p>
+<ul>
+<li><code>REQUIRED</code>（默认）：若当前存在事务，则加入该事务；若不存在，则新建事务。</li>
+<li><code>REQUIRES_NEW</code>：无论当前是否有事务，都新建一个独立事务（原事务挂起）。</li>
+<li><code>NESTED</code>：若当前有事务，则嵌套在当前事务中（子事务可独立回滚，不影响父事务）；若无，则同 <code>REQUIRED</code>。</li>
+<li><code>SUPPORTS</code>：若当前有事务，加入；否则以非事务方式执行。</li>
+<li><code>MANDATORY</code>：必须在事务中执行，否则抛异常。</li>
+<li><code>NOT_SUPPORTED</code>：以非事务方式执行，若当前有事务则挂起。</li>
+<li><code>NEVER</code>：以非事务方式执行，若当前有事务则抛异常。</li>
+</ul>
+</li>
+<li><p>隔离级别：</p>
+<p>控制多个并发事务之间的相互影响，解决脏读、不可重复读、幻读等问题。</p>
+<ul>
+<li><code>DEFAULT</code>（默认）：使用数据库默认隔离级别（如 MySQL 默认为 <code>REPEATABLE_READ</code>，Oracle 默认为 <code>READ_COMMITTED</code>）。</li>
+<li><code>READ_UNCOMMITTED</code>：允许读取未提交的数据（可能导致脏读、不可重复读、幻读）。</li>
+<li><code>READ_COMMITTED</code>：只能读取已提交的数据（避免脏读，可能出现不可重复读、幻读）。</li>
+<li><code>REPEATABLE_READ</code>：保证多次读取同一数据结果一致（避免脏读、不可重复读，可能出现幻读）。</li>
+<li><code>SERIALIZABLE</code>：最高隔离级别，事务串行执行（避免所有并发问题，但性能极低）。</li>
+</ul>
+</li>
+<li><p>回滚规则：</p>
+<p>指定哪些异常触发事务回滚，哪些异常不触发。</p>
+<ul>
+<li>rollbackFor：需要回滚的异常类型（默认只回滚 RuntimeException 及其子类）。<br>例：rollbackFor &#x3D; {Exception.class, IOException.class}（所有 Exception 都回滚）。</li>
+<li>rollbackForClassName：需要回滚的异常类名（字符串形式，如 rollbackForClassName &#x3D; “java.lang.Exception”）。</li>
+<li>noRollbackFor：不需要回滚的异常类型（即使发生也不回滚）。例：noRollbackFor &#x3D; BusinessException.class（自定义业务异常不回滚）。</li>
+<li>noRollbackForClassName：不需要回滚的异常类名（字符串形式）。</li>
+</ul>
+</li>
+<li><p>超时时间：</p>
+<p>设置事务的最大执行时间（秒），若超过该时间未完成，则自动回滚并释放资源，避免长期占用数据库连接。</p>
+</li>
+<li><p>只读属性：</p>
+<p>标记事务是否为 “只读事务”，用于优化只读操作（如查询）的性能。</p>
+</li>
+</ul>
+<h3 id="事务的失效的场景"><a href="#事务的失效的场景" class="headerlink" title="事务的失效的场景"></a>事务的失效的场景</h3><p><strong>方法访问权限问题</strong></p>
+<ul>
+<li><code>@Transactional</code> 仅对 <strong>public 方法</strong> 生效（非 public 方法的注解会被 AOP 忽略，因 Spring 代理机制限制）。</li>
+<li>解决：将方法改为 public，或通过 XML 配置强制增强非 public 方法（不推荐）。</li>
+</ul>
+<p><strong>自调用问题（同一类内方法调用）</strong></p>
+<ul>
+<li><p>若类内部 <strong>无事务的方法 A 调用有事务的方法 B</strong>，因未经过 Spring 代理对象（直接调用原始对象方法），B 的事务会失效。</p>
+<p>解决：</p>
+<ul>
+<li>注入自身代理对象（<code>@Autowired private OrderService self;</code>，再调用 <code>self.methodB()</code>）；</li>
+<li>从 Spring 容器中获取代理对象（<code>ApplicationContext.getBean(OrderService.class)</code>）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>异常被捕获且未抛出</strong></p>
+<ul>
+<li><p>若事务方法中 <strong>异常被 try-catch 捕获且未重新抛出</strong>，Spring 无法感知异常，不会触发回滚</p>
+<p>解决：捕获后重新抛出异常（<code>throw new RuntimeException(e)</code>）。</p>
+</li>
+</ul>
+<p><strong>错误配置回滚规则</strong></p>
+<ul>
+<li>默认只回滚 <strong>RuntimeException 及其子类</strong>，若方法抛出 checked 异常（如 <code>IOException</code>），未通过 <code>rollbackFor</code> 指定，则事务不回滚。</li>
+<li>解决：显式配置 <code>rollbackFor = Exception.class</code>。</li>
+</ul>
+<p><strong>数据库引擎不支持事务</strong></p>
+<ul>
+<li>如 MySQL 使用 <strong>MyISAM 引擎</strong>（默认不支持事务），需改为 InnoDB 引擎。</li>
+</ul>
+<p><strong>错误的传播行为</strong></p>
+<ul>
+<li>若配置 <code>propagation = Propagation.NOT_SUPPORTED</code>（非事务方式执行）或 <code>NEVER</code>，会导致事务失效。</li>
+</ul>
+<h2 id="Component-和-Bean-的区-别是什么？"><a href="#Component-和-Bean-的区-别是什么？" class="headerlink" title="@Component 和 @Bean 的区 别是什么？"></a>@Component 和 @Bean 的区 别是什么？</h2><p>@Component ：</p>
+<ul>
+<li>作用于<strong>类</strong>上，用于标识一个类是 “组件”，Spring 会自动扫描并通过<strong>类的默认构造方法</strong>创建其实例，并注册到容器中。</li>
+<li>用于<strong>自定义类</strong>的注册。当类是自己编写的（可直接修改源码），通过在类上标注 <code>@Component</code>，配合 Spring 的组件扫描（<code>@ComponentScan</code>），即可自动注册到容器，无需手动编写创建逻辑。</li>
+<li>依赖 Spring 的<strong>组件扫描机制</strong>。</li>
+</ul>
+<p>@Bean：</p>
+<ul>
+<li>作用于<strong>方法</strong>上，用于将方法的<strong>返回值</strong>（对象）注册到 Spring 容器中。</li>
+<li>用于<strong>第三方类</strong>或<strong>无法修改源码的类</strong>的注册。</li>
+<li><code>@Bean</code> 方法必须定义在标注了 <code>@Configuration</code> 的配置类中</li>
+<li>依赖<strong>方法的执行</strong>。</li>
+</ul>
+<h2 id="Autowired-和-Resource-有什么区别"><a href="#Autowired-和-Resource-有什么区别" class="headerlink" title="@Autowired 和 @Resource 有什么区别"></a><strong>@Autowired 和 @Resource 有什么区别</strong></h2><ul>
+<li><ul>
+<li><p><strong>来源</strong>：</p>
+</li>
+<li><ul>
+<li>@Autowired是 Spring 框架提供的注解，用于依赖注入。</li>
+<li>@Resource是 JSR - 250 规范（Java EE 5 引入）中的注解，JavaEE 和 Spring 框架都支持使用。</li>
+</ul>
+</li>
+<li><p><strong>注入方式</strong>：</p>
+</li>
+<li><ul>
+<li>@Autowired默认按类型匹配进行依赖注入。如果容器中存在多个相同类型的 Bean，会根据 Bean 的名称进行匹配，如果名称也不唯一，则会抛出NoUniqueBeanDefinitionException异常。可以通过@Qualifier注解指定要注入的 Bean 的名称来解决歧义。例如：@Autowired @Qualifier(“userDaoImpl”) UserDao userDao;</li>
+<li>@Resource默认按名称匹配进行依赖注入。如果找不到指定名称的 Bean，则按类型匹配。例如，@Resource(name &#x3D; “userDao”) UserDao userDao;如果没有指定name属性，会根据变量名或 setter 方法名来匹配 Bean 的名称。</li>
+</ul>
+</li>
+<li><p><strong>所属包不同</strong>：</p>
+</li>
+<li><ul>
+<li>@Autowired属于org.springframework.beans.factory.annotation包。</li>
+<li>@Resource属于javax.annotation包，这也体现了@Resource更具通用性，可在 JavaEE 环境中使用，而@Autowired是 Spring 特有的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Spring-中有哪些设计模式？"><a href="#Spring-中有哪些设计模式？" class="headerlink" title="Spring 中有哪些设计模式？"></a>Spring 中有哪些设计模式？</h2><h3 id="1-单例模式（Singleton-Pattern）"><a href="#1-单例模式（Singleton-Pattern）" class="headerlink" title="1. 单例模式（Singleton Pattern）"></a>1. <strong>单例模式（Singleton Pattern）</strong></h3><ul>
+<li><p><strong>核心思想</strong>：确保一个类仅有一个实例，并提供全局访问点。</p>
+</li>
+<li><p>Spring 应用：</p>
+<p>Spring 容器中的 Bean 默认是单例模式（scope&#x3D;”singleton”），由容器负责创建和管理唯一实例，避免重复创建对象带来的资源消耗。（可通过@Scope(“prototype”)改为原型模式，每次获取时创建新实例。）</p>
+</li>
+</ul>
+<h3 id="2-工厂模式（Factory-Pattern）"><a href="#2-工厂模式（Factory-Pattern）" class="headerlink" title="2. 工厂模式（Factory Pattern）"></a>2. <strong>工厂模式（Factory Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：通过工厂类封装对象的创建逻辑，解耦对象创建与使用。</li>
+<li>Spring 应用：<ul>
+<li><code>BeanFactory</code> 是 Spring 最基础的 IoC 容器，作为 “Bean 工厂” 负责创建和管理 Bean（通过 <code>getBean()</code> 方法获取实例）。</li>
+<li><code>ApplicationContext</code> 继承自 <code>BeanFactory</code>，扩展了更多功能（如事件发布、国际化等），本质上也是工厂模式的实现。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-代理模式（Proxy-Pattern）"><a href="#3-代理模式（Proxy-Pattern）" class="headerlink" title="3. 代理模式（Proxy Pattern）"></a>3. <strong>代理模式（Proxy Pattern）</strong></h3><ul>
+<li><p><strong>核心思想</strong>：通过代理对象增强目标对象的功能，且不修改目标对象代码。</p>
+</li>
+<li><p>Spring 应用：</p>
+<p>是 Spring AOP 的核心实现方式。当 Bean 需要被切面增强时，Spring 会动态生成代理对象（JDK 动态代理或 CGLIB 代理），在目标方法执行前后插入横切逻辑（如日志、事务）。</p>
+</li>
+</ul>
+<h3 id="4-观察者模式（Observer-Pattern）"><a href="#4-观察者模式（Observer-Pattern）" class="headerlink" title="4. 观察者模式（Observer Pattern）"></a>4. <strong>观察者模式（Observer Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：定义对象间的一对多依赖，当一个对象状态变化时，所有依赖它的对象会收到通知并自动更新。</li>
+<li>例如：<ul>
+<li><code>ApplicationEvent</code> 是事件源（如 <code>ContextRefreshedEvent</code> 表示容器刷新完成）。</li>
+<li><code>ApplicationListener</code> 是观察者，监听特定事件并执行回调逻辑。</li>
+<li><code>ApplicationEventMulticaster</code> 作为事件广播器，负责将事件转发给所有观察者。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-模板方法模式（Template-Method-Pattern）"><a href="#5-模板方法模式（Template-Method-Pattern）" class="headerlink" title="5. 模板方法模式（Template Method Pattern）"></a>5. <strong>模板方法模式（Template Method Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：父类定义算法骨架，将可变步骤延迟到子类实现，避免重复代码。</li>
+<li>Spring 应用：<ul>
+<li><code>JdbcTemplate</code>：封装了 JDBC 的固定流程（如获取连接、释放资源），将 SQL 执行、结果映射等可变逻辑通过回调接口（如 <code>RowMapper</code>）交给用户实现。</li>
+<li>类似的还有 <code>HibernateTemplate</code>、<code>RedisTemplate</code> 等，均通过模板方法简化数据访问层代码。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-适配器模式（Adapter-Pattern）"><a href="#6-适配器模式（Adapter-Pattern）" class="headerlink" title="6. 适配器模式（Adapter Pattern）"></a>6. <strong>适配器模式（Adapter Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：将一个类的接口转换为客户端期望的另一个接口，使不兼容的类可以一起工作。</li>
+<li>Spring 应用：<ul>
+<li>Spring MVC 中的 <code>HandlerAdapter</code>：适配不同类型的处理器（如 <code>@Controller</code>、<code>HttpRequestHandler</code>），将其统一转换为 <code>DispatcherServlet</code> 可处理的接口，避免 <code>DispatcherServlet</code> 直接依赖各种处理器类型。</li>
+<li><code>AopAdapter</code>：适配不同的通知类型（如 <code>BeforeAdvice</code>、<code>AfterAdvice</code>），统一转换为 AOP 代理可执行的逻辑。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-策略模式（Strategy-Pattern）"><a href="#7-策略模式（Strategy-Pattern）" class="headerlink" title="7. 策略模式（Strategy Pattern）"></a>7. <strong>策略模式（Strategy Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：定义一系列算法，封装每个算法并使它们可互换，客户端根据需求选择算法。</li>
+<li>Spring 应用：<ul>
+<li>事务管理：<code>PlatformTransactionManager</code> 是策略接口，不同的实现类（如 <code>DataSourceTransactionManager</code> 用于 JDBC 事务、<code>HibernateTransactionManager</code> 用于 Hibernate 事务）对应不同的事务管理策略，用户可按需配置。</li>
+<li>Spring Security 中的认证策略：<code>AuthenticationManager</code> 可集成多种认证策略（如用户名密码认证、OAuth2 认证）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-装饰器模式（Decorator-Pattern）"><a href="#8-装饰器模式（Decorator-Pattern）" class="headerlink" title="8. 装饰器模式（Decorator Pattern）"></a>8. <strong>装饰器模式（Decorator Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：动态给对象添加额外功能，不改变其原始结构。</li>
+<li>Spring 应用：<ul>
+<li><code>BeanWrapper</code>：对 Bean 对象进行包装，提供属性访问、类型转换等增强功能，同时不修改原始 Bean。</li>
+<li>Spring MVC 的 <code>HandlerInterceptor</code>：拦截器本质是对处理器（<code>Handler</code>）的装饰，在请求处理前后添加日志、权限校验等逻辑。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-组合模式（Composite-Pattern）"><a href="#9-组合模式（Composite-Pattern）" class="headerlink" title="9. 组合模式（Composite Pattern）"></a>9. <strong>组合模式（Composite Pattern）</strong></h3><ul>
+<li><strong>核心思想</strong>：将对象组合成树形结构，统一处理单个对象和组合对象。</li>
+<li>Spring 应用：<ul>
+<li><code>ApplicationContext</code> 的层次结构：<code>WebApplicationContext</code> 可包含多个 <code>ServletContext</code>，形成父子容器，通过组合模式统一管理上下文中的 Bean。</li>
+<li><code>HandlerMapping</code> 链：多个 <code>HandlerMapping</code> 可组合成一个链，Spring MVC 会依次查找适合的处理器，统一处理映射逻辑。</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-其他常用模式"><a href="#10-其他常用模式" class="headerlink" title="10. 其他常用模式"></a>10. <strong>其他常用模式</strong></h3><ul>
+<li><strong>注册表模式（Registry Pattern）</strong>：<code>BeanDefinitionRegistry</code> 负责注册和管理 <code>BeanDefinition</code>（Bean 的元数据），提供注册、查询、删除等操作，是 Spring 容器初始化的核心组件。</li>
+<li><strong>委托模式（Delegate Pattern）</strong>：<code>DispatcherServlet</code> 作为 Spring MVC 的前端控制器，将请求委托给 <code>HandlerMapping</code>、<code>HandlerAdapter</code> 等组件处理，自身不直接处理业务逻辑。</li>
+<li><strong>桥接模式（Bridge Pattern）</strong>：<code>DataSource</code> 接口作为抽象层，其实现类（如 <code>DriverManagerDataSource</code>、<code>HikariDataSource</code>）对应不同数据库连接池的具体实现，通过桥接模式分离抽象与实现，方便替换数据源。</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">北川</div><div class="post-copyright__author_desc">Believe in yourself</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://gukeyang.github.io/posts/489ef953.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://gukeyang.github.io/posts/489ef953.html')">Spring面试题</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div><div class="reward-link mode"><a class="reward-link-button" href="/wecaht/"><i class="anzhiyufont anzhiyu-icon-plant-fill"></i>运营模式与责任</a></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://gukeyang.github.io/posts/489ef953.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Spring面试题&amp;url=https://gukeyang.github.io/posts/489ef953.html&amp;pic=https://s2.loli.net/2025/10/23/5MFUXBI3EhCAx6y.jpg?_r_=e11426c7-2fb5-927a-c21e-00c94e3371d0" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gukeyang.github.io" target="_blank">北川的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Spring/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Spring<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/SpringMVC/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SpringMVC<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Springboot/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Springboot<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2025/10/23/5MFUXBI3EhCAx6y.jpg?_r_=e11426c7-2fb5-927a-c21e-00c94e3371d0" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/c45230cb.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/w3ErpsQhncfDed2.jpg?_r_=aa11e288-078a-38df-c21a-9e2ceda87b13" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">mysql面试题</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/zc998800/cdn/face/gif/m17.gif" ait="status"/></div></div><div class="author-info__description">路慢其修远兮 吾将上下而求索</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">北川</h1><div class="author-info__desc">Believe in yourself</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/gukeyang" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/1542898061" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://s2.loli.net/2023/10/19/vNio4QGBSX9x5lO.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%8A%E8%81%8A%E4%BD%A0%E5%AF%B9spring%E6%A1%86%E6%9E%B6%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">聊聊你对spring框架的理解？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E4%BE%8BBean-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">单例Bean 生命周期的核心阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Bean-%E5%AE%9A%E4%B9%89%E5%8A%A0%E8%BD%BD%E4%B8%8E%E8%A7%A3%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">1. Bean 定义加载与解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Bean-%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%88%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2. Bean 实例化（创建对象）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5%EF%BC%88%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8CDI%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3. 属性注入（依赖注入，DI）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%89%8D%EF%BC%88Aware-%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">4. 初始化前（Aware 接口回调）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%89%8D%E7%BD%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">5. 初始化前置处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C"><span class="toc-number">2.6.</span> <span class="toc-text">6. 初始化方法执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.7.</span> <span class="toc-text">7. 初始化后置处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Bean-%E5%B0%B1%E7%BB%AA%EF%BC%88%E5%8F%AF%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">2.8.</span> <span class="toc-text">8. Bean 就绪（可使用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E9%94%80%E6%AF%81%E5%89%8D%E5%87%86%E5%A4%87"><span class="toc-number">2.9.</span> <span class="toc-text">9. 销毁前准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E9%94%80%E6%AF%81%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C"><span class="toc-number">2.10.</span> <span class="toc-text">10. 销毁方法执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-%E4%B8%AD%E7%9A%84%E5%8D%95%E4%BE%8B-bean-%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F-%E9%87%8D%E8%A6%81"><span class="toc-number">3.</span> <span class="toc-text">Spring 中的单例 bean 的线程安全问题了解吗？(重要)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spring-bean%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97"><span class="toc-number">4.</span> <span class="toc-text">spring bean是线程安全的吗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spring%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E7%9A%84%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">spring是如何解决循环依赖的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E4%BA%8B%E5%8A%A1"><span class="toc-number">6.</span> <span class="toc-text">Spring事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">6.1.</span> <span class="toc-text">事务的实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transactional%E7%9A%84%E4%BA%94%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="toc-number">6.2.</span> <span class="toc-text">Transactional的五个属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%A4%B1%E6%95%88%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">6.3.</span> <span class="toc-text">事务的失效的场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Component-%E5%92%8C-Bean-%E7%9A%84%E5%8C%BA-%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">@Component 和 @Bean 的区 别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Autowired-%E5%92%8C-Resource-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">8.</span> <span class="toc-text">@Autowired 和 @Resource 有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">Spring 中有哪些设计模式？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88Singleton-Pattern%EF%BC%89"><span class="toc-number">9.1.</span> <span class="toc-text">1. 单例模式（Singleton Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88Factory-Pattern%EF%BC%89"><span class="toc-number">9.2.</span> <span class="toc-text">2. 工厂模式（Factory Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%88Proxy-Pattern%EF%BC%89"><span class="toc-number">9.3.</span> <span class="toc-text">3. 代理模式（Proxy Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Observer-Pattern%EF%BC%89"><span class="toc-number">9.4.</span> <span class="toc-text">4. 观察者模式（Observer Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88Template-Method-Pattern%EF%BC%89"><span class="toc-number">9.5.</span> <span class="toc-text">5. 模板方法模式（Template Method Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88Adapter-Pattern%EF%BC%89"><span class="toc-number">9.6.</span> <span class="toc-text">6. 适配器模式（Adapter Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88Strategy-Pattern%EF%BC%89"><span class="toc-number">9.7.</span> <span class="toc-text">7. 策略模式（Strategy Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88Decorator-Pattern%EF%BC%89"><span class="toc-number">9.8.</span> <span class="toc-text">8. 装饰器模式（Decorator Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88Composite-Pattern%EF%BC%89"><span class="toc-number">9.9.</span> <span class="toc-text">9. 组合模式（Composite Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">9.10.</span> <span class="toc-text">10. 其他常用模式</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/489ef953.html" title="Spring面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/5MFUXBI3EhCAx6y.jpg?_r_=e11426c7-2fb5-927a-c21e-00c94e3371d0" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring面试题"/></a><div class="content"><a class="title" href="/posts/489ef953.html" title="Spring面试题">Spring面试题</a><time datetime="2025-10-28T10:31:36.000Z" title="发表于 2025-10-28 18:31:36">2025-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c45230cb.html" title="mysql面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/w3ErpsQhncfDed2.jpg?_r_=aa11e288-078a-38df-c21a-9e2ceda87b13" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="mysql面试题"/></a><div class="content"><a class="title" href="/posts/c45230cb.html" title="mysql面试题">mysql面试题</a><time datetime="2025-10-27T03:31:36.000Z" title="发表于 2025-10-27 11:31:36">2025-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/66c016fb.html" title="JVM"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=544faaee-295d-b1d8-0f43-09df9b5dca27" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM"/></a><div class="content"><a class="title" href="/posts/66c016fb.html" title="JVM">JVM</a><time datetime="2025-10-24T15:31:36.000Z" title="发表于 2025-10-24 23:31:36">2025-10-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/498cfd8e.html" title="并发编程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/w3ErpsQhncfDed2.jpg?_r_=8eb0ea2b-182e-0987-228c-a8b55e5078f8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="并发编程"/></a><div class="content"><a class="title" href="/posts/498cfd8e.html" title="并发编程">并发编程</a><time datetime="2025-10-23T15:51:36.000Z" title="发表于 2025-10-23 23:51:36">2025-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7edb9ee1.html" title="集合框架"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=6a45c64a-fafa-f150-c57d-bf153f8a9550" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="集合框架"/></a><div class="content"><a class="title" href="/posts/7edb9ee1.html" title="集合框架">集合框架</a><time datetime="2025-10-23T08:48:49.330Z" title="发表于 2025-10-23 16:48:49">2025-10-23</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2025 By <a class="footer-bar-link" href="/" title="北川" target="_blank">北川</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 0.88rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 0.88rem;">JVM调优<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 0.88rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 0.88rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">函数<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 0.88rem;">反射<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">复习<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0-%E5%8F%98%E9%87%8F/" style="font-size: 0.88rem;">复习 变量<sup>1</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 0.88rem;">并发<sup>1</sup></a><a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 0.88rem;">情感<sup>1</sup></a><a href="/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB-%E6%8E%A5%E5%8F%A3/" style="font-size: 0.88rem;">抽象类 接口<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>1</sup></a><a href="/tags/%E6%AF%8F%E6%97%A5%E9%9D%A2%E8%AF%95/" style="font-size: 0.88rem;">每日面试<sup>2</sup></a><a href="/tags/%E7%94%B5%E5%95%86-%E8%AE%A2%E5%8D%95/" style="font-size: 0.88rem;">电商,订单<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96-%E5%BA%93%E5%AD%98/" style="font-size: 0.88rem;">超卖 , 库存<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 0.88rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="anzhiyufont anzhiyu-icon-comment-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8152976493&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 北川 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("04/01/2023 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      img.src = "";
+      img.title = "";
+      img.alt = "";
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+      appKey: 'TjKeHNK7GJrGTYuKYzGzh8yg',
+      avatar: 'mp',
+      serverURLs: '',
+      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script src="https://cdn.cbd.int/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=mp'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://4GK2IcRZ.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+        "X-LC-Key": 'TjKeHNK7GJrGTYuKYzGzh8yg',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="//code.tidio.co/4nifo6zdbrmyjsngh2yzxwbnlhrvshrf.js" async="async"></script><script>(() => {
+  const isChatBtn = true
+  const isChatHideShow = true
+
+  if (isChatBtn) {
+    let isShow = false
+    const close = () => {
+      window.tidioChatApi.hide()
+      isShow = false
+    }
+    
+    const open = () => {
+      window.tidioChatApi.open()
+      window.tidioChatApi.show()
+      isShow = true
+    }
+
+    const onTidioChatApiReady = () => {
+      window.tidioChatApi.hide()
+      window.tidioChatApi.on("close", close)
+    }
+    if (window.tidioChatApi) {
+      window.tidioChatApi.on("ready", onTidioChatApiReady)
+    } else {
+      document.addEventListener("tidioChat-ready", onTidioChatApiReady)
+    }
+
+    window.chatBtnFn = () => {
+      if (!window.tidioChatApi) return
+      isShow ? close() : open()
+    }
+  } else if (isChatHideShow) {
+    window.chatBtn = {
+      hide: () => {
+        window.tidioChatApi && window.tidioChatApi.hide()
+      },
+      show: () => {
+        window.tidioChatApi && window.tidioChatApi.show()
+      }
+    }
+  }
+})()</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
