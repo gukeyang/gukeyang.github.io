@@ -1,0 +1,1442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>分布式 | 北川的个人博客</title><meta name="keywords" content="nacos,sentinel,seata"><meta name="author" content="北川,1656473414@qq.com"><meta name="copyright" content="北川"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="分布式"><meta name="application-name" content="分布式"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="分布式"><meta property="og:url" content="https://gukeyang.github.io/posts/fe3c2cd2.html"><meta property="og:site_name" content="北川的个人博客"><meta property="og:description" content="单体架构 vs 分布式架构 vs 微服务架构单体架构（Monolithic） 特点：  整个系统打包成一个应用（通常一个 war&amp;#x2F;jar 包）。 所有功能模块（用户、订单、商品、支付…）都在一个工程里。  优点：  开发简单，上手快。 部署方便，只需要一个应用包。  缺点：  耦合度高，一"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=81a626d6-aaa8-19ea-3abe-8880c91e2ed9"><meta property="article:author" content="北川"><meta property="article:tag" content="博客,笔记,学习"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=81a626d6-aaa8-19ea-3abe-8880c91e2ed9"><meta name="description" content="单体架构 vs 分布式架构 vs 微服务架构单体架构（Monolithic） 特点：  整个系统打包成一个应用（通常一个 war&amp;#x2F;jar 包）。 所有功能模块（用户、订单、商品、支付…）都在一个工程里。  优点：  开发简单，上手快。 部署方便，只需要一个应用包。  缺点：  耦合度高，一"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://gukeyang.github.io/posts/fe3c2cd2"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":"3932F24FA213E964B6B1B0FD091F88CE"},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://friends.anheyu.com/"},
+  navMusic: true,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 设计开发一条龙","🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    simplehomepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: 北川","link":"链接: ","source":"来源: 北川的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '北川的个人博客',
+  title: '分布式',
+  postAI: '',
+  pageFillDescription: '单体架构 vs 分布式架构 vs 微服务架构, CAP 定理、BASE 理论, 单点故障, 微服务解决方案组件, 服务注册与发现, 配置中心, 服务通信, 负载均衡, 熔断与降级, 网关, 分布式事务, RPC的概念是什么？, RPC 的核心逻辑：, 典型 RPC 框架：, 分布式锁, 为什么需要分布式锁, 实现方案, 基于 Redis 实现（最常用）, 基于 ZooKeeper 实现, 基于数据库实现, 基于Redisson 实现, Redisson 如何保证分布式锁的可靠性？, 分布式事务, 分布式事务的解决方案你知道哪些？, 2PC（两阶段提交Two-Phase Commit）, 3PC（三阶段提交Three-Phase Commit）, TCC（Try-Confirm-Cancel）, Saga 模式, 本地消息表（Local Message Table）, 事务消息（Transactional Message）, 阿里的seata框架了解过吗？, Seata 的 几种模式, 1. AT 模式（Automatic Transaction自动事务）, 核心原理, 特点, 适用场景：电商下单、库存扣减等基于数据库的简单分布式事务。, 2. TCC 模式（Try-Confirm-Cancel）, 核心原理, Seata 增强, 特点, 适用场景：金融交易、复杂资源操作（如跨系统资金划转）。, 3. Saga 模式, 实现方式, 核心原理, 特点, 适用场景：订单全链路履约、流程审批等长事务流程。, 4. XA 模式, 特点, 适用场景：金融核心交易等对强一致性要求极高、可接受低并发的场景。, zookeeper拿来做什么？核心的原理是什么？, 一、ZooKeeper 能做什么？, 二、ZooKeeper 的核心原理, 1. 数据模型：树形结构（ZNode）, 2. 集群架构：主从复制（Leader + Follower + Observer）, 3. 一致性协议：ZAB 协议（ZooKeeper Atomic Broadcast）, 4. 事件监听：Watcher 机制, 常见的限流算法你知道哪些？, 1. 固定窗口限流（Fixed Window）, 核心思想, 实现, 优点：实现简单内存占用低。, 缺点：存在 窗口临界问题—— 若窗口边界前后各涌入阈值的请求（如第 1 秒末 50 次 + 第 2 秒初 50 次实际 1 秒内可能达 100 次）会瞬间超过阈值导致流量突刺。, 适用场景：对精度要求不高的场景（如简单接口限流）。, 2. 滑动窗口限流（Sliding Window）, 核心思想, 实现, 优点：解决了固定窗口的临界问题精度更高。, 缺点：子窗口划分越细内存占用和计算成本越高（需维护更多子窗口状态）。, 适用场景：对限流精度有一定要求的场景（如 API 网关限流）。, 3. 漏桶算法（Leaky Bucket）, 核心思想, 实现, 优点：输出流量稳定适合保护后端系统（如数据库）不被突发流量冲击。, 缺点：无法应对短时间的突发流量（即使系统空闲也只能按固定速率处理）。, 适用场景：需要严格控制输出速率的场景（如接口调用第三方服务避免触发对方限流）。, 4. 令牌桶算法（Token Bucket）, 核心思想, 实现, 优点：兼顾限流和突发流量处理灵活性高是最常用的限流算法之一。, 缺点：实现稍复杂（需动态计算令牌生成量）。, 适用场景：大多数需要限流的场景（如 API 接口、网关、秒杀系统）尤其适合允许短期流量峰值的业务。, 5. 计数器滑动窗口（Counting Sliding Window）, 核心思想, 优点：精度极高无窗口划分带来的误差。, 缺点：高并发下列表操作（插入、删除）可能成为性能瓶颈（需锁或并发数据结构）。, 适用场景：对精度要求极高但并发量不高的场景。, 6. 分布式限流（基于 Redis 等）, 分布式一致性算法, 1. Paxos 算法, 核心角色, 核心流程（简化）, 特点, 2. Raft 算法, 核心角色, 核心流程, 特点, 3. ZAB 协议（ZooKeeper Atomic Broadcast）, 核心目标, 核心流程, 特点, 什么是Nacos它的核心功能是什么？, Nacos 的服务注册与发现原理是什么？支持哪些注册中心模式？, 分布式系统中如何实现负载均衡？, 分布式全局唯一id的解决方案, UUID（通用唯一识别码）, 数据库自增 ID（单库 x2F 主从）, 数据库分段id（预分配id段）, Redis自增id, 雪花算法（Snowflake）, 美团的Leaf（企业级方案）, 百度 UidGenerator, 时间回拨问题, 如何监控分布式系统的健康状态？常用组件有哪些？, 服务熔断和服务限流, 服务熔断, 服务限流, 你了解 QPS、TPS、RT、吞吐量 这些高并发性能指标吗？, 1. QPS（Queries Per Second）, 2. TPS（Transactions Per Second）, 3. RT（Response Time）, 4. 吞吐量（Throughput）, 指标间的关联与应用单体架构分布式架构微服务架构单体架构特点整个系统打包成一个应用通常一个包所有功能模块用户订单商品支付都在一个工程里优点开发简单上手快部署方便只需要一个应用包缺点耦合度高一个模块出问题可能影响整个系统修改或扩展困难要重新编译打包部署无法灵活扩展只能整体扩容适合小型项目或初创项目分布式架构特点把系统拆分成多个子系统但粒度比较大比如用户系统订单系统子系统之间通过等方式通信优点各个子系统可以独立部署和扩展适合团队协作开发不同小组负责不同子系统缺点子系统还是比较大内部功能没有彻底拆开依赖复杂系统间通信事务处理变难适合中大型系统例如传统电商网站商品系统支付系统会员系统微服务架构特点在分布式的基础上进一步细化把系统拆成更小的服务通常围绕业务边界比如订单服务库存服务优惠券服务服务之间独立部署独立扩展通常使用优点高度解耦每个服务独立开发测试部署弹性扩展热门服务可以单独扩容比如秒杀服务扩容而不是整个电商系统扩容技术栈多样不同服务可以用不同语言数据库缺点架构复杂需要服务注册发现配置中心链路追踪分布式事务处理运维要求高需要容器化监控体系定理理论是一致性可用性分区容错性的缩写定理三个概念一致性所有节点的数据要保持一致好比大家看到的余额都是同一个数可用性系统必须随时响应请求不能挂掉分区容错性系统在出现网络分区节点间通信失败时还能继续工作在分布式系统中三个特性不能同时满足最多只能同时满足两个系统保证一致性和分区容错但可能牺牲可用性比如系统保证可用性和分区容错但数据可能短暂不一致比如系统保证一致性和可用性但无法容忍分区单机数据库没法真正分布式总结分布式系统一定要容错所以大多数系统在和之间做权衡理论理论是的工程化妥协方案基本可用软状态最终一致性三个概念基本可用在极端情况如高并发允许部分服务降级比如结算页稍微慢一点软状态允许存在中间状态不必实时强一致最终一致性系统经过一段时间后数据最终会达到一致如银行跨行转账总结是在中放弃强一致性追求最终一致性保证系统高可用单点故障在分布式系统中单点故障是指系统中某个唯一依赖的组件节点当它发生故障如宕机网络断开硬件损坏等时会直接导致整个分布式系统的核心功能中断或整体不可用的现象微服务解决方案组件服务注册与发现解决服务在哪里的问题让服务之间能动态感知对方的地址端口支持服务上下线自动更新架构强调可用性适合自我保护机制网络分区时不剔除服务支持服务发现配置管理自带健康检查架构强一致性阿里融合注册中心配置中心支持切换国产生态友好配置中心携程支持配置灰度发布权限管理配置历史回溯功能完善兼具注册中心和配置中心功能轻量易用与生态无缝集成依赖仓库存储配置服务通信典型协议框架基于简单通用如远程过程调用性能更高如核心组件声明式客户端简化调用阿里开源框架支持多种注册中心性能优异负载均衡将请求均匀分发到多个服务实例避免单实例过载客户端负载均衡支持轮询权重随机等策略内置负载均衡支持一致性哈希最小活跃数等策略熔断与降级防止服务雪崩一个服务故障导致依赖它的所有服务连锁失败老牌熔断组件支持线程隔离请求缓存阿里轻量级熔断降级工具支持流量控制热点参数限流网关作为服务入口统一处理路由认证限流监控等横切功能基于的响应式网关支持动态路由熔断集成基于的网关功能简单但性能略低分布式事务保证跨多个服务的操作要么全成功要么全失败如下单扣库存阿里支持自动补偿等模式易用性高事务消息通过半消息回查机制实现最终一致性的概念是什么远程过程调用是一种让本地程序像调用本地函数一样调用远程服务器上的函数或方法的技术的核心逻辑本地调用伪装本地发者写代码时调用远程函数的语法和调用用本地函数一样如网络通信封装框架在背后自动完成把函数名参数序列化转成二进制数据通过网络如发送给远程服务器远程服务器收到后反序列化数据找到对应的函数执行把执行结果序列化后通过网络返回给本地本地再反序列化结果返回给调用者典型框架阿里开源适合生态支持服务注册发现负载均衡开源基于和跨语言支持好等开源支持多语言适合高性能场景分布式锁为什么需要分布式锁在单体系统中用本地锁如的就能保证多线程互斥但在分布式架构中服务部署在多个服务器上本地锁只能控制单个服务器内的线程无法跨节点生效实现方案基于实现最常用利用的命令不存在则设置键值同时指定过期时间获取锁执行表示只在键不存在时设置表示秒后自动过期成功获取锁用确保唯一用于释放锁时验证失败表示锁被其他节点持有等待重试释放锁通过脚本原子执行判断是否匹配删除键避免误删其他节点的锁基于实现利用的临时有序节点和机制获取锁在指定节点下创建临时有序子节点如判断自己是否是序号最小的子节点是获取锁否监听前一个子节点的删除事件等待前一个节点释放锁释放锁节点断开连接如服务宕机临时节点自动删除后续节点收到事件后尝试获取锁基于数据库实现利用数据库的唯一索引或行锁获取锁插入一条带唯一索引的记录如成功则获取锁失败则等待释放锁删除该记录基于实现的接口封装了分布式锁的所有操作核心方法获取锁默认加锁秒后台自动续期指定锁的过期时间若则不会自动续期尝试获取锁立即返回结果成功返回失败返回指定等待时间超时未获取则返回释放锁必须在中调用确保锁释放如何保证分布式锁的可靠性原子性获取锁底层通过脚本执行命令确保判断锁是否存在设置锁的原子性类似但更完善避免并发问题自动续期看门狗机制若未指定即无参方法会默认加锁秒并启动一个看门狗线程后台定时任务每隔秒秒的看门狗会自动将锁的过期时间重置为秒直到业务执行完调用看门狗才会停止这解决了业务执行时间超过锁过期时间导致锁提前释放的问题安全释放锁锁的是生成的唯一关联当前线程释放锁时会先验证是否匹配避免误删其他线程节点的锁方法底层同样通过脚本实现验证删除的原子操作集群适配若是主从哨兵集群模式会通过算法可选保证在节点故障时锁依然可用多节点加锁超过半数成功才认为获取锁成功分布式事务分布式事务的解决方案你知道哪些两阶段提交核心思想分准备阶段和提交阶段由协调者统一管理所有参与者的事务状态准备阶段协调者询问所有参与者是否可以执行事务提交参与者执行操作并记录日志未提交返回就绪或中止提交阶段若所有参与者均就绪协调者下达提交指令参与者完成最终提交若有任一参与者中止则下达回滚指令优点实现简单强一致性缺点同步阻塞准备阶段所有参与者需锁定资源等待协调者指令性能较差协调者单点故障风险若协调者宕机参与者可能长期阻塞数据不一致风险提交阶段若部分参与者未收到指令会导致数据不一致适用场景对一致性要求极高并发量低的场景如银行核心交易三阶段提交核心思想在基础上增加预提交阶段解决的阻塞问题阶段协调者询问参与者是否可执行事务类似准备阶段的前置检查阶段若所有参与者同意协调者发送预提交指令参与者执行操作并记录日志可回滚阶段协调者确认所有参与者预提交成功后下达最终提交指令若超时或失败则下达回滚指令核心思想基于业务逻辑拆分事务为三个操作由业务代码控制一致性资源检查与预留如扣减库存前锁定商品确认执行业务操作如实际扣减库存需保证幂等性取消操作如释放锁定的库存需保证幂等性和补偿性模式核心思想将分布式事务拆分为一系列本地事务子事务每个子事务对应一个补偿事务若某子事务失败则按相反顺序执行补偿事务实现方式编排式由一个中央协调器控制子事务的执行顺序和补偿逻辑式子事务间通过事件通知触发执行无中央协调器如基于消息队列优点无锁阻塞性能优于适合长事务对业务侵入性较低相比缺点最终一致性非强一致性中间状态可能可见补偿逻辑设计复杂需处理网络重试幂等性等问题本地消息表核心思想通过本地事务保证业务操作与消息记录的原子性再通过消息队列异步通知其他节点实现最终一致性步骤在本地数据库中创建消息表记录需要发送的跨节点消息步骤业务操作与消息表插入在同一本地事务中提交保证要么都成功要么都失败步骤通过定时任务扫描消息表将未发送的消息投递到消息队列步骤接收方消费消息并执行对应业务完成后通知发送方删除消息优点实现简单依赖本地事务和消息队列可靠性高缺点消息表与业务表耦合增加数据库存储成本需处理消息重复消费幂等性和定时任务的效率问题事务消息核心思想基于消息队列的事务消息机制如的扩展实现将消息发送与本地事务绑定步骤发送方发送半消息消息队列暂存不投递步骤执行本地事务若成功则确认发送消息若失败则取消发送步骤消息队列将确认的消息投递到接收方接收方执行业务并返回确认步骤通过回查机制处理发送方超时未确认的情况优点解耦消息表与业务表依赖成熟的消息队列可靠性高缺点依赖消息队列的事务消息支持实现复杂度高于本地消息表适用场景依赖消息队列的分布式系统需最终一致性如异步通知数据同步阿里的框架了解过吗是阿里巴巴开源的分布式事务解决方案致力于在微服务架构下提供高性能和简单易用的分布式事务服务它支持多种分布式事务模式适配不同业务场景目前已成为微服务领域主流的分布式事务框架之一定义了三个核心角色来实现分布式事务的协调事务协调者独立的中间件负责维护全局事务的运行状态协调全局事务的提交或回滚事务管理器嵌入到发起全局事务的微服务中如订单服务负责发起全局事务定义全局事务的范围开始提交回滚资源管理器嵌入到参与全局事务的各个微服务中如库存服务支付服务负责管理本地事务资源与通信注册资源汇报事务状态并执行下达的提交回滚指令三者的交互流程向申请开启全局事务生成全局事务并返回给通过服务调用链路传递到各个所在的微服务各向注册分支事务本地事务并汇报执行状态根据所有分支事务的状态向发起全局提交或回滚请求协调所有执行本地事务的提交或回滚完成全局事务的几种模式场景需求推荐模式核心考量简单低侵入模式自动补偿性能较好复杂业务跨资源模式灵活性高手动控制资源长事务多步骤流程模式无锁阻塞容忍中间状态强一致性金融核心交易模式严格牺牲性能异步通信数据同步本地消息表模式实现简单依赖消息队列模式自动事务的默认模式基于思想优化通过自动生成补偿逻辑实现低侵入式的分布式事务是最常用的模式之一核心原理第一阶段本地事务执行拦截业务解析并记录数据修改前的快照生成用于回滚执行本地事务并提交释放数据库锁解决传统的阻塞问题向汇报分支事务状态为准备就绪第二阶段全局提交回滚若全局事务提交通知所有删除事务完成若全局事务回滚通知根据自动执行回滚补偿逻辑特点优点对业务代码无侵入无需手动写补偿逻辑性能较好第一阶段释放锁适合简单场景缺点仅支持关系型数据库依赖解析生成不适合复杂业务逻辑适用场景电商下单库存扣减等基于数据库的简单分布式事务模式基于业务逻辑拆分的手动事务模式需要开发者手动实现资源检查与预留确认提交取消回滚三个接口负责协调三个阶段的执行核心原理阶段检查资源是否可用如库存是否充足并预留资源如冻结部分库存确保后续操作可执行阶段若所有分支成功执行实际业务提交如扣减冻结的库存需保证幂等性阶段若任一分支失败释放预留的资源如解冻冻结的库存需保证幂等性和补偿性增强自动处理分支事务的注册状态汇报和协调逻辑支持空回滚无却收到幂等性重复调用不影响结果悬挂先于执行等问题特点优点不依赖数据库灵活性高适合跨库跨服务的复杂业务如金融转账缺点侵入业务代码开发成本高需手动实现三个接口适用场景金融交易复杂资源操作如跨系统资金划转模式针对长事务场景设计将分布式事务拆分为多个本地子事务每个子事务对应一个补偿事务通过状态机或事件驱动执行失败时按逆序执行补偿实现方式编排式通过配置定义子事务的执行顺序依赖关系和补偿逻辑由协调器统一调度注解式通过注解标记子事务和补偿方法简化配置核心原理按顺序执行各子事务如下单支付发货物流若某子事务失败触发补偿机制按逆序执行已完成子事务的补偿逻辑如物流回滚发货回滚支付回滚下单回滚特点优点无锁阻塞性能好适合长事务跨多个服务步骤多的流程缺点最终一致性中间状态可能可见补偿逻辑需手动实现适用场景订单全链路履约流程审批等长事务流程模式基于传统协议分布式事务规范实现的强一致性模式依赖数据库原生支持如的接口流程各分支事务执行后通过进入准备就绪状态持有数据库锁未提交确认所有分支就绪后发送指令完成提交若任一分支失败发送回滚特点优点强一致性符合对业务无侵入依赖数据库支持缺点性能低数据库锁全程持有阻塞严重仅支持协议的数据库适用场景金融核心交易等对强一致性要求极高可接受低并发的场景拿来做什么核心的原理是什么是一款专注于分布式系统协调的开源工具主要解决分布式环境中多节点之间的状态同步一致性保障协作控制等问题一能做什么的典型应用场景包括但不限于分布式锁多个节点竞争同一资源时通过创建临时有序节点利用节点的唯一性和有序性实现分布式锁如公平锁例如秒杀系统中控制库存扣减的并发冲突服务注册与发现服务提供者启动时在上创建临时节点记录服务地址端口等信息服务消费者通过监听这些节点获取服务列表并感知服务上下线变化集群选举分布式集群如中通过的临时节点和监听机制实现节点的自动选举如选举当故障时快速从中选出新配置中心将分布式系统的配置信息如数据库地址阈值参数存储在的节点中所有节点监听配置节点的变化实现配置的集中管理和动态更新无需重启服务数据发布与订阅基于发布订阅模式一个节点发布数据到节点其他节点通过监听该节点实时获取数据更新如分布式系统中的全局状态同步分布式队列利用的节点顺序性实现队列如任务调度系统中按顺序执行分布式任务二的核心原理的核心能力依赖于其数据模型集群架构协议和机制四者共同保障了分布式协调的可靠性数据模型树形结构的数据存储类似文件系统的树形结构每个节点称为具有以下特点层级结构根节点为子节点通过路径标识如数据存储每个可存储少量数据默认最大适合存储配置状态等元数据节点类型持久节点创建后永久存在除非手动删除临时节点创建节点的客户端会话结束后节点自动删除常用于服务注册服务下线后节点自动清除有序节点创建时会自动添加一个自增序号如用于实现分布式锁队列等版本号每个有版本号修改数据时需指定版本号实现乐观锁避免并发冲突集群架构主从复制通常以集群形式部署节点数为奇数如个避免单点故障角色分为集群的主节点负责处理所有写请求如创建修改并通过协议同步数据到其他节点同时负责选举的发起从节点负责处理读请求参与写请求的投票发起写操作时需多数确认并在故障时参与选举可选仅处理读请求不参与投票和选举用于扩展读性能不影响集群一致性集群特性写操作需处理且需超过半数节点确认才能成功保证一致性读操作可由任意节点处理本地读取性能高一致性协议协议是自定义的原子广播协议保证集群中所有节点的数据一致性类似但更简单核心流程分为两部分阶段一选举集群启动或故障时所有进入选举状态通过投票选出新得票超过半数的节点当选选举依据是节点的配置的唯一标识和事务反映数据更新顺序值越大越新优先选择最大的节点确保数据最新阶段二原子广播数据同步当选后集群进入正常工作状态写操作通过以下步骤同步到所有节点提议收到写请求后生成一个全局唯一的向所有发送提议包含数据变更内容确认收到提议后执行数据变更并返回确认提交当收到超过半数的后向所有节点发送指令所有节点正式提交数据变更本地持久化这一过程保证了所有节点要么同时提交数据要么同时失败实现强一致性事件监听机制是实现分布式协调的核心机制允许客户端注册监听某个的变化如节点创建删除数据修改当变化发生时会主动通知客户端特点一次性触发后立即失效若需持续监听需重新注册异步通知通知通过客户端的回调函数处理不阻塞客户端操作轻量级仅通知发生了变化不包含变化前后的具体数据客户端需主动读取新数据常见的限流算法你知道哪些算法核心特点优点缺点适用场景固定窗口时间分片固定简单高效临界问题低精度场景滑动窗口子窗口平滑过渡精度较高子窗口越多越耗资源中等精度场景如网关漏桶固定速率处理流量绝对平稳不支持突发流量保护后端系统如数据库令牌桶允许突发长期速率可控灵活支持峰值实现稍复杂大多数限流场景推荐计数器滑动窗口精确统计时间窗口请求精度极高高并发下性能差高精度低并发场景固定窗口限流核心思想将时间划分为固定大小的窗口如秒统计每个窗口内的请求数若超过预设阈值则拒绝后续请求示例窗口大小秒阈值次请求第秒内若请求达次后续请求被拒绝直到第秒窗口刷新实现用一个计数器记录当前窗口内的请求数窗口起始时间戳标记窗口边界每次请求到来时判断是否在当前窗口内是计数器若超过阈值则限流否重置计数器和窗口起始时间优点实现简单内存占用低缺点存在窗口临界问题若窗口边界前后各涌入阈值的请求如第秒末次第秒初次实际秒内可能达次会瞬间超过阈值导致流量突刺适用场景对精度要求不高的场景如简单接口限流滑动窗口限流核心思想将固定窗口拆分为多个更小的子窗口通过滑动计算一定时间范围内的总请求数解决固定窗口的临界问题示例秒窗口拆分为个的子窗口每个子窗口记录请求数任意连续秒内的总请求数若超过阈值则限流实现维护一个子窗口数组如个元素每个元素记录对应时间段的请求数每次请求到来时计算当前时间属于哪个子窗口更新对应计数并累加最近个子窗口的总请求数覆盖完整时间窗口若超过阈值则限流优点解决了固定窗口的临界问题精度更高缺点子窗口划分越细内存占用和计算成本越高需维护更多子窗口状态适用场景对限流精度有一定要求的场景如网关限流漏桶算法核心思想将请求比作水流系统比作漏桶请求先进入漏桶漏桶以固定速率如每秒次处理请求若请求量超过漏桶容量则溢出被限流特点强制限制请求的处理速率平滑流量不受突发流量影响实现维护两个变量漏桶当前水量请求数漏桶容量漏水速率单位时间处理请求数每次请求到来时先计算漏水量根据上次处理时间到当前的间隔按速率减去已处理的请求若新增请求后水量超过容量则限流否则水量优点输出流量稳定适合保护后端系统如数据库不被突发流量冲击缺点无法应对短时间的突发流量即使系统空闲也只能按固定速率处理适用场景需要严格控制输出速率的场景如接口调用第三方服务避免触发对方限流令牌桶算法核心思想系统按固定速率如每秒个向令牌桶中放入令牌请求到来时需从桶中获取令牌若能获取则处理否则限流桶有最大容量令牌满了之后不再新增特点允许一定程度的突发流量若桶中有积累的令牌可一次性处理多个请求同时长期速率不超过令牌生成速率实现维护变量令牌桶当前令牌数桶容量令牌生成速率单位时间新增令牌数每次请求到来时先计算当前应生成的令牌数根据上次生成时间到当前的间隔按速率增加令牌不超过桶容量若令牌数则令牌数处理请求否则限流优点兼顾限流和突发流量处理灵活性高是最常用的限流算法之一缺点实现稍复杂需动态计算令牌生成量适用场景大多数需要限流的场景如接口网关秒杀系统尤其适合允许短期流量峰值的业务计数器滑动窗口核心思想是滑动窗口的一种优化通过记录每个请求的时间戳计算最近时间窗口内的请求数如最近秒内的请求数超过阈值则限流实现用一个有序列表如红黑树链表存储请求的时间戳每次请求到来时先删除列表中超过窗口时间的时间戳再判断剩余数量是否超过阈值优点精度极高无窗口划分带来的误差缺点高并发下列表操作插入删除可能成为性能瓶颈需锁或并发数据结构适用场景对精度要求极高但并发量不高的场景分布式限流基于等以上算法均为单机限流分布式系统中需统一统计全量请求常用方案滑动窗口用的存储请求时间戳通过删除过期时间戳统计数量结合脚本保证原子性令牌桶用存储令牌数定时任务按速率生成令牌请求时原子性减少令牌数网关层限流如的基于漏桶结合实现分布式限流分布式一致性算法算法是由提出的分布式一致性算法是许多现代一致性协议的基础如是的简化版其核心目标是在异步网络环境允许节点故障和消息延迟丢失但不允许消息篡改中让多个节点对某个值达成一致核心角色提议者提出需要达成一致的值如数据更新请求接受者负责接收和表决提议只有获得多数接受的提议才能成为最终共识学习者同步最终达成一致的值不参与提议和表决可理解为从节点核心流程简化分为准备和接受两个阶段通过两阶段提交避免冲突准备阶段向多数发送包含唯一提案编号的请求若未响应过编号更大的提案会回复承诺不接受编号小于的提案并返回已接受的最大编号提案若有接受阶段若收到多数的则发送包含编号和值根据回复的提案确定若无则用自己的提议值的请求若未承诺过更大编号的提案则接受该提案共识达成当一个提案被多数接受后该值成为共识同步此值特点优点严谨性高能在异步环境下容错最多容忍个节点故障为总节点数缺点设计复杂存在多个时需处理活锁难以实现和理解适用场景分布式数据库如分布式存储如部分功能算法是为了简化而设计的一致性算法强调可理解性通过将问题分解为领导者选举日志复制安全性三个部分降低了实现难度成为目前最流行的分布式一致性算法之一核心角色领导者唯一负责接收客户端请求并向同步日志数据变更记录跟随者被动接收的日志同步若超时未收到心跳则转换为参与选举候选者发起选举争取成为新核心流程领导者选举集群启动时所有节点为定期等待心跳默认超时时间若超时未收到心跳转换为向其他节点发送投票请求节点仅为任期递增的选举轮次编号更大的投票获得多数票的成为若选举平局无节点获多数票则随机延迟后重新选举避免活锁日志复制接收客户端请求后将其作为日志条目追加到本地日志并向所有发送同步请求收到日志后追加到本地日志并返回确认当收到多数的后将该日志条目标记为已提交并通知提交此时客户端请求生效安全性保障确保拥有所有已提交的日志条目选举时需证明自己的日志至少与其他节点一样新否则不被投票日志条目按顺序提交保证数据一致性特点优点逻辑清晰拆分角色和阶段易于实现和调试容错能力与相同最多容忍个节点故障缺点依赖节点故障后需重新选举期间服务不可用短暂适用场景分布式系统的元数据管理如的集群分布式数据库如协议是自定义的原子广播协议专为分布式协调服务设计兼具一致性和高可用性可视为简化的变种核心目标保证分布式事务的原子性所有节点要么都执行要么都不执行在故障时快速选举新恢复服务核心流程分为崩溃恢复和消息广播两个阶段崩溃恢复当故障或集群启动时通过选举产生新确保新拥有所有已提交的事务日志与选举类似优先选择日志最新的节点消息广播正常运行时接收客户端写请求生成事务提案带全局唯一通过两阶段提交同步到所有向发送提案写入日志后返回当收到多数的后向所有节点发送指令完成事务提交特点优点专为设计兼顾一致性和高可用支持快速故障转移缺点耦合的数据模型通用性较弱适用场景集群用于分布式锁服务发现等协调场景什么是它的核心功能是什么是一个更易于构建云原生应用的动态服务发现配置管理和服务管理平台致力于解决微服务中的服务发现配置动态更新服务健康检查等问题服务发现与注册支持基于和的服务发现服务提供者可注册服务消费者可动态发现服务配置管理集中管理应用的配置信息支持动态更新无需重启服务多环境多集群配置配置版本控制服务健康检查自动检测服务实例的健康状态剔除不健康实例保证服务可用性动态服务通过协议解析服务域名支持权重路由流量控制等的服务注册与发现原理是什么支持哪些注册中心模式服务注册原理服务提供者启动时通过向发送注册请求包含服务名端口健康检查参数等将服务信息存储在内存注册表中并持久化到数据库默认可配置服务提供者定期向发送心跳默认秒证明自身健康若超过秒未收到心跳标记实例为不健康超过秒则剔除实例服务发现原理服务消费者通过订阅目标服务记录订阅关系当服务实例变化如新增下线健康状态变更时通过机制主动通知消费者基于长连接消费者更新本地服务列表支持的注册中心模式模式优先保证可用性和分区容错性适合服务发现场景允许网络分区时存在短暂数据不一致最终会同步模式优先保证一致性和分区容错性适合需要强一致性的场景如配置管理集群选举注意可针对不同服务动态切换模式通过等配置分布式系统中如何实现负载均衡客户端负载均衡消费者从注册中心获取服务列表本地实现负载策略如服务端负载均衡通过负载均衡器如转发请求到后端服务分布式全局唯一的解决方案方案核心原理唯一性保障有序性性能实现复杂度适用场景随机数时间戳硬件信息概率上唯一无序极高极低对有序性无要求的场景如日志数据库自增单库主从库自增序列数据库主键约束单库有序低极低小型分布式系统并发量低数据库分段预分配段如每个节点分配个段不重叠段内自增段内有序中低中小并发场景如订单自增的命令单节点原子性全局有序高低高并发场景需解决单点问题雪花算法时间戳机器序列号结构分段不重叠时间序机器内有序极高中高并发需有序的核心场景如交易美团整合数据库分段与双方案兜底段内时间序有序极高高超大规模分布式系统如电商百度优化动态机器结构分段动态分配时间序有序极高高容器化场景通用唯一识别码是微软对的实现本质一致随机数时间戳硬件信息实现起来比较简单并且性能高缺点是无序性占用空间大可读性比较差适用场景日志临时会话分布式缓存非排序场景等对有序性无要求的场景数据库自增单库主从利用关系型数据库的或特性单库中通过主键自增生成唯一主从架构下所有写入走主库从库同步数据确保唯一优点是实现零成本全局有序缺点就是有这个性能瓶颈扩展性比较差可用性比较差适合用于小型分布式系统单库单表的场景数据库分段预分配段提前向数据库申请一段连续的如节点本地缓存该段用完后再申请下一段优点就是说性能提升本地缓存段减少了数据库的交互有序性同一个段内严格递增满足大部分的排序要求并且有一定的扩展性不同业务类型独立分配互不影响缺点就是说段与段之间无序浪费未用完的段会丢失适合中小并发场景如电商订单用户注册等需要有序的业务自增利用的单线程原子性通过自增或自增命令生成唯一例如生成用户返回生成订单每次申请个段优点是性能极高全局有序轻量易扩展缺点是维护成本高数据又丢失风险有序性比较局限雪花算法开源的分布式生成算法核心是将位型拆分为个分段通过分段不重叠保障唯一性通过时间戳高位保障有序性符号位固定为确保为正数时间戳位可表示毫秒约年需设置起始时间戳如系统上线时间机器位可支持个节点序列号位可支持同一节点同一毫秒生成个优点是性能好全局有序无中心依赖可读性比较强缺点是机器需要预分配又时钟回拨的问题导致重复高并发强有序无中心依赖的核心场景如金融交易电商订单物流跟踪等美团的企业级方案美团开源的分布式生成系统整合了数据库分段和优化版两种方案可根据业务场景切换在数据库分段基础上优化通过双预申请一段在用一段预申请避免段用完时的等待提升性能解决原生的机器问题通过生成临时节点动态分配机器节点启动时向申请退出时释放适配容器化场景优点是高可用高性能适合复杂场景动态机器适配容器集群缺点是架构比较复杂维护的成本高适合超大规模的分布式系统比如这个美团和京东等电商平台需要兼顾高并发高可用和复杂部署环境百度百度开源的优化方案核心改进是动态机器分配和时间戳位宽可配置动态机器通过数据库自增分配机器节点启动时向数据库申请唯一无需可配置位宽支持自定义时间戳机器序列号的位宽如机器位支持个节点预生成缓冲通过预生成并缓存进一步提升性能优点更灵活位宽可适配不同集群规模无依赖简化部署降低维护成本性能优异单节点可达百万级缺点仍依赖数据库机器分配需数据库支持时钟回拨问题需额外处理容器化大规模集群场景如互联网大厂的用户中心内容平台等方案选型优先选若无需有序性追求极简实现如日志优先选数据库分段中小并发需有序不想引入如中小电商订单优先选自增高并发需全局有序已部署集群如秒杀优先选高并发强有序无中心依赖如金融交易核心业务小型集群原生容器化大规模集群超大规模高可用要求时间回拨问题时钟回拨是分布式生成中尤其是基于时间戳的方案如雪花算法的典型问题指服务器时钟因同步故障等原因出现时间倒退可能导致重复以下是针对性的解决方案及典型实现等待时钟追平最常用原理检测到当前时间戳小于上次生成的时间戳时暂停生成等待系统时钟自然追上上次时间后再继续使用物理时钟逻辑时钟补偿原理不直接依赖系统时钟而是维护一个逻辑时钟当物理时钟正常时逻辑时钟同步物理时钟当物理时钟回拨时逻辑时钟继续自增确保不会倒退预生成缓冲池原理提前生成一批并缓存当检测到时钟回拨时优先使用缓冲池中的同时异步触发新生成避开回拨时段如何监控分布式系统的健康状态常用组件有哪些监控维度服务指标响应时间错误率资源指标内存磁盘网络流量分布式指标节点存活状态数据同步延迟常用组件采集指标并可视化展示日志收集分析展示分布式链路追踪定位服务调用瓶颈服务熔断和服务限流服务熔断核心目标当依赖的服务出现频繁故障如超时错误率过高时主动切断调用链路避免故障蔓延导致整个系统级联崩溃雪崩效应同时给故障服务留出恢复时间工作原理类似电路断路器闭合状态正常调用依赖服务实时统计错误率超时率打开状态当错误率超过阈值如触发熔断直接返回降级结果如默认值缓存数据不再调用目标服务半开状态熔断一段时间后如秒允许少量请求尝试调用目标服务若成功则恢复闭合状态否则继续保持打开状态典型场景支付服务依赖的银行接口超时率突增触发熔断后支付服务直接返回系统繁忙请稍后再试避免大量请求阻塞在支付环节服务限流核心目标对服务的请求流量进行控制限制单位时间内的请求数量如并发数防止超出服务的处理能力导致响应延迟或崩溃常见限流维度限流限制每秒请求数如每秒最多次请求并发数限流限制同时处理的请求数如最多个并发请求基于来源限流对特定用户或接口单独设置限流规则如限制某每秒最多次请求典型场景电商秒杀活动中限制商品详情接口超出部分直接返回排队中避免服务器被冲垮你了解吞吐量这些高并发性能指标吗定义每秒处理的查询请求数通常用于描述读操作密集型的系统如数据库查询缓存查询接口的查询类请求示例一个商品详情接口每秒被请求次其为注意关注查询动作不严格区分请求是否包含写操作但更偏向读场景定义每秒处理的事务数一个事务通常包含一组连续的操作如查询库存创建订单扣减库存且需满足特性原子性一致性等常用于描述包含读写混合操作的业务场景如支付流程订单创建示例支付系统每秒完成笔支付包含查询余额扣钱生成流水等步骤其为与的区别是业务逻辑完整的事务是单一查询请求一个事务可能包含多个查询即可能对应多个定义响应时间指从请求发出到收到完整响应的总耗时单位通常为毫秒反映系统处理请求的速度关键指标平均所有请求的平均耗时需结合分布情况避免被极端值误导的请求耗时不超过该值更能反映用户实际体验如表示的请求在内完成意义是衡量系统快慢的核心指标过高会导致用户体验差如页面加载超时吞吐量定义单位时间内系统处理的数据总量单位通常为等反映系统处理数据的能力与请求数量单个请求的数据大小相关示例一个文件上传服务每秒处理个请求每个请求平均其吞吐量为与的关系吞吐量平均请求数据大小高吞吐量不一定意味着高如大文件传输低但吞吐量高指标间的关联与应用与的关系在系统资源饱和前随并发量增加而上升基本稳定当并发超过阈值后下降急剧上升因资源竞争排队等待公式参考并发数平均如并发用户平均则性能优化目标在满足要求如的前提下提升和吞吐量同时避免系统过载如内存网络瓶颈',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-11-01 15:31:45',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://gukeyang.github.io" title="博客"><img class="back-menu-item-icon" src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">北川的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src="/./img/wechat.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/./img/alipay.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 1.05rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 1.05rem;">JVM调优<sup>1</sup></a><a href="/tags/Kafka/" style="font-size: 1.05rem;">Kafka<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 1.05rem;">Mybatis<sup>1</sup></a><a href="/tags/RabbitMQ/" style="font-size: 1.05rem;">RabbitMQ<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 1.05rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 1.05rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/nacos/" style="font-size: 1.05rem;">nacos<sup>1</sup></a><a href="/tags/seata/" style="font-size: 1.05rem;">seata<sup>1</sup></a><a href="/tags/sentinel/" style="font-size: 1.05rem;">sentinel<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">复习<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 1.05rem;">并发<sup>1</sup></a><a href="/tags/%E5%BA%93%E5%AD%98/" style="font-size: 1.05rem;">库存<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 1.05rem;">电商<sup>1</sup></a><a href="/tags/%E8%AE%A2%E5%8D%95/" style="font-size: 1.05rem;">订单<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96/" style="font-size: 1.05rem;">超卖<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.05rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">面试题</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/nacos/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>nacos</span></a><a class="article-meta__tags" href="/tags/sentinel/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>sentinel</span></a><a class="article-meta__tags" href="/tags/seata/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>seata</span></a></span></div></div><h1 class="post-title" itemprop="name headline">分布式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-11-01T01:50:36.000Z" title="发表于 2025-11-01 09:50:36">2025-11-01</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-11-01T07:31:45.896Z" title="更新于 2025-11-01 15:31:45">2025-11-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="leancloud_visitors" id="/posts/fe3c2cd2.html" data-flag-title="分布式"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span class="leancloud-visitors-count" title="访问量"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为新乡"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>新乡</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/fe3c2cd2.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/posts/fe3c2cd2.html" itemprop="commentCount"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=81a626d6-aaa8-19ea-3abe-8880c91e2ed9"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://gukeyang.github.io/posts/fe3c2cd2.html"><header><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">面试题</a><a href="/tags/nacos/" tabindex="-1" itemprop="url">nacos</a><a href="/tags/sentinel/" tabindex="-1" itemprop="url">sentinel</a><a href="/tags/seata/" tabindex="-1" itemprop="url">seata</a><h1 id="CrawlerTitle" itemprop="name headline">分布式</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">北川</span><time itemprop="dateCreated datePublished" datetime="2025-11-01T01:50:36.000Z" title="发表于 2025-11-01 09:50:36">2025-11-01</time><time itemprop="dateCreated datePublished" datetime="2025-11-01T07:31:45.896Z" title="更新于 2025-11-01 15:31:45">2025-11-01</time></header><h2 id="单体架构-vs-分布式架构-vs-微服务架构"><a href="#单体架构-vs-分布式架构-vs-微服务架构" class="headerlink" title="单体架构 vs 分布式架构 vs 微服务架构"></a><strong>单体架构 vs 分布式架构 vs 微服务架构</strong></h2><p><strong>单体架构（Monolithic）</strong></p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>整个系统打包成一个应用（通常一个 war&#x2F;jar 包）。</li>
+<li>所有功能模块（用户、订单、商品、支付…）都在一个工程里。</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>开发简单，上手快。</li>
+<li>部署方便，只需要一个应用包。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>耦合度高，一个模块出问题可能影响整个系统。</li>
+<li>修改或扩展困难（要重新编译、打包、部署）。</li>
+<li>无法灵活扩展（只能整体扩容）。</li>
+</ul>
+<p>👉 适合 <strong>小型项目</strong> 或 <strong>初创项目</strong>。</p>
+<hr>
+<p><strong>分布式架构（Distributed）</strong></p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>把系统拆分成多个子系统（但粒度比较大，比如用户系统、订单系统）。</li>
+<li>子系统之间通过 RPC、HTTP、MQ 等方式通信。</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>各个子系统可以独立部署和扩展。</li>
+<li>适合团队协作开发（不同小组负责不同子系统）。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>子系统还是比较大，内部功能没有彻底拆开。</li>
+<li>依赖复杂，系统间通信、事务处理变难。</li>
+</ul>
+<p>👉 适合 <strong>中大型系统</strong>，例如传统电商网站：商品系统、支付系统、会员系统。</p>
+<hr>
+<p><strong>微服务架构（Microservices）</strong></p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>在分布式的基础上进一步细化，把系统拆成 <strong>更小的服务</strong>（通常围绕业务边界，比如订单服务、库存服务、优惠券服务）。</li>
+<li>服务之间独立部署、独立扩展，通常使用 <strong>Spring Cloud &#x2F; Dubbo &#x2F; gRPC</strong>。</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>高度解耦：每个服务独立开发、测试、部署。</li>
+<li>弹性扩展：热门服务可以单独扩容（比如“秒杀服务”扩容，而不是整个电商系统扩容）。</li>
+<li>技术栈多样：不同服务可以用不同语言、数据库。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>架构复杂，需要服务注册发现、配置中心、链路追踪、分布式事务处理。</li>
+<li>运维要求高，需要容器化、CI&#x2F;CD、监控体系。</li>
+</ul>
+<h2 id="CAP-定理、BASE-理论"><a href="#CAP-定理、BASE-理论" class="headerlink" title="CAP 定理、BASE 理论"></a><strong>CAP 定理、BASE 理论</strong></h2><p>CAP 是 <strong>一致性（Consistency）、可用性（Availability）、分区容错性（Partition Tolerance）</strong> 的缩写。</p>
+<p><strong>CAP 定理</strong></p>
+<p><strong>三个概念：</strong></p>
+<ul>
+<li><strong>一致性 C</strong>：所有节点的数据要保持一致（好比大家看到的余额都是同一个数）。</li>
+<li><strong>可用性 A</strong>：系统必须随时响应请求，不能“挂掉”。</li>
+<li><strong>分区容错性 P</strong>：系统在出现网络分区（节点间通信失败）时还能继续工作。</li>
+</ul>
+<p>在分布式系统中，<strong>CAP 三个特性不能同时满足</strong>，最多只能同时满足两个：</p>
+<ul>
+<li><strong>CP 系统</strong>：保证一致性和分区容错，但可能牺牲可用性（比如 Zookeeper）。</li>
+<li><strong>AP 系统</strong>：保证可用性和分区容错，但数据可能短暂不一致（比如 Eureka、Cassandra）。</li>
+<li><strong>CA 系统</strong>：保证一致性和可用性，但无法容忍分区（单机数据库，没法真正分布式）。</li>
+</ul>
+<p>👉 <strong>总结</strong>：分布式系统一定要容错（P），所以大多数系统在 <strong>C 和 A</strong> 之间做权衡。</p>
+<p><strong>BASE 理论</strong></p>
+<p>BASE 理论是 <strong>CAP 的工程化妥协方案</strong>。</p>
+<p>BASE &#x3D; <strong>Basically Available（基本可用） + Soft State（软状态） + Eventual Consistency（最终一致性）</strong></p>
+<p><strong>三个概念：</strong></p>
+<ul>
+<li><strong>基本可用</strong>：在极端情况（如高并发），允许部分服务降级，比如结算页稍微慢一点。</li>
+<li><strong>软状态</strong>：允许存在中间状态，不必实时强一致。</li>
+<li><strong>最终一致性</strong>：系统经过一段时间后，数据最终会达到一致（如银行跨行转账）。</li>
+</ul>
+<p>👉 <strong>总结</strong>：BASE 是在 CAP 中 <strong>放弃强一致性，追求最终一致性</strong>，保证系统高可用。</p>
+<h2 id="单点故障"><a href="#单点故障" class="headerlink" title="单点故障"></a><strong>单点故障</strong></h2><p>在分布式系统中，<strong>单点故障（Single Point of Failure, SPoF）</strong> 是指系统中某个<strong>唯一依赖的组件 &#x2F; 节点</strong>—— 当它发生故障（如宕机、网络断开、硬件损坏等）时，会直接导致整个分布式系统的<strong>核心功能中断</strong>或<strong>整体不可用</strong>的现象。</p>
+<h2 id="微服务解决方案组件"><a href="#微服务解决方案组件" class="headerlink" title="微服务解决方案组件"></a>微服务解决方案组件</h2><h3 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h3><p>解决 “服务在哪里” 的问题，让服务之间能动态感知对方的地址（IP &#x2F; 端口），支持服务上下线自动更新。</p>
+<ul>
+<li><strong>Eureka</strong>（Netflix）：AP 架构，强调可用性，适合自我保护机制（网络分区时不剔除服务）。</li>
+<li><strong>Consul</strong>：支持服务发现 + 配置管理，自带健康检查，CP 架构（强一致性）。</li>
+<li><strong>Nacos</strong>（阿里）：融合注册中心 + 配置中心，支持 AP&#x2F;CP 切换，国产生态友好。</li>
+</ul>
+<h3 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h3><ul>
+<li><strong>Apollo</strong>（携程）：支持配置灰度发布、权限管理、配置历史回溯，功能完善。</li>
+<li><strong>Nacos</strong>：兼具注册中心和配置中心功能，轻量易用。</li>
+<li><strong>Config Server</strong>（Spring Cloud）：与 Spring 生态无缝集成，依赖 Git 仓库存储配置。</li>
+</ul>
+<h3 id="服务通信"><a href="#服务通信" class="headerlink" title="服务通信"></a>服务通信</h3><ul>
+<li>典型协议 &#x2F; 框架：<ul>
+<li><strong>RESTful API</strong>：基于 HTTP，简单通用（如 Spring MVC）。</li>
+<li><strong>RPC</strong>：远程过程调用，性能更高（如 Dubbo、gRPC）。</li>
+</ul>
+</li>
+<li>核心组件：<ul>
+<li><strong>OpenFeign</strong>（Spring Cloud）：声明式 REST 客户端，简化 HTTP 调用。</li>
+<li><strong>Dubbo</strong>：阿里开源 RPC 框架，支持多种注册中心，性能优异。</li>
+</ul>
+</li>
+</ul>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>将请求均匀分发到多个服务实例，避免单实例过载。</p>
+<ul>
+<li><strong>Ribbon</strong>（Spring Cloud）：客户端负载均衡，支持轮询、权重、随机等策略。</li>
+<li><strong>Dubbo 内置负载均衡</strong>：支持一致性哈希、最小活跃数等策略。</li>
+</ul>
+<h3 id="熔断与降级"><a href="#熔断与降级" class="headerlink" title="熔断与降级"></a>熔断与降级</h3><p>防止服务雪崩（一个服务故障导致依赖它的所有服务连锁失败）。</p>
+<ul>
+<li><strong>Hystrix</strong>（Netflix）：老牌熔断组件，支持线程隔离、请求缓存。</li>
+<li><strong>Sentinel</strong>（阿里）：轻量级熔断降级工具，支持流量控制、热点参数限流。</li>
+</ul>
+<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p>作为服务入口，统一处理路由、认证、限流、监控等横切功能。</p>
+<ul>
+<li><strong>Spring Cloud Gateway</strong>：基于 Netty 的响应式网关，支持动态路由、熔断集成。</li>
+<li><strong>Zuul</strong>（Netflix）：基于 Servlet 的网关，功能简单但性能略低。</li>
+</ul>
+<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><p>保证跨多个服务的操作要么全成功，要么全失败（如 “下单 + 扣库存”）。</p>
+<ul>
+<li><strong>Seata</strong>（阿里）：支持 AT（自动补偿）、TCC、SAGA 等模式，易用性高。</li>
+<li><strong>RocketMQ 事务消息</strong>：通过半消息 + 回查机制实现最终一致性。</li>
+</ul>
+<h2 id="RPC的概念是什么？"><a href="#RPC的概念是什么？" class="headerlink" title="RPC的概念是什么？"></a>RPC的概念是什么？</h2><p>RPC（Remote Procedure Call，远程过程调用）是一种<strong>让本地程序像调用本地函数一样调用远程服务器上的函数或方法</strong>的技术</p>
+<h3 id="RPC-的核心逻辑："><a href="#RPC-的核心逻辑：" class="headerlink" title="RPC 的核心逻辑："></a>RPC 的核心逻辑：</h3><ol>
+<li><p><strong>本地调用伪装</strong>：本地发者写代码时，调用远程函数的语法和调用用本地函数一样（如 <code>remoteService.queryData(param)</code>）。</p>
+</li>
+<li><p>网络通信封装</p>
+<p>：RPC 框架在背后自动完成：</p>
+<ul>
+<li>把函数名、参数<strong>序列化</strong>（转成二进制数据）；</li>
+<li>通过网络（如 TCP）发送给远程服务器；</li>
+<li>远程服务器收到后，<strong>反序列化</strong>数据，找到对应的函数执行；</li>
+<li>把执行结果序列化后，通过网络返回给本地；</li>
+<li>本地再反序列化结果，返回给调用者。</li>
+</ul>
+</li>
+</ol>
+<h3 id="典型-RPC-框架："><a href="#典型-RPC-框架：" class="headerlink" title="典型 RPC 框架："></a>典型 RPC 框架：</h3><ul>
+<li><strong>Dubbo</strong>：阿里开源，适合 Java 生态，支持服务注册发现、负载均衡。</li>
+<li><strong>gRPC</strong>：Google 开源，基于 HTTP&#x2F;2 和 Protobuf，跨语言支持好（Java、Go、Python 等）。</li>
+<li><strong>Thrift</strong>：Facebook 开源，支持多语言，适合高性能场景。</li>
+</ul>
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><h3 id="为什么需要分布式锁"><a href="#为什么需要分布式锁" class="headerlink" title="为什么需要分布式锁"></a>为什么需要分布式锁</h3><p>在单体系统中，用本地锁（如 Java 的<code>ReentrantLock</code>）就能保证多线程互斥；但在分布式架构中，服务部署在多个服务器（JVM）上，本地锁只能控制单个服务器内的线程，无法跨节点生效。</p>
+<h3 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h3><h4 id="基于-Redis-实现（最常用）"><a href="#基于-Redis-实现（最常用）" class="headerlink" title="基于 Redis 实现（最常用）"></a>基于 Redis 实现（最常用）</h4><p>利用 Redis 的<code>SET NX EX</code>命令（不存在则设置键值，同时指定过期时间）：</p>
+<ul>
+<li>获取锁：执行<code>SET lock_key unique_value NX EX 10</code>（NX表示只在键不存在时设置，EX 表示 10 秒后自动过期）。<ul>
+<li>成功：获取锁（<code>unique_value</code>用 UUID，确保唯一，用于释放锁时验证）。</li>
+<li>失败：表示锁被其他节点持有，等待重试。</li>
+</ul>
+</li>
+<li><strong>释放锁</strong>：通过 Lua 脚本原子执行 “判断 value 是否匹配 + 删除键”（避免误删其他节点的锁）：</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&#x27;get&#x27;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">return</span> redis.call(<span class="string">&#x27;del&#x27;</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="基于-ZooKeeper-实现"><a href="#基于-ZooKeeper-实现" class="headerlink" title="基于 ZooKeeper 实现"></a>基于 ZooKeeper 实现</h4><p>利用 ZooKeeper 的临时有序节点和 Watcher 机制：</p>
+<p>获取锁：在指定节点下创建临时有序子节点（如&#x2F;lock&#x2F;node-0000001），判断自己是否是序号最小的子节点：<br>    是：获取锁。<br>    否：监听前一个子节点的删除事件（等待前一个节点释放锁）。<br>释放锁：节点断开连接（如服务宕机），临时节点自动删除，后续节点收到事件后尝试获取锁。</p>
+<h4 id="基于数据库实现"><a href="#基于数据库实现" class="headerlink" title="基于数据库实现"></a>基于数据库实现</h4><p>利用数据库的唯一索引或行锁：</p>
+<ul>
+<li><strong>获取锁</strong>：插入一条带唯一索引的记录（如<code>lock_key</code>），成功则获取锁，失败则等待。</li>
+<li><strong>释放锁</strong>：删除该记录。</li>
+</ul>
+<h4 id="基于Redisson-实现"><a href="#基于Redisson-实现" class="headerlink" title="基于Redisson 实现"></a>基于Redisson 实现</h4><p>Redisson 的 <code>RLock</code> 接口封装了分布式锁的所有操作，核心方法：</p>
+<ul>
+<li><code>lock()</code>：获取锁（默认加锁 30 秒，后台自动续期）。</li>
+<li><code>lock(long leaseTime, TimeUnit unit)</code>：指定锁的过期时间（若 leaseTime &gt; 0，则不会自动续期）。</li>
+<li><code>tryLock()</code>：尝试获取锁，立即返回结果（成功返回 true，失败返回 false）。</li>
+<li><code>tryLock(long waitTime, long leaseTime, TimeUnit unit)</code>：指定等待时间（超时未获取则返回 false）。</li>
+<li><code>unlock()</code>：释放锁（必须在 finally 中调用，确保锁释放）。</li>
+</ul>
+<h2 id="Redisson-如何保证分布式锁的可靠性？"><a href="#Redisson-如何保证分布式锁的可靠性？" class="headerlink" title="Redisson 如何保证分布式锁的可靠性？"></a>Redisson 如何保证分布式锁的可靠性？</h2><ol>
+<li><strong>原子性获取锁</strong>：Redisson 底层通过 Lua 脚本执行 Redis 命令，确保 “判断锁是否存在 + 设置锁” 的原子性（类似 <code>SET NX EX</code> 但更完善），避免并发问题。</li>
+<li><strong>自动续期（看门狗机制）</strong>：<ul>
+<li>若未指定 <code>leaseTime</code>（即 <code>lock()</code> 无参方法），Redisson 会默认加锁 30 秒，并启动一个 “看门狗” 线程（后台定时任务）。</li>
+<li>每隔 10 秒（30 秒的 1&#x2F;3），看门狗会自动将锁的过期时间重置为 30 秒，直到业务执行完调用 <code>unlock()</code>，看门狗才会停止。</li>
+<li>这解决了 “业务执行时间超过锁过期时间，导致锁提前释放” 的问题。</li>
+</ul>
+</li>
+<li><strong>安全释放锁</strong>：<ul>
+<li>锁的 value 是 Redisson 生成的唯一 ID（关联当前线程），释放锁时会先验证 ID 是否匹配，避免误删其他线程 &#x2F; 节点的锁。</li>
+<li><code>unlock()</code> 方法底层同样通过 Lua 脚本实现 “验证 + 删除” 的原子操作。</li>
+</ul>
+</li>
+<li><strong>集群适配</strong>：若 Redis 是主从 &#x2F; 哨兵 &#x2F; 集群模式，Redisson 会通过 <code>RedLock</code> 算法（可选）保证在 Redis 节点故障时，锁依然可用（多节点加锁，超过半数成功才认为获取锁成功）。</li>
+</ol>
+<h2 id="分布式事务-1"><a href="#分布式事务-1" class="headerlink" title="分布式事务"></a>分布式事务</h2><h3 id="分布式事务的解决方案你知道哪些？"><a href="#分布式事务的解决方案你知道哪些？" class="headerlink" title="分布式事务的解决方案你知道哪些？"></a>分布式事务的解决方案你知道哪些？</h3><h4 id="2PC（两阶段提交，Two-Phase-Commit）"><a href="#2PC（两阶段提交，Two-Phase-Commit）" class="headerlink" title="2PC（两阶段提交，Two-Phase Commit）"></a><strong>2PC（两阶段提交，Two-Phase Commit）</strong></h4><ul>
+<li>核心思想：分 “准备阶段” 和 “提交阶段”，由协调者（Coordinator）统一管理所有参与者（Participant）的事务状态。<ul>
+<li><strong>准备阶段</strong>：协调者询问所有参与者是否可以执行事务提交，参与者执行操作并记录日志（未提交），返回 “就绪” 或 “中止”。</li>
+<li><strong>提交阶段</strong>：若所有参与者均 “就绪”，协调者下达 “提交” 指令，参与者完成最终提交；若有任一参与者 “中止”，则下达 “回滚” 指令。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：实现简单，强一致性。</li>
+<li>缺点：<ul>
+<li>同步阻塞：准备阶段所有参与者需锁定资源，等待协调者指令，性能较差。</li>
+<li>协调者单点故障风险：若协调者宕机，参与者可能长期阻塞。</li>
+<li>数据不一致风险：提交阶段若部分参与者未收到指令，会导致数据不一致。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：对一致性要求极高、并发量低的场景（如银行核心交易）。</li>
+</ul>
+<h4 id="3PC（三阶段提交，Three-Phase-Commit）"><a href="#3PC（三阶段提交，Three-Phase-Commit）" class="headerlink" title="3PC（三阶段提交，Three-Phase Commit）"></a><strong>3PC（三阶段提交，Three-Phase Commit）</strong></h4><ul>
+<li>核心思想：在 2PC 基础上增加 “预提交阶段”，解决 2PC 的阻塞问题。<ul>
+<li><strong>阶段 1（CanCommit）</strong>：协调者询问参与者是否可执行事务（类似 2PC 准备阶段的前置检查）。</li>
+<li><strong>阶段 2（PreCommit）</strong>：若所有参与者同意，协调者发送预提交指令，参与者执行操作并记录日志（可回滚）。</li>
+<li><strong>阶段 3（DoCommit）</strong>：协调者确认所有参与者预提交成功后，下达最终提交指令；若超时或失败，则下达回滚指令。</li>
+</ul>
+</li>
+</ul>
+<h4 id="TCC（Try-Confirm-Cancel）"><a href="#TCC（Try-Confirm-Cancel）" class="headerlink" title="TCC（Try-Confirm-Cancel）"></a><strong>TCC（Try-Confirm-Cancel）</strong></h4><ul>
+<li>核心思想：基于业务逻辑拆分事务为三个操作，由业务代码控制一致性。<ul>
+<li><strong>Try</strong>：资源检查与预留（如扣减库存前锁定商品）。</li>
+<li><strong>Confirm</strong>：确认执行业务操作（如实际扣减库存），需保证幂等性。</li>
+<li><strong>Cancel</strong>：取消操作（如释放锁定的库存），需保证幂等性和补偿性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Saga-模式"><a href="#Saga-模式" class="headerlink" title="Saga 模式"></a><strong>Saga 模式</strong></h4><ul>
+<li><strong>核心思想</strong>：将分布式事务拆分为一系列本地事务（子事务），每个子事务对应一个 “补偿事务”，若某子事务失败，则按相反顺序执行补偿事务。</li>
+<li>实现方式：<ul>
+<li><strong>编排式</strong>：由一个中央协调器（Saga Coordinator）控制子事务的执行顺序和补偿逻辑。</li>
+<li>** choreography 式 **：子事务间通过事件通知触发执行，无中央协调器（如基于消息队列）。</li>
+</ul>
+</li>
+<li>优点：<ul>
+<li>无锁阻塞，性能优于 2PC，适合长事务。</li>
+<li>对业务侵入性较低（相比 TCC）。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>最终一致性（非强一致性），中间状态可能可见。</li>
+<li>补偿逻辑设计复杂，需处理网络重试、幂等性等问题。</li>
+</ul>
+</li>
+</ul>
+<h4 id="本地消息表（Local-Message-Table）"><a href="#本地消息表（Local-Message-Table）" class="headerlink" title="本地消息表（Local Message Table）"></a><strong>本地消息表（Local Message Table）</strong></h4><ul>
+<li>核心思想：通过本地事务保证 “业务操作” 与 “消息记录” 的原子性，再通过消息队列异步通知其他节点，实现最终一致性。<ul>
+<li>步骤 1：在本地数据库中创建消息表，记录需要发送的跨节点消息。</li>
+<li>步骤 2：业务操作与消息表插入在同一本地事务中提交（保证要么都成功，要么都失败）。</li>
+<li>步骤 3：通过定时任务扫描消息表，将未发送的消息投递到消息队列。</li>
+<li>步骤 4：接收方消费消息并执行对应业务，完成后通知发送方删除消息。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：实现简单，依赖本地事务和消息队列，可靠性高。</li>
+<li>缺点：<ul>
+<li>消息表与业务表耦合，增加数据库存储成本。</li>
+<li>需处理消息重复消费（幂等性）和定时任务的效率问题。</li>
+</ul>
+</li>
+</ul>
+<h4 id="事务消息（Transactional-Message）"><a href="#事务消息（Transactional-Message）" class="headerlink" title="事务消息（Transactional Message）"></a><strong>事务消息（Transactional Message）</strong></h4><ul>
+<li>核心思想：基于消息队列的 “事务消息” 机制（如 RocketMQ、RabbitMQ 的扩展实现），将消息发送与本地事务绑定。<ul>
+<li>步骤 1：发送方发送 “半消息”（消息队列暂存，不投递）。</li>
+<li>步骤 2：执行本地事务，若成功则 “确认发送” 消息，若失败则 “取消发送”。</li>
+<li>步骤 3：消息队列将确认的消息投递到接收方，接收方执行业务并返回确认。</li>
+<li>步骤 4：通过回查机制处理发送方超时未确认的情况。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：解耦消息表与业务表，依赖成熟的消息队列，可靠性高。</li>
+<li><strong>缺点</strong>：依赖消息队列的事务消息支持，实现复杂度高于本地消息表。</li>
+<li><strong>适用场景</strong>：依赖消息队列的分布式系统，需最终一致性（如异步通知、数据同步）。</li>
+</ul>
+<h2 id="阿里的seata框架了解过吗？"><a href="#阿里的seata框架了解过吗？" class="headerlink" title="阿里的seata框架了解过吗？"></a>阿里的seata框架了解过吗？</h2><p>Seata 是阿里巴巴开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。它支持多种分布式事务模式，适配不同业务场景，目前已成为微服务领域主流的分布式事务框架之一。</p>
+<p>​	Seata 定义了三个核心角色，来实现分布式事务的协调：</p>
+<ul>
+<li>**Transaction Coordinator (TC)**：事务协调者，独立的中间件，负责维护全局事务的运行状态，协调全局事务的提交或回滚。</li>
+<li>**Transaction Manager (TM)**：事务管理器，嵌入到发起全局事务的微服务中（如订单服务），负责发起全局事务、定义全局事务的范围（开始、提交、回滚）。</li>
+<li>**Resource Manager (RM)**：资源管理器，嵌入到参与全局事务的各个微服务中（如库存服务、支付服务），负责管理本地事务资源，与 TC 通信注册资源、汇报事务状态，并执行 TC 下达的提交 &#x2F; 回滚指令。</li>
+</ul>
+<p>三者的交互流程：</p>
+<ol>
+<li>TM 向 TC 申请开启全局事务，TC 生成全局事务 ID（XID）并返回给 TM；</li>
+<li>XID 通过服务调用链路传递到各个 RM 所在的微服务；</li>
+<li>各 RM 向 TC 注册分支事务（本地事务），并汇报执行状态；</li>
+<li>TM 根据所有分支事务的状态，向 TC 发起全局提交或回滚请求；</li>
+<li>TC 协调所有 RM 执行本地事务的提交或回滚，完成全局事务。</li>
+</ol>
+<h2 id="Seata-的-几种模式"><a href="#Seata-的-几种模式" class="headerlink" title="Seata 的 几种模式"></a>Seata 的 几种模式</h2><table>
+<thead>
+<tr>
+<th>场景需求</th>
+<th>推荐模式</th>
+<th>核心考量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单 CRUD、低侵入</td>
+<td>AT 模式</td>
+<td>自动补偿，性能较好</td>
+</tr>
+<tr>
+<td>复杂业务、跨资源</td>
+<td>TCC 模式</td>
+<td>灵活性高，手动控制资源</td>
+</tr>
+<tr>
+<td>长事务、多步骤流程</td>
+<td>Saga 模式</td>
+<td>无锁阻塞，容忍中间状态</td>
+</tr>
+<tr>
+<td>强一致性、金融核心交易</td>
+<td>XA 模式</td>
+<td>严格 ACID，牺牲性能</td>
+</tr>
+<tr>
+<td>异步通信、数据同步</td>
+<td>本地消息表模式</td>
+<td>实现简单，依赖消息队列</td>
+</tr>
+</tbody></table>
+<h3 id="1-AT-模式（Automatic-Transaction，自动事务）"><a href="#1-AT-模式（Automatic-Transaction，自动事务）" class="headerlink" title="1. AT 模式（Automatic Transaction，自动事务）"></a><strong>1. AT 模式（Automatic Transaction，自动事务）</strong></h3><p>Seata 的默认模式，基于 2PC 思想优化，通过 <strong>自动生成补偿逻辑</strong> 实现低侵入式的分布式事务，是最常用的模式之一。</p>
+<h4 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a><strong>核心原理</strong></h4><ul>
+<li><strong>第一阶段（本地事务执行）</strong>：<ol>
+<li>RM 拦截业务 SQL，解析并记录数据修改前的快照（生成 <code>undo log</code>，用于回滚）；</li>
+<li>执行本地事务并提交（释放数据库锁，解决传统 2PC 的阻塞问题）；</li>
+<li>向 TC 汇报分支事务状态为 “准备就绪”。</li>
+</ol>
+</li>
+<li><strong>第二阶段（全局提交 &#x2F; 回滚）</strong>：<ul>
+<li>若全局事务提交：TC 通知所有 RM 删除 <code>undo log</code>，事务完成。</li>
+<li>若全局事务回滚：TC 通知 RM 根据 <code>undo log</code> 自动执行回滚（补偿逻辑）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：对业务代码无侵入（无需手动写补偿逻辑），性能较好（第一阶段释放锁），适合简单 CRUD 场景。<ul>
+<li><strong>缺点</strong>：仅支持关系型数据库（依赖 SQL 解析生成 <code>undo log</code>），不适合复杂业务逻辑。</li>
+</ul>
+</li>
+</ul>
+<h4 id="适用场景：电商下单、库存扣减等基于数据库的简单分布式事务。"><a href="#适用场景：电商下单、库存扣减等基于数据库的简单分布式事务。" class="headerlink" title="适用场景：电商下单、库存扣减等基于数据库的简单分布式事务。"></a><strong>适用场景</strong>：电商下单、库存扣减等基于数据库的简单分布式事务。</h4><h3 id="2-TCC-模式（Try-Confirm-Cancel）"><a href="#2-TCC-模式（Try-Confirm-Cancel）" class="headerlink" title="2. TCC 模式（Try-Confirm-Cancel）"></a><strong>2. TCC 模式（Try-Confirm-Cancel）</strong></h3><p>基于业务逻辑拆分的手动事务模式，需要开发者手动实现 <strong>Try（资源检查与预留）、Confirm（确认提交）、Cancel（取消回滚）</strong> 三个接口，Seata 负责协调三个阶段的执行。</p>
+<h4 id="核心原理-1"><a href="#核心原理-1" class="headerlink" title="核心原理"></a><strong>核心原理</strong></h4><ul>
+<li><strong>Try 阶段</strong>：检查资源是否可用（如库存是否充足），并预留资源（如冻结部分库存），确保后续操作可执行。</li>
+<li><strong>Confirm 阶段</strong>：若所有分支 Try 成功，执行实际业务提交（如扣减冻结的库存），需保证幂等性。</li>
+<li><strong>Cancel 阶段</strong>：若任一分支 Try 失败，释放预留的资源（如解冻冻结的库存），需保证幂等性和补偿性。</li>
+</ul>
+<h4 id="Seata-增强"><a href="#Seata-增强" class="headerlink" title="Seata 增强"></a><strong>Seata 增强</strong></h4><ul>
+<li>自动处理分支事务的注册、状态汇报和协调逻辑；</li>
+<li>支持空回滚（无 Try 却收到 Cancel）、幂等性（重复调用不影响结果）、悬挂（Cancel 先于 Try 执行）等问题。</li>
+</ul>
+<h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：不依赖数据库，灵活性高，适合跨库、跨服务的复杂业务（如金融转账）。</li>
+<li><strong>缺点</strong>：侵入业务代码，开发成本高（需手动实现三个接口）。</li>
+</ul>
+<h4 id="适用场景：金融交易、复杂资源操作（如跨系统资金划转）。"><a href="#适用场景：金融交易、复杂资源操作（如跨系统资金划转）。" class="headerlink" title="适用场景：金融交易、复杂资源操作（如跨系统资金划转）。"></a><strong>适用场景</strong>：金融交易、复杂资源操作（如跨系统资金划转）。</h4><h3 id="3-Saga-模式"><a href="#3-Saga-模式" class="headerlink" title="3. Saga 模式"></a><strong>3. Saga 模式</strong></h3><p>针对 <strong>长事务场景</strong> 设计，将分布式事务拆分为多个本地子事务，每个子事务对应一个补偿事务，通过状态机或事件驱动执行，失败时按逆序执行补偿。</p>
+<h4 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a><strong>实现方式</strong></h4><ul>
+<li><strong>编排式</strong>：通过 JSON 配置定义子事务的执行顺序、依赖关系和补偿逻辑，由 Seata 协调器统一调度。</li>
+<li><strong>注解式</strong>：通过 <code>@SagaTask</code> 注解标记子事务和补偿方法，简化配置。</li>
+</ul>
+<h4 id="核心原理-2"><a href="#核心原理-2" class="headerlink" title="核心原理"></a><strong>核心原理</strong></h4><ol>
+<li>按顺序执行各子事务（如 “下单→支付→发货→物流”）；</li>
+<li>若某子事务失败，触发补偿机制，按逆序执行已完成子事务的补偿逻辑（如 “物流回滚→发货回滚→支付回滚→下单回滚”）。</li>
+</ol>
+<h4 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：无锁阻塞，性能好，适合长事务（跨多个服务、步骤多的流程）。</li>
+<li><strong>缺点</strong>：最终一致性（中间状态可能可见），补偿逻辑需手动实现。</li>
+</ul>
+<h4 id="适用场景：订单全链路履约、流程审批等长事务流程。"><a href="#适用场景：订单全链路履约、流程审批等长事务流程。" class="headerlink" title="适用场景：订单全链路履约、流程审批等长事务流程。"></a><strong>适用场景</strong>：订单全链路履约、流程审批等长事务流程。</h4><h3 id="4-XA-模式"><a href="#4-XA-模式" class="headerlink" title="4. XA 模式"></a><strong>4. XA 模式</strong></h3><p>基于传统 XA 协议（分布式事务规范）实现的强一致性模式，依赖数据库原生 XA 支持（如 MySQL、Oracle 的 XA 接口）。</p>
+<ul>
+<li>流程：<ol>
+<li>各分支事务执行 SQL 后，通过 <code>XA PREPARE</code> 进入 “准备就绪” 状态（持有数据库锁，未提交）；</li>
+<li>TC 确认所有分支就绪后，发送 <code>XA COMMIT</code> 指令完成提交；若任一分支失败，发送 <code>XA ROLLBACK</code> 回滚。</li>
+</ol>
+</li>
+</ul>
+<h4 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：强一致性（符合 ACID），对业务无侵入（依赖数据库 XA 支持）。</li>
+<li><strong>缺点</strong>：性能低（数据库锁全程持有，阻塞严重），仅支持 XA 协议的数据库。</li>
+</ul>
+<h4 id="适用场景：金融核心交易等对强一致性要求极高、可接受低并发的场景。"><a href="#适用场景：金融核心交易等对强一致性要求极高、可接受低并发的场景。" class="headerlink" title="适用场景：金融核心交易等对强一致性要求极高、可接受低并发的场景。"></a><strong>适用场景</strong>：金融核心交易等对强一致性要求极高、可接受低并发的场景。</h4><h2 id="zookeeper拿来做什么？核心的原理是什么？"><a href="#zookeeper拿来做什么？核心的原理是什么？" class="headerlink" title="zookeeper拿来做什么？核心的原理是什么？"></a>zookeeper拿来做什么？核心的原理是什么？</h2><p>ZooKeeper 是一款专注于分布式系统协调的开源工具，主要解决分布式环境中多节点之间的 <strong>状态同步、一致性保障、协作控制</strong> 等问题。</p>
+<h3 id="一、ZooKeeper-能做什么？"><a href="#一、ZooKeeper-能做什么？" class="headerlink" title="一、ZooKeeper 能做什么？"></a><strong>一、ZooKeeper 能做什么？</strong></h3><p>ZooKeeper 的典型应用场景包括但不限于：</p>
+<ol>
+<li><strong>分布式锁</strong>多个节点竞争同一资源时，通过 ZooKeeper 创建临时有序节点，利用节点的唯一性和有序性实现分布式锁（如公平锁）。例如，秒杀系统中控制库存扣减的并发冲突。</li>
+<li><strong>服务注册与发现</strong>服务提供者启动时在 ZooKeeper 上创建临时节点（记录服务地址、端口等信息），服务消费者通过监听这些节点获取服务列表，并感知服务上下线变化。</li>
+<li><strong>集群选举</strong>分布式集群（如 Hadoop、Kafka）中，通过 ZooKeeper 的临时节点和监听机制实现 leader 节点的自动选举（如 Kafka Controller 选举）。当 leader 故障时，快速从 follower 中选出新 leader。</li>
+<li><strong>配置中心</strong>将分布式系统的配置信息（如数据库地址、阈值参数）存储在 ZooKeeper 的节点中，所有节点监听配置节点的变化，实现配置的集中管理和动态更新（无需重启服务）。</li>
+<li><strong>数据发布与订阅</strong>基于 “发布 - 订阅” 模式，一个节点发布数据到 ZooKeeper 节点，其他节点通过监听该节点实时获取数据更新（如分布式系统中的全局状态同步）。<ol>
+<li><strong>分布式队列</strong>利用 ZooKeeper 的节点顺序性，实现 FIFO 队列（如任务调度系统中按顺序执行分布式任务）。</li>
+</ol>
+</li>
+</ol>
+<h3 id="二、ZooKeeper-的核心原理"><a href="#二、ZooKeeper-的核心原理" class="headerlink" title="二、ZooKeeper 的核心原理"></a><strong>二、ZooKeeper 的核心原理</strong></h3><p>ZooKeeper 的核心能力依赖于其 <strong>数据模型、集群架构、ZAB 协议</strong> 和 <strong>Watcher 机制</strong>，四者共同保障了分布式协调的可靠性。</p>
+<h4 id="1-数据模型：树形结构（ZNode）"><a href="#1-数据模型：树形结构（ZNode）" class="headerlink" title="1. 数据模型：树形结构（ZNode）"></a>1. <strong>数据模型：树形结构（ZNode）</strong></h4><p>ZooKeeper 的数据存储类似文件系统的树形结构，每个节点称为 <strong>ZNode</strong>，具有以下特点：</p>
+<ul>
+<li><p><strong>层级结构</strong>：根节点为 <code>/</code>，子节点通过路径标识（如 <code>/services/user-service</code>）。</p>
+</li>
+<li><p><strong>数据存储</strong>：每个 ZNode 可存储少量数据（默认最大 1MB），适合存储配置、状态等元数据。</p>
+</li>
+<li><p>节点类型</p>
+<p>：</p>
+<ul>
+<li><strong>持久节点（PERSISTENT）</strong>：创建后永久存在，除非手动删除。</li>
+<li><strong>临时节点（EPHEMERAL）</strong>：创建节点的客户端会话结束后，节点自动删除（常用于服务注册，服务下线后节点自动清除）。</li>
+<li><strong>有序节点（SEQUENTIAL）</strong>：创建时会自动添加一个自增序号（如 <code>lock-000000001</code>），用于实现分布式锁、队列等。</li>
+</ul>
+</li>
+<li><p><strong>版本号</strong>：每个 ZNode 有版本号（dataVersion），修改数据时需指定版本号，实现乐观锁（避免并发冲突）。</p>
+</li>
+</ul>
+<h4 id="2-集群架构：主从复制（Leader-Follower-Observer）"><a href="#2-集群架构：主从复制（Leader-Follower-Observer）" class="headerlink" title="2. 集群架构：主从复制（Leader + Follower + Observer）"></a>2. <strong>集群架构：主从复制（Leader + Follower + Observer）</strong></h4><p>ZooKeeper 通常以集群形式部署（节点数为奇数，如 3、5 个），避免单点故障，角色分为：</p>
+<ul>
+<li><strong>Leader</strong>：集群的主节点，负责处理所有写请求（如创建、修改 ZNode），并通过 ZAB 协议同步数据到其他节点；同时负责 leader 选举的发起。</li>
+<li><strong>Follower</strong>：从节点，负责处理读请求，参与写请求的投票（Leader 发起写操作时，需多数 Follower 确认），并在 Leader 故障时参与选举。</li>
+<li><strong>Observer（可选）</strong>：仅处理读请求，不参与投票和选举，用于扩展读性能（不影响集群一致性）。</li>
+</ul>
+<p><strong>集群特性</strong>：</p>
+<ul>
+<li>写操作需 Leader 处理，且需超过半数节点（Leader + Follower）确认才能成功（保证一致性）。</li>
+<li>读操作可由任意节点处理（本地读取，性能高）。</li>
+</ul>
+<h4 id="3-一致性协议：ZAB-协议（ZooKeeper-Atomic-Broadcast）"><a href="#3-一致性协议：ZAB-协议（ZooKeeper-Atomic-Broadcast）" class="headerlink" title="3. 一致性协议：ZAB 协议（ZooKeeper Atomic Broadcast）"></a>3. <strong>一致性协议：ZAB 协议（ZooKeeper Atomic Broadcast）</strong></h4><p>ZAB 是 ZooKeeper 自定义的原子广播协议，保证集群中所有节点的数据一致性，类似 Paxos 但更简单，核心流程分为两部分：</p>
+<ul>
+<li><p><strong>阶段一：Leader 选举</strong>集群启动或 Leader 故障时，所有 Follower 进入选举状态，通过投票选出新 Leader（得票超过半数的节点当选）。选举依据是节点的 <strong>myid（配置的唯一标识）</strong> 和 <strong>zxid（事务 ID，反映数据更新顺序，值越大越新）</strong>，优先选择 zxid 最大的节点（确保数据最新）。</p>
+</li>
+<li><p><strong>阶段二：原子广播（数据同步）</strong>Leader 当选后，集群进入正常工作状态，写操作通过以下步骤同步到所有节点：</p>
+<ol>
+<li><strong>提议（Propose）</strong>：Leader 收到写请求后，生成一个全局唯一的 zxid，向所有 Follower 发送提议（包含数据变更内容）。</li>
+<li><strong>确认（Ack）</strong>：Follower 收到提议后，执行数据变更并返回确认（Ack）。</li>
+<li><strong>提交（Commit）</strong>：当 Leader 收到超过半数 Follower 的 Ack 后，向所有节点发送 Commit 指令，所有节点正式提交数据变更（本地持久化）。</li>
+</ol>
+<p>这一过程保证了 <strong>所有节点要么同时提交数据，要么同时失败</strong>，实现强一致性。</p>
+</li>
+</ul>
+<h4 id="4-事件监听：Watcher-机制"><a href="#4-事件监听：Watcher-机制" class="headerlink" title="4. 事件监听：Watcher 机制"></a>4. <strong>事件监听：Watcher 机制</strong></h4><p>Watcher 是 ZooKeeper 实现分布式协调的核心机制，允许客户端注册监听某个 ZNode 的变化（如节点创建、删除、数据修改），当变化发生时，ZooKeeper 会主动通知客户端。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li><strong>一次性</strong>：Watcher 触发后立即失效，若需持续监听，需重新注册。</li>
+<li><strong>异步通知</strong>：通知通过客户端的回调函数处理，不阻塞客户端操作。</li>
+<li><strong>轻量级</strong>：仅通知发生了变化，不包含变化前后的具体数据（客户端需主动读取新数据）。</li>
+</ul>
+<h2 id="常见的限流算法你知道哪些？"><a href="#常见的限流算法你知道哪些？" class="headerlink" title="常见的限流算法你知道哪些？"></a>常见的限流算法你知道哪些？</h2><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>核心特点</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>固定窗口</td>
+<td>时间分片固定</td>
+<td>简单、高效</td>
+<td>临界问题</td>
+<td>低精度场景</td>
+</tr>
+<tr>
+<td>滑动窗口</td>
+<td>子窗口平滑过渡</td>
+<td>精度较高</td>
+<td>子窗口越多越耗资源</td>
+<td>中等精度场景（如 API 网关）</td>
+</tr>
+<tr>
+<td>漏桶</td>
+<td>固定速率处理</td>
+<td>流量绝对平稳</td>
+<td>不支持突发流量</td>
+<td>保护后端系统（如数据库）</td>
+</tr>
+<tr>
+<td>令牌桶</td>
+<td>允许突发，长期速率可控</td>
+<td>灵活，支持峰值</td>
+<td>实现稍复杂</td>
+<td>大多数限流场景（推荐）</td>
+</tr>
+<tr>
+<td>计数器滑动窗口</td>
+<td>精确统计时间窗口请求</td>
+<td>精度极高</td>
+<td>高并发下性能差</td>
+<td>高精度、低并发场景</td>
+</tr>
+</tbody></table>
+<h3 id="1-固定窗口限流（Fixed-Window）"><a href="#1-固定窗口限流（Fixed-Window）" class="headerlink" title="1. 固定窗口限流（Fixed Window）"></a><strong>1. 固定窗口限流（Fixed Window）</strong></h3><h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a><strong>核心思想</strong></h4><p>将时间划分为固定大小的窗口（如 1 秒），统计每个窗口内的请求数，若超过预设阈值则拒绝后续请求。</p>
+<ul>
+<li><strong>示例</strong>：窗口大小 1 秒，阈值 100 次请求。第 1 秒内若请求达 100 次，后续请求被拒绝，直到第 2 秒窗口刷新。</li>
+</ul>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a><strong>实现</strong></h4><ul>
+<li>用一个计数器记录当前窗口内的请求数，窗口起始时间戳标记窗口边界。</li>
+<li>每次请求到来时，判断是否在当前窗口内：<ul>
+<li>是：计数器 + 1，若超过阈值则限流。</li>
+<li>否：重置计数器和窗口起始时间。</li>
+</ul>
+</li>
+</ul>
+<h4 id="优点：实现简单，内存占用低。"><a href="#优点：实现简单，内存占用低。" class="headerlink" title="优点：实现简单，内存占用低。"></a><strong>优点</strong>：实现简单，内存占用低。</h4><h4 id="缺点：存在-“窗口临界问题”——-若窗口边界前后各涌入阈值的请求（如第-1-秒末-50-次-第-2-秒初-50-次，实际-1-秒内可能达-100-次），会瞬间超过阈值，导致流量突刺。"><a href="#缺点：存在-“窗口临界问题”——-若窗口边界前后各涌入阈值的请求（如第-1-秒末-50-次-第-2-秒初-50-次，实际-1-秒内可能达-100-次），会瞬间超过阈值，导致流量突刺。" class="headerlink" title="缺点：存在 “窗口临界问题”—— 若窗口边界前后各涌入阈值的请求（如第 1 秒末 50 次 + 第 2 秒初 50 次，实际 1 秒内可能达 100 次），会瞬间超过阈值，导致流量突刺。"></a><strong>缺点</strong>：存在 “窗口临界问题”—— 若窗口边界前后各涌入阈值的请求（如第 1 秒末 50 次 + 第 2 秒初 50 次，实际 1 秒内可能达 100 次），会瞬间超过阈值，导致流量突刺。</h4><h4 id="适用场景：对精度要求不高的场景（如简单接口限流）。"><a href="#适用场景：对精度要求不高的场景（如简单接口限流）。" class="headerlink" title="适用场景：对精度要求不高的场景（如简单接口限流）。"></a><strong>适用场景</strong>：对精度要求不高的场景（如简单接口限流）。</h4><h3 id="2-滑动窗口限流（Sliding-Window）"><a href="#2-滑动窗口限流（Sliding-Window）" class="headerlink" title="2. 滑动窗口限流（Sliding Window）"></a><strong>2. 滑动窗口限流（Sliding Window）</strong></h3><h4 id="核心思想-1"><a href="#核心思想-1" class="headerlink" title="核心思想"></a><strong>核心思想</strong></h4><p>将固定窗口拆分为多个更小的 “子窗口”，通过滑动计算一定时间范围内的总请求数，解决固定窗口的临界问题。</p>
+<ul>
+<li><strong>示例</strong>：1 秒窗口拆分为 10 个 100ms 的子窗口，每个子窗口记录请求数。任意连续 1 秒内的总请求数若超过阈值，则限流。</li>
+</ul>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a><strong>实现</strong></h4><ul>
+<li>维护一个子窗口数组（如 10 个元素），每个元素记录对应时间段的请求数。</li>
+<li>每次请求到来时，计算当前时间属于哪个子窗口，更新对应计数，并累加最近 N 个子窗口的总请求数（覆盖完整时间窗口），若超过阈值则限流。</li>
+</ul>
+<h4 id="优点：解决了固定窗口的临界问题，精度更高。"><a href="#优点：解决了固定窗口的临界问题，精度更高。" class="headerlink" title="优点：解决了固定窗口的临界问题，精度更高。"></a><strong>优点</strong>：解决了固定窗口的临界问题，精度更高。</h4><h4 id="缺点：子窗口划分越细，内存占用和计算成本越高（需维护更多子窗口状态）。"><a href="#缺点：子窗口划分越细，内存占用和计算成本越高（需维护更多子窗口状态）。" class="headerlink" title="缺点：子窗口划分越细，内存占用和计算成本越高（需维护更多子窗口状态）。"></a><strong>缺点</strong>：子窗口划分越细，内存占用和计算成本越高（需维护更多子窗口状态）。</h4><h4 id="适用场景：对限流精度有一定要求的场景（如-API-网关限流）。"><a href="#适用场景：对限流精度有一定要求的场景（如-API-网关限流）。" class="headerlink" title="适用场景：对限流精度有一定要求的场景（如 API 网关限流）。"></a><strong>适用场景</strong>：对限流精度有一定要求的场景（如 API 网关限流）。</h4><h3 id="3-漏桶算法（Leaky-Bucket）"><a href="#3-漏桶算法（Leaky-Bucket）" class="headerlink" title="3. 漏桶算法（Leaky Bucket）"></a><strong>3. 漏桶算法（Leaky Bucket）</strong></h3><h4 id="核心思想-2"><a href="#核心思想-2" class="headerlink" title="核心思想"></a><strong>核心思想</strong></h4><p>将请求比作 “水流”，系统比作 “漏桶”：请求先进入漏桶，漏桶以固定速率（如每秒 100 次）处理请求，若请求量超过漏桶容量，则溢出（被限流）。</p>
+<ul>
+<li><strong>特点</strong>：强制限制请求的处理速率，平滑流量，不受突发流量影响。</li>
+</ul>
+<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a><strong>实现</strong></h4><ul>
+<li>维护两个变量：漏桶当前水量（请求数）、漏桶容量、漏水速率（单位时间处理请求数）。</li>
+<li>每次请求到来时：<ul>
+<li>先计算 “漏水” 量（根据上次处理时间到当前的间隔，按速率减去已处理的请求）。</li>
+<li>若新增请求后水量超过容量，则限流；否则水量 + 1。</li>
+</ul>
+</li>
+</ul>
+<h4 id="优点：输出流量稳定，适合保护后端系统（如数据库）不被突发流量冲击。"><a href="#优点：输出流量稳定，适合保护后端系统（如数据库）不被突发流量冲击。" class="headerlink" title="优点：输出流量稳定，适合保护后端系统（如数据库）不被突发流量冲击。"></a><strong>优点</strong>：输出流量稳定，适合保护后端系统（如数据库）不被突发流量冲击。</h4><h4 id="缺点：无法应对短时间的突发流量（即使系统空闲，也只能按固定速率处理）。"><a href="#缺点：无法应对短时间的突发流量（即使系统空闲，也只能按固定速率处理）。" class="headerlink" title="缺点：无法应对短时间的突发流量（即使系统空闲，也只能按固定速率处理）。"></a><strong>缺点</strong>：无法应对短时间的突发流量（即使系统空闲，也只能按固定速率处理）。</h4><h4 id="适用场景：需要严格控制输出速率的场景（如接口调用第三方服务，避免触发对方限流）。"><a href="#适用场景：需要严格控制输出速率的场景（如接口调用第三方服务，避免触发对方限流）。" class="headerlink" title="适用场景：需要严格控制输出速率的场景（如接口调用第三方服务，避免触发对方限流）。"></a><strong>适用场景</strong>：需要严格控制输出速率的场景（如接口调用第三方服务，避免触发对方限流）。</h4><h3 id="4-令牌桶算法（Token-Bucket）"><a href="#4-令牌桶算法（Token-Bucket）" class="headerlink" title="4. 令牌桶算法（Token Bucket）"></a><strong>4. 令牌桶算法（Token Bucket）</strong></h3><h4 id="核心思想-3"><a href="#核心思想-3" class="headerlink" title="核心思想"></a><strong>核心思想</strong></h4><p>系统按固定速率（如每秒 100 个）向 “令牌桶” 中放入令牌，请求到来时需从桶中获取令牌，若能获取则处理，否则限流。桶有最大容量，令牌满了之后不再新增。</p>
+<ul>
+<li><strong>特点</strong>：允许一定程度的突发流量（若桶中有积累的令牌，可一次性处理多个请求），同时长期速率不超过令牌生成速率。</li>
+</ul>
+<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a><strong>实现</strong></h4><ul>
+<li>维护变量：令牌桶当前令牌数、桶容量、令牌生成速率（单位时间新增令牌数）。</li>
+<li>每次请求到来时：<ul>
+<li>先计算当前应生成的令牌数（根据上次生成时间到当前的间隔，按速率增加令牌，不超过桶容量）。</li>
+<li>若令牌数≥1，则令牌数 - 1，处理请求；否则限流。</li>
+</ul>
+</li>
+</ul>
+<h4 id="优点：兼顾限流和突发流量处理，灵活性高，是最常用的限流算法之一。"><a href="#优点：兼顾限流和突发流量处理，灵活性高，是最常用的限流算法之一。" class="headerlink" title="优点：兼顾限流和突发流量处理，灵活性高，是最常用的限流算法之一。"></a><strong>优点</strong>：兼顾限流和突发流量处理，灵活性高，是最常用的限流算法之一。</h4><h4 id="缺点：实现稍复杂（需动态计算令牌生成量）。"><a href="#缺点：实现稍复杂（需动态计算令牌生成量）。" class="headerlink" title="缺点：实现稍复杂（需动态计算令牌生成量）。"></a><strong>缺点</strong>：实现稍复杂（需动态计算令牌生成量）。</h4><h4 id="适用场景：大多数需要限流的场景（如-API-接口、网关、秒杀系统），尤其适合允许短期流量峰值的业务。"><a href="#适用场景：大多数需要限流的场景（如-API-接口、网关、秒杀系统），尤其适合允许短期流量峰值的业务。" class="headerlink" title="适用场景：大多数需要限流的场景（如 API 接口、网关、秒杀系统），尤其适合允许短期流量峰值的业务。"></a><strong>适用场景</strong>：大多数需要限流的场景（如 API 接口、网关、秒杀系统），尤其适合允许短期流量峰值的业务。</h4><h3 id="5-计数器滑动窗口（Counting-Sliding-Window）"><a href="#5-计数器滑动窗口（Counting-Sliding-Window）" class="headerlink" title="5. 计数器滑动窗口（Counting Sliding Window）"></a><strong>5. 计数器滑动窗口（Counting Sliding Window）</strong></h3><h4 id="核心思想-4"><a href="#核心思想-4" class="headerlink" title="核心思想"></a><strong>核心思想</strong></h4><p>是滑动窗口的一种优化，通过记录每个请求的时间戳，计算最近时间窗口内的请求数（如最近 1 秒内的请求数），超过阈值则限流。</p>
+<ul>
+<li><strong>实现</strong>：用一个有序列表（如红黑树、链表）存储请求的时间戳，每次请求到来时，先删除列表中超过窗口时间的时间戳，再判断剩余数量是否超过阈值。</li>
+</ul>
+<h4 id="优点：精度极高，无窗口划分带来的误差。"><a href="#优点：精度极高，无窗口划分带来的误差。" class="headerlink" title="优点：精度极高，无窗口划分带来的误差。"></a><strong>优点</strong>：精度极高，无窗口划分带来的误差。</h4><h4 id="缺点：高并发下，列表操作（插入、删除）可能成为性能瓶颈（需锁或并发数据结构）。"><a href="#缺点：高并发下，列表操作（插入、删除）可能成为性能瓶颈（需锁或并发数据结构）。" class="headerlink" title="缺点：高并发下，列表操作（插入、删除）可能成为性能瓶颈（需锁或并发数据结构）。"></a><strong>缺点</strong>：高并发下，列表操作（插入、删除）可能成为性能瓶颈（需锁或并发数据结构）。</h4><h4 id="适用场景：对精度要求极高但并发量不高的场景。"><a href="#适用场景：对精度要求极高但并发量不高的场景。" class="headerlink" title="适用场景：对精度要求极高但并发量不高的场景。"></a><strong>适用场景</strong>：对精度要求极高但并发量不高的场景。</h4><h3 id="6-分布式限流（基于-Redis-等）"><a href="#6-分布式限流（基于-Redis-等）" class="headerlink" title="6. 分布式限流（基于 Redis 等）"></a><strong>6. 分布式限流（基于 Redis 等）</strong></h3><p>以上算法均为单机限流，分布式系统中需统一统计全量请求，常用方案：</p>
+<ul>
+<li><strong>Redis + 滑动窗口</strong>：用 Redis 的<code>ZSET</code>存储请求时间戳，通过<code>ZREMRangeByScore</code>删除过期时间戳，<code>ZCARD</code>统计数量，结合 Lua 脚本保证原子性。</li>
+<li><strong>Redis + 令牌桶</strong>：用 Redis 存储令牌数，定时任务按速率生成令牌，请求时原子性减少令牌数。</li>
+<li><strong>网关层限流</strong>：如 Nginx 的<code>limit_req</code>（基于漏桶）、Spring Cloud Gateway 结合 Redis 实现分布式限流。</li>
+</ul>
+<h2 id="分布式一致性算法"><a href="#分布式一致性算法" class="headerlink" title="分布式一致性算法"></a>分布式一致性算法</h2><h3 id="1-Paxos-算法"><a href="#1-Paxos-算法" class="headerlink" title="1. Paxos 算法"></a><strong>1. Paxos 算法</strong></h3><p>Paxos 是由 Leslie Lamport 提出的分布式一致性算法，是许多现代一致性协议的基础（如 Raft 是 Paxos 的简化版）。其核心目标是在 <strong>异步网络环境</strong>（允许节点故障和消息延迟 &#x2F; 丢失，但不允许消息篡改）中，让多个节点对某个值达成一致。</p>
+<h4 id="核心角色"><a href="#核心角色" class="headerlink" title="核心角色"></a><strong>核心角色</strong></h4><ul>
+<li><strong>Proposer（提议者）</strong>：提出需要达成一致的值（如数据更新请求）。</li>
+<li><strong>Acceptor（接受者）</strong>：负责接收和表决提议，只有获得多数 Acceptor 接受的提议才能成为最终共识。</li>
+<li><strong>Learner（学习者）</strong>：同步最终达成一致的值，不参与提议和表决（可理解为从节点）。</li>
+</ul>
+<h4 id="核心流程（简化）"><a href="#核心流程（简化）" class="headerlink" title="核心流程（简化）"></a><strong>核心流程（简化）</strong></h4><p>Paxos 分为 <strong>准备（Prepare）</strong> 和 <strong>接受（Accept）</strong> 两个阶段，通过 “两阶段提交” 避免冲突：</p>
+<ol>
+<li><strong>准备阶段</strong>：Proposer 向多数 Acceptor 发送包含唯一提案编号 N 的 Prepare 请求。Acceptor 若未响应过编号更大的提案，会回复 “承诺（Promise）” 不接受编号小于 N 的提案，并返回已接受的最大编号提案（若有）。</li>
+<li><strong>接受阶段</strong>：若 Proposer 收到多数 Acceptor 的 Promise，则发送包含编号 N 和值 V（根据 Accept 回复的提案确定，若无则用自己的提议值）的 Accept 请求。Acceptor 若未承诺过更大编号的提案，则接受该提案。</li>
+<li><strong>共识达成</strong>：当一个提案被多数 Acceptor 接受后，该值 V 成为共识，Learner 同步此值。</li>
+</ol>
+<h4 id="特点-4"><a href="#特点-4" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：严谨性高，能在异步环境下容错（最多容忍 <code>(n-1)/2</code> 个节点故障，n 为总节点数）。</li>
+<li><strong>缺点</strong>：设计复杂（存在多个 Proposer 时需处理活锁），难以实现和理解。</li>
+<li><strong>适用场景</strong>：分布式数据库（如 Google Spanner）、分布式存储（如 Cassandra 部分功能）。</li>
+</ul>
+<h3 id="2-Raft-算法"><a href="#2-Raft-算法" class="headerlink" title="2. Raft 算法"></a><strong>2. Raft 算法</strong></h3><p>Raft 是为了简化 Paxos 而设计的一致性算法，强调 <strong>可理解性</strong>，通过将问题分解为 “领导者选举”“日志复制”“安全性” 三个部分，降低了实现难度，成为目前最流行的分布式一致性算法之一。</p>
+<h4 id="核心角色-1"><a href="#核心角色-1" class="headerlink" title="核心角色"></a><strong>核心角色</strong></h4><ul>
+<li><strong>Leader（领导者）</strong>：唯一负责接收客户端请求，并向 Follower 同步日志（数据变更记录）。</li>
+<li><strong>Follower（跟随者）</strong>：被动接收 Leader 的日志同步，若超时未收到 Leader 心跳，则转换为 Candidate 参与选举。</li>
+<li><strong>Candidate（候选者）</strong>：发起选举，争取成为新 Leader。</li>
+</ul>
+<h4 id="核心流程"><a href="#核心流程" class="headerlink" title="核心流程"></a><strong>核心流程</strong></h4><ol>
+<li><strong>领导者选举</strong>：<ul>
+<li>集群启动时，所有节点为 Follower，定期等待 Leader 心跳（默认超时时间 150-300ms）。</li>
+<li>若 Follower 超时未收到心跳，转换为 Candidate，向其他节点发送投票请求。</li>
+<li>节点仅为任期（Term，递增的选举轮次编号）更大的 Candidate 投票，获得多数票的 Candidate 成为 Leader。</li>
+<li>若选举平局（无节点获多数票），则随机延迟后重新选举，避免活锁。</li>
+</ul>
+</li>
+<li><strong>日志复制</strong>：<ul>
+<li>Leader 接收客户端请求后，将其作为日志条目追加到本地日志，并向所有 Follower 发送同步请求。</li>
+<li>Follower 收到日志后追加到本地日志并返回确认（Ack）。</li>
+<li>当 Leader 收到多数 Follower 的 Ack 后，将该日志条目标记为 “已提交”，并通知 Follower 提交，此时客户端请求生效。</li>
+</ul>
+</li>
+<li><strong>安全性保障</strong>：<ul>
+<li>确保 Leader 拥有所有已提交的日志条目（选举时，Candidate 需证明自己的日志至少与其他节点一样新，否则不被投票）。</li>
+<li>日志条目按顺序提交，保证数据一致性。</li>
+</ul>
+</li>
+</ol>
+<h4 id="特点-5"><a href="#特点-5" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：逻辑清晰（拆分角色和阶段），易于实现和调试，容错能力与 Paxos 相同（最多容忍 <code>(n-1)/2</code> 个节点故障）。</li>
+<li><strong>缺点</strong>：依赖 Leader 节点，Leader 故障后需重新选举，期间服务不可用（短暂）。</li>
+<li><strong>适用场景</strong>：分布式系统的元数据管理（如 etcd、Consul、Kubernetes 的 etcd 集群）、分布式数据库（如 CockroachDB）。</li>
+</ul>
+<h3 id="3-ZAB-协议（ZooKeeper-Atomic-Broadcast）"><a href="#3-ZAB-协议（ZooKeeper-Atomic-Broadcast）" class="headerlink" title="3. ZAB 协议（ZooKeeper Atomic Broadcast）"></a><strong>3. ZAB 协议（ZooKeeper Atomic Broadcast）</strong></h3><p>ZAB 是 ZooKeeper 自定义的原子广播协议，专为分布式协调服务设计，兼具 <strong>一致性</strong> 和 <strong>高可用性</strong>，可视为简化的 Paxos 变种。</p>
+<h4 id="核心目标"><a href="#核心目标" class="headerlink" title="核心目标"></a><strong>核心目标</strong></h4><ul>
+<li>保证分布式事务的原子性（所有节点要么都执行，要么都不执行）。</li>
+<li>在 Leader 故障时快速选举新 Leader，恢复服务。</li>
+</ul>
+<h4 id="核心流程-1"><a href="#核心流程-1" class="headerlink" title="核心流程"></a><strong>核心流程</strong></h4><p>ZAB 分为 <strong>崩溃恢复</strong> 和 <strong>消息广播</strong> 两个阶段：</p>
+<ol>
+<li><strong>崩溃恢复</strong>：当 Leader 故障或集群启动时，通过选举产生新 Leader，确保新 Leader 拥有所有已提交的事务日志（与 Raft 选举类似，优先选择日志最新的节点）。</li>
+<li>消息广播：正常运行时，Leader 接收客户端写请求，生成事务提案（带全局唯一 ZXID），通过 “两阶段提交” 同步到所有 Follower：<ul>
+<li>Leader 向 Follower 发送提案，Follower 写入日志后返回 Ack。</li>
+<li>当 Leader 收到多数 Follower 的 Ack 后，向所有节点发送 Commit 指令，完成事务提交。</li>
+</ul>
+</li>
+</ol>
+<h4 id="特点-6"><a href="#特点-6" class="headerlink" title="特点"></a><strong>特点</strong></h4><ul>
+<li><strong>优点</strong>：专为 ZooKeeper 设计，兼顾一致性和高可用，支持快速故障转移。</li>
+<li><strong>缺点</strong>：耦合 ZooKeeper 的数据模型（ZNode），通用性较弱。</li>
+<li><strong>适用场景</strong>：ZooKeeper 集群（用于分布式锁、服务发现等协调场景）。</li>
+</ul>
+<h2 id="什么是Nacos，它的核心功能是什么？"><a href="#什么是Nacos，它的核心功能是什么？" class="headerlink" title="什么是Nacos，它的核心功能是什么？"></a>什么是Nacos，<strong>它的核心功能是什么？</strong></h2><p>是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台，致力于解决微服务中的服务发现、配置动态更新、服务健康检查等问题。</p>
+<ul>
+<li><strong>服务发现与注册</strong>：支持基于 DNS 和 RPC 的服务发现，服务提供者可注册服务，消费者可动态发现服务。</li>
+<li><strong>配置管理</strong>：集中管理应用的配置信息，支持动态更新（无需重启服务）、多环境 &#x2F; 多集群配置、配置版本控制。</li>
+<li><strong>服务健康检查</strong>：自动检测服务实例的健康状态，剔除不健康实例，保证服务可用性。</li>
+<li><strong>动态 DNS 服务</strong>：通过 DNS 协议解析服务域名，支持权重路由、流量控制等。</li>
+</ul>
+<p>​	</p>
+<h2 id="Nacos-的服务注册与发现原理是什么？支持哪些注册中心模式？"><a href="#Nacos-的服务注册与发现原理是什么？支持哪些注册中心模式？" class="headerlink" title="Nacos 的服务注册与发现原理是什么？支持哪些注册中心模式？"></a><strong>Nacos 的服务注册与发现原理是什么？支持哪些注册中心模式？</strong></h2><ul>
+<li><strong>服务注册原理</strong>：<ol>
+<li>服务提供者启动时，通过 Nacos SDK 向 Nacos Server 发送注册请求（包含服务名、IP、端口、健康检查参数等）。</li>
+<li>Nacos Server 将服务信息存储在内存注册表中，并持久化到数据库（默认 Derby，可配置 MySQL）。</li>
+<li>服务提供者定期向 Nacos Server 发送心跳（默认 5 秒），证明自身健康；Nacos Server 若超过 15 秒未收到心跳，标记实例为不健康；超过 30 秒则剔除实例。</li>
+</ol>
+</li>
+<li><strong>服务发现原理</strong>：<ol>
+<li>服务消费者通过 Nacos SDK 订阅目标服务，Nacos Server 记录订阅关系。</li>
+<li>当服务实例变化（如新增、下线、健康状态变更）时，Nacos Server 通过 Push 机制主动通知消费者（基于长连接），消费者更新本地服务列表。</li>
+</ol>
+</li>
+<li><strong>支持的注册中心模式</strong>：<ul>
+<li><strong>AP 模式</strong>：优先保证可用性和分区容错性，适合服务发现场景（允许网络分区时存在短暂数据不一致，最终会同步）。</li>
+<li><strong>CP 模式</strong>：优先保证一致性和分区容错性，适合需要强一致性的场景（如配置管理、集群选举）。</li>
+<li>注意：Nacos 可针对不同服务动态切换 AP&#x2F;CP 模式（通过 <code>nacos.core.protocol=grpc</code> 等配置）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="分布式系统中如何实现负载均衡？"><a href="#分布式系统中如何实现负载均衡？" class="headerlink" title="分布式系统中如何实现负载均衡？"></a>分布式系统中如何实现负载均衡？</h2><p>客户端负载均衡：消费者从注册中心获取服务列 表，本地实现负载策略（如 Ribbon、 SpringCloudLoadBanlance）。</p>
+<p>服务端负载均衡：通过负载均衡器（如 Nginx、 LVS）转发请求到后端服务。</p>
+<h2 id="分布式全局唯一id的解决方案"><a href="#分布式全局唯一id的解决方案" class="headerlink" title="分布式全局唯一id的解决方案"></a>分布式全局唯一id的解决方案</h2><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>核心原理</th>
+<th>唯一性保障</th>
+<th>有序性</th>
+<th>性能</th>
+<th>实现复杂度</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UUID&#x2F;GUID</td>
+<td>随机数 + 时间戳 + 硬件信息</td>
+<td>概率上唯一</td>
+<td>无序</td>
+<td>极高</td>
+<td>极低</td>
+<td>对有序性无要求的场景（如日志 ID）</td>
+</tr>
+<tr>
+<td>数据库自增 ID</td>
+<td>单库 &#x2F; 主从库自增序列</td>
+<td>数据库主键约束</td>
+<td>单库有序</td>
+<td>低</td>
+<td>极低</td>
+<td>小型分布式系统（并发量低）</td>
+</tr>
+<tr>
+<td>数据库分段 ID</td>
+<td>预分配 ID 段（如每个节点分配 1000 个）</td>
+<td>段不重叠 + 段内自增</td>
+<td>段内有序</td>
+<td>中</td>
+<td>低</td>
+<td>中小并发场景（如订单 ID）</td>
+</tr>
+<tr>
+<td>Redis 自增 ID</td>
+<td>Redis 的 INCR&#x2F;INCRBY 命令</td>
+<td>单 Redis 节点原子性</td>
+<td>全局有序</td>
+<td>高</td>
+<td>低</td>
+<td>高并发场景（需解决 Redis 单点问题）</td>
+</tr>
+<tr>
+<td>雪花算法（Snowflake）</td>
+<td>时间戳 + 机器 ID + 序列号</td>
+<td>结构分段不重叠</td>
+<td>时间序 + 机器内有序</td>
+<td>极高</td>
+<td>中</td>
+<td>高并发、需有序的核心场景（如交易）</td>
+</tr>
+<tr>
+<td>美团 Leaf</td>
+<td>整合 “数据库分段” 与 “Snowflake”</td>
+<td>双方案兜底</td>
+<td>段内 &#x2F; 时间序有序</td>
+<td>极高</td>
+<td>高</td>
+<td>超大规模分布式系统（如电商）</td>
+</tr>
+<tr>
+<td>百度 UidGenerator</td>
+<td>优化 Snowflake（动态机器 ID）</td>
+<td>结构分段 + 动态 ID 分配</td>
+<td>时间序有序</td>
+<td>极高</td>
+<td>高</td>
+<td>容器化（K8s）场景</td>
+</tr>
+</tbody></table>
+<h3 id="UUID（通用唯一识别码）"><a href="#UUID（通用唯一识别码）" class="headerlink" title="UUID（通用唯一识别码）"></a><strong>UUID（通用唯一识别码）</strong></h3><p>GUID 是微软对 UUID 的实现，本质一致。</p>
+<p><strong>随机数+时间戳+硬件信息</strong></p>
+<p>实现起来比较简单，并且性能高，缺点是无序性，占用空间大，可读性比较差</p>
+<p>适用场景：日志 ID、临时会话 ID、分布式缓存 Key（非排序场景）等对有序性无要求的场景。</p>
+<h3 id="数据库自增-ID（单库-主从）"><a href="#数据库自增-ID（单库-主从）" class="headerlink" title="数据库自增 ID（单库 &#x2F; 主从）"></a><strong>数据库自增 ID（单库 &#x2F; 主从）</strong></h3><p>利用关系型数据库（MySQL、PostgreSQL）的AUTO_INCREMENT（MySQL）或SERIAL（PostgreSQL）特性，单库中通过主键自增生成唯一 ID；主从架构下，所有写入走主库，从库同步数据，确保 ID 唯一。</p>
+<p>优点是实现零成本，全局有序；缺点就是有这个性能瓶颈，扩展性比较差，可用性比较差</p>
+<p>适合用于小型分布式系统，单库单表的场景</p>
+<h3 id="数据库分段id（预分配id段）"><a href="#数据库分段id（预分配id段）" class="headerlink" title="数据库分段id（预分配id段）"></a><strong>数据库分段id（预分配id段）</strong></h3><p><strong>提前向数据库申请一段连续的 ID（如 1000-1999），节点本地缓存该段 ID，用完后再申请下一段</strong>。</p>
+<p>优点就是说性能提升：本地缓存id段，减少了数据库的交互。有序性、同一个id段内严格递增，满足大部分的排序要求</p>
+<p>并且有一定的扩展性，不同业务类型独立分配，互不影响。</p>
+<p>缺点就是说段与段之间无序，id浪费，未用完的id段会丢失</p>
+<p>适合中小并发场景，如电商订单，用户注册等需要有序id的业务</p>
+<h3 id="Redis自增id"><a href="#Redis自增id" class="headerlink" title="Redis自增id"></a><strong>Redis自增id</strong></h3><p>利用 Redis 的<strong>单线程原子性</strong>，通过INCR key（自增 1）或INCRBY key step（自增 step）命令生成唯一 ID。</p>
+<p>例如：</p>
+<ul>
+<li>生成用户 ID：INCR user_id → 返回 1、2、3…</li>
+<li>生成订单 ID：INCRBY order_id 100 → 每次申请 100 个 ID 段。</li>
+</ul>
+<p>优点是性能极高，全局有序，轻量易扩展；</p>
+<p>缺点是维护成本高，数据又丢失风险，有序性比较局限</p>
+<h3 id="雪花算法（Snowflake）"><a href="#雪花算法（Snowflake）" class="headerlink" title="雪花算法（Snowflake）"></a><strong>雪花算法（Snowflake）</strong></h3><p>Twitter 开源的分布式 ID 生成算法，核心是将<strong>64 位 Long 型 ID</strong>拆分为 5 个分段，通过 “分段不重叠” 保障唯一性，通过 “时间戳高位” 保障有序性。</p>
+<ul>
+<li><strong>符号位</strong>：固定为 0，确保 ID 为正数；</li>
+<li><strong>时间戳</strong>：41 位可表示2^41-1毫秒（约 69 年），需设置 “起始时间戳”（如系统上线时间）；</li>
+<li><strong>机器 ID</strong>：10 位可支持2^10&#x3D;1024个节点；</li>
+<li><strong>序列号</strong>：12 位可支持同一节点同一毫秒生成2^12&#x3D;4096个 ID。</li>
+</ul>
+<p>优点是性能好，全局有序，无中心依赖，可读性比较强</p>
+<p>缺点是机器id需要预分配,又时钟回拨的问题导致id重复</p>
+<p>高并发、强有序、无中心依赖的核心场景，如金融交易、电商订单、物流跟踪等。</p>
+<h3 id="美团的Leaf（企业级方案）"><a href="#美团的Leaf（企业级方案）" class="headerlink" title="美团的Leaf（企业级方案）"></a><strong>美团的Leaf（企业级方案）</strong></h3><p>美团开源的分布式 ID 生成系统，整合了 <strong>“数据库分段 ID”（Leaf-segment）</strong> 和 <strong>“优化版 Snowflake”（Leaf-snowflake）</strong> 两种方案，可根据业务场景切换。</p>
+<ul>
+<li><strong>Leaf-segment</strong>：在 “数据库分段” 基础上优化，通过 “双 Buffer 预申请”（一段在用、一段预申请）避免 ID 段用完时的等待，提升性能；</li>
+<li><strong>Leaf-snowflake</strong>：解决原生 Snowflake 的机器 ID 问题，通过 “ZooKeeper 生成临时节点” 动态分配机器 ID（节点启动时向 ZK 申请，退出时释放），适配容器化场景。</li>
+</ul>
+<p>优点是高可用，高性能，适合复杂场景：动态机器id适配k8s容器集群</p>
+<p>缺点是架构比较复杂 ，维护的成本高</p>
+<p>适合超大规模的分布式系统（比如这个美团和京东等电商平台），需要兼顾高并发，高可用和复杂部署环境</p>
+<h3 id="百度-UidGenerator"><a href="#百度-UidGenerator" class="headerlink" title="百度 UidGenerator"></a><strong>百度 UidGenerator</strong></h3><p>百度开源的 Snowflake 优化方案，核心改进是 <strong>“动态机器 ID 分配” 和 “时间戳位宽可配置”</strong> 。</p>
+<ul>
+<li><p>动态机器 ID：通过 “数据库自增” 分配机器 ID（节点启动时向数据库申请唯一 ID），无需 ZK；</p>
+</li>
+<li><p>可配置位宽：支持自定义 “时间戳、机器 ID、序列号” 的位宽（如机器 ID16 位支持 65536 个节点）；</p>
+</li>
+<li><p>预生成缓冲：通过 “RingBuffer” 预生成 ID 并缓存，进一步提升性能。</p>
+</li>
+<li><p><strong>优点</strong>：</p>
+</li>
+<li><ol>
+<li>更灵活：位宽可适配不同集群规模；</li>
+<li>无 ZK 依赖：简化部署，降低维护成本；</li>
+<li>性能优异：单节点 QPS 可达百万级。</li>
+</ol>
+</li>
+<li><p><strong>缺点</strong>：</p>
+</li>
+<li><ol>
+<li>仍依赖数据库：机器 ID 分配需数据库支持；</li>
+<li>时钟回拨问题：需额外处理。</li>
+</ol>
+</li>
+</ul>
+<p>容器化（K8s）、大规模集群场景，如互联网大厂的用户中心、内容平台等。</p>
+<p><strong>方案选型</strong></p>
+<ol>
+<li><strong>优先选 UUID</strong>：若无需有序性、追求极简实现（如日志 ID）；</li>
+<li><strong>优先选数据库分段</strong>：中小并发、需有序、不想引入 Redis（如中小电商订单）；</li>
+<li><strong>优先选 Redis 自增</strong>：高并发、需全局有序、已部署 Redis 集群（如秒杀）；</li>
+<li><strong>优先选 Snowflake&#x2F;Leaf&#x2F;UidGenerator</strong>：高并发、强有序、无中心依赖（如金融交易、核心业务）；</li>
+</ol>
+<ul>
+<li><ul>
+<li>小型集群→原生 Snowflake；</li>
+<li>容器化 &#x2F; 大规模集群→UidGenerator；</li>
+<li>超大规模 &#x2F; 高可用要求→Leaf。</li>
+</ul>
+</li>
+</ul>
+<h2 id="时间回拨问题"><a href="#时间回拨问题" class="headerlink" title="时间回拨问题"></a><strong>时间回拨问题</strong></h2><p>时钟回拨（Clock Backward）是分布式 ID 生成中（尤其是基于时间戳的方案，如雪花算法）的典型问题，指服务器时钟因同步、故障等原因出现时间倒退，可能导致 ID 重复。以下是针对性的解决方案及典型实现：</p>
+<p><strong>1.</strong> <strong>等待时钟追平（最常用）</strong></p>
+<p><strong>原理</strong></p>
+<p>检测到当前时间戳小于上次生成 ID 的时间戳时，暂停 ID 生成，等待系统时钟自然追上上次时间后再继续。</p>
+<p><strong>2.</strong> <strong>使用物理时钟 + 逻辑时钟补偿</strong></p>
+<p><strong>原理</strong>：不直接依赖系统时钟，而是维护一个 “逻辑时钟”：</p>
+<ul>
+<li>当物理时钟正常时，逻辑时钟同步物理时钟；</li>
+<li>当物理时钟回拨时，逻辑时钟继续自增（确保不会倒退）。</li>
+</ul>
+<p><strong>3.</strong> <strong>预生成 ID 缓冲池</strong></p>
+<p><strong>原理</strong>：提前生成一批 ID 并缓存，当检测到时钟回拨时，优先使用缓冲池中的 ID，同时异步触发新 ID 生成（避开回拨时段）。</p>
+<h2 id="如何监控分布式系统的健康状态？常用组件有哪些？"><a href="#如何监控分布式系统的健康状态？常用组件有哪些？" class="headerlink" title="如何监控分布式系统的健康状态？常用组件有哪些？"></a>如何监控分布式系统的健康状态？常用组件有哪些？</h2><ul>
+<li>监控维度 服务指标：QPS、响应时间、错误率。 </li>
+<li>资源指标：CPU、内存、磁盘 IO、网络流量。 </li>
+<li>分布式指标：节点存活状态、数据同步延迟。</li>
+</ul>
+<p><strong>常用组件</strong> </p>
+<ul>
+<li>Prometheus + Grafana：采集指标并可视化展示。 </li>
+<li>ELK Stack：日志收集（Elasticsearch）、分析 （Logstash）、展示（Kibana）。 </li>
+<li>Skywalking：分布式链路追踪，定位服务调用瓶颈。</li>
+</ul>
+<h2 id="服务熔断和服务限流"><a href="#服务熔断和服务限流" class="headerlink" title="服务熔断和服务限流"></a>服务熔断和服务限流</h2><h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h3><p><strong>核心目标</strong>：当依赖的服务出现频繁故障（如超时、错误率过高）时，<strong>主动切断调用链路</strong>，避免故障 “蔓延” 导致整个系统级联崩溃（“雪崩效应”），同时给故障服务留出恢复时间。</p>
+<p><strong>工作原理（类似电路断路器）</strong>：</p>
+<ul>
+<li><strong>闭合状态（Closed）</strong>：正常调用依赖服务，实时统计错误率 &#x2F; 超时率。</li>
+<li><strong>打开状态（Open）</strong>：当错误率超过阈值（如 50%），触发熔断，直接返回降级结果（如默认值、缓存数据），不再调用目标服务。</li>
+<li><strong>半开状态（Half-Open）</strong>：熔断一段时间后（如 5 秒），允许少量请求尝试调用目标服务，若成功则恢复 “闭合状态”，否则继续保持 “打开状态”。</li>
+</ul>
+<p><strong>典型场景</strong>：</p>
+<ul>
+<li>支付服务依赖的银行接口超时率突增，触发熔断后，支付服务直接返回 “系统繁忙，请稍后再试”，避免大量请求阻塞在支付环节。</li>
+</ul>
+<h3 id="服务限流"><a href="#服务限流" class="headerlink" title="服务限流"></a>服务限流</h3><p><strong>核心目标</strong>：对服务的请求流量进行控制，<strong>限制单位时间内的请求数量</strong>（如 QPS、并发数），防止超出服务的处理能力，导致响应延迟或崩溃。</p>
+<p><strong>常见限流维度</strong>：</p>
+<ul>
+<li><strong>QPS 限流</strong>：限制每秒请求数（如每秒最多 1000 次请求）。</li>
+<li><strong>并发数限流</strong>：限制同时处理的请求数（如最多 500 个并发请求）。</li>
+<li><strong>基于来源限流</strong>：对特定 IP、用户或接口单独设置限流规则（如限制某 IP 每秒最多 10 次请求）。</li>
+</ul>
+<p><strong>典型场景</strong>：</p>
+<ul>
+<li>电商秒杀活动中，限制商品详情接口 QPS&#x3D;10000，超出部分直接返回 “排队中”，避免服务器被冲垮。</li>
+</ul>
+<h2 id="你了解-QPS、TPS、RT、吞吐量-这些高并发性能指标吗？"><a href="#你了解-QPS、TPS、RT、吞吐量-这些高并发性能指标吗？" class="headerlink" title="你了解 QPS、TPS、RT、吞吐量 这些高并发性能指标吗？"></a>你了解 QPS、TPS、RT、吞吐量 这些高并发性能指标吗？</h2><h3 id="1-QPS（Queries-Per-Second）"><a href="#1-QPS（Queries-Per-Second）" class="headerlink" title="1. QPS（Queries Per Second）"></a>1. QPS（Queries Per Second）</h3><ul>
+<li><strong>定义</strong>：每秒处理的<strong>查询请求数</strong>，通常用于描述读操作密集型的系统（如数据库查询、缓存查询、API 接口的查询类请求）。</li>
+<li><strong>示例</strong>：一个商品详情接口每秒被请求 1000 次，其 QPS 为 1000。</li>
+<li><strong>注意</strong>：QPS 关注 “查询” 动作，不严格区分请求是否包含写操作，但更偏向读场景。</li>
+</ul>
+<h3 id="2-TPS（Transactions-Per-Second）"><a href="#2-TPS（Transactions-Per-Second）" class="headerlink" title="2. TPS（Transactions Per Second）"></a>2. TPS（Transactions Per Second）</h3><ul>
+<li><strong>定义</strong>：每秒处理的<strong>事务数</strong>，一个事务通常包含一组连续的操作（如 “查询库存→创建订单→扣减库存”），且需满足 ACID 特性（原子性、一致性等），常用于描述包含读写混合操作的业务场景（如支付流程、订单创建）。</li>
+<li><strong>示例</strong>：支付系统每秒完成 500 笔支付（包含查询余额、扣钱、生成流水等步骤），其 TPS 为 500。</li>
+<li><strong>与 QPS 的区别</strong>：TPS 是 “业务逻辑完整的事务”，QPS 是 “单一查询请求”；一个事务可能包含多个查询（即 1 TPS 可能对应多个 QPS）。</li>
+</ul>
+<h3 id="3-RT（Response-Time）"><a href="#3-RT（Response-Time）" class="headerlink" title="3. RT（Response Time）"></a>3. RT（Response Time）</h3><ul>
+<li><strong>定义</strong>：响应时间，指从请求发出到收到完整响应的<strong>总耗时</strong>（单位通常为毫秒 ms），反映系统处理请求的速度。</li>
+<li>关键指标：<ul>
+<li>平均 RT：所有请求的平均耗时（需结合分布情况，避免被极端值误导）。</li>
+<li>P99&#x2F;P95 RT：99%&#x2F;95% 的请求耗时不超过该值（更能反映用户实际体验，如 P99&#x3D;500ms 表示 99% 的请求在 500ms 内完成）。</li>
+</ul>
+</li>
+<li><strong>意义</strong>：RT 是衡量系统 “快慢” 的核心指标，过高会导致用户体验差（如页面加载超时）。</li>
+</ul>
+<h3 id="4-吞吐量（Throughput）"><a href="#4-吞吐量（Throughput）" class="headerlink" title="4. 吞吐量（Throughput）"></a>4. 吞吐量（Throughput）</h3><ul>
+<li><strong>定义</strong>：单位时间内系统处理的<strong>数据总量</strong>（单位通常为 MB&#x2F;s、GB&#x2F;h 等），反映系统处理数据的能力，与请求数量、单个请求的数据大小相关。</li>
+<li><strong>示例</strong>：一个文件上传服务每秒处理 100 个请求，每个请求平均 2MB，其吞吐量为 200MB&#x2F;s。</li>
+<li><strong>与 QPS&#x2F;TPS 的关系</strong>：吞吐量 &#x3D; （QPS&#x2F;TPS）× 平均请求数据大小；高吞吐量不一定意味着高 QPS（如大文件传输，QPS 低但吞吐量高）。</li>
+</ul>
+<h3 id="指标间的关联与应用"><a href="#指标间的关联与应用" class="headerlink" title="指标间的关联与应用"></a>指标间的关联与应用</h3><ul>
+<li>QPS&#x2F;TPS 与 RT 的关系：在系统资源饱和前，QPS&#x2F;TPS 随并发量增加而上升，RT 基本稳定；当并发超过阈值后，QPS&#x2F;TPS 下降，RT 急剧上升（因资源竞争、排队等待）。<ul>
+<li>公式参考：QPS ≈ 并发数 &#x2F; 平均 RT（如并发用户 1000，平均 RT&#x3D;100ms，则 QPS≈1000&#x2F;0.1&#x3D;10000）。</li>
+</ul>
+</li>
+<li><strong>性能优化目标</strong>：在满足 RT 要求（如 P99&lt;1s）的前提下，提升 QPS&#x2F;TPS 和吞吐量，同时避免系统过载（如 CPU、内存、网络瓶颈）。</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">北川</div><div class="post-copyright__author_desc">Believe in yourself</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://gukeyang.github.io/posts/fe3c2cd2.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://gukeyang.github.io/posts/fe3c2cd2.html')">分布式</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div><div class="reward-link mode"><a class="reward-link-button" href="/wecaht/"><i class="anzhiyufont anzhiyu-icon-plant-fill"></i>运营模式与责任</a></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://gukeyang.github.io/posts/fe3c2cd2.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=分布式&amp;url=https://gukeyang.github.io/posts/fe3c2cd2.html&amp;pic=https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=81a626d6-aaa8-19ea-3abe-8880c91e2ed9" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gukeyang.github.io" target="_blank">北川的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/nacos/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>nacos<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/sentinel/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>sentinel<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/seata/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>seata<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=81a626d6-aaa8-19ea-3abe-8880c91e2ed9" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/fec99276.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=218bf9af-60f5-5795-7a01-8a70de46fb8f" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">消息队列</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/zc998800/cdn/face/gif/m17.gif" ait="status"/></div></div><div class="author-info__description">路慢其修远兮 吾将上下而求索</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">北川</h1><div class="author-info__desc">Believe in yourself</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/gukeyang" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/1542898061" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://s2.loli.net/2023/10/19/vNio4QGBSX9x5lO.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84-vs-%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84-vs-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">单体架构 vs 分布式架构 vs 微服务架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP-%E5%AE%9A%E7%90%86%E3%80%81BASE-%E7%90%86%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">CAP 定理、BASE 理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%82%B9%E6%95%85%E9%9A%9C"><span class="toc-number">3.</span> <span class="toc-text">单点故障</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%BB%84%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">微服务解决方案组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0"><span class="toc-number">4.1.</span> <span class="toc-text">服务注册与发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="toc-number">4.2.</span> <span class="toc-text">配置中心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%80%9A%E4%BF%A1"><span class="toc-number">4.3.</span> <span class="toc-text">服务通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">4.4.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7"><span class="toc-number">4.5.</span> <span class="toc-text">熔断与降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%85%B3"><span class="toc-number">4.6.</span> <span class="toc-text">网关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="toc-number">4.7.</span> <span class="toc-text">分布式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RPC%E7%9A%84%E6%A6%82%E5%BF%B5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">RPC的概念是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RPC-%E7%9A%84%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">RPC 的核心逻辑：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B-RPC-%E6%A1%86%E6%9E%B6%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">典型 RPC 框架：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">6.</span> <span class="toc-text">分布式锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">6.1.</span> <span class="toc-text">为什么需要分布式锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-number">6.2.</span> <span class="toc-text">实现方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-Redis-%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">6.2.1.</span> <span class="toc-text">基于 Redis 实现（最常用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-ZooKeeper-%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.2.2.</span> <span class="toc-text">基于 ZooKeeper 实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.2.3.</span> <span class="toc-text">基于数据库实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ERedisson-%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.2.4.</span> <span class="toc-text">基于Redisson 实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redisson-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">Redisson 如何保证分布式锁的可靠性？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1-1"><span class="toc-number">8.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">8.1.</span> <span class="toc-text">分布式事务的解决方案你知道哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2PC%EF%BC%88%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%EF%BC%8CTwo-Phase-Commit%EF%BC%89"><span class="toc-number">8.1.1.</span> <span class="toc-text">2PC（两阶段提交，Two-Phase Commit）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3PC%EF%BC%88%E4%B8%89%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%EF%BC%8CThree-Phase-Commit%EF%BC%89"><span class="toc-number">8.1.2.</span> <span class="toc-text">3PC（三阶段提交，Three-Phase Commit）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCC%EF%BC%88Try-Confirm-Cancel%EF%BC%89"><span class="toc-number">8.1.3.</span> <span class="toc-text">TCC（Try-Confirm-Cancel）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Saga-%E6%A8%A1%E5%BC%8F"><span class="toc-number">8.1.4.</span> <span class="toc-text">Saga 模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%EF%BC%88Local-Message-Table%EF%BC%89"><span class="toc-number">8.1.5.</span> <span class="toc-text">本地消息表（Local Message Table）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%EF%BC%88Transactional-Message%EF%BC%89"><span class="toc-number">8.1.6.</span> <span class="toc-text">事务消息（Transactional Message）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E7%9A%84seata%E6%A1%86%E6%9E%B6%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">阿里的seata框架了解过吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Seata-%E7%9A%84-%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-number">10.</span> <span class="toc-text">Seata 的 几种模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-AT-%E6%A8%A1%E5%BC%8F%EF%BC%88Automatic-Transaction%EF%BC%8C%E8%87%AA%E5%8A%A8%E4%BA%8B%E5%8A%A1%EF%BC%89"><span class="toc-number">10.1.</span> <span class="toc-text">1. AT 模式（Automatic Transaction，自动事务）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">10.1.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">10.1.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E7%94%B5%E5%95%86%E4%B8%8B%E5%8D%95%E3%80%81%E5%BA%93%E5%AD%98%E6%89%A3%E5%87%8F%E7%AD%89%E5%9F%BA%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%AE%80%E5%8D%95%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E3%80%82"><span class="toc-number">10.1.3.</span> <span class="toc-text">适用场景：电商下单、库存扣减等基于数据库的简单分布式事务。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-TCC-%E6%A8%A1%E5%BC%8F%EF%BC%88Try-Confirm-Cancel%EF%BC%89"><span class="toc-number">10.2.</span> <span class="toc-text">2. TCC 模式（Try-Confirm-Cancel）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-1"><span class="toc-number">10.2.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Seata-%E5%A2%9E%E5%BC%BA"><span class="toc-number">10.2.2.</span> <span class="toc-text">Seata 增强</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-1"><span class="toc-number">10.2.3.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E9%87%91%E8%9E%8D%E4%BA%A4%E6%98%93%E3%80%81%E5%A4%8D%E6%9D%82%E8%B5%84%E6%BA%90%E6%93%8D%E4%BD%9C%EF%BC%88%E5%A6%82%E8%B7%A8%E7%B3%BB%E7%BB%9F%E8%B5%84%E9%87%91%E5%88%92%E8%BD%AC%EF%BC%89%E3%80%82"><span class="toc-number">10.2.4.</span> <span class="toc-text">适用场景：金融交易、复杂资源操作（如跨系统资金划转）。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Saga-%E6%A8%A1%E5%BC%8F"><span class="toc-number">10.3.</span> <span class="toc-text">3. Saga 模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">10.3.1.</span> <span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-2"><span class="toc-number">10.3.2.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-2"><span class="toc-number">10.3.3.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E8%AE%A2%E5%8D%95%E5%85%A8%E9%93%BE%E8%B7%AF%E5%B1%A5%E7%BA%A6%E3%80%81%E6%B5%81%E7%A8%8B%E5%AE%A1%E6%89%B9%E7%AD%89%E9%95%BF%E4%BA%8B%E5%8A%A1%E6%B5%81%E7%A8%8B%E3%80%82"><span class="toc-number">10.3.4.</span> <span class="toc-text">适用场景：订单全链路履约、流程审批等长事务流程。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-XA-%E6%A8%A1%E5%BC%8F"><span class="toc-number">10.4.</span> <span class="toc-text">4. XA 模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-3"><span class="toc-number">10.4.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E9%87%91%E8%9E%8D%E6%A0%B8%E5%BF%83%E4%BA%A4%E6%98%93%E7%AD%89%E5%AF%B9%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E8%A6%81%E6%B1%82%E6%9E%81%E9%AB%98%E3%80%81%E5%8F%AF%E6%8E%A5%E5%8F%97%E4%BD%8E%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9C%BA%E6%99%AF%E3%80%82"><span class="toc-number">10.4.2.</span> <span class="toc-text">适用场景：金融核心交易等对强一致性要求极高、可接受低并发的场景。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zookeeper%E6%8B%BF%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F%E6%A0%B8%E5%BF%83%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">11.</span> <span class="toc-text">zookeeper拿来做什么？核心的原理是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81ZooKeeper-%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">11.1.</span> <span class="toc-text">一、ZooKeeper 能做什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ZooKeeper-%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">11.2.</span> <span class="toc-text">二、ZooKeeper 的核心原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%EF%BC%88ZNode%EF%BC%89"><span class="toc-number">11.2.1.</span> <span class="toc-text">1. 数据模型：树形结构（ZNode）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%EF%BC%88Leader-Follower-Observer%EF%BC%89"><span class="toc-number">11.2.2.</span> <span class="toc-text">2. 集群架构：主从复制（Leader + Follower + Observer）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AE%EF%BC%9AZAB-%E5%8D%8F%E8%AE%AE%EF%BC%88ZooKeeper-Atomic-Broadcast%EF%BC%89"><span class="toc-number">11.2.3.</span> <span class="toc-text">3. 一致性协议：ZAB 协议（ZooKeeper Atomic Broadcast）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%EF%BC%9AWatcher-%E6%9C%BA%E5%88%B6"><span class="toc-number">11.2.4.</span> <span class="toc-text">4. 事件监听：Watcher 机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">12.</span> <span class="toc-text">常见的限流算法你知道哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9B%BA%E5%AE%9A%E7%AA%97%E5%8F%A3%E9%99%90%E6%B5%81%EF%BC%88Fixed-Window%EF%BC%89"><span class="toc-number">12.1.</span> <span class="toc-text">1. 固定窗口限流（Fixed Window）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-number">12.1.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">12.1.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%EF%BC%8C%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E4%BD%8E%E3%80%82"><span class="toc-number">12.1.3.</span> <span class="toc-text">优点：实现简单，内存占用低。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A%E5%AD%98%E5%9C%A8-%E2%80%9C%E7%AA%97%E5%8F%A3%E4%B8%B4%E7%95%8C%E9%97%AE%E9%A2%98%E2%80%9D%E2%80%94%E2%80%94-%E8%8B%A5%E7%AA%97%E5%8F%A3%E8%BE%B9%E7%95%8C%E5%89%8D%E5%90%8E%E5%90%84%E6%B6%8C%E5%85%A5%E9%98%88%E5%80%BC%E7%9A%84%E8%AF%B7%E6%B1%82%EF%BC%88%E5%A6%82%E7%AC%AC-1-%E7%A7%92%E6%9C%AB-50-%E6%AC%A1-%E7%AC%AC-2-%E7%A7%92%E5%88%9D-50-%E6%AC%A1%EF%BC%8C%E5%AE%9E%E9%99%85-1-%E7%A7%92%E5%86%85%E5%8F%AF%E8%83%BD%E8%BE%BE-100-%E6%AC%A1%EF%BC%89%EF%BC%8C%E4%BC%9A%E7%9E%AC%E9%97%B4%E8%B6%85%E8%BF%87%E9%98%88%E5%80%BC%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%B5%81%E9%87%8F%E7%AA%81%E5%88%BA%E3%80%82"><span class="toc-number">12.1.4.</span> <span class="toc-text">缺点：存在 “窗口临界问题”—— 若窗口边界前后各涌入阈值的请求（如第 1 秒末 50 次 + 第 2 秒初 50 次，实际 1 秒内可能达 100 次），会瞬间超过阈值，导致流量突刺。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%AF%B9%E7%B2%BE%E5%BA%A6%E8%A6%81%E6%B1%82%E4%B8%8D%E9%AB%98%E7%9A%84%E5%9C%BA%E6%99%AF%EF%BC%88%E5%A6%82%E7%AE%80%E5%8D%95%E6%8E%A5%E5%8F%A3%E9%99%90%E6%B5%81%EF%BC%89%E3%80%82"><span class="toc-number">12.1.5.</span> <span class="toc-text">适用场景：对精度要求不高的场景（如简单接口限流）。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%99%90%E6%B5%81%EF%BC%88Sliding-Window%EF%BC%89"><span class="toc-number">12.2.</span> <span class="toc-text">2. 滑动窗口限流（Sliding Window）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-1"><span class="toc-number">12.2.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">12.2.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E8%A7%A3%E5%86%B3%E4%BA%86%E5%9B%BA%E5%AE%9A%E7%AA%97%E5%8F%A3%E7%9A%84%E4%B8%B4%E7%95%8C%E9%97%AE%E9%A2%98%EF%BC%8C%E7%B2%BE%E5%BA%A6%E6%9B%B4%E9%AB%98%E3%80%82"><span class="toc-number">12.2.3.</span> <span class="toc-text">优点：解决了固定窗口的临界问题，精度更高。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A%E5%AD%90%E7%AA%97%E5%8F%A3%E5%88%92%E5%88%86%E8%B6%8A%E7%BB%86%EF%BC%8C%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E5%92%8C%E8%AE%A1%E7%AE%97%E6%88%90%E6%9C%AC%E8%B6%8A%E9%AB%98%EF%BC%88%E9%9C%80%E7%BB%B4%E6%8A%A4%E6%9B%B4%E5%A4%9A%E5%AD%90%E7%AA%97%E5%8F%A3%E7%8A%B6%E6%80%81%EF%BC%89%E3%80%82"><span class="toc-number">12.2.4.</span> <span class="toc-text">缺点：子窗口划分越细，内存占用和计算成本越高（需维护更多子窗口状态）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%AF%B9%E9%99%90%E6%B5%81%E7%B2%BE%E5%BA%A6%E6%9C%89%E4%B8%80%E5%AE%9A%E8%A6%81%E6%B1%82%E7%9A%84%E5%9C%BA%E6%99%AF%EF%BC%88%E5%A6%82-API-%E7%BD%91%E5%85%B3%E9%99%90%E6%B5%81%EF%BC%89%E3%80%82"><span class="toc-number">12.2.5.</span> <span class="toc-text">适用场景：对限流精度有一定要求的场景（如 API 网关限流）。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95%EF%BC%88Leaky-Bucket%EF%BC%89"><span class="toc-number">12.3.</span> <span class="toc-text">3. 漏桶算法（Leaky Bucket）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-2"><span class="toc-number">12.3.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">12.3.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E8%BE%93%E5%87%BA%E6%B5%81%E9%87%8F%E7%A8%B3%E5%AE%9A%EF%BC%8C%E9%80%82%E5%90%88%E4%BF%9D%E6%8A%A4%E5%90%8E%E7%AB%AF%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%A6%82%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89%E4%B8%8D%E8%A2%AB%E7%AA%81%E5%8F%91%E6%B5%81%E9%87%8F%E5%86%B2%E5%87%BB%E3%80%82"><span class="toc-number">12.3.3.</span> <span class="toc-text">优点：输出流量稳定，适合保护后端系统（如数据库）不被突发流量冲击。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A%E6%97%A0%E6%B3%95%E5%BA%94%E5%AF%B9%E7%9F%AD%E6%97%B6%E9%97%B4%E7%9A%84%E7%AA%81%E5%8F%91%E6%B5%81%E9%87%8F%EF%BC%88%E5%8D%B3%E4%BD%BF%E7%B3%BB%E7%BB%9F%E7%A9%BA%E9%97%B2%EF%BC%8C%E4%B9%9F%E5%8F%AA%E8%83%BD%E6%8C%89%E5%9B%BA%E5%AE%9A%E9%80%9F%E7%8E%87%E5%A4%84%E7%90%86%EF%BC%89%E3%80%82"><span class="toc-number">12.3.4.</span> <span class="toc-text">缺点：无法应对短时间的突发流量（即使系统空闲，也只能按固定速率处理）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E9%9C%80%E8%A6%81%E4%B8%A5%E6%A0%BC%E6%8E%A7%E5%88%B6%E8%BE%93%E5%87%BA%E9%80%9F%E7%8E%87%E7%9A%84%E5%9C%BA%E6%99%AF%EF%BC%88%E5%A6%82%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%EF%BC%8C%E9%81%BF%E5%85%8D%E8%A7%A6%E5%8F%91%E5%AF%B9%E6%96%B9%E9%99%90%E6%B5%81%EF%BC%89%E3%80%82"><span class="toc-number">12.3.5.</span> <span class="toc-text">适用场景：需要严格控制输出速率的场景（如接口调用第三方服务，避免触发对方限流）。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95%EF%BC%88Token-Bucket%EF%BC%89"><span class="toc-number">12.4.</span> <span class="toc-text">4. 令牌桶算法（Token Bucket）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-3"><span class="toc-number">12.4.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-3"><span class="toc-number">12.4.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E5%85%BC%E9%A1%BE%E9%99%90%E6%B5%81%E5%92%8C%E7%AA%81%E5%8F%91%E6%B5%81%E9%87%8F%E5%A4%84%E7%90%86%EF%BC%8C%E7%81%B5%E6%B4%BB%E6%80%A7%E9%AB%98%EF%BC%8C%E6%98%AF%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95%E4%B9%8B%E4%B8%80%E3%80%82"><span class="toc-number">12.4.3.</span> <span class="toc-text">优点：兼顾限流和突发流量处理，灵活性高，是最常用的限流算法之一。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%A8%8D%E5%A4%8D%E6%9D%82%EF%BC%88%E9%9C%80%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97%E4%BB%A4%E7%89%8C%E7%94%9F%E6%88%90%E9%87%8F%EF%BC%89%E3%80%82"><span class="toc-number">12.4.4.</span> <span class="toc-text">缺点：实现稍复杂（需动态计算令牌生成量）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%A4%A7%E5%A4%9A%E6%95%B0%E9%9C%80%E8%A6%81%E9%99%90%E6%B5%81%E7%9A%84%E5%9C%BA%E6%99%AF%EF%BC%88%E5%A6%82-API-%E6%8E%A5%E5%8F%A3%E3%80%81%E7%BD%91%E5%85%B3%E3%80%81%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%EF%BC%89%EF%BC%8C%E5%B0%A4%E5%85%B6%E9%80%82%E5%90%88%E5%85%81%E8%AE%B8%E7%9F%AD%E6%9C%9F%E6%B5%81%E9%87%8F%E5%B3%B0%E5%80%BC%E7%9A%84%E4%B8%9A%E5%8A%A1%E3%80%82"><span class="toc-number">12.4.5.</span> <span class="toc-text">适用场景：大多数需要限流的场景（如 API 接口、网关、秒杀系统），尤其适合允许短期流量峰值的业务。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%AE%A1%E6%95%B0%E5%99%A8%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%EF%BC%88Counting-Sliding-Window%EF%BC%89"><span class="toc-number">12.5.</span> <span class="toc-text">5. 计数器滑动窗口（Counting Sliding Window）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-4"><span class="toc-number">12.5.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E7%B2%BE%E5%BA%A6%E6%9E%81%E9%AB%98%EF%BC%8C%E6%97%A0%E7%AA%97%E5%8F%A3%E5%88%92%E5%88%86%E5%B8%A6%E6%9D%A5%E7%9A%84%E8%AF%AF%E5%B7%AE%E3%80%82"><span class="toc-number">12.5.2.</span> <span class="toc-text">优点：精度极高，无窗口划分带来的误差。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%EF%BC%8C%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C%EF%BC%88%E6%8F%92%E5%85%A5%E3%80%81%E5%88%A0%E9%99%A4%EF%BC%89%E5%8F%AF%E8%83%BD%E6%88%90%E4%B8%BA%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%88%E9%9C%80%E9%94%81%E6%88%96%E5%B9%B6%E5%8F%91%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%89%E3%80%82"><span class="toc-number">12.5.3.</span> <span class="toc-text">缺点：高并发下，列表操作（插入、删除）可能成为性能瓶颈（需锁或并发数据结构）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%AF%B9%E7%B2%BE%E5%BA%A6%E8%A6%81%E6%B1%82%E6%9E%81%E9%AB%98%E4%BD%86%E5%B9%B6%E5%8F%91%E9%87%8F%E4%B8%8D%E9%AB%98%E7%9A%84%E5%9C%BA%E6%99%AF%E3%80%82"><span class="toc-number">12.5.4.</span> <span class="toc-text">适用场景：对精度要求极高但并发量不高的场景。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%86%E5%B8%83%E5%BC%8F%E9%99%90%E6%B5%81%EF%BC%88%E5%9F%BA%E4%BA%8E-Redis-%E7%AD%89%EF%BC%89"><span class="toc-number">12.6.</span> <span class="toc-text">6. 分布式限流（基于 Redis 等）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">分布式一致性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Paxos-%E7%AE%97%E6%B3%95"><span class="toc-number">13.1.</span> <span class="toc-text">1. Paxos 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E8%A7%92%E8%89%B2"><span class="toc-number">13.1.1.</span> <span class="toc-text">核心角色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%EF%BC%88%E7%AE%80%E5%8C%96%EF%BC%89"><span class="toc-number">13.1.2.</span> <span class="toc-text">核心流程（简化）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-4"><span class="toc-number">13.1.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Raft-%E7%AE%97%E6%B3%95"><span class="toc-number">13.2.</span> <span class="toc-text">2. Raft 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E8%A7%92%E8%89%B2-1"><span class="toc-number">13.2.1.</span> <span class="toc-text">核心角色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B"><span class="toc-number">13.2.2.</span> <span class="toc-text">核心流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-5"><span class="toc-number">13.2.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ZAB-%E5%8D%8F%E8%AE%AE%EF%BC%88ZooKeeper-Atomic-Broadcast%EF%BC%89"><span class="toc-number">13.3.</span> <span class="toc-text">3. ZAB 协议（ZooKeeper Atomic Broadcast）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9B%AE%E6%A0%87"><span class="toc-number">13.3.1.</span> <span class="toc-text">核心目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B-1"><span class="toc-number">13.3.2.</span> <span class="toc-text">核心流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-6"><span class="toc-number">13.3.3.</span> <span class="toc-text">特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNacos%EF%BC%8C%E5%AE%83%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">什么是Nacos，它的核心功能是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos-%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="toc-number">15.</span> <span class="toc-text">Nacos 的服务注册与发现原理是什么？支持哪些注册中心模式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9F"><span class="toc-number">16.</span> <span class="toc-text">分布式系统中如何实现负载均衡？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80id%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">17.</span> <span class="toc-text">分布式全局唯一id的解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UUID%EF%BC%88%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81%EF%BC%89"><span class="toc-number">17.1.</span> <span class="toc-text">UUID（通用唯一识别码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%87%AA%E5%A2%9E-ID%EF%BC%88%E5%8D%95%E5%BA%93-%E4%B8%BB%E4%BB%8E%EF%BC%89"><span class="toc-number">17.2.</span> <span class="toc-text">数据库自增 ID（单库 &#x2F; 主从）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E6%AE%B5id%EF%BC%88%E9%A2%84%E5%88%86%E9%85%8Did%E6%AE%B5%EF%BC%89"><span class="toc-number">17.3.</span> <span class="toc-text">数据库分段id（预分配id段）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis%E8%87%AA%E5%A2%9Eid"><span class="toc-number">17.4.</span> <span class="toc-text">Redis自增id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%EF%BC%88Snowflake%EF%BC%89"><span class="toc-number">17.5.</span> <span class="toc-text">雪花算法（Snowflake）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%8E%E5%9B%A2%E7%9A%84Leaf%EF%BC%88%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%96%B9%E6%A1%88%EF%BC%89"><span class="toc-number">17.6.</span> <span class="toc-text">美团的Leaf（企业级方案）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E5%BA%A6-UidGenerator"><span class="toc-number">17.7.</span> <span class="toc-text">百度 UidGenerator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%9B%9E%E6%8B%A8%E9%97%AE%E9%A2%98"><span class="toc-number">18.</span> <span class="toc-text">时间回拨问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%81%A5%E5%BA%B7%E7%8A%B6%E6%80%81%EF%BC%9F%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">19.</span> <span class="toc-text">如何监控分布式系统的健康状态？常用组件有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%99%90%E6%B5%81"><span class="toc-number">20.</span> <span class="toc-text">服务熔断和服务限流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD"><span class="toc-number">20.1.</span> <span class="toc-text">服务熔断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%99%90%E6%B5%81"><span class="toc-number">20.2.</span> <span class="toc-text">服务限流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E4%BA%86%E8%A7%A3-QPS%E3%80%81TPS%E3%80%81RT%E3%80%81%E5%90%9E%E5%90%90%E9%87%8F-%E8%BF%99%E4%BA%9B%E9%AB%98%E5%B9%B6%E5%8F%91%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E5%90%97%EF%BC%9F"><span class="toc-number">21.</span> <span class="toc-text">你了解 QPS、TPS、RT、吞吐量 这些高并发性能指标吗？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-QPS%EF%BC%88Queries-Per-Second%EF%BC%89"><span class="toc-number">21.1.</span> <span class="toc-text">1. QPS（Queries Per Second）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-TPS%EF%BC%88Transactions-Per-Second%EF%BC%89"><span class="toc-number">21.2.</span> <span class="toc-text">2. TPS（Transactions Per Second）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-RT%EF%BC%88Response-Time%EF%BC%89"><span class="toc-number">21.3.</span> <span class="toc-text">3. RT（Response Time）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%90%9E%E5%90%90%E9%87%8F%EF%BC%88Throughput%EF%BC%89"><span class="toc-number">21.4.</span> <span class="toc-text">4. 吞吐量（Throughput）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%A0%87%E9%97%B4%E7%9A%84%E5%85%B3%E8%81%94%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">21.5.</span> <span class="toc-text">指标间的关联与应用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/fe3c2cd2.html" title="分布式"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=81a626d6-aaa8-19ea-3abe-8880c91e2ed9" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式"/></a><div class="content"><a class="title" href="/posts/fe3c2cd2.html" title="分布式">分布式</a><time datetime="2025-11-01T01:50:36.000Z" title="发表于 2025-11-01 09:50:36">2025-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fec99276.html" title="消息队列"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=218bf9af-60f5-5795-7a01-8a70de46fb8f" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="消息队列"/></a><div class="content"><a class="title" href="/posts/fec99276.html" title="消息队列">消息队列</a><time datetime="2025-10-31T05:50:36.000Z" title="发表于 2025-10-31 13:50:36">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a0d0ac1c.html" title="Mybatis面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=04702d6f-9dc7-a4be-c79a-743e81013841" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mybatis面试题"/></a><div class="content"><a class="title" href="/posts/a0d0ac1c.html" title="Mybatis面试题">Mybatis面试题</a><time datetime="2025-10-30T04:31:36.000Z" title="发表于 2025-10-30 12:31:36">2025-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/adbd2430.html" title="Redis面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=4e2071bd-67fa-32f6-9285-5ff7d7429f93" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis面试题"/></a><div class="content"><a class="title" href="/posts/adbd2430.html" title="Redis面试题">Redis面试题</a><time datetime="2025-10-30T04:31:36.000Z" title="发表于 2025-10-30 12:31:36">2025-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/489ef953.html" title="Spring面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=e4e413d3-55ec-ae43-26cd-5d76823c7da0" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring面试题"/></a><div class="content"><a class="title" href="/posts/489ef953.html" title="Spring面试题">Spring面试题</a><time datetime="2025-10-28T10:31:36.000Z" title="发表于 2025-10-28 18:31:36">2025-10-28</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E4%B8%8A%E7%8F%AD%E6%91%B8%E9%B1%BC-brightgreen?style=social&amp;logo=appveyor&amp;logoColor=blue&amp;logoSize=auto&amp;label=%E5%8C%97%E5%B7%9D&amp;labelColor=white&amp;color=white" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2021 - 2025 By <a class="footer-bar-link" href="/" title="北川" target="_blank">北川</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://gukeyang.github.io" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 0.88rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 0.88rem;">JVM调优<sup>1</sup></a><a href="/tags/Kafka/" style="font-size: 0.88rem;">Kafka<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 0.88rem;">Mybatis<sup>1</sup></a><a href="/tags/RabbitMQ/" style="font-size: 0.88rem;">RabbitMQ<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 0.88rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 0.88rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/nacos/" style="font-size: 0.88rem;">nacos<sup>1</sup></a><a href="/tags/seata/" style="font-size: 0.88rem;">seata<sup>1</sup></a><a href="/tags/sentinel/" style="font-size: 0.88rem;">sentinel<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">复习<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 0.88rem;">并发<sup>1</sup></a><a href="/tags/%E5%BA%93%E5%AD%98/" style="font-size: 0.88rem;">库存<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 0.88rem;">电商<sup>1</sup></a><a href="/tags/%E8%AE%A2%E5%8D%95/" style="font-size: 0.88rem;">订单<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96/" style="font-size: 0.88rem;">超卖<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 0.88rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="anzhiyufont anzhiyu-icon-comment-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8152976493&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2021 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 北川 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("04/01/2023 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      img.src = "https://img.shields.io/badge/%E4%B8%8B%E7%8F%AD%E5%93%88%E7%9A%AE-brightgreen?style=social&amp;logo=appveyor&amp;logoColor=blue&amp;logoSize=auto&amp;label=%E5%8C%97%E5%B7%9D&amp;labelColor=white&amp;color=white";
+      img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+      img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+      appKey: 'TjKeHNK7GJrGTYuKYzGzh8yg',
+      avatar: 'mp',
+      serverURLs: '',
+      emojiMaps: {"2023":"https://i0.hdslb.com/bfs/emote/fa6dda8b876ed38609de38aa604be5ad109b8591.png","14周年":"https://i0.hdslb.com/bfs/emote/53148f85bb7e2d8bada8cea57ee4b1f36f48237d.png","兔年":"https://i0.hdslb.com/bfs/emote/9cb6ee2c42986c56ec361d21d5ccbd096aefab0a.png","脱单doge":"https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png","微笑":"https://i0.hdslb.com/bfs/emote/685612eadc33f6bc233776c6241813385844f182.png","微笑-春节":"https://i0.hdslb.com/bfs/emote/f32e5d367c81fbb88b54d7fe46366de04fe4f38f.png","微笑-愚人节":"https://i0.hdslb.com/bfs/emote/774d19d2416eb5b30ac66b02ac580b1b0ca92a80.png","微笑-愚人节2":"https://i0.hdslb.com/bfs/emote/ff45294fbd469ed51eab492e15b8bc7f8e755f14.png","口罩":"https://i0.hdslb.com/bfs/emote/3ad2f66b151496d2a5fb0a8ea75f32265d778dd3.png","doge":"https://i0.hdslb.com/bfs/emote/3087d273a78ccaff4bb1e9972e2ba2a7583c9f11.png","doge-春节":"https://i0.hdslb.com/bfs/emote/feb9abf68df628803ff69a244e744470c2b7e136.png","doge-圣诞":"https://i0.hdslb.com/bfs/emote/1afb5eb96846e0876071eeecb47be95dbf55f08d.png","doge-愚人节":"https://i0.hdslb.com/bfs/emote/8ab62b33061d20bc27beec798a2f73c639e8bb6e.png","doge-愚人节2":"https://i0.hdslb.com/bfs/emote/94460b4e92163c4ca88684b1830ca182d56ddea7.png","妙啊":"https://i0.hdslb.com/bfs/emote/b4cb77159d58614a9b787b91b1cd22a81f383535.png","妙啊-春节":"https://i0.hdslb.com/bfs/emote/692f196da6a623a1634ea305618d37709c2c87f0.png","妙啊-圣诞":"https://i0.hdslb.com/bfs/emote/1cdb10e4b6c6743a1ec96f1579e3ef3045a8f225.png","妙啊-愚人节":"https://i0.hdslb.com/bfs/emote/5675a5d2f3e7fb6b29db0ca8c7703237a18c4271.png","妙啊-愚人节2":"https://i0.hdslb.com/bfs/emote/7b55232e0733afe509d4ac6282d7e604f6f2064f.png","OK":"https://i0.hdslb.com/bfs/emote/4683fd9ffc925fa6423110979d7dcac5eda297f4.png","OK-春节":"https://i0.hdslb.com/bfs/emote/ad17fceba45996104c8b8e2e3f4efd7e2f588368.png","OK-圣诞":"https://i0.hdslb.com/bfs/emote/75d1c99cce001d6d103a8fd406616be9f51621ab.png","OK-愚人节":"https://i0.hdslb.com/bfs/emote/76cc9da7f4a054cb02aad900f0ca3d3fda9c9667.png","OK-愚人节2":"https://i0.hdslb.com/bfs/emote/4ab30d0c384aa7fb112d6078777d46f73797869b.png","星星眼":"https://i0.hdslb.com/bfs/emote/63c9d1a31c0da745b61cdb35e0ecb28635675db2.png","星星眼-春节":"https://i0.hdslb.com/bfs/emote/f6f01068ac7f6548779b0e16daa61974f9299b17.png","星星眼-圣诞":"https://i0.hdslb.com/bfs/emote/195641c30c55f34f9cd82c5e5c32d66a425c7723.png","星星眼-愚人节":"https://i0.hdslb.com/bfs/emote/270e85c95c1ad919848b415601ed3a879bd08127.png","星星眼-愚人节2":"https://i0.hdslb.com/bfs/emote/99471a235923d29c00fa9fc46b82e74196f99722.png","辣眼睛":"https://i0.hdslb.com/bfs/emote/35d62c496d1e4ea9e091243fa812866f5fecc101.png","辣眼睛-春节":"https://i0.hdslb.com/bfs/emote/1ad7c9d351bd64332cc8520c165ee0b32a6e82fa.png","辣眼睛-圣诞":"https://i0.hdslb.com/bfs/emote/8080adfe5acdfd0b6b09bd91db24ea7334ac7b44.png","辣眼睛-愚人节":"https://i0.hdslb.com/bfs/emote/65ed9509df4d509a1cdf22e75a6d3b708f4e9afb.png","辣眼睛-愚人节2":"https://i0.hdslb.com/bfs/emote/60fcc72634bc1d2ad612a18b46256d5d50804ca2.png","吃瓜":"https://i0.hdslb.com/bfs/emote/4191ce3c44c2b3df8fd97c33f85d3ab15f4f3c84.png","吃瓜-春节":"https://i0.hdslb.com/bfs/emote/fbd58fe2465d84d32f37800af0fe6f25711ef397.png","吃瓜-圣诞":"https://i0.hdslb.com/bfs/emote/aa6a3022e47b441c7f84d02cacc063a728a561e0.png","吃瓜-愚人节":"https://i0.hdslb.com/bfs/emote/f05344578512ef18878de01d188657fbf81d31c8.png","吃瓜-愚人节2":"https://i0.hdslb.com/bfs/emote/39a3f88f2232bdd8b8116d952060c72fcf093b55.png","滑稽":"https://i0.hdslb.com/bfs/emote/d15121545a99ac46774f1f4465b895fe2d1411c3.png","滑稽-春节":"https://i0.hdslb.com/bfs/emote/e56b466b43dd6930756d5caf4c22bef4f963dd35.png","滑稽-圣诞":"https://i0.hdslb.com/bfs/emote/5874276ea716d0e9797f827dcfca4332acf8f0de.png","滑稽-愚人节":"https://i0.hdslb.com/bfs/emote/e8c1b263949c2617e6395b190d185b2f8cdf0747.png","滑稽-愚人节2":"https://i0.hdslb.com/bfs/emote/1d44d848b82fe0fcbd4d6f23e3c4a26a0fe4f40f.png","呲牙":"https://i0.hdslb.com/bfs/emote/b5a5898491944a4268360f2e7a84623149672eb6.png","呲牙-春节":"https://i0.hdslb.com/bfs/emote/6ae3b1008d2fee7e15b5eb447b2ccff18e664b88.png","呲牙-圣诞":"https://i0.hdslb.com/bfs/emote/ae4395c1e29e9a2db0c9ccc4c0db05c414816e68.png","呲牙-愚人节":"https://i0.hdslb.com/bfs/emote/299e5867bb79f42d8553023909f42e89707cb500.png","呲牙-愚人节2":"https://i0.hdslb.com/bfs/emote/3688061f6a90c8559dc4663f4d4971ea27d0c014.png","打call":"https://i0.hdslb.com/bfs/emote/431432c43da3ee5aab5b0e4f8931953e649e9975.png","打call-春节":"https://i0.hdslb.com/bfs/emote/bf990016e43b7111cab4566dea194ba837a1a88f.png","打call-圣诞":"https://i0.hdslb.com/bfs/emote/2b04dd2d0e55d978ee485e1f7f3c5e355493ab78.png","打call-愚人节":"https://i0.hdslb.com/bfs/emote/49240d8643d7702519fc4cc468e0003a7623c0e3.png","打call-愚人节2":"https://i0.hdslb.com/bfs/emote/7ffaa98f9f49489022815e38dbcb1a04677a8f13.png","歪嘴":"https://i0.hdslb.com/bfs/emote/4384050fbab0586259acdd170b510fe262f08a17.png","歪嘴-愚人节":"https://i0.hdslb.com/bfs/emote/6cc4c091d3f2cc540f64d8f10ffe516fd2f4ea2b.png","歪嘴-愚人节2":"https://i0.hdslb.com/bfs/emote/f24a5cd8e8400a3ab850ce68ac495fde66a03b64.png","调皮":"https://i0.hdslb.com/bfs/emote/8290b7308325e3179d2154327c85640af1528617.png","调皮-愚人节":"https://i0.hdslb.com/bfs/emote/a09481ceb0644f799d94805446fd52dce775b022.png","调皮-愚人节2":"https://i0.hdslb.com/bfs/emote/0da0b2049a4f7b310e3992afbcb7367b81707824.png","豹富":"https://i0.hdslb.com/bfs/emote/3d1dbe52ea16e12ff7b1c371196f728a4097fb33.png","嗑瓜子":"https://i0.hdslb.com/bfs/emote/28a91da1685d90124cfeead74622e1ebb417c0eb.png","嗑瓜子-春节":"https://i0.hdslb.com/bfs/emote/d2f9910f2d6e52ead3bf1ee29754cd1176f5fc2e.png","笑哭":"https://i0.hdslb.com/bfs/emote/c3043ba94babf824dea03ce500d0e73763bf4f40.png","捂脸-圣诞":"https://i0.hdslb.com/bfs/emote/9af59557383770c398daac81583e6c4d27d83da7.png","笑哭-春节":"https://i0.hdslb.com/bfs/emote/29ce59fb7f14351d195609ef297d30e336bdb240.png","藏狐":"https://i0.hdslb.com/bfs/emote/ba0937ef6f3ccca85e2e0047e6263f3b4da37201.png","脸红":"https://i0.hdslb.com/bfs/emote/0922c375da40e6b69002bd89b858572f424dcfca.png","脸红-旧":"https://i0.hdslb.com/bfs/emote/50cb2606c285614f5786bd387c4f00dff923c82b.png","给心心":"https://i0.hdslb.com/bfs/emote/1597302b98827463f5b75c7cac1f29ea6ce572c4.png","嘟嘟":"https://i0.hdslb.com/bfs/emote/abd7404537d8162720ccbba9e0a8cdf75547e07a.png","哦呼":"https://i0.hdslb.com/bfs/emote/362bded07ea5434886271d23fa25f5d85d8af06c.png","喜欢":"https://i0.hdslb.com/bfs/emote/8a10a4d73a89f665feff3d46ca56e83dc68f9eb8.png","酸了":"https://i0.hdslb.com/bfs/emote/92b1c8cbceea3ae0e8e32253ea414783e8ba7806.png","嫌弃":"https://i0.hdslb.com/bfs/emote/de4c0783aaa60ec03de0a2b90858927bfad7154b.png","害羞":"https://i0.hdslb.com/bfs/emote/9d2ec4e1fbd6cb1b4d12d2bbbdd124ccb83ddfda.png","大哭":"https://i0.hdslb.com/bfs/emote/2caafee2e5db4db72104650d87810cc2c123fc86.png","疑惑":"https://i0.hdslb.com/bfs/emote/b7840db4b1f9f4726b7cb23c0972720c1698d661.png","喜极而泣":"https://i0.hdslb.com/bfs/emote/485a7e0c01c2d70707daae53bee4a9e2e31ef1ed.png","笑":"https://i0.hdslb.com/bfs/emote/81edf17314cea3b48674312b4364df44d5c01f17.png","偷笑":"https://i0.hdslb.com/bfs/emote/6c49d226e76c42cd8002abc47b3112bc5a92f66a.png","惊讶":"https://i0.hdslb.com/bfs/emote/f8e9a59cad52ae1a19622805696a35f0a0d853f3.png","捂脸":"https://i0.hdslb.com/bfs/emote/6921bb43f0c634870b92f4a8ad41dada94a5296d.png","阴险":"https://i0.hdslb.com/bfs/emote/ba8d5f8e7d136d59aab52c40fd3b8a43419eb03c.png","呆":"https://i0.hdslb.com/bfs/emote/33ad6000d9f9f168a0976bc60937786f239e5d8c.png","抠鼻":"https://i0.hdslb.com/bfs/emote/cb89184c97e3f6d50acfd7961c313ce50360d70f.png","大笑":"https://i0.hdslb.com/bfs/emote/ca94ad1c7e6dac895eb5b33b7836b634c614d1c0.png","惊喜":"https://i0.hdslb.com/bfs/emote/0afecaf3a3499479af946f29749e1a6c285b6f65.png","无语":"https://i0.hdslb.com/bfs/emote/44667b7d9349957e903b1b62cb91fb9b13720f04.png","点赞":"https://i0.hdslb.com/bfs/emote/1a67265993913f4c35d15a6028a30724e83e7d35.png","鼓掌":"https://i0.hdslb.com/bfs/emote/895d1fc616b4b6c830cf96012880818c0e1de00d.png","尴尬":"https://i0.hdslb.com/bfs/emote/cb321684ed5ce6eacdc2699092ab8fe7679e4fda.png","灵魂出窍":"https://i0.hdslb.com/bfs/emote/43d3db7d97343c01b47e22cfabeca84b4251f35a.png","委屈":"https://i0.hdslb.com/bfs/emote/d2f26cbdd6c96960320af03f5514c5b524990840.png","傲娇":"https://i0.hdslb.com/bfs/emote/010540d0f61220a0db4922e4a679a1d8eca94f4e.png","疼":"https://i0.hdslb.com/bfs/emote/905fd9a99ec316e353b9bd4ecd49a5f0a301eabf.png","冷":"https://i0.hdslb.com/bfs/emote/cb0ebbd0668640f07ebfc0e03f7a18a8cd00b4ed.png","热":"https://i0.hdslb.com/bfs/emote/4e58a2a6f5f1580ac33df2d2cf7ecad7d9ab3635.png","生病":"https://i0.hdslb.com/bfs/emote/0f25ce04ae1d7baf98650986454c634f6612cb76.png","捂眼":"https://i0.hdslb.com/bfs/emote/c5c6d6982e1e53e478daae554b239f2b227b172b.png","嘘声":"https://i0.hdslb.com/bfs/emote/e64af664d20716e090f10411496998095f62f844.png","思考":"https://i0.hdslb.com/bfs/emote/cfa9b7e89e4bfe04bbcd34ccb1b0df37f4fa905c.png","再见":"https://i0.hdslb.com/bfs/emote/fc510306bae26c9aec7e287cdf201ded27b065b9.png","翻白眼":"https://i0.hdslb.com/bfs/emote/eba54707c7168925b18f6f8b1f48d532fe08c2b1.png","哈欠":"https://i0.hdslb.com/bfs/emote/888d877729cbec444ddbd1cf4c9af155a7a06086.png","奋斗":"https://i0.hdslb.com/bfs/emote/bb2060c15dba7d3fd731c35079d1617f1afe3376.png","墨镜":"https://i0.hdslb.com/bfs/emote/3a03aebfc06339d86a68c2d893303b46f4b85771.png","难过":"https://i0.hdslb.com/bfs/emote/a651db36701610aa70a781fa98c07c9789b11543.png","撇嘴":"https://i0.hdslb.com/bfs/emote/531863568e5668c5ac181d395508a0eeb1f0cda4.png","抓狂":"https://i0.hdslb.com/bfs/emote/4c87afff88c22439c45b79e9d2035d21d5622eba.png","生气":"https://i0.hdslb.com/bfs/emote/3195714219c4b582a4fb02033dd1519913d0246d.png","水稻":"https://i0.hdslb.com/bfs/emote/d530fcaa5100ba12a17a79b55bad342d530c54e3.png","奶茶干杯":"https://i0.hdslb.com/bfs/emote/d5a491990be551ce69f9660da948050df4eab331.png","汤圆":"https://i0.hdslb.com/bfs/emote/93609633a9d194cf336687eb19c01dca95bde719.png","锦鲤":"https://i0.hdslb.com/bfs/emote/643d6c19c8164ffd89e3e9cdf093cf5d773d979c.png","锦鲤-愚人节2":"https://i0.hdslb.com/bfs/emote/51b05d4c678f3880499f1cf2c5742c334cdd0a72.png","福到了":"https://i0.hdslb.com/bfs/emote/5de5373d354c373cf1617b6b836f3a8d53c5a655.png","鸡腿":"https://i0.hdslb.com/bfs/emote/c7860392815d345fa69c4f00ef18d67dccfbd574.png","雪花":"https://i0.hdslb.com/bfs/emote/a41813c4edf8782047e172c884ebd4507ce5e449.png","视频卫星":"https://i0.hdslb.com/bfs/emote/dce6fc7d6dfeafff01241924db60f8251cca5307.png","干杯":"https://i0.hdslb.com/bfs/emote/8da12d5f55a2c7e9778dcc05b40571979fe208e6.png","黑洞":"https://i0.hdslb.com/bfs/emote/e90ec4c799010f25391179118ccd9f66b3b279ba.png","黑洞2":"https://i0.hdslb.com/bfs/emote/c4e9f0e3f35961d5037cb071b16ddba2170b262c.png","爱心":"https://i0.hdslb.com/bfs/emote/ed04066ea7124106d17ffcaf75600700e5442f5c.png","胜利":"https://i0.hdslb.com/bfs/emote/b49fa9f4b1e7c3477918153b82c60b114d87347c.png","加油":"https://i0.hdslb.com/bfs/emote/c7aaeacb21e107292d3bb053e5abde4a4459ed30.png","抱拳":"https://i0.hdslb.com/bfs/emote/89516218158dbea18ab78e8873060bf95d33bbbe.png","响指":"https://i0.hdslb.com/bfs/emote/1b5c53cf14336903e1d2ae3527ca380a1256a077.png","保佑":"https://i0.hdslb.com/bfs/emote/fafe8d3de0dc139ebe995491d2dac458a865fb30.png","福":"https://i0.hdslb.com/bfs/emote/802429a301ac5b35a0480d9526a070ce67cd8097.png","支持":"https://i0.hdslb.com/bfs/emote/3c210366a5585706c09d4c686a9d942b39feeb50.png","拥抱":"https://i0.hdslb.com/bfs/emote/41780a4254750cdaaccb20735730a36044e98ef3.png","跪了":"https://i0.hdslb.com/bfs/emote/f2b3aee7e521de7799d4e3aa379b01be032698ac.png","怪我咯":"https://i0.hdslb.com/bfs/emote/07cc6077f7f7d75b8d2c722dd9d9828a9fb9e46d.png","老鼠":"https://i0.hdslb.com/bfs/emote/8e6fb491eb1bb0d5862e7ec8ccf9a3da12b6c155.png","牛年":"https://i0.hdslb.com/bfs/emote/9275275ff1f2659310648221107d20bc4970f106.png","三星堆":"https://i0.hdslb.com/bfs/emote/fc7dadaa6986e75b813aa26f3eff3281d5f1a6d1.png","桃源-给花花":"https://i0.hdslb.com/bfs/emote/085d41d0fa25453b58fdc87dc2df538183fea11e.png","桃源-缘分":"https://i0.hdslb.com/bfs/emote/cf1c441507689342713623965035f9bed72b1b17.png","桃源-傲娇":"https://i0.hdslb.com/bfs/emote/ce8314c9c2cfdbe235c239c28b819698e29a02d3.png","桃源-欢呼":"https://i0.hdslb.com/bfs/emote/1f439878d8160bd64a4464904064a10df880c921.png","桃源-乖巧":"https://i0.hdslb.com/bfs/emote/57d087b6437002c2ca9e225dcac0ef226d1f2654.png","洛天依":"https://i0.hdslb.com/bfs/emote/9fe06f3594d9afaf4ee2b74770f1c3086ae0ba11.png","坎公骑冠剑-吃鸡":"https://i0.hdslb.com/bfs/emote/c4248a7b6ab326d66c83fd1fb58f1a50f99df332.png","坎公骑冠剑-钻石":"https://i0.hdslb.com/bfs/emote/0b97c7e50e0cc963370e62fbb9b55f51bbe7f8ab.png","坎公骑冠剑-无语":"https://i0.hdslb.com/bfs/emote/80eba0ce64c3fc1279b4daede2f1979cb2380e78.png","来古-沉思":"https://i0.hdslb.com/bfs/emote/4ee07ff03266d62b246be0b950bebb2abf3d997c.png","来古-呆滞":"https://i0.hdslb.com/bfs/emote/9a70b365e523f2379f395031ceefcebb75a45903.png","来古-疑问":"https://i0.hdslb.com/bfs/emote/032fdc0d9d9fe6334776f6c39518a959b73b98f4.png","来古-震撼":"https://i0.hdslb.com/bfs/emote/8b40f228675602a317d32007de6b795c101135ec.png","来古-注意":"https://i0.hdslb.com/bfs/emote/4b671ba32a2581cf40e5cd41c67b111eb8010de0.png","初音未来-大笑":"https://i0.hdslb.com/bfs/emote/8e7f71cda83ce407b0684702983399f8ed982f17.png","原神-哇":"https://i0.hdslb.com/bfs/emote/8188ddf95bace929d382c7a83214afde79d83bfc.png","原神-哼":"https://i0.hdslb.com/bfs/emote/91ed33b74bc36873c3ac8b2648f70d7ab6d8ab78.png","原神-嗯":"https://i0.hdslb.com/bfs/emote/8b0a87e414f453a29730b6e0f45ca61f2f898688.png","原神-欸嘿":"https://i0.hdslb.com/bfs/emote/8fba438fcbe0550877b04efd768d857082307c5e.png","原神-喝茶":"https://i0.hdslb.com/bfs/emote/1de5789fbb3526ef7823c54db7081790a38e7044.png","原神-生气":"https://i0.hdslb.com/bfs/emote/90a38c34742899f8e84138ed55f56cad3ba611fb.png","保卫萝卜-白眼":"https://i0.hdslb.com/bfs/emote/9fce63f38288700bf7be84f3be336cf895ba0902.png","保卫萝卜-笔芯":"https://i0.hdslb.com/bfs/emote/5ff2ed5cb71b02010018cc5910ac7052a03769af.png","保卫萝卜-哭哭":"https://i0.hdslb.com/bfs/emote/7d249f7c990111d3e2982f7477af15b7eb29cbd9.png","保卫萝卜-哇":"https://i0.hdslb.com/bfs/emote/5f2370e561c32d841245f7b1aab2eef43aeb9544.png","保卫萝卜-问号":"https://i0.hdslb.com/bfs/emote/41eb93f09fc4a4d0692a310e8a1f85ba60e96060.png","无悔华夏-不愧是你":"https://i0.hdslb.com/bfs/emote/c58002c32ee78d45366e126f294cb3149dd64ac2.png","无悔华夏-吃瓜":"https://i0.hdslb.com/bfs/emote/273dcff577551bafff4f1eae18561f871e73a6ba.png","无悔华夏-达咩":"https://i0.hdslb.com/bfs/emote/cffab383f47bab7f6736ba9c8d6ac098113410d9.png","无悔华夏-点赞":"https://i0.hdslb.com/bfs/emote/b0f2e8db405ec667c3e6aaabd7c15155b6ea8710.png","无悔华夏-好耶":"https://i0.hdslb.com/bfs/emote/324cd79784aeb37dbf2f47f68bbe8ed5d01f975e.png","奥比岛-搬砖":"https://i0.hdslb.com/bfs/emote/1fab697214918d91087373a999cc7ef8040ddf85.png","奥比岛-点赞":"https://i0.hdslb.com/bfs/emote/fb0b476fe2ff30cd59385ea7d616627ac114161f.png","奥比岛-击爪":"https://i0.hdslb.com/bfs/emote/35bba1bb8f164c5e844155548438248e6eaa8382.png","奥比岛-委屈":"https://i0.hdslb.com/bfs/emote/fda155e7c33b40dbb94c24644e0635d47b6ef3cc.png","奥比岛-喜欢":"https://i0.hdslb.com/bfs/emote/ed64e0c81ee194138bd9df30c65077ed978fb88c.png"},
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script src="https://cdn.cbd.int/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=mp'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://4GK2IcRZ.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+        "X-LC-Key": 'TjKeHNK7GJrGTYuKYzGzh8yg',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="//code.tidio.co/4nifo6zdbrmyjsngh2yzxwbnlhrvshrf.js" async="async"></script><script>(() => {
+  const isChatBtn = true
+  const isChatHideShow = true
+
+  if (isChatBtn) {
+    let isShow = false
+    const close = () => {
+      window.tidioChatApi.hide()
+      isShow = false
+    }
+    
+    const open = () => {
+      window.tidioChatApi.open()
+      window.tidioChatApi.show()
+      isShow = true
+    }
+
+    const onTidioChatApiReady = () => {
+      window.tidioChatApi.hide()
+      window.tidioChatApi.on("close", close)
+    }
+    if (window.tidioChatApi) {
+      window.tidioChatApi.on("ready", onTidioChatApiReady)
+    } else {
+      document.addEventListener("tidioChat-ready", onTidioChatApiReady)
+    }
+
+    window.chatBtnFn = () => {
+      if (!window.tidioChatApi) return
+      isShow ? close() : open()
+    }
+  } else if (isChatHideShow) {
+    window.chatBtn = {
+      hide: () => {
+        window.tidioChatApi && window.tidioChatApi.hide()
+      },
+      show: () => {
+        window.tidioChatApi && window.tidioChatApi.show()
+      }
+    }
+  }
+})()</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
