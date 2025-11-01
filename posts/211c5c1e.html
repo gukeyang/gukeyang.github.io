@@ -1,0 +1,1002 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>工具命令 | 北川的个人博客</title><meta name="keywords" content="Linux,Docker,Git"><meta name="author" content="北川,1656473414@qq.com"><meta name="copyright" content="北川"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="工具命令"><meta name="application-name" content="工具命令"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="工具命令"><meta property="og:url" content="https://gukeyang.github.io/posts/211c5c1e.html"><meta property="og:site_name" content="北川的个人博客"><meta property="og:description" content="Git命令 以下是 Git 日常开发中最常用的命令整理，按功能分类便于查阅： 一、初始化与配置 git init：在当前目录初始化一个新的 Git 仓库（生成.git目录）。 git config --global user.name &amp;quot;你的名字&amp;quot;：设置全局用户名（所有仓库生效）"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=2f392bd0-33ea-48ed-ad11-b97812f2b595"><meta property="article:author" content="北川"><meta property="article:tag" content="博客,笔记,学习"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=2f392bd0-33ea-48ed-ad11-b97812f2b595"><meta name="description" content="Git命令 以下是 Git 日常开发中最常用的命令整理，按功能分类便于查阅： 一、初始化与配置 git init：在当前目录初始化一个新的 Git 仓库（生成.git目录）。 git config --global user.name &amp;quot;你的名字&amp;quot;：设置全局用户名（所有仓库生效）"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://gukeyang.github.io/posts/211c5c1e"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":"3932F24FA213E964B6B1B0FD091F88CE"},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://friends.anheyu.com/"},
+  navMusic: true,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 设计开发一条龙","🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    simplehomepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: 北川","link":"链接: ","source":"来源: 北川的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '北川的个人博客',
+  title: '工具命令',
+  postAI: '',
+  pageFillDescription: 'Git命令, 一、初始化与配置, 二、工作区与暂存区操作, 三、提交与日志, 四、分支操作, 五、远程仓库操作, 六、撤销与回退, 七、其他常用命令, Linux命令, 一、文件与目录操作, 二、文件内容查看与编辑, 三、系统信息与资源查看, 四、用户与权限管理, 五、进程管理, 六、网络操作, 七、压缩与解压, 八、文本处理工具, 九、其他常用命令, Docker命令, 一、容器管理（最核心）, 二、镜像管理, 三、数据卷（数据持久化）, 四、网络管理, 五、Docker Compose（多容器管理）, 六、系统与清理, DockerFile, 一、基础镜像与构建上下文, FROM, 二、工作目录与路径配置, WORKDIR, 三、文件复制与添加, COPY, ADD, 四、构建时执行命令, RUN, 五、环境配置, ENV, ARG, 六、容器运行配置, EXPOSE, VOLUME, USER, 七、容器启动命令, CMD, ENTRYPOINT, 八、其他辅助指令, LABEL, ONBUILD命令以下是日常开发中最常用的命令整理按功能分类便于查阅一初始化与配置在当前目录初始化一个新的仓库生成目录你的名字设置全局用户名所有仓库生效你的邮箱设置全局邮箱所有仓库生效名字设置当前仓库的用户名仅当前仓库生效覆盖全局查看当前配置包括全局和本地二工作区与暂存区操作文件名将指定文件从工作区添加到暂存区暂存修改将当前目录所有修改新增修改删除添加到暂存区仅添加已跟踪文件的修改删除不包含新增文件文件名删除工作区文件并将删除操作添加到暂存区等价于文件文件文件名从暂存区移除文件保留工作区文件即取消跟踪三提交与日志提交说明将暂存区的内容提交到本地仓库后为提交信息必填提交说明直接提交已跟踪文件的修改跳过但不包含新增文件修改最近一次提交适用于补充提交信息或遗漏文件需先遗漏文件查看提交历史按时间倒序显示作者时间提交说明简化日志输出仅显示前位和提交说明以图形化方式显示分支合并历史直观看到分支走向查看所有操作记录包括已删除的提交用于找回误删的版本四分支操作查看本地所有分支当前分支前有标记分支名创建新分支基于当前分支的最新提交分支名切换到指定分支新增替代的分支切换功能更清晰分支名创建并切换到新分支等价于分支名分支名分支名将指定分支合并到当前分支如把分支合并到当前分支分支名删除已合并的本地分支若未合并需用强制删除旧分支名新分支名重命名本地分支五远程仓库操作远程仓库地址克隆远程仓库到本地会自动创建本地仓库并关联远程远程仓库地址将本地仓库关联到远程仓库通常命名为查看当前仓库关联的远程仓库地址显示详细信息拉取远程仓库的最新代码并合并到当前分支等价于远程分支名拉取指定远程分支的代码并合并到当前分支将本地分支的提交推送到远程仓库首次推送需指定远程和分支如本地分支名远程分支名将本地分支推送到远程指定分支如本地推到远程远程分支名删除远程仓库的指定分支六撤销与回退文件名撤销工作区的修改恢复到最近一次或的状态未的修改会丢失文件名将暂存区的修改撤销回工作区取消的效果回退到指定版本可通过获取工作区和暂存区会被强制覆盖谨慎使用回退到指定版本但保留工作区和暂存区的修改仅撤销七其他常用命令将当前工作区的修改临时保存常用于切换分支前暂存未提交的修改恢复最近一次的内容并删除该记录查看所有记录查看工作区与暂存区的差异未的修改查看暂存区与本地仓库的差异已但未的修改命令一文件与目录操作列出目录内容显示详细信息权限大小修改时间等显示所有文件包括隐藏文件以开头以人类可读格式显示大小如目录名切换目录回到上级目录回到当前用户的家目录回到上一次所在目录显示当前所在目录的绝对路径目录名创建目录递归创建多级目录如下的下的目录名删除空目录非空目录需用文件名创建空文件若文件已存在更新修改时间源文件目标路径复制文件目录源目录目标路径复制目录递归覆盖前提示确认源文件目标路径移动重命名文件目录例移动到重命名文件名删除文件目录目录名删除目录递归包括子文件文件名强制删除不提示目录名强制删除目录谨慎使用避免误删二文件内容查看与编辑文件名查看文件全部内容适合短文件文件名显示行号文件名分页查看文件按空格翻页退出文件名更灵活的分页查看支持上下键滚动关键词搜索退出文件名查看文件前行默认前行文件名查看前行文件名查看文件后行默认后行文件名查看后行文件名实时跟踪文件更新常用于查看日志退出文件名简单文本编辑器入门友好保存退出文件名强大的文本编辑器需学习基础操作进入编辑模式退出编辑保存退出强制退出不保存三系统信息与资源查看查看系统内核版本主机名等详细信息查看当前主机名显示当前系统时间显示当月日历显示年日历查看磁盘分区使用情况人类可读格式目录名查看指定目录的总大小汇总可读格式查看内存使用情况可读格式显示总内存已用空闲等实时查看进程资源占用按退出按排序按内存排序更美观的进程监控工具需安装功能类似四用户与权限管理查看当前登录用户查看所有登录用户的信息用户名创建新用户需权限用户名删除用户同时删除用户家目录用户名修改用户密码可改任意用户普通用户改自己用户名切换到指定用户切换并加载目标用户的环境变量命令以权限执行命令需当前用户在列表中权限文件目录修改文件目录权限权限格式位数字如分别代表所有者所属组其他用户的权限例所有者可读可写可执行组和其他用户可读可执行符号格式给所有者添加执行权限所有者组其他用户组文件目录修改文件目录的所有者和所属组例改为用户和组所有五进程管理查看当前终端的进程查看系统所有进程所有用户详细信息包括非终端进程关键词查找指定进程进程终止指定进程进程通过获取进程强制终止进程无法忽略的信号进程名按进程名终止进程例关闭所有火狐进程将前台进程切换到后台运行需先按暂停前台进程将后台进程切换到前台六网络操作或查看网络接口信息地址地址等域名测试与目标主机的连通性停止只发送个数据包或查看系统监听的端口监听数字显示查看所有网络连接下载文件例发送请求或下载文件例保存文件用户名域名通过登录远程服务器例七压缩与解压打包解压文件常用格式打包压缩文件名源文件目录压缩创建显示过程指定文件名解压文件名解压解压到指定目录文件名目标目录压缩包名源文件目录创建压缩包压缩包名解压压缩包压缩包名目标目录解压到指定目录八文本处理工具关键词文件名在文件中搜索关键词关键词文件名显示匹配行的行号关键词目录递归搜索目录下所有文件文件名统计文件的行数单词数字符数文件名只统计行数常用于统计日志行数文件名对文件内容排序默认按字符顺序文件名按数字排序文件名倒序排序旧内容新内容文件名文本替换例替换所有为九其他常用命令命令查看命令的帮助手册例查看的用法目录文件名在指定目录下查找文件例查找所有文件命令查看命令的安装路径例或清空终端屏幕查看历史命令执行第条历史命令命令一容器管理最核心容器是的运行实例以下命令用于容器的创建启停查看等操作选项镜像名创建并启动容器最常用命令常用选项后台运行容器守护进程模式主机端口容器端口端口映射如将主机映射到容器主机路径容器路径挂载主机目录文件到容器实现数据持久化容器名指定容器名称否则自动生成容器停止后自动删除适合临时任务交互式运行分配终端常用于进入容器操作如查看正在运行的容器查看所有容器包括已停止的只显示容器常用于批量操作容器名启动已停止的容器容器名停止运行中的容器容器名重启容器容器名强制终止容器类似容器名删除已停止的容器容器名强制删除运行中的容器删除所有容器谨慎使用选项容器名命令在运行的容器中执行命令常用容器名进入容器终端退出不影响容器运行选项容器名查看容器日志实时跟踪日志类似显示最后行日志容器名查看容器详细信息配置网络挂载等二镜像管理镜像是容器的模板以下命令用于镜像的获取构建删除等镜像名标签从仓库拉取镜像默认拉取标签如查看本地所有镜像只显示镜像镜像名删除本地镜像镜像名强制删除即使有容器依赖删除所有镜像谨慎使用镜像名标签路径根据构建镜像例表示当前目录的原镜像名标签新镜像名标签给镜像打标签常用于推送镜像到仓库前重命名例适配仓库命名规范镜像名标签将镜像推送到远程仓库如需先登录保存路径镜像名将镜像导出为本地文件镜像文件从本地文件导入镜像三数据卷数据持久化数据卷是独立于容器的存储区域用于持久化容器数据避免容器删除后数据丢失卷名创建数据卷查看所有数据卷卷名查看数据卷详细信息如挂载路径卷名删除数据卷删除所有未使用的数据卷四网络管理网络用于容器间通信或容器与外部网络交互查看所有网络网络名创建自定义网络默认桥接模式网络名容器名将容器连接到指定网络网络名容器名断开容器与网络的连接网络名删除网络网络名查看网络详细信息包含连接的容器等五多容器管理用于定义和运行多容器应用通过配置创建并启动所有服务基于后台运行启动前重新构建镜像停止并删除所有服务网络保留数据卷启动停止重启所有服务查看所有服务的容器状态服务名查看服务日志实时跟踪服务名命令在指定服务的容器中执行命令六系统与清理查看系统信息版本镜像数容器数等查看客户端和服务器版本查看磁盘使用情况镜像容器数据卷等清理未使用的资源停止的容器无用镜像未使用的网络清理更彻底包括未被任何容器引用的镜像一基础镜像与构建上下文语法镜像名标签功能指定构建新镜像的基础镜像所有镜像都基于其他镜像必填指令示例基于基于轻量镜像二工作目录与路径配置语法路径功能设置后续指令等的工作目录类似但持久化到镜像层示例后续命令默认在目录执行切换到基于上一层的工作目录三文件复制与添加语法宿主机源路径镜像目标路径功能将宿主机文件目录复制到镜像中仅复制不自动解压示例复制单个文件复制目录包括子文件语法源路径目标路径功能类似但支持自动解压本地压缩包如通过下载文件不推荐建议用示例复制并解压压缩包到四构建时执行命令语法格式命令如终端执行格式可执行文件参数推荐避免解析问题功能在镜像构建过程中执行命令如安装依赖编译代码每行会生成新镜像层示例合并命令减少层数推荐清理缓存减小体积格式五环境配置语法键值功能定义环境变量构建时和容器运行时均有效示例单个变量多个变量语法变量名默认值功能定义构建时临时变量仅时有效容器运行时不可见可通过覆盖示例构建时覆盖六容器运行配置语法端口端口功能声明容器运行时预期监听的端口仅文档说明需手动映射示例声明监听和端口语法路径路径功能声明数据卷指定容器内需要持久化的目录避免数据随容器删除丢失示例容器内目录会被挂载为数据卷语法用户名功能指定后续指令的执行用户默认切换非用户提高安全性示例先创建用户后续命令以身份执行七容器启动命令语法格式命令格式可执行文件参数推荐功能指定容器启动时默认执行的命令一个仅最后一个生效可被后的命令覆盖示例启动前台运行运行时覆盖进入语法格式命令格式可执行文件参数推荐功能定义容器启动的入口程序不会被后的命令覆盖可作为其参数示例固定入口为默认参数为运行时输出参数被替换八其他辅助指令语法键值功能为镜像添加元数据如作者描述便于管理示例语法指令功能当当前镜像被作为基础镜像时触发指定指令用于父镜像定义子镜像的通用操作示例父镜像中定义子镜像构建时自动复制代码',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-11-01 16:09:28',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://gukeyang.github.io" title="博客"><img class="back-menu-item-icon" src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">北川的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src="/./img/wechat.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/./img/alipay.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 1.05rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 1.05rem;">JVM调优<sup>1</sup></a><a href="/tags/Kafka/" style="font-size: 1.05rem;">Kafka<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 1.05rem;">Mybatis<sup>1</sup></a><a href="/tags/RabbitMQ/" style="font-size: 1.05rem;">RabbitMQ<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 1.05rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 1.05rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/nacos/" style="font-size: 1.05rem;">nacos<sup>1</sup></a><a href="/tags/seata/" style="font-size: 1.05rem;">seata<sup>1</sup></a><a href="/tags/sentinel/" style="font-size: 1.05rem;">sentinel<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">复习<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 1.05rem;">并发<sup>1</sup></a><a href="/tags/%E5%BA%93%E5%AD%98/" style="font-size: 1.05rem;">库存<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 1.05rem;">电商<sup>1</sup></a><a href="/tags/%E7%A7%92%E6%9D%80/" style="font-size: 1.05rem;">秒杀<sup>1</sup></a><a href="/tags/%E8%AE%A2%E5%8D%95/" style="font-size: 1.05rem;">订单<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96/" style="font-size: 1.05rem;">超卖<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.05rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9C%BA%E6%99%AF%E9%A2%98/" itemprop="url">场景题</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Linux/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Linux</span></a><a class="article-meta__tags" href="/tags/Docker/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Docker</span></a><a class="article-meta__tags" href="/tags/Git/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Git</span></a></span></div></div><h1 class="post-title" itemprop="name headline">工具命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-11-01T09:41:03.000Z" title="发表于 2025-11-01 17:41:03">2025-11-01</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-11-01T08:09:28.347Z" title="更新于 2025-11-01 16:09:28">2025-11-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="leancloud_visitors" id="/posts/211c5c1e.html" data-flag-title="工具命令"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span class="leancloud-visitors-count" title="访问量"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为新乡"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>新乡</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/211c5c1e.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/posts/211c5c1e.html" itemprop="commentCount"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=2f392bd0-33ea-48ed-ad11-b97812f2b595"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://gukeyang.github.io/posts/211c5c1e.html"><header><a class="post-meta-categories" href="/categories/%E5%9C%BA%E6%99%AF%E9%A2%98/" itemprop="url">场景题</a><a href="/tags/Linux/" tabindex="-1" itemprop="url">Linux</a><a href="/tags/Docker/" tabindex="-1" itemprop="url">Docker</a><a href="/tags/Git/" tabindex="-1" itemprop="url">Git</a><h1 id="CrawlerTitle" itemprop="name headline">工具命令</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">北川</span><time itemprop="dateCreated datePublished" datetime="2025-11-01T09:41:03.000Z" title="发表于 2025-11-01 17:41:03">2025-11-01</time><time itemprop="dateCreated datePublished" datetime="2025-11-01T08:09:28.347Z" title="更新于 2025-11-01 16:09:28">2025-11-01</time></header><h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><p> 以下是 Git 日常开发中最常用的命令整理，按功能分类便于查阅：</p>
+<h3 id="一、初始化与配置"><a href="#一、初始化与配置" class="headerlink" title="一、初始化与配置"></a><strong>一、初始化与配置</strong></h3><ul>
+<li><code>git init</code>：在当前目录初始化一个新的 Git 仓库（生成<code>.git</code>目录）。</li>
+<li><code>git config --global user.name &quot;你的名字&quot;</code>：设置全局用户名（所有仓库生效）。</li>
+<li><code>git config --global user.email &quot;你的邮箱&quot;</code>：设置全局邮箱（所有仓库生效）。</li>
+<li><code>git config --local user.name &quot;名字&quot;</code>：设置当前仓库的用户名（仅当前仓库生效，覆盖全局）。</li>
+<li><code>git config --list</code>：查看当前 Git 配置（包括全局和本地）。</li>
+</ul>
+<h3 id="二、工作区与暂存区操作"><a href="#二、工作区与暂存区操作" class="headerlink" title="二、工作区与暂存区操作"></a><strong>二、工作区与暂存区操作</strong></h3><ul>
+<li><code>git add &lt;文件名&gt;</code>：将指定文件从工作区添加到暂存区（暂存修改）。</li>
+<li><code>git add .</code>：将当前目录所有修改（新增、修改、删除）添加到暂存区。</li>
+<li><code>git add -u</code>：仅添加已跟踪文件的修改 &#x2F; 删除（不包含新增文件）。</li>
+<li><code>git rm &lt;文件名&gt;</code>：删除工作区文件，并将删除操作添加到暂存区（等价于<code>rm &lt;文件&gt; + git add &lt;文件&gt;</code>）。</li>
+<li><code>git rm --cached &lt;文件名&gt;</code>：从暂存区移除文件（保留工作区文件，即取消跟踪）。</li>
+</ul>
+<h3 id="三、提交与日志"><a href="#三、提交与日志" class="headerlink" title="三、提交与日志"></a><strong>三、提交与日志</strong></h3><ul>
+<li><code>git commit -m &quot;提交说明&quot;</code>：将暂存区的内容提交到本地仓库，<code>-m</code>后为提交信息（必填）。</li>
+<li><code>git commit -am &quot;提交说明&quot;</code>：直接提交已跟踪文件的修改（跳过<code>git add</code>，但不包含新增文件）。</li>
+<li><code>git commit --amend</code>：修改最近一次提交（适用于补充提交信息或遗漏文件，需先<code>git add</code>遗漏文件）。</li>
+<li><code>git log</code>：查看提交历史（按时间倒序，显示 commit-id、作者、时间、提交说明）。</li>
+<li><code>git log --oneline</code>：简化日志输出（仅显示 commit-id 前 7 位和提交说明）。</li>
+<li><code>git log --graph</code>：以图形化方式显示分支合并历史（直观看到分支走向）。</li>
+<li><code>git reflog</code>：查看所有操作记录（包括已删除的提交，用于找回误删的版本）。</li>
+</ul>
+<h3 id="四、分支操作"><a href="#四、分支操作" class="headerlink" title="四、分支操作"></a><strong>四、分支操作</strong></h3><ul>
+<li><code>git branch</code>：查看本地所有分支（当前分支前有<code>*</code>标记）。</li>
+<li><code>git branch &lt;分支名&gt;</code>：创建新分支（基于当前分支的最新提交）。</li>
+<li><code>git switch &lt;分支名&gt;</code>：切换到指定分支（Git 2.23 + 新增，替代<code>git checkout</code>的分支切换功能，更清晰）。</li>
+<li><code>git switch -c &lt;分支名&gt;</code>：创建并切换到新分支（等价于<code>git branch &lt;分支名&gt; + git switch &lt;分支名&gt;</code>）。</li>
+<li><code>git merge &lt;分支名&gt;</code>：将指定分支合并到当前分支（如<code>git merge dev</code>：把 dev 分支合并到当前分支）。</li>
+<li><code>git branch -d &lt;分支名&gt;</code>：删除已合并的本地分支（若未合并，需用<code>-D</code>强制删除）。</li>
+<li><code>git branch -m &lt;旧分支名&gt; &lt;新分支名&gt;</code>：重命名本地分支。</li>
+</ul>
+<h3 id="五、远程仓库操作"><a href="#五、远程仓库操作" class="headerlink" title="五、远程仓库操作"></a><strong>五、远程仓库操作</strong></h3><ul>
+<li><code>git clone &lt;远程仓库地址&gt;</code>：克隆远程仓库到本地（会自动创建本地仓库并关联远程）。</li>
+<li><code>git remote add origin &lt;远程仓库地址&gt;</code>：将本地仓库关联到远程仓库（通常命名为<code>origin</code>）。</li>
+<li><code>git remote -v</code>：查看当前仓库关联的远程仓库地址（<code>-v</code>显示详细信息）。</li>
+<li><code>git pull</code>：拉取远程仓库的最新代码并合并到当前分支（等价于<code>git fetch + git merge</code>）。</li>
+<li><code>git pull origin &lt;远程分支名&gt;</code>：拉取指定远程分支的代码并合并到当前分支。</li>
+<li><code>git push</code>：将本地分支的提交推送到远程仓库（首次推送需指定远程和分支，如<code>git push -u origin main</code>）。</li>
+<li><code>git push origin &lt;本地分支名&gt;:&lt;远程分支名&gt;</code>：将本地分支推送到远程指定分支（如本地 dev 推到远程 dev：<code>git push origin dev:dev</code>）。</li>
+<li><code>git push origin --delete &lt;远程分支名&gt;</code>：删除远程仓库的指定分支。</li>
+</ul>
+<h3 id="六、撤销与回退"><a href="#六、撤销与回退" class="headerlink" title="六、撤销与回退"></a><strong>六、撤销与回退</strong></h3><ul>
+<li><code>git checkout -- &lt;文件名&gt;</code>：撤销工作区的修改（恢复到最近一次<code>commit</code>或<code>add</code>的状态，未<code>add</code>的修改会丢失）。</li>
+<li><code>git reset HEAD &lt;文件名&gt;</code>：将暂存区的修改撤销回工作区（取消<code>git add</code>的效果）。</li>
+<li><code>git reset --hard &lt;commit-id&gt;</code>：回退到指定版本（<code>commit-id</code>可通过<code>git log</code>获取，工作区和暂存区会被强制覆盖，谨慎使用）。</li>
+<li><code>git reset --soft &lt;commit-id&gt;</code>：回退到指定版本，但保留工作区和暂存区的修改（仅撤销<code>commit</code>）。</li>
+</ul>
+<h3 id="七、其他常用命令"><a href="#七、其他常用命令" class="headerlink" title="七、其他常用命令"></a><strong>七、其他常用命令</strong></h3><ul>
+<li><code>git stash</code>：将当前工作区的修改临时保存（常用于切换分支前暂存未提交的修改）。</li>
+<li><code>git stash pop</code>：恢复最近一次<code>stash</code>的内容，并删除该<code>stash</code>记录。</li>
+<li><code>git stash list</code>：查看所有<code>stash</code>记录。</li>
+<li><code>git diff</code>：查看工作区与暂存区的差异（未<code>add</code>的修改）。</li>
+<li><code>git diff --cached</code>：查看暂存区与本地仓库的差异（已<code>add</code>但未<code>commit</code>的修改）。</li>
+</ul>
+<h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><h3 id="一、文件与目录操作"><a href="#一、文件与目录操作" class="headerlink" title="一、文件与目录操作"></a><strong>一、文件与目录操作</strong></h3><ul>
+<li><code>ls</code>：列出目录内容<ul>
+<li><code>ls -l</code>：显示详细信息（权限、大小、修改时间等）</li>
+<li><code>ls -a</code>：显示所有文件（包括隐藏文件，以<code>.</code>开头）</li>
+<li><code>ls -h</code>：以人类可读格式显示大小（如 K、M）</li>
+</ul>
+</li>
+<li><code>cd &lt;目录名&gt;</code>：切换目录<ul>
+<li><code>cd ..</code>：回到上级目录</li>
+<li><code>cd ~</code>：回到当前用户的家目录</li>
+<li><code>cd -</code>：回到上一次所在目录</li>
+</ul>
+</li>
+<li><code>pwd</code>：显示当前所在目录的绝对路径</li>
+<li><code>mkdir &lt;目录名&gt;</code>：创建目录<ul>
+<li><code>mkdir -p a/b/c</code>：递归创建多级目录（如 a 下的 b 下的 c）</li>
+</ul>
+</li>
+<li><code>rmdir &lt;目录名&gt;</code>：删除空目录（非空目录需用<code>rm -r</code>）</li>
+<li><code>touch &lt;文件名&gt;</code>：创建空文件（若文件已存在，更新修改时间）</li>
+<li><code>cp &lt;源文件&gt; &lt;目标路径&gt;</code>：复制文件 &#x2F; 目录<ul>
+<li><code>cp -r &lt;源目录&gt; &lt;目标路径&gt;</code>：复制目录（递归）</li>
+<li><code>cp -i</code>：覆盖前提示确认</li>
+</ul>
+</li>
+<li><code>mv &lt;源文件&gt; &lt;目标路径&gt;</code>：移动 &#x2F; 重命名文件 &#x2F; 目录<ul>
+<li>例：<code>mv file1.txt dir1/</code>（移动到 dir1）；<code>mv oldname.txt newname.txt</code>（重命名）</li>
+</ul>
+</li>
+<li><code>rm &lt;文件名&gt;</code>：删除文件 &#x2F; 目录<ul>
+<li><code>rm -r &lt;目录名&gt;</code>：删除目录（递归，包括子文件）</li>
+<li><code>rm -f &lt;文件名&gt;</code>：强制删除（不提示）</li>
+<li><code>rm -rf &lt;目录名&gt;</code>：强制删除目录（谨慎使用，避免误删）</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、文件内容查看与编辑"><a href="#二、文件内容查看与编辑" class="headerlink" title="二、文件内容查看与编辑"></a><strong>二、文件内容查看与编辑</strong></h3><ul>
+<li><code>cat &lt;文件名&gt;</code>：查看文件全部内容（适合短文件）<ul>
+<li><code>cat -n &lt;文件名&gt;</code>：显示行号</li>
+</ul>
+</li>
+<li><code>more &lt;文件名&gt;</code>：分页查看文件（按空格翻页，<code>q</code>退出）</li>
+<li><code>less &lt;文件名&gt;</code>：更灵活的分页查看（支持上下键滚动，<code>/关键词</code>搜索，<code>q</code>退出）</li>
+<li><code>head &lt;文件名&gt;</code>：查看文件前 N 行（默认前 10 行）<ul>
+<li><code>head -n 5 &lt;文件名&gt;</code>：查看前 5 行</li>
+</ul>
+</li>
+<li><code>tail &lt;文件名&gt;</code>：查看文件后 N 行（默认后 10 行）<ul>
+<li><code>tail -n 5 &lt;文件名&gt;</code>：查看后 5 行</li>
+<li><code>tail -f &lt;文件名&gt;</code>：实时跟踪文件更新（常用于查看日志，<code>Ctrl+C</code>退出）</li>
+</ul>
+</li>
+<li><code>nano &lt;文件名&gt;</code>：简单文本编辑器（入门友好，<code>Ctrl+O</code>保存，<code>Ctrl+X</code>退出）</li>
+<li><code>vim &lt;文件名&gt;</code>：强大的文本编辑器（需学习基础操作：<code>i</code>进入编辑模式，<code>Esc</code>退出编辑，<code>:wq</code>保存退出，<code>:q!</code>强制退出不保存）</li>
+</ul>
+<h3 id="三、系统信息与资源查看"><a href="#三、系统信息与资源查看" class="headerlink" title="三、系统信息与资源查看"></a><strong>三、系统信息与资源查看</strong></h3><ul>
+<li><code>uname -a</code>：查看系统内核版本、主机名等详细信息</li>
+<li><code>hostname</code>：查看当前主机名</li>
+<li><code>date</code>：显示当前系统时间</li>
+<li><code>cal</code>：显示当月日历（<code>cal 2024</code>显示 2024 年日历）</li>
+<li><code>df -h</code>：查看磁盘分区使用情况（<code>-h</code>：人类可读格式）</li>
+<li><code>du -sh &lt;目录名&gt;</code>：查看指定目录的总大小（<code>-s</code>：汇总，<code>-h</code>：可读格式）</li>
+<li><code>free -h</code>：查看内存使用情况（<code>-h</code>：可读格式，显示总内存、已用、空闲等）</li>
+<li><code>top</code>：实时查看进程资源占用（按<code>q</code>退出，<code>P</code>按 CPU 排序，<code>M</code>按内存排序）</li>
+<li><code>htop</code>：更美观的进程监控工具（需安装，功能类似 top）</li>
+</ul>
+<h3 id="四、用户与权限管理"><a href="#四、用户与权限管理" class="headerlink" title="四、用户与权限管理"></a><strong>四、用户与权限管理</strong></h3><ul>
+<li><code>whoami</code>：查看当前登录用户</li>
+<li><code>who</code>：查看所有登录用户的信息</li>
+<li><code>useradd &lt;用户名&gt;</code>：创建新用户（需 root 权限）</li>
+<li><code>userdel -r &lt;用户名&gt;</code>：删除用户（<code>-r</code>：同时删除用户家目录）</li>
+<li><code>passwd &lt;用户名&gt;</code>：修改用户密码（root 可改任意用户，普通用户改自己）</li>
+<li><code>su &lt;用户名&gt;</code>：切换到指定用户（<code>su -</code>：切换并加载目标用户的环境变量）</li>
+<li><code>sudo &lt;命令&gt;</code>：以 root 权限执行命令（需当前用户在 sudoers 列表中）</li>
+<li><code>chmod &lt;权限&gt; &lt;文件/目录&gt;</code>：修改文件 &#x2F; 目录权限<ul>
+<li>权限格式：3 位数字（如<code>755</code>），分别代表所有者、所属组、其他用户的权限（r&#x3D;4，w&#x3D;2，x&#x3D;1）</li>
+<li>例：<code>chmod 755 file.sh</code>（所有者可读可写可执行，组和其他用户可读可执行）</li>
+<li>符号格式：<code>chmod u+x file.sh</code>（给所有者添加执行权限，u &#x3D; 所有者，g &#x3D; 组，o &#x3D; 其他）</li>
+</ul>
+</li>
+<li><code>chown &lt;用户&gt;:&lt;组&gt; &lt;文件/目录&gt;</code>：修改文件 &#x2F; 目录的所有者和所属组<ul>
+<li>例：<code>chown root:root file.txt</code>（改为 root 用户和 root 组所有）</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、进程管理"><a href="#五、进程管理" class="headerlink" title="五、进程管理"></a><strong>五、进程管理</strong></h3><ul>
+<li><code>ps</code>：查看当前终端的进程<ul>
+<li><code>ps aux</code>：查看系统所有进程（a &#x3D; 所有用户，u &#x3D; 详细信息，x &#x3D; 包括非终端进程）</li>
+<li><code>ps aux | grep &lt;关键词&gt;</code>：查找指定进程</li>
+</ul>
+</li>
+<li><code>kill &lt;进程ID&gt;</code>：终止指定进程（进程 ID 通过<code>ps</code>获取）<ul>
+<li><code>kill -9 &lt;进程ID&gt;</code>：强制终止进程（无法忽略的信号）</li>
+</ul>
+</li>
+<li><code>pkill &lt;进程名&gt;</code>：按进程名终止进程（例：<code>pkill firefox</code>关闭所有火狐进程）</li>
+<li><code>bg</code>：将前台进程切换到后台运行（需先按<code>Ctrl+Z</code>暂停前台进程）</li>
+<li><code>fg</code>：将后台进程切换到前台</li>
+</ul>
+<h3 id="六、网络操作"><a href="#六、网络操作" class="headerlink" title="六、网络操作"></a><strong>六、网络操作</strong></h3><ul>
+<li><code>ifconfig</code> 或 <code>ip addr</code>：查看网络接口信息（IP 地址、MAC 地址等）</li>
+<li><code>ping &lt;IP/域名&gt;</code>：测试与目标主机的连通性（<code>Ctrl+C</code>停止）<ul>
+<li><code>ping -c 4 &lt;IP&gt;</code>：只发送 4 个数据包</li>
+</ul>
+</li>
+<li><code>netstat -tuln</code> 或 <code>ss -tuln</code>：查看系统监听的端口（t&#x3D;TCP，u&#x3D;UDP，l &#x3D; 监听，n &#x3D; 数字显示）</li>
+<li><code>netstat -an</code>：查看所有网络连接</li>
+<li><code>wget &lt;URL&gt;</code>：下载文件（例：<code>wget https://example.com/file.zip</code>）</li>
+<li><code>curl &lt;URL&gt;</code>：发送 HTTP 请求或下载文件（例：<code>curl -O https://example.com/file.zip</code>保存文件）</li>
+<li><code>ssh &lt;用户名&gt;@&lt;IP/域名&gt;</code>：通过 SSH 登录远程服务器（例：<code>ssh root@192.168.1.1</code>）</li>
+</ul>
+<h3 id="七、压缩与解压"><a href="#七、压缩与解压" class="headerlink" title="七、压缩与解压"></a><strong>七、压缩与解压</strong></h3><ul>
+<li><code>tar</code>：打包 &#x2F; 解压文件（常用格式：.tar、.tar.gz、.tar.bz2）<ul>
+<li>打包压缩：<code>tar -zcvf 文件名.tar.gz 源文件/目录</code>（z&#x3D;gzip 压缩，c &#x3D; 创建，v &#x3D; 显示过程，f &#x3D; 指定文件名）</li>
+<li>解压：<code>tar -zxvf 文件名.tar.gz</code>（x &#x3D; 解压）</li>
+<li>解压到指定目录：<code>tar -zxvf 文件名.tar.gz -C 目标目录</code></li>
+</ul>
+</li>
+<li><code>zip 压缩包名.zip 源文件/目录</code>：创建 zip 压缩包</li>
+<li><code>unzip 压缩包名.zip</code>：解压 zip 压缩包</li>
+<li><code>unzip 压缩包名.zip -d 目标目录</code>：解压到指定目录</li>
+</ul>
+<h3 id="八、文本处理工具"><a href="#八、文本处理工具" class="headerlink" title="八、文本处理工具"></a><strong>八、文本处理工具</strong></h3><ul>
+<li><code>grep &lt;关键词&gt; &lt;文件名&gt;</code>：在文件中搜索关键词<ul>
+<li><code>grep -n &lt;关键词&gt; &lt;文件名&gt;</code>：显示匹配行的行号</li>
+<li><code>grep -r &lt;关键词&gt; &lt;目录&gt;</code>：递归搜索目录下所有文件</li>
+</ul>
+</li>
+<li><code>wc &lt;文件名&gt;</code>：统计文件的行数、单词数、字符数<ul>
+<li><code>wc -l &lt;文件名&gt;</code>：只统计行数（常用于统计日志行数）</li>
+</ul>
+</li>
+<li><code>sort &lt;文件名&gt;</code>：对文件内容排序（默认按字符顺序）<ul>
+<li><code>sort -n &lt;文件名&gt;</code>：按数字排序</li>
+<li><code>sort -r &lt;文件名&gt;</code>：倒序排序</li>
+</ul>
+</li>
+<li><code>sed &#39;s/旧内容/新内容/g&#39; &lt;文件名&gt;</code>：文本替换（例：<code>sed &#39;s/hello/world/g&#39; file.txt</code>替换所有 hello 为 world）</li>
+</ul>
+<h3 id="九、其他常用命令"><a href="#九、其他常用命令" class="headerlink" title="九、其他常用命令"></a><strong>九、其他常用命令</strong></h3><ul>
+<li><code>man &lt;命令&gt;</code>：查看命令的帮助手册（例：<code>man ls</code>查看 ls 的用法）</li>
+<li><code>find &lt;目录&gt; -name &lt;文件名&gt;</code>：在指定目录下查找文件（例：<code>find /home -name &quot;*.txt&quot;</code>查找所有 txt 文件）</li>
+<li><code>which &lt;命令&gt;</code>：查看命令的安装路径（例：<code>which python</code>）</li>
+<li><code>clear</code> 或 <code>Ctrl+L</code>：清空终端屏幕</li>
+<li><code>history</code>：查看历史命令（<code>!n</code>执行第 n 条历史命令）</li>
+</ul>
+<h2 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h2><h3 id="一、容器管理（最核心）"><a href="#一、容器管理（最核心）" class="headerlink" title="一、容器管理（最核心）"></a><strong>一、容器管理（最核心）</strong></h3><p>容器是 Docker 的运行实例，以下命令用于容器的创建、启停、查看等操作。</p>
+<ul>
+<li><code>docker run [选项] &lt;镜像名&gt;</code>：创建并启动容器（最常用命令）常用选项：<ul>
+<li><code>-d</code>：后台运行容器（守护进程模式）</li>
+<li><code>-p 主机端口:容器端口</code>：端口映射（如<code>-p 8080:80</code>将主机 8080 映射到容器 80）</li>
+<li><code>-v 主机路径:容器路径</code>：挂载主机目录 &#x2F; 文件到容器（实现数据持久化）</li>
+<li><code>--name &lt;容器名&gt;</code>：指定容器名称（否则自动生成）</li>
+<li><code>--rm</code>：容器停止后自动删除（适合临时任务）</li>
+<li><code>-it</code>：交互式运行（分配终端，常用于进入容器操作，如<code>docker run -it ubuntu /bin/bash</code>）</li>
+</ul>
+</li>
+<li><code>docker ps</code>：查看正在运行的容器<ul>
+<li><code>docker ps -a</code>：查看所有容器（包括已停止的）</li>
+<li><code>docker ps -q</code>：只显示容器 ID（常用于批量操作）</li>
+</ul>
+</li>
+<li><code>docker start &lt;容器名/ID&gt;</code>：启动已停止的容器</li>
+<li><code>docker stop &lt;容器名/ID&gt;</code>：停止运行中的容器</li>
+<li><code>docker restart &lt;容器名/ID&gt;</code>：重启容器</li>
+<li><code>docker kill &lt;容器名/ID&gt;</code>：强制终止容器（类似<code>kill -9</code>）</li>
+<li><code>docker rm &lt;容器名/ID&gt;</code>：删除已停止的容器<ul>
+<li><code>docker rm -f &lt;容器名/ID&gt;</code>：强制删除运行中的容器</li>
+<li><code>docker rm $(docker ps -aq)</code>：删除所有容器（谨慎使用）</li>
+</ul>
+</li>
+<li><code>docker exec [选项] &lt;容器名/ID&gt; &lt;命令&gt;</code>：在运行的容器中执行命令常用：<code>docker exec -it &lt;容器名&gt; /bin/bash</code>（进入容器终端，<code>exit</code>退出不影响容器运行）</li>
+<li><code>docker logs [选项] &lt;容器名/ID&gt;</code>：查看容器日志<ul>
+<li><code>-f</code>：实时跟踪日志（类似<code>tail -f</code>）</li>
+<li><code>-n 100</code>：显示最后 100 行日志</li>
+</ul>
+</li>
+<li><code>docker inspect &lt;容器名/ID&gt;</code>：查看容器详细信息（配置、网络、挂载等）</li>
+</ul>
+<h3 id="二、镜像管理"><a href="#二、镜像管理" class="headerlink" title="二、镜像管理"></a><strong>二、镜像管理</strong></h3><p>镜像是容器的 “模板”，以下命令用于镜像的获取、构建、删除等。</p>
+<ul>
+<li><code>docker pull &lt;镜像名:标签&gt;</code>：从仓库拉取镜像（默认拉取<code>latest</code>标签，如<code>docker pull nginx:1.25</code>）</li>
+<li><code>docker images</code>：查看本地所有镜像<ul>
+<li><code>docker images -q</code>：只显示镜像 ID</li>
+</ul>
+</li>
+<li><code>docker rmi &lt;镜像名/ID&gt;</code>：删除本地镜像<ul>
+<li><code>docker rmi -f &lt;镜像名/ID&gt;</code>：强制删除（即使有容器依赖）</li>
+<li><code>docker rmi $(docker images -q)</code>：删除所有镜像（谨慎使用）</li>
+</ul>
+</li>
+<li><code>docker build -t &lt;镜像名:标签&gt; &lt;Dockerfile路径&gt;</code>：根据 Dockerfile 构建镜像例：<code>docker build -t myapp:v1 .</code>（<code>.</code>表示当前目录的 Dockerfile）</li>
+<li><code>docker tag &lt;原镜像名:标签&gt; &lt;新镜像名:标签&gt;</code>：给镜像打标签（常用于推送镜像到仓库前重命名）例：<code>docker tag myapp:v1 username/myapp:v1</code>（适配仓库命名规范）</li>
+<li><code>docker push &lt;镜像名:标签&gt;</code>：将镜像推送到远程仓库（如 Docker Hub，需先<code>docker login</code>登录）</li>
+<li><code>docker save -o &lt;保存路径.tar&gt; &lt;镜像名&gt;</code>：将镜像导出为本地文件</li>
+<li><code>docker load -i &lt;镜像文件.tar&gt;</code>：从本地文件导入镜像</li>
+</ul>
+<h3 id="三、数据卷（数据持久化）"><a href="#三、数据卷（数据持久化）" class="headerlink" title="三、数据卷（数据持久化）"></a><strong>三、数据卷（数据持久化）</strong></h3><p>数据卷是独立于容器的存储区域，用于持久化容器数据（避免容器删除后数据丢失）。</p>
+<ul>
+<li><code>docker volume create &lt;卷名&gt;</code>：创建数据卷</li>
+<li><code>docker volume ls</code>：查看所有数据卷</li>
+<li><code>docker volume inspect &lt;卷名&gt;</code>：查看数据卷详细信息（如挂载路径）</li>
+<li><code>docker volume rm &lt;卷名&gt;</code>：删除数据卷</li>
+<li><code>docker volume prune</code>：删除所有未使用的数据卷</li>
+</ul>
+<h3 id="四、网络管理"><a href="#四、网络管理" class="headerlink" title="四、网络管理"></a><strong>四、网络管理</strong></h3><p>Docker 网络用于容器间通信或容器与外部网络交互。</p>
+<ul>
+<li><code>docker network ls</code>：查看所有 Docker 网络</li>
+<li><code>docker network create &lt;网络名&gt;</code>：创建自定义网络（默认桥接模式）</li>
+<li><code>docker network connect &lt;网络名&gt; &lt;容器名&gt;</code>：将容器连接到指定网络</li>
+<li><code>docker network disconnect &lt;网络名&gt; &lt;容器名&gt;</code>：断开容器与网络的连接</li>
+<li><code>docker network rm &lt;网络名&gt;</code>：删除网络</li>
+<li><code>docker network inspect &lt;网络名&gt;</code>：查看网络详细信息（包含连接的容器等）</li>
+</ul>
+<h3 id="五、Docker-Compose（多容器管理）"><a href="#五、Docker-Compose（多容器管理）" class="headerlink" title="五、Docker Compose（多容器管理）"></a><strong>五、Docker Compose（多容器管理）</strong></h3><p>用于定义和运行多容器应用（通过<code>docker-compose.yml</code>配置）。</p>
+<ul>
+<li><code>docker-compose up</code>：创建并启动所有服务（基于<code>docker-compose.yml</code>）<ul>
+<li><code>-d</code>：后台运行</li>
+<li><code>--build</code>：启动前重新构建镜像</li>
+</ul>
+</li>
+<li><code>docker-compose down</code>：停止并删除所有服务、网络（保留数据卷）</li>
+<li><code>docker-compose start/stop/restart</code>：启动 &#x2F; 停止 &#x2F; 重启所有服务</li>
+<li><code>docker-compose ps</code>：查看所有服务的容器状态</li>
+<li><code>docker-compose logs [服务名]</code>：查看服务日志（<code>-f</code>实时跟踪）</li>
+<li><code>docker-compose exec &lt;服务名&gt; &lt;命令&gt;</code>：在指定服务的容器中执行命令</li>
+</ul>
+<h3 id="六、系统与清理"><a href="#六、系统与清理" class="headerlink" title="六、系统与清理"></a><strong>六、系统与清理</strong></h3><ul>
+<li><code>docker info</code>：查看 Docker 系统信息（版本、镜像数、容器数等）</li>
+<li><code>docker version</code>：查看 Docker 客户端和服务器版本</li>
+<li><code>docker system df</code>：查看 Docker 磁盘使用情况（镜像、容器、数据卷等）</li>
+<li><code>docker system prune</code>：清理未使用的资源（停止的容器、无用镜像、未使用的网络）<ul>
+<li><code>docker system prune -a</code>：清理更彻底（包括未被任何容器引用的镜像）</li>
+</ul>
+</li>
+</ul>
+<h2 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h2><h3 id="一、基础镜像与构建上下文"><a href="#一、基础镜像与构建上下文" class="headerlink" title="一、基础镜像与构建上下文"></a><strong>一、基础镜像与构建上下文</strong></h3><h4 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a><code>FROM</code></h4><ul>
+<li><p><strong>语法</strong>：<code>FROM &lt;镜像名:标签&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：指定构建新镜像的基础镜像（所有镜像都基于其他镜像，必填指令）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">22.04</span>  <span class="comment"># 基于Ubuntu 22.04</span></span><br><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.9</span>-slim  <span class="comment"># 基于轻量Python 3.9镜像</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="二、工作目录与路径配置"><a href="#二、工作目录与路径配置" class="headerlink" title="二、工作目录与路径配置"></a><strong>二、工作目录与路径配置</strong></h3><h4 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a><code>WORKDIR</code></h4><ul>
+<li><p><strong>语法</strong>：<code>WORKDIR &lt;路径&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：设置后续指令（<code>RUN</code>&#x2F;<code>COPY</code>&#x2F;<code>CMD</code>等）的工作目录（类似<code>cd</code>，但持久化到镜像层）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app  <span class="comment"># 后续命令默认在/app目录执行</span></span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> src   <span class="comment"># 切换到/app/src（基于上一层的工作目录）</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="三、文件复制与添加"><a href="#三、文件复制与添加" class="headerlink" title="三、文件复制与添加"></a><strong>三、文件复制与添加</strong></h3><h4 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a><code>COPY</code></h4><ul>
+<li><p><strong>语法</strong>：<code>COPY &lt;宿主机源路径&gt; &lt;镜像目标路径&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：将宿主机文件 &#x2F; 目录复制到镜像中（仅复制，不自动解压）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="language-bash"> app.py /app/  <span class="comment"># 复制单个文件</span></span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> src/ /app/src/  <span class="comment"># 复制目录（包括子文件）</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a><code>ADD</code></h4><ul>
+<li><p><strong>语法</strong>：<code>ADD &lt;源路径/URL&gt; &lt;目标路径&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：类似<code>COPY</code>，但支持：① 自动解压本地压缩包（如<code>.tar</code>&#x2F;<code>.gz</code>）；② 通过 URL 下载文件（不推荐，建议用<code>RUN wget</code>）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ADD</span><span class="language-bash"> archive.tar.gz /app/  <span class="comment"># 复制并解压压缩包到/app</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="四、构建时执行命令"><a href="#四、构建时执行命令" class="headerlink" title="四、构建时执行命令"></a><strong>四、构建时执行命令</strong></h3><h4 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a><code>RUN</code></h4><ul>
+<li><p>语法：</p>
+<ul>
+<li>shell 格式：<code>RUN &lt;命令&gt;</code>（如终端执行）</li>
+<li>exec 格式：<code>RUN [&quot;可执行文件&quot;, &quot;参数1&quot;]</code>（推荐，避免 shell 解析问题）</li>
+</ul>
+</li>
+<li><p><strong>功能</strong>：在镜像构建过程中执行命令（如安装依赖、编译代码），每行会生成新镜像层。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 合并命令减少层数（推荐）</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get install -y nginx &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get clean  <span class="comment"># 清理缓存减小体积</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> [<span class="string">&quot;pip&quot;</span>, <span class="string">&quot;install&quot;</span>, <span class="string">&quot;-r&quot;</span>, <span class="string">&quot;requirements.txt&quot;</span>]  <span class="comment"># exec格式</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="五、环境配置"><a href="#五、环境配置" class="headerlink" title="五、环境配置"></a><strong>五、环境配置</strong></h3><h4 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a><code>ENV</code></h4><ul>
+<li><p><strong>语法</strong>：<code>ENV &lt;键&gt;=&lt;值&gt; ...</code></p>
+</li>
+<li><p><strong>功能</strong>：定义环境变量（构建时和容器运行时均有效）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ENV</span> APP_PORT=<span class="number">8080</span>  <span class="comment"># 单个变量</span></span><br><span class="line"><span class="keyword">ENV</span> DB_HOST=localhost DB_PORT=<span class="number">3306</span>  <span class="comment"># 多个变量</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="ARG"><a href="#ARG" class="headerlink" title="ARG"></a><code>ARG</code></h4><ul>
+<li><p><strong>语法</strong>：<code>ARG &lt;变量名&gt;=&lt;默认值&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：定义构建时临时变量（仅<code>docker build</code>时有效，容器运行时不可见），可通过<code>--build-arg</code>覆盖。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ARG</span> VERSION=<span class="number">1.0</span></span><br><span class="line"><span class="comment"># 构建时覆盖：docker build --build-arg VERSION=2.0 -t myapp .</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="六、容器运行配置"><a href="#六、容器运行配置" class="headerlink" title="六、容器运行配置"></a><strong>六、容器运行配置</strong></h3><h4 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a><code>EXPOSE</code></h4><ul>
+<li><p><strong>语法</strong>：<code>EXPOSE &lt;端口1&gt; &lt;端口2&gt; ...</code></p>
+</li>
+<li><p><strong>功能</strong>：声明容器运行时预期监听的端口（仅文档说明，需<code>docker run -p</code>手动映射）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span> <span class="number">443</span>  <span class="comment"># 声明监听80和443端口</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a><code>VOLUME</code></h4><ul>
+<li><p><strong>语法</strong>：<code>VOLUME [&quot;&lt;路径1&gt;&quot;, &quot;&lt;路径2&gt;&quot;]</code></p>
+</li>
+<li><p><strong>功能</strong>：声明数据卷（指定容器内需要持久化的目录，避免数据随容器删除丢失）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">VOLUME</span><span class="language-bash"> [<span class="string">&quot;/data&quot;</span>]  <span class="comment"># 容器内/data目录会被挂载为数据卷</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="USER"><a href="#USER" class="headerlink" title="USER"></a><code>USER</code></h4><ul>
+<li><p><strong>语法</strong>：<code>USER &lt;用户名/UID&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：指定后续指令的执行用户（默认<code>root</code>，切换非 root 用户提高安全性）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> useradd appuser  <span class="comment"># 先创建用户</span></span></span><br><span class="line"><span class="keyword">USER</span> appuser  <span class="comment"># 后续命令以appuser身份执行</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="七、容器启动命令"><a href="#七、容器启动命令" class="headerlink" title="七、容器启动命令"></a><strong>七、容器启动命令</strong></h3><h4 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a><code>CMD</code></h4><ul>
+<li><p>语法：</p>
+<ul>
+<li>shell 格式：<code>CMD &lt;命令&gt;</code></li>
+<li>exec 格式：<code>CMD [&quot;可执行文件&quot;, &quot;参数1&quot;]</code>（推荐）</li>
+</ul>
+</li>
+<li><p><strong>功能</strong>：指定容器启动时默认执行的命令（一个 Dockerfile 仅最后一个<code>CMD</code>生效，可被<code>docker run</code>后的命令覆盖）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;nginx&quot;</span>, <span class="string">&quot;-g&quot;</span>, <span class="string">&quot;daemon off;&quot;</span>]  <span class="comment"># 启动nginx（前台运行）</span></span></span><br><span class="line"><span class="comment"># 运行时覆盖：docker run myimage /bin/bash（进入bash）</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a><code>ENTRYPOINT</code></h4><ul>
+<li><p>语法：</p>
+<ul>
+<li>shell 格式：<code>ENTRYPOINT &lt;命令&gt;</code></li>
+<li>exec 格式：<code>ENTRYPOINT [&quot;可执行文件&quot;, &quot;参数1&quot;]</code>（推荐）</li>
+</ul>
+</li>
+<li><p><strong>功能</strong>：定义容器启动的 “入口程序”（不会被<code>docker run</code>后的命令覆盖，<code>CMD</code>可作为其参数）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;echo&quot;</span>]  <span class="comment"># 固定入口为echo</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;hello&quot;</span>]  <span class="comment"># 默认参数为hello</span></span></span><br><span class="line"><span class="comment"># 运行时：docker run myimage world → 输出&quot;world&quot;（CMD参数被替换）</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="八、其他辅助指令"><a href="#八、其他辅助指令" class="headerlink" title="八、其他辅助指令"></a><strong>八、其他辅助指令</strong></h3><h4 id="LABEL"><a href="#LABEL" class="headerlink" title="LABEL"></a><code>LABEL</code></h4><ul>
+<li><p><strong>语法</strong>：<code>LABEL &lt;键&gt;=&lt;值&gt; ...</code></p>
+</li>
+<li><p><strong>功能</strong>：为镜像添加元数据（如作者、描述），便于管理。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> maintainer=<span class="string">&quot;dev@example.com&quot;</span> description=<span class="string">&quot;My App Image&quot;</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a><code>ONBUILD</code></h4><ul>
+<li><p><strong>语法</strong>：<code>ONBUILD &lt;指令&gt;</code></p>
+</li>
+<li><p><strong>功能</strong>：当当前镜像被作为基础镜像时，触发指定指令（用于 “父镜像” 定义子镜像的通用操作）。</p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 父镜像中定义：子镜像构建时自动复制app代码</span></span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">COPY</span><span class="language-bash"> app/ /app/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">北川</div><div class="post-copyright__author_desc">Believe in yourself</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://gukeyang.github.io/posts/211c5c1e.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://gukeyang.github.io/posts/211c5c1e.html')">工具命令</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div><div class="reward-link mode"><a class="reward-link-button" href="/wecaht/"><i class="anzhiyufont anzhiyu-icon-plant-fill"></i>运营模式与责任</a></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://gukeyang.github.io/posts/211c5c1e.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=工具命令&amp;url=https://gukeyang.github.io/posts/211c5c1e.html&amp;pic=https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=2f392bd0-33ea-48ed-ad11-b97812f2b595" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gukeyang.github.io" target="_blank">北川的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Linux/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Linux<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Docker/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Docker<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Git/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Git<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=d0373d96-8ded-1918-75db-bc79c24292e2" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/fe3c2cd2.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=f5e7a396-b897-1dc8-6b17-1c570debcbea" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">分布式</div></div></a></div><div class="next-post pull-right"><a href="/posts/49aedbef.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=d0373d96-8ded-1918-75db-bc79c24292e2" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">如何设计一个秒杀场景？</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/zc998800/cdn/face/gif/m17.gif" ait="status"/></div></div><div class="author-info__description">路慢其修远兮 吾将上下而求索</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">北川</h1><div class="author-info__desc">Believe in yourself</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/gukeyang" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/1542898061" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://s2.loli.net/2023/10/19/vNio4QGBSX9x5lO.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">Git命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">一、初始化与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%8E%E6%9A%82%E5%AD%98%E5%8C%BA%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">二、工作区与暂存区操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%8F%90%E4%BA%A4%E4%B8%8E%E6%97%A5%E5%BF%97"><span class="toc-number">1.3.</span> <span class="toc-text">三、提交与日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">1.4.</span> <span class="toc-text">四、分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">1.5.</span> <span class="toc-text">五、远程仓库操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E9%80%80"><span class="toc-number">1.6.</span> <span class="toc-text">六、撤销与回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.7.</span> <span class="toc-text">七、其他常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">Linux命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">一、文件与目录操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E7%9C%8B%E4%B8%8E%E7%BC%96%E8%BE%91"><span class="toc-number">2.2.</span> <span class="toc-text">二、文件内容查看与编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%B5%84%E6%BA%90%E6%9F%A5%E7%9C%8B"><span class="toc-number">2.3.</span> <span class="toc-text">三、系统信息与资源查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">四、用户与权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">五、进程管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C"><span class="toc-number">2.6.</span> <span class="toc-text">六、网络操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B"><span class="toc-number">2.7.</span> <span class="toc-text">七、压缩与解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-number">2.8.</span> <span class="toc-text">八、文本处理工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.9.</span> <span class="toc-text">九、其他常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">Docker命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86%EF%BC%88%E6%9C%80%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">一、容器管理（最核心）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">二、镜像管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%8D%B7%EF%BC%88%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">三、数据卷（数据持久化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86"><span class="toc-number">3.4.</span> <span class="toc-text">四、网络管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81Docker-Compose%EF%BC%88%E5%A4%9A%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">五、Docker Compose（多容器管理）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%B8%85%E7%90%86"><span class="toc-number">3.6.</span> <span class="toc-text">六、系统与清理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DockerFile"><span class="toc-number">4.</span> <span class="toc-text">DockerFile</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E4%B8%8E%E6%9E%84%E5%BB%BA%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">4.1.</span> <span class="toc-text">一、基础镜像与构建上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FROM"><span class="toc-number">4.1.1.</span> <span class="toc-text">FROM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%B7%AF%E5%BE%84%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">二、工作目录与路径配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#WORKDIR"><span class="toc-number">4.2.1.</span> <span class="toc-text">WORKDIR</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E4%B8%8E%E6%B7%BB%E5%8A%A0"><span class="toc-number">4.3.</span> <span class="toc-text">三、文件复制与添加</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#COPY"><span class="toc-number">4.3.1.</span> <span class="toc-text">COPY</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ADD"><span class="toc-number">4.3.2.</span> <span class="toc-text">ADD</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%9E%84%E5%BB%BA%E6%97%B6%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-number">4.4.</span> <span class="toc-text">四、构建时执行命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RUN"><span class="toc-number">4.4.1.</span> <span class="toc-text">RUN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">4.5.</span> <span class="toc-text">五、环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ENV"><span class="toc-number">4.5.1.</span> <span class="toc-text">ENV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ARG"><span class="toc-number">4.5.2.</span> <span class="toc-text">ARG</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">4.6.</span> <span class="toc-text">六、容器运行配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EXPOSE"><span class="toc-number">4.6.1.</span> <span class="toc-text">EXPOSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VOLUME"><span class="toc-number">4.6.2.</span> <span class="toc-text">VOLUME</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#USER"><span class="toc-number">4.6.3.</span> <span class="toc-text">USER</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">4.7.</span> <span class="toc-text">七、容器启动命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CMD"><span class="toc-number">4.7.1.</span> <span class="toc-text">CMD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ENTRYPOINT"><span class="toc-number">4.7.2.</span> <span class="toc-text">ENTRYPOINT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%85%B6%E4%BB%96%E8%BE%85%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-number">4.8.</span> <span class="toc-text">八、其他辅助指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LABEL"><span class="toc-number">4.8.1.</span> <span class="toc-text">LABEL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ONBUILD"><span class="toc-number">4.8.2.</span> <span class="toc-text">ONBUILD</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/49aedbef.html" title="如何设计一个秒杀场景？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=d0373d96-8ded-1918-75db-bc79c24292e2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何设计一个秒杀场景？"/></a><div class="content"><a class="title" href="/posts/49aedbef.html" title="如何设计一个秒杀场景？">如何设计一个秒杀场景？</a><time datetime="2025-11-01T09:41:03.000Z" title="发表于 2025-11-01 17:41:03">2025-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/211c5c1e.html" title="工具命令"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=2f392bd0-33ea-48ed-ad11-b97812f2b595" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工具命令"/></a><div class="content"><a class="title" href="/posts/211c5c1e.html" title="工具命令">工具命令</a><time datetime="2025-11-01T09:41:03.000Z" title="发表于 2025-11-01 17:41:03">2025-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fe3c2cd2.html" title="分布式"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=f5e7a396-b897-1dc8-6b17-1c570debcbea" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式"/></a><div class="content"><a class="title" href="/posts/fe3c2cd2.html" title="分布式">分布式</a><time datetime="2025-11-01T01:50:36.000Z" title="发表于 2025-11-01 09:50:36">2025-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fec99276.html" title="消息队列"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/g4UkwyDri9BWZtE.jpg?_r_=ca0f0085-c76b-b460-1bbd-516b99f821e8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="消息队列"/></a><div class="content"><a class="title" href="/posts/fec99276.html" title="消息队列">消息队列</a><time datetime="2025-10-31T05:50:36.000Z" title="发表于 2025-10-31 13:50:36">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a0d0ac1c.html" title="Mybatis面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/wfbr2eNcL1VvXIn.png?_r_=9f73e914-1418-a81d-00c3-4cc2d3cc9b8b" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mybatis面试题"/></a><div class="content"><a class="title" href="/posts/a0d0ac1c.html" title="Mybatis面试题">Mybatis面试题</a><time datetime="2025-10-30T04:31:36.000Z" title="发表于 2025-10-30 12:31:36">2025-10-30</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E4%B8%8A%E7%8F%AD%E6%91%B8%E9%B1%BC-brightgreen?style=social&amp;logo=appveyor&amp;logoColor=blue&amp;logoSize=auto&amp;label=%E5%8C%97%E5%B7%9D&amp;labelColor=white&amp;color=white" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2021 - 2025 By <a class="footer-bar-link" href="/" title="北川" target="_blank">北川</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://gukeyang.github.io" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 0.88rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 0.88rem;">JVM调优<sup>1</sup></a><a href="/tags/Kafka/" style="font-size: 0.88rem;">Kafka<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 0.88rem;">Mybatis<sup>1</sup></a><a href="/tags/RabbitMQ/" style="font-size: 0.88rem;">RabbitMQ<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 0.88rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 0.88rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/nacos/" style="font-size: 0.88rem;">nacos<sup>1</sup></a><a href="/tags/seata/" style="font-size: 0.88rem;">seata<sup>1</sup></a><a href="/tags/sentinel/" style="font-size: 0.88rem;">sentinel<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">复习<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 0.88rem;">并发<sup>1</sup></a><a href="/tags/%E5%BA%93%E5%AD%98/" style="font-size: 0.88rem;">库存<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 0.88rem;">电商<sup>1</sup></a><a href="/tags/%E7%A7%92%E6%9D%80/" style="font-size: 0.88rem;">秒杀<sup>1</sup></a><a href="/tags/%E8%AE%A2%E5%8D%95/" style="font-size: 0.88rem;">订单<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96/" style="font-size: 0.88rem;">超卖<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 0.88rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="anzhiyufont anzhiyu-icon-comment-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8152976493&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2021 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 北川 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("04/01/2023 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      img.src = "https://img.shields.io/badge/%E4%B8%8B%E7%8F%AD%E5%93%88%E7%9A%AE-brightgreen?style=social&amp;logo=appveyor&amp;logoColor=blue&amp;logoSize=auto&amp;label=%E5%8C%97%E5%B7%9D&amp;labelColor=white&amp;color=white";
+      img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+      img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+      appKey: 'TjKeHNK7GJrGTYuKYzGzh8yg',
+      avatar: 'mp',
+      serverURLs: '',
+      emojiMaps: {"2023":"https://i0.hdslb.com/bfs/emote/fa6dda8b876ed38609de38aa604be5ad109b8591.png","14周年":"https://i0.hdslb.com/bfs/emote/53148f85bb7e2d8bada8cea57ee4b1f36f48237d.png","兔年":"https://i0.hdslb.com/bfs/emote/9cb6ee2c42986c56ec361d21d5ccbd096aefab0a.png","脱单doge":"https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png","微笑":"https://i0.hdslb.com/bfs/emote/685612eadc33f6bc233776c6241813385844f182.png","微笑-春节":"https://i0.hdslb.com/bfs/emote/f32e5d367c81fbb88b54d7fe46366de04fe4f38f.png","微笑-愚人节":"https://i0.hdslb.com/bfs/emote/774d19d2416eb5b30ac66b02ac580b1b0ca92a80.png","微笑-愚人节2":"https://i0.hdslb.com/bfs/emote/ff45294fbd469ed51eab492e15b8bc7f8e755f14.png","口罩":"https://i0.hdslb.com/bfs/emote/3ad2f66b151496d2a5fb0a8ea75f32265d778dd3.png","doge":"https://i0.hdslb.com/bfs/emote/3087d273a78ccaff4bb1e9972e2ba2a7583c9f11.png","doge-春节":"https://i0.hdslb.com/bfs/emote/feb9abf68df628803ff69a244e744470c2b7e136.png","doge-圣诞":"https://i0.hdslb.com/bfs/emote/1afb5eb96846e0876071eeecb47be95dbf55f08d.png","doge-愚人节":"https://i0.hdslb.com/bfs/emote/8ab62b33061d20bc27beec798a2f73c639e8bb6e.png","doge-愚人节2":"https://i0.hdslb.com/bfs/emote/94460b4e92163c4ca88684b1830ca182d56ddea7.png","妙啊":"https://i0.hdslb.com/bfs/emote/b4cb77159d58614a9b787b91b1cd22a81f383535.png","妙啊-春节":"https://i0.hdslb.com/bfs/emote/692f196da6a623a1634ea305618d37709c2c87f0.png","妙啊-圣诞":"https://i0.hdslb.com/bfs/emote/1cdb10e4b6c6743a1ec96f1579e3ef3045a8f225.png","妙啊-愚人节":"https://i0.hdslb.com/bfs/emote/5675a5d2f3e7fb6b29db0ca8c7703237a18c4271.png","妙啊-愚人节2":"https://i0.hdslb.com/bfs/emote/7b55232e0733afe509d4ac6282d7e604f6f2064f.png","OK":"https://i0.hdslb.com/bfs/emote/4683fd9ffc925fa6423110979d7dcac5eda297f4.png","OK-春节":"https://i0.hdslb.com/bfs/emote/ad17fceba45996104c8b8e2e3f4efd7e2f588368.png","OK-圣诞":"https://i0.hdslb.com/bfs/emote/75d1c99cce001d6d103a8fd406616be9f51621ab.png","OK-愚人节":"https://i0.hdslb.com/bfs/emote/76cc9da7f4a054cb02aad900f0ca3d3fda9c9667.png","OK-愚人节2":"https://i0.hdslb.com/bfs/emote/4ab30d0c384aa7fb112d6078777d46f73797869b.png","星星眼":"https://i0.hdslb.com/bfs/emote/63c9d1a31c0da745b61cdb35e0ecb28635675db2.png","星星眼-春节":"https://i0.hdslb.com/bfs/emote/f6f01068ac7f6548779b0e16daa61974f9299b17.png","星星眼-圣诞":"https://i0.hdslb.com/bfs/emote/195641c30c55f34f9cd82c5e5c32d66a425c7723.png","星星眼-愚人节":"https://i0.hdslb.com/bfs/emote/270e85c95c1ad919848b415601ed3a879bd08127.png","星星眼-愚人节2":"https://i0.hdslb.com/bfs/emote/99471a235923d29c00fa9fc46b82e74196f99722.png","辣眼睛":"https://i0.hdslb.com/bfs/emote/35d62c496d1e4ea9e091243fa812866f5fecc101.png","辣眼睛-春节":"https://i0.hdslb.com/bfs/emote/1ad7c9d351bd64332cc8520c165ee0b32a6e82fa.png","辣眼睛-圣诞":"https://i0.hdslb.com/bfs/emote/8080adfe5acdfd0b6b09bd91db24ea7334ac7b44.png","辣眼睛-愚人节":"https://i0.hdslb.com/bfs/emote/65ed9509df4d509a1cdf22e75a6d3b708f4e9afb.png","辣眼睛-愚人节2":"https://i0.hdslb.com/bfs/emote/60fcc72634bc1d2ad612a18b46256d5d50804ca2.png","吃瓜":"https://i0.hdslb.com/bfs/emote/4191ce3c44c2b3df8fd97c33f85d3ab15f4f3c84.png","吃瓜-春节":"https://i0.hdslb.com/bfs/emote/fbd58fe2465d84d32f37800af0fe6f25711ef397.png","吃瓜-圣诞":"https://i0.hdslb.com/bfs/emote/aa6a3022e47b441c7f84d02cacc063a728a561e0.png","吃瓜-愚人节":"https://i0.hdslb.com/bfs/emote/f05344578512ef18878de01d188657fbf81d31c8.png","吃瓜-愚人节2":"https://i0.hdslb.com/bfs/emote/39a3f88f2232bdd8b8116d952060c72fcf093b55.png","滑稽":"https://i0.hdslb.com/bfs/emote/d15121545a99ac46774f1f4465b895fe2d1411c3.png","滑稽-春节":"https://i0.hdslb.com/bfs/emote/e56b466b43dd6930756d5caf4c22bef4f963dd35.png","滑稽-圣诞":"https://i0.hdslb.com/bfs/emote/5874276ea716d0e9797f827dcfca4332acf8f0de.png","滑稽-愚人节":"https://i0.hdslb.com/bfs/emote/e8c1b263949c2617e6395b190d185b2f8cdf0747.png","滑稽-愚人节2":"https://i0.hdslb.com/bfs/emote/1d44d848b82fe0fcbd4d6f23e3c4a26a0fe4f40f.png","呲牙":"https://i0.hdslb.com/bfs/emote/b5a5898491944a4268360f2e7a84623149672eb6.png","呲牙-春节":"https://i0.hdslb.com/bfs/emote/6ae3b1008d2fee7e15b5eb447b2ccff18e664b88.png","呲牙-圣诞":"https://i0.hdslb.com/bfs/emote/ae4395c1e29e9a2db0c9ccc4c0db05c414816e68.png","呲牙-愚人节":"https://i0.hdslb.com/bfs/emote/299e5867bb79f42d8553023909f42e89707cb500.png","呲牙-愚人节2":"https://i0.hdslb.com/bfs/emote/3688061f6a90c8559dc4663f4d4971ea27d0c014.png","打call":"https://i0.hdslb.com/bfs/emote/431432c43da3ee5aab5b0e4f8931953e649e9975.png","打call-春节":"https://i0.hdslb.com/bfs/emote/bf990016e43b7111cab4566dea194ba837a1a88f.png","打call-圣诞":"https://i0.hdslb.com/bfs/emote/2b04dd2d0e55d978ee485e1f7f3c5e355493ab78.png","打call-愚人节":"https://i0.hdslb.com/bfs/emote/49240d8643d7702519fc4cc468e0003a7623c0e3.png","打call-愚人节2":"https://i0.hdslb.com/bfs/emote/7ffaa98f9f49489022815e38dbcb1a04677a8f13.png","歪嘴":"https://i0.hdslb.com/bfs/emote/4384050fbab0586259acdd170b510fe262f08a17.png","歪嘴-愚人节":"https://i0.hdslb.com/bfs/emote/6cc4c091d3f2cc540f64d8f10ffe516fd2f4ea2b.png","歪嘴-愚人节2":"https://i0.hdslb.com/bfs/emote/f24a5cd8e8400a3ab850ce68ac495fde66a03b64.png","调皮":"https://i0.hdslb.com/bfs/emote/8290b7308325e3179d2154327c85640af1528617.png","调皮-愚人节":"https://i0.hdslb.com/bfs/emote/a09481ceb0644f799d94805446fd52dce775b022.png","调皮-愚人节2":"https://i0.hdslb.com/bfs/emote/0da0b2049a4f7b310e3992afbcb7367b81707824.png","豹富":"https://i0.hdslb.com/bfs/emote/3d1dbe52ea16e12ff7b1c371196f728a4097fb33.png","嗑瓜子":"https://i0.hdslb.com/bfs/emote/28a91da1685d90124cfeead74622e1ebb417c0eb.png","嗑瓜子-春节":"https://i0.hdslb.com/bfs/emote/d2f9910f2d6e52ead3bf1ee29754cd1176f5fc2e.png","笑哭":"https://i0.hdslb.com/bfs/emote/c3043ba94babf824dea03ce500d0e73763bf4f40.png","捂脸-圣诞":"https://i0.hdslb.com/bfs/emote/9af59557383770c398daac81583e6c4d27d83da7.png","笑哭-春节":"https://i0.hdslb.com/bfs/emote/29ce59fb7f14351d195609ef297d30e336bdb240.png","藏狐":"https://i0.hdslb.com/bfs/emote/ba0937ef6f3ccca85e2e0047e6263f3b4da37201.png","脸红":"https://i0.hdslb.com/bfs/emote/0922c375da40e6b69002bd89b858572f424dcfca.png","脸红-旧":"https://i0.hdslb.com/bfs/emote/50cb2606c285614f5786bd387c4f00dff923c82b.png","给心心":"https://i0.hdslb.com/bfs/emote/1597302b98827463f5b75c7cac1f29ea6ce572c4.png","嘟嘟":"https://i0.hdslb.com/bfs/emote/abd7404537d8162720ccbba9e0a8cdf75547e07a.png","哦呼":"https://i0.hdslb.com/bfs/emote/362bded07ea5434886271d23fa25f5d85d8af06c.png","喜欢":"https://i0.hdslb.com/bfs/emote/8a10a4d73a89f665feff3d46ca56e83dc68f9eb8.png","酸了":"https://i0.hdslb.com/bfs/emote/92b1c8cbceea3ae0e8e32253ea414783e8ba7806.png","嫌弃":"https://i0.hdslb.com/bfs/emote/de4c0783aaa60ec03de0a2b90858927bfad7154b.png","害羞":"https://i0.hdslb.com/bfs/emote/9d2ec4e1fbd6cb1b4d12d2bbbdd124ccb83ddfda.png","大哭":"https://i0.hdslb.com/bfs/emote/2caafee2e5db4db72104650d87810cc2c123fc86.png","疑惑":"https://i0.hdslb.com/bfs/emote/b7840db4b1f9f4726b7cb23c0972720c1698d661.png","喜极而泣":"https://i0.hdslb.com/bfs/emote/485a7e0c01c2d70707daae53bee4a9e2e31ef1ed.png","笑":"https://i0.hdslb.com/bfs/emote/81edf17314cea3b48674312b4364df44d5c01f17.png","偷笑":"https://i0.hdslb.com/bfs/emote/6c49d226e76c42cd8002abc47b3112bc5a92f66a.png","惊讶":"https://i0.hdslb.com/bfs/emote/f8e9a59cad52ae1a19622805696a35f0a0d853f3.png","捂脸":"https://i0.hdslb.com/bfs/emote/6921bb43f0c634870b92f4a8ad41dada94a5296d.png","阴险":"https://i0.hdslb.com/bfs/emote/ba8d5f8e7d136d59aab52c40fd3b8a43419eb03c.png","呆":"https://i0.hdslb.com/bfs/emote/33ad6000d9f9f168a0976bc60937786f239e5d8c.png","抠鼻":"https://i0.hdslb.com/bfs/emote/cb89184c97e3f6d50acfd7961c313ce50360d70f.png","大笑":"https://i0.hdslb.com/bfs/emote/ca94ad1c7e6dac895eb5b33b7836b634c614d1c0.png","惊喜":"https://i0.hdslb.com/bfs/emote/0afecaf3a3499479af946f29749e1a6c285b6f65.png","无语":"https://i0.hdslb.com/bfs/emote/44667b7d9349957e903b1b62cb91fb9b13720f04.png","点赞":"https://i0.hdslb.com/bfs/emote/1a67265993913f4c35d15a6028a30724e83e7d35.png","鼓掌":"https://i0.hdslb.com/bfs/emote/895d1fc616b4b6c830cf96012880818c0e1de00d.png","尴尬":"https://i0.hdslb.com/bfs/emote/cb321684ed5ce6eacdc2699092ab8fe7679e4fda.png","灵魂出窍":"https://i0.hdslb.com/bfs/emote/43d3db7d97343c01b47e22cfabeca84b4251f35a.png","委屈":"https://i0.hdslb.com/bfs/emote/d2f26cbdd6c96960320af03f5514c5b524990840.png","傲娇":"https://i0.hdslb.com/bfs/emote/010540d0f61220a0db4922e4a679a1d8eca94f4e.png","疼":"https://i0.hdslb.com/bfs/emote/905fd9a99ec316e353b9bd4ecd49a5f0a301eabf.png","冷":"https://i0.hdslb.com/bfs/emote/cb0ebbd0668640f07ebfc0e03f7a18a8cd00b4ed.png","热":"https://i0.hdslb.com/bfs/emote/4e58a2a6f5f1580ac33df2d2cf7ecad7d9ab3635.png","生病":"https://i0.hdslb.com/bfs/emote/0f25ce04ae1d7baf98650986454c634f6612cb76.png","捂眼":"https://i0.hdslb.com/bfs/emote/c5c6d6982e1e53e478daae554b239f2b227b172b.png","嘘声":"https://i0.hdslb.com/bfs/emote/e64af664d20716e090f10411496998095f62f844.png","思考":"https://i0.hdslb.com/bfs/emote/cfa9b7e89e4bfe04bbcd34ccb1b0df37f4fa905c.png","再见":"https://i0.hdslb.com/bfs/emote/fc510306bae26c9aec7e287cdf201ded27b065b9.png","翻白眼":"https://i0.hdslb.com/bfs/emote/eba54707c7168925b18f6f8b1f48d532fe08c2b1.png","哈欠":"https://i0.hdslb.com/bfs/emote/888d877729cbec444ddbd1cf4c9af155a7a06086.png","奋斗":"https://i0.hdslb.com/bfs/emote/bb2060c15dba7d3fd731c35079d1617f1afe3376.png","墨镜":"https://i0.hdslb.com/bfs/emote/3a03aebfc06339d86a68c2d893303b46f4b85771.png","难过":"https://i0.hdslb.com/bfs/emote/a651db36701610aa70a781fa98c07c9789b11543.png","撇嘴":"https://i0.hdslb.com/bfs/emote/531863568e5668c5ac181d395508a0eeb1f0cda4.png","抓狂":"https://i0.hdslb.com/bfs/emote/4c87afff88c22439c45b79e9d2035d21d5622eba.png","生气":"https://i0.hdslb.com/bfs/emote/3195714219c4b582a4fb02033dd1519913d0246d.png","水稻":"https://i0.hdslb.com/bfs/emote/d530fcaa5100ba12a17a79b55bad342d530c54e3.png","奶茶干杯":"https://i0.hdslb.com/bfs/emote/d5a491990be551ce69f9660da948050df4eab331.png","汤圆":"https://i0.hdslb.com/bfs/emote/93609633a9d194cf336687eb19c01dca95bde719.png","锦鲤":"https://i0.hdslb.com/bfs/emote/643d6c19c8164ffd89e3e9cdf093cf5d773d979c.png","锦鲤-愚人节2":"https://i0.hdslb.com/bfs/emote/51b05d4c678f3880499f1cf2c5742c334cdd0a72.png","福到了":"https://i0.hdslb.com/bfs/emote/5de5373d354c373cf1617b6b836f3a8d53c5a655.png","鸡腿":"https://i0.hdslb.com/bfs/emote/c7860392815d345fa69c4f00ef18d67dccfbd574.png","雪花":"https://i0.hdslb.com/bfs/emote/a41813c4edf8782047e172c884ebd4507ce5e449.png","视频卫星":"https://i0.hdslb.com/bfs/emote/dce6fc7d6dfeafff01241924db60f8251cca5307.png","干杯":"https://i0.hdslb.com/bfs/emote/8da12d5f55a2c7e9778dcc05b40571979fe208e6.png","黑洞":"https://i0.hdslb.com/bfs/emote/e90ec4c799010f25391179118ccd9f66b3b279ba.png","黑洞2":"https://i0.hdslb.com/bfs/emote/c4e9f0e3f35961d5037cb071b16ddba2170b262c.png","爱心":"https://i0.hdslb.com/bfs/emote/ed04066ea7124106d17ffcaf75600700e5442f5c.png","胜利":"https://i0.hdslb.com/bfs/emote/b49fa9f4b1e7c3477918153b82c60b114d87347c.png","加油":"https://i0.hdslb.com/bfs/emote/c7aaeacb21e107292d3bb053e5abde4a4459ed30.png","抱拳":"https://i0.hdslb.com/bfs/emote/89516218158dbea18ab78e8873060bf95d33bbbe.png","响指":"https://i0.hdslb.com/bfs/emote/1b5c53cf14336903e1d2ae3527ca380a1256a077.png","保佑":"https://i0.hdslb.com/bfs/emote/fafe8d3de0dc139ebe995491d2dac458a865fb30.png","福":"https://i0.hdslb.com/bfs/emote/802429a301ac5b35a0480d9526a070ce67cd8097.png","支持":"https://i0.hdslb.com/bfs/emote/3c210366a5585706c09d4c686a9d942b39feeb50.png","拥抱":"https://i0.hdslb.com/bfs/emote/41780a4254750cdaaccb20735730a36044e98ef3.png","跪了":"https://i0.hdslb.com/bfs/emote/f2b3aee7e521de7799d4e3aa379b01be032698ac.png","怪我咯":"https://i0.hdslb.com/bfs/emote/07cc6077f7f7d75b8d2c722dd9d9828a9fb9e46d.png","老鼠":"https://i0.hdslb.com/bfs/emote/8e6fb491eb1bb0d5862e7ec8ccf9a3da12b6c155.png","牛年":"https://i0.hdslb.com/bfs/emote/9275275ff1f2659310648221107d20bc4970f106.png","三星堆":"https://i0.hdslb.com/bfs/emote/fc7dadaa6986e75b813aa26f3eff3281d5f1a6d1.png","桃源-给花花":"https://i0.hdslb.com/bfs/emote/085d41d0fa25453b58fdc87dc2df538183fea11e.png","桃源-缘分":"https://i0.hdslb.com/bfs/emote/cf1c441507689342713623965035f9bed72b1b17.png","桃源-傲娇":"https://i0.hdslb.com/bfs/emote/ce8314c9c2cfdbe235c239c28b819698e29a02d3.png","桃源-欢呼":"https://i0.hdslb.com/bfs/emote/1f439878d8160bd64a4464904064a10df880c921.png","桃源-乖巧":"https://i0.hdslb.com/bfs/emote/57d087b6437002c2ca9e225dcac0ef226d1f2654.png","洛天依":"https://i0.hdslb.com/bfs/emote/9fe06f3594d9afaf4ee2b74770f1c3086ae0ba11.png","坎公骑冠剑-吃鸡":"https://i0.hdslb.com/bfs/emote/c4248a7b6ab326d66c83fd1fb58f1a50f99df332.png","坎公骑冠剑-钻石":"https://i0.hdslb.com/bfs/emote/0b97c7e50e0cc963370e62fbb9b55f51bbe7f8ab.png","坎公骑冠剑-无语":"https://i0.hdslb.com/bfs/emote/80eba0ce64c3fc1279b4daede2f1979cb2380e78.png","来古-沉思":"https://i0.hdslb.com/bfs/emote/4ee07ff03266d62b246be0b950bebb2abf3d997c.png","来古-呆滞":"https://i0.hdslb.com/bfs/emote/9a70b365e523f2379f395031ceefcebb75a45903.png","来古-疑问":"https://i0.hdslb.com/bfs/emote/032fdc0d9d9fe6334776f6c39518a959b73b98f4.png","来古-震撼":"https://i0.hdslb.com/bfs/emote/8b40f228675602a317d32007de6b795c101135ec.png","来古-注意":"https://i0.hdslb.com/bfs/emote/4b671ba32a2581cf40e5cd41c67b111eb8010de0.png","初音未来-大笑":"https://i0.hdslb.com/bfs/emote/8e7f71cda83ce407b0684702983399f8ed982f17.png","原神-哇":"https://i0.hdslb.com/bfs/emote/8188ddf95bace929d382c7a83214afde79d83bfc.png","原神-哼":"https://i0.hdslb.com/bfs/emote/91ed33b74bc36873c3ac8b2648f70d7ab6d8ab78.png","原神-嗯":"https://i0.hdslb.com/bfs/emote/8b0a87e414f453a29730b6e0f45ca61f2f898688.png","原神-欸嘿":"https://i0.hdslb.com/bfs/emote/8fba438fcbe0550877b04efd768d857082307c5e.png","原神-喝茶":"https://i0.hdslb.com/bfs/emote/1de5789fbb3526ef7823c54db7081790a38e7044.png","原神-生气":"https://i0.hdslb.com/bfs/emote/90a38c34742899f8e84138ed55f56cad3ba611fb.png","保卫萝卜-白眼":"https://i0.hdslb.com/bfs/emote/9fce63f38288700bf7be84f3be336cf895ba0902.png","保卫萝卜-笔芯":"https://i0.hdslb.com/bfs/emote/5ff2ed5cb71b02010018cc5910ac7052a03769af.png","保卫萝卜-哭哭":"https://i0.hdslb.com/bfs/emote/7d249f7c990111d3e2982f7477af15b7eb29cbd9.png","保卫萝卜-哇":"https://i0.hdslb.com/bfs/emote/5f2370e561c32d841245f7b1aab2eef43aeb9544.png","保卫萝卜-问号":"https://i0.hdslb.com/bfs/emote/41eb93f09fc4a4d0692a310e8a1f85ba60e96060.png","无悔华夏-不愧是你":"https://i0.hdslb.com/bfs/emote/c58002c32ee78d45366e126f294cb3149dd64ac2.png","无悔华夏-吃瓜":"https://i0.hdslb.com/bfs/emote/273dcff577551bafff4f1eae18561f871e73a6ba.png","无悔华夏-达咩":"https://i0.hdslb.com/bfs/emote/cffab383f47bab7f6736ba9c8d6ac098113410d9.png","无悔华夏-点赞":"https://i0.hdslb.com/bfs/emote/b0f2e8db405ec667c3e6aaabd7c15155b6ea8710.png","无悔华夏-好耶":"https://i0.hdslb.com/bfs/emote/324cd79784aeb37dbf2f47f68bbe8ed5d01f975e.png","奥比岛-搬砖":"https://i0.hdslb.com/bfs/emote/1fab697214918d91087373a999cc7ef8040ddf85.png","奥比岛-点赞":"https://i0.hdslb.com/bfs/emote/fb0b476fe2ff30cd59385ea7d616627ac114161f.png","奥比岛-击爪":"https://i0.hdslb.com/bfs/emote/35bba1bb8f164c5e844155548438248e6eaa8382.png","奥比岛-委屈":"https://i0.hdslb.com/bfs/emote/fda155e7c33b40dbb94c24644e0635d47b6ef3cc.png","奥比岛-喜欢":"https://i0.hdslb.com/bfs/emote/ed64e0c81ee194138bd9df30c65077ed978fb88c.png"},
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script src="https://cdn.cbd.int/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=mp'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://4GK2IcRZ.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+        "X-LC-Key": 'TjKeHNK7GJrGTYuKYzGzh8yg',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="//code.tidio.co/4nifo6zdbrmyjsngh2yzxwbnlhrvshrf.js" async="async"></script><script>(() => {
+  const isChatBtn = true
+  const isChatHideShow = true
+
+  if (isChatBtn) {
+    let isShow = false
+    const close = () => {
+      window.tidioChatApi.hide()
+      isShow = false
+    }
+    
+    const open = () => {
+      window.tidioChatApi.open()
+      window.tidioChatApi.show()
+      isShow = true
+    }
+
+    const onTidioChatApiReady = () => {
+      window.tidioChatApi.hide()
+      window.tidioChatApi.on("close", close)
+    }
+    if (window.tidioChatApi) {
+      window.tidioChatApi.on("ready", onTidioChatApiReady)
+    } else {
+      document.addEventListener("tidioChat-ready", onTidioChatApiReady)
+    }
+
+    window.chatBtnFn = () => {
+      if (!window.tidioChatApi) return
+      isShow ? close() : open()
+    }
+  } else if (isChatHideShow) {
+    window.chatBtn = {
+      hide: () => {
+        window.tidioChatApi && window.tidioChatApi.hide()
+      },
+      show: () => {
+        window.tidioChatApi && window.tidioChatApi.show()
+      }
+    }
+  }
+})()</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
