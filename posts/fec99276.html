@@ -1,0 +1,953 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>消息队列 | 北川的个人博客</title><meta name="keywords" content="RabbitMQ,Kafka"><meta name="author" content="北川,1656473414@qq.com"><meta name="copyright" content="北川"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="消息队列"><meta name="application-name" content="消息队列"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="消息队列"><meta property="og:url" content="https://gukeyang.github.io/posts/fec99276.html"><meta property="og:site_name" content="北川的个人博客"><meta property="og:description" content="什么是消息队列（MQ）MQ（Message Queue）消息队列，是基础数据结构中“先进先出”的一种数据结构。指把要传输的数据（消息）放在队列中，用队列机制来实现消息传递——生产者产生消息并把消息放入队列，然后由消费者去处理。消费者可以到指定队列拉取消息，或者订阅相应的队列，由MQ服务端给其推送消息"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=3077ac68-bda1-8881-875d-14b9ff785cad"><meta property="article:author" content="北川"><meta property="article:tag" content="博客,笔记,学习"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=3077ac68-bda1-8881-875d-14b9ff785cad"><meta name="description" content="什么是消息队列（MQ）MQ（Message Queue）消息队列，是基础数据结构中“先进先出”的一种数据结构。指把要传输的数据（消息）放在队列中，用队列机制来实现消息传递——生产者产生消息并把消息放入队列，然后由消费者去处理。消费者可以到指定队列拉取消息，或者订阅相应的队列，由MQ服务端给其推送消息"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://gukeyang.github.io/posts/fec99276"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":"3932F24FA213E964B6B1B0FD091F88CE"},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://friends.anheyu.com/"},
+  navMusic: true,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 设计开发一条龙","🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    simplehomepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: 北川","link":"链接: ","source":"来源: 北川的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '北川的个人博客',
+  title: '消息队列',
+  postAI: '',
+  pageFillDescription: '什么是消息队列（MQ）, 常见的消息队列（如何选型）, 消息队列的作用, 消息重复消费怎么解决？, 为什么会出现重复消费, 消费端幂等设计, 基于唯一标识去重（通用的）, 基于数据库的唯一约束, 基于状态机幂等, 基于分布式锁, 消息丢失怎么解决的, 消息丢失的 3 个核心环节, 具体分析, 1. 生产者发送阶段：确保消息成功投递到 MQ, 2. MQ 存储阶段：确保消息在 MQ 中可靠存储, 3. 消费者消费阶段：确保消息被正确处理并确认, 额外保障：监控与兜底机制, 消息保证顺序性, 1. 为什么会出现顺序混乱？, 2. 保证顺序的核心方案, 方案 1：单分区 x2F 队列 + 单线程消费（最彻底）, 方案 2：业务标识分区 + 分区内单线程（平衡吞吐与顺序）, 方案 3：消费端排序（松耦合场景）, 如何保证幂等写?, 如何解决消息堆积, 1. 紧急缓解：快速降低堆积量, 2. 根源优化：避免再次堆积, 消息队列是参考哪种设计模式？, 1. 核心参考：发布 - 订阅模式（Publish-Subscribe Pattern）, 2. 辅助支撑：中介者模式（Mediator Pattern）, 如何设计一个消息队列, RocketMQ延时消息的底层原理, 1. 延迟消息的临时存储, 2. 定时扫描与到期判断, 3. 到期消息的迁移与投递, RocektMQ怎么处理分布式事务？, 1. 发送 半消息（第一阶段：占坑）, 2. 执行本地事务, 3. 提交 x2F 回滚消息（第二阶段：填坑 x2F 撤坑）, 关键：解决 指令丢失 问题（事务回查）, RocketMQ消息顺序怎么保证？, 1. 为什么需要顺序？, 2. 怎么保证顺序？（两步核心）, （1）生产者：确保消息 按顺序进同一个分区, （2）消费者：确保 一个分区只被一个消费者处理, 对Kafka有什么了解吗？, Kafka 为什么这么快？, kafka的模型介绍一下kafka是推送还是拉取？什么是消息队列消息队列是基础数据结构中先进先出的一种数据结构指把要传输的数据消息放在队列中用队列机制来实现消息传递生产者产生消息并把消息放入队列然后由消费者去处理消费者可以到指定队列拉取消息或者订阅相应的队列由服务端给其推送消息常见的消息队列如何选型吞吐量极高十万级大数据生态友好运维复杂事务消息需额外开发日志采集大数据流处理高吞吐业务吞吐可靠性灵活性金融级可靠性事务消息顺序性强多语言支持弱主要依赖金融交易订单核心流程事务场景可靠性吞吐生态优先路由灵活延迟低微秒级多语言友好吞吐量有限千级通知推送复杂路由中小业务灵活性延迟吞吐云原生多租户冷热数据分离社区成熟度略低运维中等复杂度云环境多团队共享混合消息流场景云原生多租户存储成本消息队列的作用应用解耦传统方式系统订单服务调用系统库存服务的接口二者紧耦合问题挂了就受影响改动的接口也要改方案只需要把消息订单数据丢进至于谁来消费库存服务物流服务等不关心好处减少系统依赖模块间更加独立异步处理场景用户下单后需要做很多操作扣库存生成订单发送短信推送消息问题如果全在主流程里处理响应很慢方案订单服务只负责写订单其他操作通过异步处理短信服务推送服务分别消费消息好处提升响应速度用户体验更好流量削峰场景秒杀双十一大促瞬间有上百万请求涌入问题数据库服务直接被压垮方案请求先进入队列消费者服务按照自己的能力慢慢消费处理好处保护下游服务避免雪崩消息重复消费怎么解决消息重复消费是分布式系统中常见的问题本质是由于网络抖动消费者崩溃消息确认机制异常等原因导致同一条消息被消费者多次接收解决的核心思路就是要保证消费逻辑的幂等性为什么会出现重复消费生产者重试生产者发送消息后未收到确认触发重试机制导致消息重复发送消费者确认失败消费者处理完消息后向发送时失败会认为消息未处理重新投递自身机制部分默认采用至少一次的投递策略优先保证不丢失消息允许重复消费端幂等设计基于唯一标识去重通用的为每条消息或业务数据分配全局唯一消费时通过判断是否已处理过避免重复执行适用场景订单支付通知等有明确业务标识的场景实现方式消息唯一利用自带的消息如的的但需注意部分场景下如生产者重试同一业务消息可能有不同的消息此时需结合业务业务唯一用业务自身的唯一标识如订单号支付流水号更可靠存储校验将已处理的存入数据库如消费前先查询若已存在则跳过否则处理并记录基于数据库的唯一约束在表中为业务唯一如订单号设置唯一键重复消费时数据库会抛出异常捕获异常后直接忽略即可基于状态机幂等业务数据存在明确的状态流转如订单待支付支付中已支付通过状态机判断当前操作是否合法避免重复执行适用场景有状态流转的业务如订单支付任务状态更新实现方式消费前检查当前状态是否允许执行操作例如支付操作仅在订单处于待支付状态时执行若已处于已支付则直接跳过基于分布式锁若业务逻辑无唯一或状态机可通过分布式锁保证同一消息同一时间仅被处理一次避免并发重复适用场景无明确唯一标识但需避免并发重复的场景如库存扣减实现方式消费时先获取锁以消息或业务为锁键获取成功则处理失败则等待或跳过消息丢失怎么解决的消息丢失的个核心环节生产者发送阶段消息未成功投递到如网络中断接收失败存储阶段消息已到达但未被持久化或因故障如宕机丢失消费者消费阶段消息已被投递到消费者但消费者未处理完成或未确认导致认为消息未消费而丢失实际是未正确记录消费状态具体分析生产者发送阶段确保消息成功投递到问题根源生产者发送消息后因网络超时临时不可用等未收到的接收确认但消息可能已被接收也可能未接收若生产者直接放弃可能导致丢失生产者未开启重试机制单次发送失败后直接丢弃消息解决方案开启发送确认机制关键让在成功接收并持久化消息后向生产者返回发送成功确认生产者只有收到才认为消息发送成功否则触发重试生产者配置需所有副本确认接收并开启重试次数如使用同步发送而非异步单向发送通过返回的判断是否成功失败则重试开启发布确认机制通过回调确认消息是否被交换机接收若失败触发重试避免消息发送阻塞导致丢失生产者需设置合理的超时时间如避免因繁忙导致发送线程长期阻塞同时配置消息缓冲区如的防止瞬间高并发导致消息被丢弃本地持久化兜底极端场景若对消息可靠性要求极高如金融交易可在生产者本地暂存消息如写入数据库本地文件待收到的后再删除若重试多次失败触发人工介入避免彻底丢失存储阶段确保消息在中可靠存储问题根源默认使用内存存储消息未开启持久化宕机后内存数据丢失虽开启持久化但采用异步刷盘先存内存定期刷到磁盘宕机时内存中未刷盘的消息丢失单节点部署节点故障后无副本恢复数据解决方案强制开启消息持久化确保消息到达后被写入磁盘而非仅存于内存创建时设置多副本且消息默认持久化到磁盘不可关闭消息默认持久化存储在文件可通过显式指定默认即为队列需设置队列持久化消息发送时设置消息持久化确保队列和消息均写入磁盘选择同步刷盘策略核心场景牺牲部分性能确保消息写入磁盘后才返回存储成功避免异步刷盘的丢失风险配置同步刷盘默认是适合金融级场景通过确保消息被所有副本持久化后才确认等价于同步到副本磁盘部署多副本集群高可用单节点故障时通过副本恢复数据避免单点丢失分区设置多副本如并确保至少个副本同步成功部署主从架构消息同步到后才确认宕机后可切换为开启镜像队列将队列数据同步到多个节点避免单节点故障丢失消费者消费阶段确保消息被正确处理并确认问题根源消费者开启自动确认消息一到达消费者就被标记为已消费但消费者实际处理失败如崩溃导致消息丢失消费者处理消息超时超过的重试阈值将消息移入死信队列或丢弃未正确配置死信策略解决方案关闭自动确认使用手动关键消费者处理完业务逻辑如订单入库支付完成后再手动向发送消费成功确认确保消息处理完成后才被标记为已消费消费者关闭禁止自动提交在业务处理成功后调用手动提交消费监听中处理成功后返回默认手动确认失败返回触发重试关闭处理成功后调用手动确认失败则调用让重新投递合理设置消费超时与重试机制避免因处理超时导致误判消息未消费而丢弃调整默认分钟若业务处理耗时较长适当调大同时配置重试次数重试失败后移入死信队列避免无限重试导致丢失设置队列的消息超时时间和死信交换机超时未处理的消息进入死信队列后续人工处理消费逻辑幂等事务即使消息被重复投递因重试也需保证消费逻辑幂等避免重复处理若消费涉及数据库操作需用事务确保业务处理与消息确认的原子性如处理失败则回滚业务不发送额外保障监控与兜底机制全链路监控监控的消息堆积量发送成功率消费成功率如通过一旦出现发送失败率突增消费延迟过高立即告警死信队列配置死信队列将处理失败超过重试次数的消息存入而非直接丢弃后续通过人工或定时任务重试避免彻底丢失定期数据校验核心业务如支付需定期对比生产者发送量存储量消费者处理量发现数据不一致时及时排查如通过消息轨迹追踪工具消息保证顺序性顺序性指消息的消费顺序严格遵循发送顺序如订单的创建支付发货需按序处理顺序混乱的根源是并行处理多分区多线程消费需通过串行化或分区对齐解决为什么会出现顺序混乱多分区队列并行通过分区队列并行提升吞吐同一的不同分区队列内消息有序但跨分区队列无法保证顺序如消息发往分区消息发往分区消费时可能先被处理多线程消费即使单分区若消费者用多线程并行处理也可能导致顺序混乱如线程处理消息未完成线程已处理消息保证顺序的核心方案方案单分区队列单线程消费最彻底原理将需要保证顺序的消息全部发送到同一个分区队列且消费者用单线程处理该分区队列的消息从存储和消费两端强制串行化实现发送消息时指定固定的如或通过自定义分区器将同一业务标识如订单号的消息路由到同一分区消费者单线程消费该分区发送时指定将同一业务的消息路由到同一消费者使用单线程监听器将消息发送到同一个队列避免多队列且消费者使用单线程消费关闭多消费者实例或同一队列仅绑定一个消费者适用场景严格顺序需求如订单状态变更但会牺牲吞吐单分区队列的吞吐有限方案业务标识分区分区内单线程平衡吞吐与顺序原理按业务标识如用户订单号分区同一标识的消息进入同一分区保证该标识内的消息有序不同标识的消息可并行提升吞吐示例电商订单场景中按用户哈希路由到分区分区数同一用户的订单消息在同一分区内有序不同用户的消息可并行处理注意需确保分区数固定避免扩容导致哈希路由变化且消费者对每个分区使用单线程处理如的每次拉取条消息处理方案消费端排序松耦合场景原理允许消息乱序到达消费端但通过业务层记录消息序号消费后按序号排序再处理适合非实时可缓冲的场景实现生产者发送消息时携带全局序号如消费者将消息暂存到本地缓存如有序集合当检测到序号连续时如都到达按序处理缺失序号则等待重试适用场景顺序要求不严格允许短暂乱序如日志聚合可兼容高吞吐如何保证幂等写幂等性是指同一操作的多次执行对系统状态的影响与一次执行结果一致例如支付接口若因网络重试被多次调用最终应确保仅扣款一次实现幂等写的核心方案唯一标识幂等键客户端为每个请求生成全局唯一如业务主键服务端校验该是否已处理适用场景接口调用消息消费等数据库事务乐观锁通过版本号或状态字段控制并发更新确保多次更新等同于单次操作适用场景数据库记录更新如余额扣减订单状态变更数据库唯一约束利用数据库唯一索引防止重复数据写入适用场景数据插入场景如订单创建分布式锁通过锁机制保证同一时刻仅有一个请求执行关键操作适用场景高并发下的资源抢夺如秒杀消息去重消息队列生产者为每条消息生成唯一的消息消费者在处理消息前先检查该消息是否已经处理过如果已经处理过则丢弃该消息如何解决消息堆积生产者发送消息的速度远超过消费者处理速度导致中未处理的消息数量持续增长在动手解决前必须先明确堆积根源避免盲目操作核心通过个维度排查生产端查看消息生产速率是否突然飙升如峰值流量重复发送是否存在发而不管的无限流逻辑消费端检查消费者实例数单实例处理速率是否有报错阻塞如数据库慢查询远程调用超时中间件确认队列的分区数存储容量是否存在配置限制如最大堆积数刷盘策略导致的性能瓶颈紧急缓解快速降低堆积量适用于堆积已经影响业务的场景优先恢复服务可用性水平扩展消费端最直接的方式增加消费者实例数量如从台机器扩到台注意需确保中间件支持并发消费如分区数消费者数队列允许多消费者监听临时扩容消费能力在单个消费者实例内通过线程池提高并发处理数如从单线程改为线程但需避免线程过多导致资源竞争如数据库连接池耗尽降级非核心消费逻辑暂时关闭消费链路中的非必要步骤如日志打印非核心数据校验优先保证消息快速处理完后续再补全逻辑根源优化避免再次堆积解决紧急问题后需从根源上优化流程防止问题复发优化消费端处理效率减少同步阻塞将消费中的同步远程调用如请求改为异步调用或增加超时时间限制避免线程挂起批量处理消息开启中间件的批量拉取功能如的配置同时批量写入数据库如的减少次数优化代码逻辑修复消费端的慢代码如算法未加索引的通过压测提前发现性能瓶颈管控生产端发送速率增加限流机制在生产端设置流量阈值如每秒最多发条超过阈值时触发降级如返回暂时繁忙避免消息爆冲避免重复发送生产端增加幂等设计如消息去重防止因重试网络波动导致的重复消息减少消费端无效工作调整中间件配置增加分区分片数对于等中间件分区数决定了最大并发消费能力需根据预期消费速率合理设置如目标每秒处理条可设个分区每个分区承载条秒优化存储策略若消息无需长期保存缩短消息保留时间如从天改为天减少中间件存储压力非核心消息可使用内存队列降低磁盘开销消息队列是参考哪种设计模式消息队列的设计核心参考了发布订阅模式同时也融合了中介者模式的思想核心参考发布订阅模式发布订阅模式是消息队列最直接的设计原型其核心逻辑是发布者负责产生消息并发布到一个中间载体如的主题或交换机无需关心谁会接收消息订阅者通过订阅中间载体接收并处理感兴趣的消息无需关心消息来自哪个发布者中间载体作为消息的中转站负责存储和分发消息如的节点实现发布者与订阅者的完全解耦辅助支撑中介者模式中介者模式的核心是通过一个中介对象协调多个对象的交互避免对象之间直接耦合减少多对多依赖消息队列的节点本质上就是一个中介者生产者无需知道消费者的存在只需将消息发送给消费者无需知道生产者的存在只需从获取消息生产者与消费者的交互完全通过中转负责处理消息的存储重试路由等复杂逻辑简化了生产者和消费者的实现如何设计一个消息队列第一是伸缩性以为最小单元每个对应一个存储部分数据需要扩容时要么直接给加提升并行度要么加后通过元数据服务自动迁移快速提升吞吐量和容量第二是持久化用磁盘顺序写日志文件配合操作系统的优化读的时候预加载相邻数据到缓存写的时候先存缓存再异步刷盘既避免进程挂了丢数据又能保证读写效率第三是可用性每个做主从的副本主副本对外提供服务从副本同步数据主副本故障时会从同步正常的副本里选新主自动切换不中断服务靠冗余实现高可用延时消息的底层原理的延时消息延迟队列底层通过临时存储定时扫描迁移机制实现核心是将延迟消息先暂存到特殊队列到期后再转发到目标队列具体原理可拆解为步延迟消息的临时存储当生产者发送延迟消息时指定如秒分钟消息不会直接进入目标而是被路由到内置的延迟主题延迟主题下包含多个分区每个分区对应一个延迟级别如分区对应级延迟分区对应级延迟消息根据指定的被存入对应分区实现按延迟级别分类存储定时扫描与到期判断内部有一个定时任务线程池默认每扫描一次延迟主题的所有分区扫描时线程会读取分区内的消息根据消息的发送时间延迟级别对应的时长计算到期时间判断消息是否已到期延迟级别是预定义的如级级级不支持自定义时长需修改源码扩展到期消息的迁移与投递对于已到期的消息会将其从延迟主题中删除并重新写入生产者指定的目标消息进入目标后就和普通消息一样会被消费者正常拉取和消费怎么处理分布式事务处理分布式事务的核心思路是两阶段提交事务状态回查用通俗的话讲就是先占个坑确认业务成功后再填坑失败了就撤坑确保消息和本地事务要么都成功要么都失败发送半消息第一阶段占坑生产者订单系统先给发一条半消息半消息能被接收并持久化但暂时不会被消费者看到像待确认状态作用先在消息队列里占个位置确保消息不会丢但也不会提前触发远程事务执行本地事务生产者发送半消息成功后立即执行本地事务比如创建订单本地事务成功比如订单表插入成功本地事务失败比如订单创建时数据库报错提交回滚消息第二阶段填坑撤坑生产者根据本地事务结果给发确认指令若本地事务成功发提交消息指令标记半消息为可用消费者就能收到消息触发库存减少若本地事务失败发回滚消息指令删掉半消息消费者不会收到避免库存错误减少关键解决指令丢失问题事务回查如果生产者在发确认指令时宕机了比如网络断了会定期主动回查生产者问生产者你之前那个半消息对应的本地事务到底成没成功生产者查本地事务日志比如订单表状态告诉结果再按结果处理提交回滚消息顺序怎么保证保证消息顺序的核心逻辑是分区内有序消费绑定通过路由到同一分区保证写入顺序分区与消费者一对一绑定保证消费顺序为什么需要顺序比如订单创建支付发货这条消息必须按顺序消费否则消费者先处理发货再处理创建就会出错怎么保证顺序两步核心生产者确保消息按顺序进同一个分区中一个可以分成多个类似多个队伍同一类需要顺序的消息比如同一个订单的消息必须通过相同的路由到同一个举例用订单作为会根据计算哈希值让同一个订单的所有消息都进入同一个单个内部消息是先进先出的类似排队先到的消息先存所以分区内天然有序消费者确保一个分区只被一个消费者处理消费者以消费组的形式工作一个消费组可以有多个消费者类似多个打饭窗口为了避免顺序混乱会让一个只分给消费组里的一个消费者比如只由消费者处理只由消费者处理各自按顺序消费自己分区的消息不会交叉对有什么了解吗高吞吐量依赖顺序读写磁盘比随机快倍以上缓存读写先经内存批量处理批量发送拉取单每秒可处理几十万甚至消息高可靠性每个分区可设置多个副本个主副本处理读写其余从副本同步数据主副本故障时自动切换从副本避免数据丢失持久化消息默认持久化到磁盘支持按时间大小清理旧数据如保留天适合存储海量历史数据流式处理友好消费者通过偏移量记录消费进度支持从头消费指定位置消费与等流处理框架集成紧密场景日志收集如栈收集分布式系统日志实时数据管道如实时数仓从业务库同步数据到分析系统高吞吐消息队列如用户行为追踪每秒百万级埋点数据传输为什么这么快快的核心逻辑是用顺序读写规避磁盘短板用缓存减少实际用批量降低交互成本用分区实现并行处理机械硬盘的随机读写很慢磁头要来回移动寻道但顺序读写速度接近内存因为不需要频繁寻道只需连续存储读取不自己管理内存缓存而是直接依赖操作系统的磁盘缓存写入消息时先存到内存就返回成功后续由操作系统异步批量刷到磁盘减少磁盘次数读取消息时先查命中的话直接从内存读速度极快没命中再读磁盘且操作系统会预读相邻数据到缓存比如读条消息时顺便把后面几条也加载到缓存后续消费几乎都是内存操作网络传输和磁盘的单次操作成本很高比如建立连接寻址通过批量攒消息降低这种成本生产者会把多条消息攒成一个批次再发送可配置批量大小和超时时间消费者一次拉取一批消息而不是单条获取刷盘时也是批量把中的消息同步到磁盘而不是每条消息单独刷盘批量操作能把多次小交互变成一次大交互大幅提升效率的每个会拆分成多个分区每个分区独立存储独立处理读写生产者可以同时向多个分区写消息并行写入消费者组的多个消费者可以同时消费不同分区的消息并行读取就像多车道高速公路车流量消息量能随车道数分区数线性提升吞吐量自然就高了的模型介绍一下是推送还是拉取是基于发布订阅的分布式消息系统核心模型可以用生产者主题消费者三要素概括主题消息的逻辑分类比如用户行为日志订单数据是生产者和消费者的交互入口分区每个会被拆分成多个物理存储单元消息按规则如哈希分配到不同实现并行读写提升吞吐量单个内的消息按写入顺序存储保证分区内有序生产者向发送消息通过指定消息或轮询策略将消息路由到具体消费者与消费组消费者从的中读取消息通过偏移量记录自己的消费进度类似读书时的书签消费组是多个消费者的集合组内消费者共同消费一个的所有个仅被组内个消费者消费避免重复采用消费者主动拉取模式即消费者根据自己的处理能力主动向请求消息为什么不用推送推送模式下难以判断消费者的处理能力如果推送速度超过消费者的处理速度会导致消费者过载比如消息堆积内存溢出而拉取模式的优势是消费者可以自主控制拉取频率和批量大小比如处理快的消费者多拉点处理慢的少拉点避免被压垮配合机制消费者可以灵活选择重新消费比如从最早的消息开始读更适合流处理场景',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-31 21:59:59',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://gukeyang.github.io" title="博客"><img class="back-menu-item-icon" src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">北川的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src="/./img/wechat.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/./img/alipay.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 1.05rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 1.05rem;">JVM调优<sup>1</sup></a><a href="/tags/Kafka/" style="font-size: 1.05rem;">Kafka<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 1.05rem;">Mybatis<sup>1</sup></a><a href="/tags/RabbitMQ/" style="font-size: 1.05rem;">RabbitMQ<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 1.05rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 1.05rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">复习<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 1.05rem;">并发<sup>1</sup></a><a href="/tags/%E5%BA%93%E5%AD%98/" style="font-size: 1.05rem;">库存<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 1.05rem;">电商<sup>1</sup></a><a href="/tags/%E8%AE%A2%E5%8D%95/" style="font-size: 1.05rem;">订单<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96/" style="font-size: 1.05rem;">超卖<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.05rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">面试题</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/RabbitMQ/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>RabbitMQ</span></a><a class="article-meta__tags" href="/tags/Kafka/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Kafka</span></a></span></div></div><h1 class="post-title" itemprop="name headline">消息队列</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-10-31T05:50:36.000Z" title="发表于 2025-10-31 13:50:36">2025-10-31</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-10-31T13:59:59.710Z" title="更新于 2025-10-31 21:59:59">2025-10-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="leancloud_visitors" id="/posts/fec99276.html" data-flag-title="消息队列"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span class="leancloud-visitors-count" title="访问量"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为新乡"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>新乡</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/fec99276.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/posts/fec99276.html" itemprop="commentCount"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=3077ac68-bda1-8881-875d-14b9ff785cad"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://gukeyang.github.io/posts/fec99276.html"><header><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">面试题</a><a href="/tags/RabbitMQ/" tabindex="-1" itemprop="url">RabbitMQ</a><a href="/tags/Kafka/" tabindex="-1" itemprop="url">Kafka</a><h1 id="CrawlerTitle" itemprop="name headline">消息队列</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">北川</span><time itemprop="dateCreated datePublished" datetime="2025-10-31T05:50:36.000Z" title="发表于 2025-10-31 13:50:36">2025-10-31</time><time itemprop="dateCreated datePublished" datetime="2025-10-31T13:59:59.710Z" title="更新于 2025-10-31 21:59:59">2025-10-31</time></header><h2 id="什么是消息队列（MQ）"><a href="#什么是消息队列（MQ）" class="headerlink" title="什么是消息队列（MQ）"></a>什么是消息队列（MQ）</h2><p>MQ（Message Queue）消息队列，是基础数据结构中“先进先出”的一种数据结构。指把要传输的数据（消息）放在队列中，用队列机制来实现消息传递——生产者产生消息并把消息放入队列，然后由消费者去处理。消费者可以到指定队列拉取消息，或者订阅相应的队列，由MQ服务端给其推送消息。 </p>
+<h2 id="常见的消息队列（如何选型）"><a href="#常见的消息队列（如何选型）" class="headerlink" title="常见的消息队列（如何选型）"></a>常见的消息队列（如何选型）</h2><table>
+<thead>
+<tr>
+<th>Kafka</th>
+<th>吞吐量极高（十万级 TPS）、大数据生态友好</th>
+<th>运维复杂、事务消息需额外开发</th>
+<th>日志采集、大数据流处理、高吞吐业务</th>
+<th>吞吐 &gt; 可靠性 &gt; 灵活性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RocketMQ</td>
+<td>金融级可靠性、事务消息、顺序性强</td>
+<td>多语言支持弱（主要依赖 Java）</td>
+<td>金融交易、订单核心流程、事务场景</td>
+<td>可靠性 &gt; 吞吐 &gt; 生态（Java 优先）</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>路由灵活、延迟低（微秒级）、多语言友好</td>
+<td>吞吐量有限（千级 TPS）</td>
+<td>通知推送、复杂路由、中小业务</td>
+<td>灵活性 &gt; 延迟 &gt; 吞吐</td>
+</tr>
+<tr>
+<td>Pulsar</td>
+<td>云原生、多租户、冷热数据分离</td>
+<td>社区成熟度略低、运维中等复杂度</td>
+<td>云环境、多团队共享、混合消息 &#x2F; 流场景</td>
+<td>云原生 &gt; 多租户 &gt; 存储成本</td>
+</tr>
+</tbody></table>
+<h2 id="消息队列的作用"><a href="#消息队列的作用" class="headerlink" title="消息队列的作用"></a>消息队列的作用</h2><p><strong>应用解耦</strong></p>
+<ul>
+<li><p><strong>传统方式</strong>：系统 A（订单服务）调用系统 B（库存服务）的接口，二者紧耦合。</p>
+</li>
+<li><p><strong>问题</strong>：B 挂了，A 就受影响。改动 B 的接口，A 也要改。</p>
+</li>
+<li><p><strong>MQ 方案</strong>：A 只需要把消息（订单数据）丢进 MQ，至于谁来消费（库存服务、物流服务等），A 不关心。 ➡️ <strong>好处</strong>：减少系统依赖，模块间更加独立。</p>
+</li>
+</ul>
+<p><strong>异步处理</strong></p>
+<ul>
+<li><p><strong>场景</strong>：用户下单后，需要做很多操作：扣库存、生成订单、发送短信、推送消息。</p>
+</li>
+<li><p><strong>问题</strong>：如果全在主流程里处理，响应很慢。</p>
+</li>
+<li><p><strong>MQ 方案</strong>：订单服务只负责写订单，其他操作通过 MQ 异步处理（短信服务、推送服务分别消费消息）。 ➡️ <strong>好处</strong>：提升响应速度，用户体验更好。</p>
+</li>
+</ul>
+<p><strong>流量削峰</strong></p>
+<ul>
+<li><p><strong>场景</strong>：秒杀、双十一大促，瞬间有上百万请求涌入。</p>
+</li>
+<li><p><strong>问题</strong>：数据库、服务直接被压垮。</p>
+</li>
+<li><p><strong>MQ 方案</strong>：请求先进入 MQ 队列，消费者服务按照自己的能力慢慢消费处理。 ➡️ <strong>好处</strong>：保护下游服务，避免雪崩。</p>
+</li>
+</ul>
+<h2 id="消息重复消费怎么解决？"><a href="#消息重复消费怎么解决？" class="headerlink" title="消息重复消费怎么解决？"></a>消息重复消费怎么解决？</h2><p>消息重复消费是分布式系统中常见的问题，本质是由于网络抖动、消费者崩溃、消息确认机制异常等原因，导致同一条消息被消费者多次接收。解决的核心思路就是要保证消费逻辑的“幂等性”。</p>
+<h3 id="为什么会出现重复消费"><a href="#为什么会出现重复消费" class="headerlink" title="为什么会出现重复消费"></a>为什么会出现重复消费</h3><p><strong>生产者重试</strong>：生产者发送消息后未收到确认，触发重试机制，导致消息重复发送。</p>
+<p><strong>消费者确认失败</strong>：消费者处理完消息后，向MQ发送ACK时失败，MQ会认为消息未处理，重新投递。</p>
+<p><strong>MQ自身机制</strong>：部分MQ默认采用至少一次的投递策略（优先保证不丢失消息，允许重复）</p>
+<h3 id="消费端幂等设计"><a href="#消费端幂等设计" class="headerlink" title="消费端幂等设计"></a>消费端幂等设计</h3><h4 id="基于唯一标识去重（通用的）"><a href="#基于唯一标识去重（通用的）" class="headerlink" title="基于唯一标识去重（通用的）"></a>基于唯一标识去重（通用的）</h4><p>为每条消息或业务数据分配<strong>全局唯一 ID</strong>，消费时通过判断 ID 是否已处理过，避免重复执行。</p>
+<ul>
+<li><p><strong>适用场景</strong>：订单、支付、通知等有明确业务标识的场景。</p>
+</li>
+<li><p><strong>实现方式</strong>：</p>
+<ul>
+<li><p><strong>消息唯一 ID</strong>：利用 MQ 自带的消息 ID（如 RocketMQ 的<code>msgId</code>、Kafka 的<code>offset+partition</code>），但需注意：部分场景下（如生产者重试），同一业务消息可能有不同的消息 ID，此时需结合业务 ID。</p>
+</li>
+<li><p><strong>业务唯一 ID</strong>：用业务自身的唯一标识（如订单号、支付流水号），更可靠。</p>
+</li>
+<li><p><strong>存储校验</strong>：将已处理的 ID 存入数据库 &#x2F; Redis（如<code>set key value NX</code>），消费前先查询：若已存在则跳过，否则处理并记录。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="基于数据库的唯一约束"><a href="#基于数据库的唯一约束" class="headerlink" title="基于数据库的唯一约束"></a>基于数据库的唯一约束</h4><p>在表中为业务唯一 ID（如订单号）设置唯一键，重复消费时，数据库会抛出<code>Duplicate key</code>异常，捕获异常后直接忽略即可。</p>
+<h4 id="基于状态机幂等"><a href="#基于状态机幂等" class="headerlink" title="基于状态机幂等"></a>基于状态机幂等</h4><p>业务数据存在明确的状态流转（如订单：待支付→支付中→已支付），通过状态机判断当前操作是否合法，避免重复执行。</p>
+<ul>
+<li><strong>适用场景</strong>：有状态流转的业务（如订单支付、任务状态更新）。</li>
+<li><strong>实现方式</strong>：消费前检查当前状态是否允许执行操作。例如，“支付” 操作仅在订单处于 “待支付” 状态时执行，若已处于 “已支付”，则直接跳过。</li>
+</ul>
+<h4 id="基于分布式锁"><a href="#基于分布式锁" class="headerlink" title="基于分布式锁"></a>基于分布式锁</h4><p>若业务逻辑无唯一 ID 或状态机，可通过分布式锁保证同一消息同一时间仅被处理一次（避免并发重复）。</p>
+<ul>
+<li><strong>适用场景</strong>：无明确唯一标识，但需避免并发重复的场景（如库存扣减）。</li>
+<li><strong>实现方式</strong>：消费时先获取锁（以消息 ID 或业务 ID 为锁键），获取成功则处理，失败则等待或跳过。</li>
+</ul>
+<h2 id="消息丢失怎么解决的"><a href="#消息丢失怎么解决的" class="headerlink" title="消息丢失怎么解决的"></a>消息丢失怎么解决的</h2><h3 id="消息丢失的-3-个核心环节"><a href="#消息丢失的-3-个核心环节" class="headerlink" title="消息丢失的 3 个核心环节"></a>消息丢失的 3 个核心环节</h3><ol>
+<li><strong>生产者发送阶段</strong>：消息未成功投递到 MQ（如网络中断、MQ 接收失败）。</li>
+<li><strong>MQ 存储阶段</strong>：消息已到达 MQ，但未被持久化或因 MQ 故障（如宕机）丢失。</li>
+<li><strong>消费者消费阶段</strong>：消息已被 MQ 投递到消费者，但消费者未处理完成或未确认，导致 MQ 认为消息未消费而 “丢失”（实际是未正确记录消费状态）。</li>
+</ol>
+<h3 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h3><h4 id="1-生产者发送阶段：确保消息成功投递到-MQ"><a href="#1-生产者发送阶段：确保消息成功投递到-MQ" class="headerlink" title="1. 生产者发送阶段：确保消息成功投递到 MQ"></a>1. 生产者发送阶段：确保消息成功投递到 MQ</h4><p><strong>问题根源</strong>：</p>
+<ul>
+<li>生产者发送消息后，因网络超时、MQ 临时不可用等，未收到 MQ 的 “接收确认”，但消息可能已被 MQ 接收（也可能未接收），若生产者直接放弃，可能导致丢失。</li>
+<li>生产者未开启重试机制，单次发送失败后直接丢弃消息。</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><strong>开启发送确认机制</strong>（关键）：让 MQ 在成功接收并持久化消息后，向生产者返回 “发送成功” 确认（ACK）。生产者只有收到 ACK，才认为消息发送成功；否则触发重试。<ul>
+<li><strong>Kafka</strong>：生产者配置<code>acks=all</code>（需所有 ISR 副本确认接收），并开启<code>retries</code>（重试次数，如<code>retries=3</code>）。</li>
+<li><strong>RocketMQ</strong>：使用同步发送（<code>send()</code>）而非异步 &#x2F; 单向发送，通过返回的<code>SendResult</code>判断是否成功（<code>SEND_OK</code>），失败则重试。</li>
+<li><strong>RabbitMQ</strong>：开启<code>publisher-confirms</code>（发布确认机制），通过回调确认消息是否被交换机接收；若失败，触发重试。</li>
+</ul>
+</li>
+<li><strong>避免消息发送阻塞导致丢失</strong>：生产者需设置合理的超时时间（如<code>sendTimeout=3000ms</code>），避免因 MQ 繁忙导致发送线程长期阻塞；同时配置消息缓冲区（如 Kafka 的<code>buffer.memory</code>），防止瞬间高并发导致消息被丢弃。</li>
+<li><strong>本地持久化兜底</strong>（极端场景）：若对消息可靠性要求极高（如金融交易），可在生产者本地暂存消息（如写入数据库 &#x2F; 本地文件），待收到 MQ 的 ACK 后再删除；若重试多次失败，触发人工介入（避免彻底丢失）。</li>
+</ul>
+<h4 id="2-MQ-存储阶段：确保消息在-MQ-中可靠存储"><a href="#2-MQ-存储阶段：确保消息在-MQ-中可靠存储" class="headerlink" title="2. MQ 存储阶段：确保消息在 MQ 中可靠存储"></a>2. MQ 存储阶段：确保消息在 MQ 中可靠存储</h4><p><strong>问题根源</strong>：</p>
+<ul>
+<li>MQ 默认使用内存存储消息，未开启持久化，宕机后内存数据丢失。</li>
+<li>虽开启持久化，但采用 “异步刷盘”（先存内存，定期刷到磁盘），宕机时内存中未刷盘的消息丢失。</li>
+<li>MQ 单节点部署，节点故障后无副本恢复数据。</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><strong>强制开启消息持久化</strong>：确保消息到达 MQ 后被写入磁盘，而非仅存于内存。<ul>
+<li><strong>Kafka</strong>：创建 Topic 时设置<code>replication-factor ≥ 2</code>（多副本），且消息默认持久化到磁盘（不可关闭）。</li>
+<li><strong>RocketMQ</strong>：消息默认持久化（存储在 CommitLog 文件），可通过<code>persistent=true</code>显式指定（默认即为 true）。</li>
+<li><strong>RabbitMQ</strong>：队列需设置<code>durable=true</code>（队列持久化），消息发送时设置<code>delivery_mode=2</code>（消息持久化），确保队列和消息均写入磁盘。</li>
+</ul>
+</li>
+<li><strong>选择同步刷盘策略</strong>（核心场景）：牺牲部分性能，确保消息写入磁盘后才返回 “存储成功”，避免异步刷盘的丢失风险。<ul>
+<li><strong>RocketMQ</strong>： broker 配置<code>flushDiskType=SYNC_FLUSH</code>（同步刷盘，默认是 ASYNC_FLUSH），适合金融级场景。</li>
+<li><strong>Kafka</strong>：通过<code>acks=all</code>确保消息被所有 ISR 副本持久化后才确认，等价于 “同步到副本磁盘”。</li>
+</ul>
+</li>
+<li><strong>部署多副本 &#x2F; 集群</strong>（高可用）：单节点故障时，通过副本恢复数据，避免单点丢失。<ul>
+<li><strong>Kafka</strong>：Topic 分区设置多副本（如<code>replication-factor=3</code>），并确保<code>min.insync.replicas ≥ 2</code>（至少 2 个副本同步成功）。</li>
+<li><strong>RocketMQ</strong>：部署主从架构（Master+Slave），消息同步到 Slave 后才确认（<code>syncMaster= true</code>），Master 宕机后 Slave 可切换为 Master。</li>
+<li><strong>RabbitMQ</strong>：开启镜像队列（Mirror Queue），将队列数据同步到多个节点，避免单节点故障丢失。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-消费者消费阶段：确保消息被正确处理并确认"><a href="#3-消费者消费阶段：确保消息被正确处理并确认" class="headerlink" title="3. 消费者消费阶段：确保消息被正确处理并确认"></a>3. 消费者消费阶段：确保消息被正确处理并确认</h4><p><strong>问题根源</strong>：</p>
+<ul>
+<li>消费者开启 “自动确认”（Auto ACK），消息一到达消费者就被 MQ 标记为 “已消费”，但消费者实际处理失败（如崩溃），导致消息丢失。</li>
+<li>消费者处理消息超时（超过 MQ 的重试阈值），MQ 将消息移入死信队列或丢弃（未正确配置死信策略）。</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><strong>关闭自动确认，使用手动 ACK</strong>（关键）：消费者处理完业务逻辑（如订单入库、支付完成）后，再手动向 MQ 发送 “消费成功” 确认（ACK），确保消息处理完成后才被 MQ 标记为 “已消费”。<ul>
+<li><strong>Kafka</strong>：消费者关闭<code>enable.auto.commit</code>（禁止自动提交 offset），在业务处理成功后调用<code>commitSync()</code>手动提交 offset。</li>
+<li><strong>RocketMQ</strong>：消费监听中，处理成功后返回<code>ConsumeConcurrentlyStatus.CONSUME_SUCCESS</code>（默认手动确认），失败返回<code>RECONSUME_LATER</code>（触发重试）。</li>
+<li><strong>RabbitMQ</strong>：关闭<code>autoAck=false</code>，处理成功后调用<code>channel.basicAck(deliveryTag, false)</code>手动确认；失败则调用<code>basicNack</code>让 MQ 重新投递。</li>
+</ul>
+</li>
+<li><strong>合理设置消费超时与重试机制</strong>：避免因处理超时导致 MQ 误判消息未消费而丢弃。<ul>
+<li><strong>RocketMQ</strong>：调整<code>consumeTimeout</code>（默认 15 分钟），若业务处理耗时较长，适当调大；同时配置重试次数（<code>maxReconsumeTimes</code>），重试失败后移入死信队列（DLQ），避免无限重试导致丢失。</li>
+<li><strong>RabbitMQ</strong>：设置队列的<code>x-message-ttl</code>（消息超时时间）和<code>x-dead-letter-exchange</code>（死信交换机），超时未处理的消息进入死信队列，后续人工处理。</li>
+</ul>
+</li>
+<li><strong>消费逻辑幂等 + 事务</strong>：即使消息被重复投递（因重试），也需保证消费逻辑幂等（避免重复处理）；若消费涉及数据库操作，需用事务确保 “业务处理” 与 “消息确认” 的原子性（如处理失败则回滚业务，不发送 ACK）。</li>
+</ul>
+<h4 id="额外保障：监控与兜底机制"><a href="#额外保障：监控与兜底机制" class="headerlink" title="额外保障：监控与兜底机制"></a>额外保障：监控与兜底机制</h4><ol>
+<li><p>全链路监控：</p>
+<p>监控 MQ 的消息堆积量、发送成功率、消费成功率（如通过 Prometheus+Grafana），一旦出现发送失败率突增、消费延迟过高，立即告警。</p>
+</li>
+<li><p>死信队列（DLQ）：</p>
+<p>配置死信队列，将处理失败（超过重试次数）的消息存入 DLQ，而非直接丢弃，后续通过人工或定时任务重试，避免彻底丢失。</p>
+</li>
+<li><p>定期数据校验：</p>
+<p>核心业务（如支付）需定期对比生产者发送量、MQ 存储量、消费者处理量，发现数据不一致时及时排查（如通过消息轨迹追踪工具）。</p>
+</li>
+</ol>
+<h2 id="消息保证顺序性"><a href="#消息保证顺序性" class="headerlink" title="消息保证顺序性"></a>消息保证顺序性</h2><p>顺序性指 “消息的消费顺序严格遵循发送顺序”（如订单的 “创建→支付→发货” 需按序处理）。顺序混乱的根源是 “并行处理”（多分区、多线程消费），需通过 “串行化” 或 “分区对齐” 解决。</p>
+<h4 id="1-为什么会出现顺序混乱？"><a href="#1-为什么会出现顺序混乱？" class="headerlink" title="1. 为什么会出现顺序混乱？"></a>1. 为什么会出现顺序混乱？</h4><ul>
+<li><strong>多分区 &#x2F; 队列并行</strong>：Kafka&#x2F;RocketMQ 通过 “分区 &#x2F; 队列” 并行提升吞吐，同一 Topic 的不同分区 &#x2F; 队列内消息有序，但跨分区 &#x2F; 队列无法保证顺序（如消息 1 发往分区 A，消息 2 发往分区 B，消费时可能 2 先被处理）。</li>
+<li><strong>多线程消费</strong>：即使单分区，若消费者用多线程并行处理，也可能导致顺序混乱（如线程 1 处理消息 1 未完成，线程 2 已处理消息 2）。</li>
+</ul>
+<h4 id="2-保证顺序的核心方案"><a href="#2-保证顺序的核心方案" class="headerlink" title="2. 保证顺序的核心方案"></a>2. 保证顺序的核心方案</h4><h5 id="方案-1：单分区-队列-单线程消费（最彻底）"><a href="#方案-1：单分区-队列-单线程消费（最彻底）" class="headerlink" title="方案 1：单分区 &#x2F; 队列 + 单线程消费（最彻底）"></a>方案 1：单分区 &#x2F; 队列 + 单线程消费（最彻底）</h5><ul>
+<li><strong>原理</strong>：将需要保证顺序的消息全部发送到同一个分区 &#x2F; 队列，且消费者用单线程处理该分区 &#x2F; 队列的消息，从存储和消费两端强制串行化。</li>
+<li><strong>实现</strong>：<ul>
+<li><strong>Kafka</strong>：发送消息时指定固定的<code>partition</code>（如<code>partition=0</code>），或通过自定义分区器（<code>Partitioner</code>）将同一业务标识（如订单号）的消息路由到同一分区；消费者单线程消费该分区。</li>
+<li><strong>RocketMQ</strong>：发送时指定<code>MessageQueueSelector</code>，将同一业务 ID 的消息路由到同一 Queue；消费者使用单线程监听器（<code>MessageListenerOrderly</code>）。</li>
+<li><strong>RabbitMQ</strong>：将消息发送到同一个队列（避免多队列），且消费者使用单线程消费（关闭多消费者实例，或同一队列仅绑定一个消费者）。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：严格顺序需求（如订单状态变更），但会牺牲吞吐（单分区 &#x2F; 队列的吞吐有限）。</li>
+</ul>
+<h5 id="方案-2：业务标识分区-分区内单线程（平衡吞吐与顺序）"><a href="#方案-2：业务标识分区-分区内单线程（平衡吞吐与顺序）" class="headerlink" title="方案 2：业务标识分区 + 分区内单线程（平衡吞吐与顺序）"></a>方案 2：业务标识分区 + 分区内单线程（平衡吞吐与顺序）</h5><ul>
+<li><p><strong>原理</strong>：按 “业务标识”（如用户 ID、订单号）分区，同一标识的消息进入同一分区（保证该标识内的消息有序），不同标识的消息可并行（提升吞吐）。</p>
+</li>
+<li><p>示例：</p>
+<p>电商订单场景中，按 “用户 ID” 哈希路由到分区（partition &#x3D; userID % 分区数），同一用户的订单消息在同一分区内有序，不同用户的消息可并行处理。</p>
+</li>
+<li><p><strong>注意</strong>：需确保分区数固定（避免扩容导致哈希路由变化），且消费者对每个分区使用单线程处理（如 Kafka 的<code>max.poll.records=1</code>，每次拉取 1 条消息处理）。</p>
+</li>
+</ul>
+<h5 id="方案-3：消费端排序（松耦合场景）"><a href="#方案-3：消费端排序（松耦合场景）" class="headerlink" title="方案 3：消费端排序（松耦合场景）"></a>方案 3：消费端排序（松耦合场景）</h5><ul>
+<li><p><strong>原理</strong>：允许消息乱序到达消费端，但通过业务层记录消息序号，消费后按序号排序再处理（适合非实时、可缓冲的场景）。</p>
+</li>
+<li><p>实现：</p>
+<p>生产者发送消息时携带 “全局序号”（如seq&#x3D;1,2,3…），消费者将消息暂存到本地缓存（如 Redis 有序集合），当检测到序号连续时（如 1、2、3 都到达），按序处理；缺失序号则等待重试。</p>
+</li>
+<li><p><strong>适用场景</strong>：顺序要求不严格、允许短暂乱序（如日志聚合），可兼容高吞吐。</p>
+</li>
+</ul>
+<h2 id="如何保证幂等写"><a href="#如何保证幂等写" class="headerlink" title="如何保证幂等写?"></a>如何保证幂等写?</h2><p>幂等性是指 同一操作的多次执行对系统状态的影响与一次执行结果一致。例如，支付接口若因网络重试被多次调用，最终应确保仅扣款一次。实现幂等写的核心方案:</p>
+<ul>
+<li>唯一标识（幂等键）：客户端为每个请求生成全局唯一ID（如UUID、业务主键），服务端校验该ID是否已处理，适用场景接口调用、消息消费等。</li>
+<li>数据库事务+乐观锁：通过版本号或状态字段控制并发更新，确保多次更新等同于单次操作，适用场景数据库记录更新（如余额扣减、订单状态变更）。</li>
+<li>数据库唯一约束：利用数据库唯一索引防止重复数据写入，适用场景数据插入场景（如订单创建）。</li>
+<li>分布式锁：通过锁机制保证同一时刻仅有一个请求执行关键操作，适用场景高并发下的资源抢夺（如秒杀)。</li>
+<li>消息去重：消息队列生产者为每条消息生成唯一的消息ID，消费者在处理消息前，先检查该消息ID是否已经处理过，如果已经处理过则丢弃该消息。</li>
+</ul>
+<h2 id="如何解决消息堆积"><a href="#如何解决消息堆积" class="headerlink" title="如何解决消息堆积"></a>如何解决消息堆积</h2><p>生产者发送消息的速度远超过消费者处理速度，导致 MQ 中未处理的消息数量持续增长。</p>
+<p>在动手解决前，必须先明确堆积根源，避免盲目操作。核心通过 3 个维度排查：</p>
+<ol>
+<li><strong>生产端</strong>：查看消息生产速率是否突然飙升（如峰值流量、重复发送），是否存在 “发而不管” 的无限流逻辑。</li>
+<li><strong>消费端</strong>：检查消费者实例数、单实例处理速率、是否有报错 &#x2F; 阻塞（如数据库慢查询、远程调用超时）。</li>
+<li><strong>中间件</strong>：确认队列 &#x2F;topic 的分区数、存储容量、是否存在配置限制（如最大堆积数、刷盘策略导致的性能瓶颈）。</li>
+</ol>
+<h4 id="1-紧急缓解：快速降低堆积量"><a href="#1-紧急缓解：快速降低堆积量" class="headerlink" title="1. 紧急缓解：快速降低堆积量"></a>1. 紧急缓解：快速降低堆积量</h4><p>适用于堆积已经影响业务的场景，优先恢复服务可用性。</p>
+<ul>
+<li><strong>水平扩展消费端</strong>：最直接的方式，增加消费者实例数量（如从 2 台机器扩到 10 台）。注意：需确保中间件支持并发消费（如 Kafka 分区数≥消费者数，RabbitMQ 队列允许多消费者监听）。</li>
+<li><strong>临时扩容消费能力</strong>：在单个消费者实例内，通过线程池提高并发处理数（如从单线程改为 10 线程），但需避免线程过多导致资源竞争（如数据库连接池耗尽）。</li>
+<li><strong>降级非核心消费逻辑</strong>：暂时关闭消费链路中的非必要步骤（如日志打印、非核心数据校验），优先保证消息 “快速处理完”，后续再补全逻辑。</li>
+</ul>
+<h4 id="2-根源优化：避免再次堆积"><a href="#2-根源优化：避免再次堆积" class="headerlink" title="2. 根源优化：避免再次堆积"></a>2. 根源优化：避免再次堆积</h4><p>解决紧急问题后，需从根源上优化流程，防止问题复发。</p>
+<ul>
+<li>优化消费端处理效率<ul>
+<li>减少同步阻塞：将消费中的同步远程调用（如 HTTP 请求）改为异步调用，或增加超时时间限制（避免线程挂起）。</li>
+<li>批量处理消息：开启中间件的批量拉取功能（如 Kafka 的<code>fetch.min.bytes</code>配置），同时批量写入数据库（如 MySQL 的<code>batch insert</code>），减少 IO 次数。</li>
+<li>优化代码逻辑：修复消费端的慢代码（如 O (n²) 算法、未加索引的 SQL），通过压测提前发现性能瓶颈。</li>
+</ul>
+</li>
+<li>管控生产端发送速率<ul>
+<li>增加限流机制：在生产端设置流量阈值（如每秒最多发 1000 条），超过阈值时触发降级（如返回 “暂时繁忙”），避免消息 “爆冲”。</li>
+<li>避免重复发送：生产端增加幂等设计（如消息 ID 去重），防止因重试、网络波动导致的重复消息，减少消费端无效工作。</li>
+</ul>
+</li>
+<li>调整中间件配置<ul>
+<li>增加分区 &#x2F; 分片数：对于 Kafka、RocketMQ 等中间件，分区数决定了最大并发消费能力，需根据预期消费速率合理设置（如目标每秒处理 5000 条，可设 10 个分区，每个分区承载 500 条 &#x2F; 秒）。</li>
+<li>优化存储策略：若消息无需长期保存，缩短消息保留时间（如从 7 天改为 1 天），减少中间件存储压力；非核心消息可使用 “内存队列”，降低磁盘 IO 开销。</li>
+</ul>
+</li>
+</ul>
+<h2 id="消息队列是参考哪种设计模式？"><a href="#消息队列是参考哪种设计模式？" class="headerlink" title="消息队列是参考哪种设计模式？"></a>消息队列是参考哪种设计模式？</h2><p>消息队列（MQ）的设计核心参考了<strong>发布 - 订阅模式（Publish-Subscribe Pattern）</strong>，同时也融合了<strong>中介者模式（Mediator Pattern）</strong> 的思想。</p>
+<h3 id="1-核心参考：发布-订阅模式（Publish-Subscribe-Pattern）"><a href="#1-核心参考：发布-订阅模式（Publish-Subscribe-Pattern）" class="headerlink" title="1. 核心参考：发布 - 订阅模式（Publish-Subscribe Pattern）"></a>1. 核心参考：发布 - 订阅模式（Publish-Subscribe Pattern）</h3><p>发布 - 订阅模式是消息队列最直接的设计原型，其核心逻辑是：</p>
+<ul>
+<li><strong>发布者（Publisher）</strong>：负责产生消息并 “发布” 到一个中间载体（如 MQ 的 “主题 Topic” 或 “交换机 Exchange”），无需关心谁会接收消息。</li>
+<li><strong>订阅者（Subscriber）</strong>：通过 “订阅” 中间载体，接收并处理感兴趣的消息，无需关心消息来自哪个发布者。</li>
+<li><strong>中间载体</strong>：作为消息的中转站，负责存储和分发消息（如 MQ 的 Broker 节点），实现发布者与订阅者的完全解耦。</li>
+</ul>
+<h3 id="2-辅助支撑：中介者模式（Mediator-Pattern）"><a href="#2-辅助支撑：中介者模式（Mediator-Pattern）" class="headerlink" title="2. 辅助支撑：中介者模式（Mediator Pattern）"></a>2. 辅助支撑：中介者模式（Mediator Pattern）</h3><p>中介者模式的核心是通过一个 “中介对象” 协调多个对象的交互，避免对象之间直接耦合（减少多对多依赖）。消息队列的 Broker 节点本质上就是一个 “中介者”：</p>
+<ul>
+<li>生产者无需知道消费者的存在，只需将消息发送给 Broker；</li>
+<li>消费者无需知道生产者的存在，只需从 Broker 获取消息；</li>
+<li>生产者与消费者的交互完全通过 Broker 中转，Broker 负责处理消息的存储、重试、路由等复杂逻辑，简化了生产者和消费者的实现。</li>
+</ul>
+<h2 id="如何设计一个消息队列"><a href="#如何设计一个消息队列" class="headerlink" title="如何设计一个消息队列"></a>如何设计一个消息队列</h2><p>第一是伸缩性，以 Partition 为最小单元，每个 Partition 对应一个 Broker 存储部分数据。需要扩容时，要么直接给 Topic 加 Partition 提升并行度，要么加 Broker 后通过元数据服务自动迁移 Partition，快速提升吞吐量和容量。</p>
+<p>第二是持久化，用磁盘顺序写日志文件，配合操作系统的 PageCache 优化：读的时候预加载相邻数据到缓存，写的时候先存缓存再异步刷盘，既避免进程挂了丢数据，又能保证读写效率。</p>
+<p>第三是可用性，每个 Partition 做 1 主 N 从的副本，主副本对外提供服务，从副本同步数据。主副本故障时，会从同步正常的副本里选新主，自动切换不中断服务，靠冗余实现高可用。</p>
+<h2 id="RocketMQ延时消息的底层原理"><a href="#RocketMQ延时消息的底层原理" class="headerlink" title="RocketMQ延时消息的底层原理"></a>RocketMQ延时消息的底层原理</h2><p>RocketMQ 的延时消息（延迟队列）底层通过 “<strong>临时存储 + 定时扫描迁移</strong>” 机制实现，核心是将延迟消息先暂存到特殊队列，到期后再转发到目标队列。具体原理可拆解为 3 步：</p>
+<h3 id="1-延迟消息的临时存储"><a href="#1-延迟消息的临时存储" class="headerlink" title="1. 延迟消息的临时存储"></a>1. 延迟消息的临时存储</h3><ul>
+<li>当生产者发送延迟消息时（指定<code>delayLevel</code>，如 10 秒、1 分钟），消息不会直接进入目标 Topic，而是被路由到 RocketMQ 内置的<strong>延迟主题（<code>SCHEDULE_TOPIC_XXXX</code>）</strong>。</li>
+<li>延迟主题下包含多个分区，每个分区对应一个延迟级别（如分区 0 对应 1 级延迟，分区 1 对应 2 级延迟）。消息根据指定的<code>delayLevel</code>被存入对应分区，实现按延迟级别分类存储。</li>
+</ul>
+<h3 id="2-定时扫描与到期判断"><a href="#2-定时扫描与到期判断" class="headerlink" title="2. 定时扫描与到期判断"></a>2. 定时扫描与到期判断</h3><ul>
+<li>Broker 内部有一个<strong>定时任务线程池</strong>，默认每 100ms 扫描一次延迟主题的所有分区。</li>
+<li>扫描时，线程会读取分区内的消息，根据消息的 “发送时间 + 延迟级别对应的时长” 计算到期时间，判断消息是否已到期。</li>
+<li>延迟级别（<code>delayLevel</code>）是预定义的（如 1 级 &#x3D; 1s、2 级 &#x3D; 5s、18 级 &#x3D; 2h），不支持自定义时长（需修改源码扩展）。</li>
+</ul>
+<h3 id="3-到期消息的迁移与投递"><a href="#3-到期消息的迁移与投递" class="headerlink" title="3. 到期消息的迁移与投递"></a>3. 到期消息的迁移与投递</h3><ul>
+<li>对于已到期的消息，Broker 会将其从延迟主题中删除，并重新写入生产者指定的<strong>目标 Topic</strong>。</li>
+<li>消息进入目标 Topic 后，就和普通消息一样，会被消费者正常拉取和消费。</li>
+</ul>
+<h2 id="RocektMQ怎么处理分布式事务？"><a href="#RocektMQ怎么处理分布式事务？" class="headerlink" title="RocektMQ怎么处理分布式事务？"></a>RocektMQ怎么处理分布式事务？</h2><p>RocketMQ 处理分布式事务的核心思路是 <strong>“两阶段提交 + 事务状态回查”</strong>，用通俗的话讲就是：先 “占个坑”，确认业务成功后再 “填坑”，失败了就 “撤坑”，确保消息和本地事务要么都成功，要么都失败。</p>
+<h4 id="1-发送-“半消息”（第一阶段：占坑）"><a href="#1-发送-“半消息”（第一阶段：占坑）" class="headerlink" title="1. 发送 “半消息”（第一阶段：占坑）"></a>1. 发送 “半消息”（第一阶段：占坑）</h4><p>生产者（订单系统）先给 RocketMQ 发一条 <strong>“半消息”</strong>（Half Message）。</p>
+<ul>
+<li>半消息：能被 Broker 接收并持久化，但 <strong>暂时不会被消费者看到</strong>（像 “待确认” 状态）。</li>
+<li>作用：先在消息队列里 “占个位置”，确保消息不会丢，但也不会提前触发远程事务。</li>
+</ul>
+<h4 id="2-执行本地事务"><a href="#2-执行本地事务" class="headerlink" title="2. 执行本地事务"></a>2. 执行本地事务</h4><p>生产者发送半消息成功后，立即执行本地事务（比如创建订单）。</p>
+<ul>
+<li>本地事务成功：比如订单表插入成功。</li>
+<li>本地事务失败：比如订单创建时数据库报错。</li>
+</ul>
+<h4 id="3-提交-回滚消息（第二阶段：填坑-撤坑）"><a href="#3-提交-回滚消息（第二阶段：填坑-撤坑）" class="headerlink" title="3. 提交 &#x2F; 回滚消息（第二阶段：填坑 &#x2F; 撤坑）"></a>3. 提交 &#x2F; 回滚消息（第二阶段：填坑 &#x2F; 撤坑）</h4><p>生产者根据本地事务结果，给 Broker 发 “确认指令”：</p>
+<ul>
+<li>若本地事务成功：发 <strong>“提交消息”</strong> 指令，Broker 标记半消息为 “可用”，消费者就能收到消息（触发库存减少）。</li>
+<li>若本地事务失败：发 <strong>“回滚消息”</strong> 指令，Broker 删掉半消息，消费者不会收到（避免库存错误减少）。</li>
+</ul>
+<h3 id="关键：解决-“指令丢失”-问题（事务回查）"><a href="#关键：解决-“指令丢失”-问题（事务回查）" class="headerlink" title="关键：解决 “指令丢失” 问题（事务回查）"></a>关键：解决 “指令丢失” 问题（事务回查）</h3><p>如果生产者在发 “确认指令” 时宕机了（比如网络断了），Broker 会定期主动 <strong>“回查” 生产者</strong>：</p>
+<ul>
+<li>Broker 问生产者：“你之前那个半消息对应的本地事务，到底成没成功？”</li>
+<li>生产者查本地事务日志（比如订单表状态），告诉 Broker 结果，Broker 再按结果处理（提交 &#x2F; 回滚）。</li>
+</ul>
+<h2 id="RocketMQ消息顺序怎么保证？"><a href="#RocketMQ消息顺序怎么保证？" class="headerlink" title="RocketMQ消息顺序怎么保证？"></a>RocketMQ消息顺序怎么保证？</h2><p>RocketMQ 保证消息顺序的核心逻辑是 <strong>“分区内有序 + 消费绑定”</strong></p>
+<p><strong>“通过 Key 路由到同一分区（保证写入顺序） + 分区与消费者一对一绑定（保证消费顺序）”</strong>。</p>
+<h3 id="1-为什么需要顺序？"><a href="#1-为什么需要顺序？" class="headerlink" title="1. 为什么需要顺序？"></a>1. 为什么需要顺序？</h3><p>比如 “订单创建→支付→发货” 这 3 条消息，必须按顺序消费，否则消费者先处理 “发货” 再处理 “创建” 就会出错。</p>
+<h3 id="2-怎么保证顺序？（两步核心）"><a href="#2-怎么保证顺序？（两步核心）" class="headerlink" title="2. 怎么保证顺序？（两步核心）"></a>2. 怎么保证顺序？（两步核心）</h3><h4 id="（1）生产者：确保消息-“按顺序进同一个分区”"><a href="#（1）生产者：确保消息-“按顺序进同一个分区”" class="headerlink" title="（1）生产者：确保消息 “按顺序进同一个分区”"></a>（1）生产者：确保消息 “按顺序进同一个分区”</h4><ul>
+<li><p>RocketMQ 中，一个 Topic 可以分成多个 Partition（类似多个 “队伍”）。</p>
+</li>
+<li><p>同一类需要顺序的消息（比如同一个订单的消息），必须通过“相同的 Key”路由到同一个 Partition。</p>
+<p>举例：用订单 ID 作为 Key，RocketMQ 会根据 Key 计算哈希值，让同一个订单的所有消息都进入同一个 Partition。</p>
+</li>
+<li><p>单个 Partition 内部，消息是 <strong>“先进先出”</strong> 的（类似排队，先到的消息先存），所以分区内天然有序。</p>
+</li>
+</ul>
+<h4 id="（2）消费者：确保-“一个分区只被一个消费者处理”"><a href="#（2）消费者：确保-“一个分区只被一个消费者处理”" class="headerlink" title="（2）消费者：确保 “一个分区只被一个消费者处理”"></a>（2）消费者：确保 “一个分区只被一个消费者处理”</h4><ul>
+<li><p>消费者以 “消费组” 的形式工作，一个消费组可以有多个消费者（类似多个 “打饭窗口”）。</p>
+</li>
+<li><p>为了避免顺序混乱，RocketMQ 会让一个 Partition 只分给消费组里的一个消费者。</p>
+<p>比如：Partition 0 只由消费者 A 处理，Partition 1 只由消费者 B 处理，各自按顺序消费自己分区的消息，不会交叉。</p>
+</li>
+</ul>
+<h2 id="对Kafka有什么了解吗？"><a href="#对Kafka有什么了解吗？" class="headerlink" title="对Kafka有什么了解吗？"></a>对Kafka有什么了解吗？</h2><ul>
+<li>高吞吐量：依赖 “顺序读写磁盘”（比随机 IO 快 10 倍以上）、“PageCache 缓存”（读写先经内存）、“批量处理”（批量发送 &#x2F; 拉取），单 Broker 每秒可处理几十万甚至消息。</li>
+<li>高可靠性：每个分区可设置多个副本（Replica），1 个主副本（Leader）处理读写，其余从副本（Follower）同步数据，主副本故障时自动切换从副本，避免数据丢失。</li>
+<li>持久化：消息默认持久化到磁盘，支持按时间 &#x2F; 大小清理旧数据（如保留 7 天），适合存储海量历史数据。</li>
+<li>流式处理友好：消费者通过Offset（偏移量）记录消费进度，支持 “从头消费”“指定位置消费”，与 Spark、Flink 等流处理框架集成紧密。</li>
+</ul>
+<p>场景：</p>
+<ul>
+<li>日志收集（如 ELK 栈，收集分布式系统日志）。</li>
+<li>实时数据管道（如实时数仓，从业务库同步数据到分析系统）。</li>
+<li>高吞吐消息队列（如用户行为追踪，每秒百万级埋点数据传输）。</li>
+</ul>
+<h2 id="Kafka-为什么这么快？"><a href="#Kafka-为什么这么快？" class="headerlink" title="Kafka 为什么这么快？"></a>Kafka 为什么这么快？</h2><p>Kafka 快的核心逻辑是：<strong>用顺序读写规避磁盘短板，用缓存减少实际 IO，用批量降低交互成本，用分区实现并行处理</strong>。</p>
+<p>机械硬盘的 “随机读写” 很慢（磁头要来回移动寻道），但 “顺序读写” 速度接近内存 —— 因为不需要频繁寻道，只需连续存储 &#x2F; 读取。</p>
+<p>Kafka 不自己管理内存缓存，而是直接依赖操作系统的 <strong>PageCache</strong>（磁盘缓存）：</p>
+<ul>
+<li>写入消息时，先存到 PageCache（内存），就返回 “成功”，后续由操作系统异步批量刷到磁盘（减少磁盘 IO 次数）。</li>
+<li>读取消息时，先查 PageCache，命中的话直接从内存读（速度极快）；没命中再读磁盘，且操作系统会 “预读” 相邻数据到缓存（比如读 1 条消息时，顺便把后面几条也加载到缓存），后续消费几乎都是内存操作。</li>
+</ul>
+<p>网络传输和磁盘 IO 的 “单次操作成本” 很高（比如建立连接、寻址），Kafka 通过 “<strong>批量攒消息</strong>” 降低这种成本：</p>
+<ul>
+<li><p>生产者（Producer）会把多条消息攒成一个批次再发送（可配置批量大小和超时时间）。</p>
+</li>
+<li><p>消费者（Consumer）一次拉取一批消息，而不是单条获取。</p>
+</li>
+<li><p>Broker 刷盘时，也是批量把 PageCache 中的消息同步到磁盘，而不是每条消息单独刷盘。</p>
+<p>批量操作能把 “多次小交互” 变成 “一次大交互”，大幅提升效率。</p>
+</li>
+</ul>
+<p>Kafka 的每个 Topic 会拆分成多个 <strong>Partition（分区）</strong>，每个分区独立存储、独立处理读写：</p>
+<ul>
+<li><p>生产者可以同时向多个分区写消息（并行写入）。</p>
+</li>
+<li><p>消费者组的多个消费者可以同时消费不同分区的消息（并行读取）。</p>
+<p>就像多车道高速公路，车流量（消息量）能随车道数（分区数）线性提升，吞吐量自然就高了。</p>
+</li>
+</ul>
+<h2 id="kafka的模型介绍一下，kafka是推送还是拉取？"><a href="#kafka的模型介绍一下，kafka是推送还是拉取？" class="headerlink" title="kafka的模型介绍一下，kafka是推送还是拉取？"></a>kafka的模型介绍一下，kafka是推送还是拉取？</h2><p>Kafka 是基于 “<strong>发布 - 订阅（Pub-Sub）</strong>” 的分布式消息系统，核心模型可以用 “<strong>生产者 - 主题 - 消费者</strong>” 三要素概括：</p>
+<ol>
+<li><strong>主题（Topic）</strong>：消息的逻辑分类（比如 “用户行为日志”“订单数据”），是生产者和消费者的交互入口。</li>
+<li><strong>分区（Partition）</strong>：每个 Topic 会被拆分成多个 Partition（物理存储单元），消息按规则（如哈希）分配到不同 Partition，实现并行读写（提升吞吐量）。单个 Partition 内的消息按写入顺序存储（保证分区内有序）。</li>
+<li><strong>生产者（Producer）</strong>：向 Topic 发送消息，通过指定消息 Key 或轮询策略，将消息路由到具体 Partition。</li>
+<li>消费者与消费组（Consumer Group）：<ul>
+<li>消费者从 Topic 的 Partition 中读取消息，通过 “偏移量（Offset）” 记录自己的消费进度（类似 “读书时的书签”）。</li>
+<li>消费组是多个消费者的集合，组内消费者共同消费一个 Topic 的所有 Partition（1 个 Partition 仅被组内 1 个消费者消费，避免重复）。</li>
+</ul>
+</li>
+</ol>
+<p><strong>Kafka 采用 “消费者主动拉取（Pull）” 模式</strong>，即消费者根据自己的处理能力，主动向 Broker 请求消息。</p>
+<p><strong>为什么不用推送（Push）？</strong></p>
+<p>推送模式下，Broker 难以判断消费者的处理能力：如果 Broker 推送速度超过消费者的处理速度，会导致消费者过载（比如消息堆积、内存溢出）。</p>
+<p>而拉取模式的优势是：</p>
+<ul>
+<li>消费者可以自主控制拉取频率和批量大小（比如处理快的消费者多拉点，处理慢的少拉点），避免被 “压垮”。</li>
+<li>配合 Offset 机制，消费者可以灵活选择重新消费（比如从最早的消息开始读），更适合流处理场景。</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">北川</div><div class="post-copyright__author_desc">Believe in yourself</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://gukeyang.github.io/posts/fec99276.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://gukeyang.github.io/posts/fec99276.html')">消息队列</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/./img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/./img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div><div class="reward-link mode"><a class="reward-link-button" href="/wecaht/"><i class="anzhiyufont anzhiyu-icon-plant-fill"></i>运营模式与责任</a></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://gukeyang.github.io/posts/fec99276.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=消息队列&amp;url=https://gukeyang.github.io/posts/fec99276.html&amp;pic=https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=3077ac68-bda1-8881-875d-14b9ff785cad" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gukeyang.github.io" target="_blank">北川的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/RabbitMQ/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>RabbitMQ<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Kafka/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Kafka<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=3077ac68-bda1-8881-875d-14b9ff785cad" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/a0d0ac1c.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=653934aa-4102-d615-704c-0c371867f9de" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Mybatis面试题</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2022/11/07/QVWvrnAsuGxelbS.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/zc998800/cdn/face/gif/m17.gif" ait="status"/></div></div><div class="author-info__description">路慢其修远兮 吾将上下而求索</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">北川</h1><div class="author-info__desc">Believe in yourself</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/gukeyang" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/1542898061" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://s2.loli.net/2023/10/19/vNio4QGBSX9x5lO.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%88MQ%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">什么是消息队列（MQ）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%88%E5%A6%82%E4%BD%95%E9%80%89%E5%9E%8B%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">常见的消息队列（如何选型）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">消息队列的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">消息重复消费怎么解决？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9"><span class="toc-number">4.1.</span> <span class="toc-text">为什么会出现重复消费</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E7%AB%AF%E5%B9%82%E7%AD%89%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.2.</span> <span class="toc-text">消费端幂等设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%94%AF%E4%B8%80%E6%A0%87%E8%AF%86%E5%8E%BB%E9%87%8D%EF%BC%88%E9%80%9A%E7%94%A8%E7%9A%84%EF%BC%89"><span class="toc-number">4.2.1.</span> <span class="toc-text">基于唯一标识去重（通用的）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F"><span class="toc-number">4.2.2.</span> <span class="toc-text">基于数据库的唯一约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%8A%B6%E6%80%81%E6%9C%BA%E5%B9%82%E7%AD%89"><span class="toc-number">4.2.3.</span> <span class="toc-text">基于状态机幂等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">4.2.4.</span> <span class="toc-text">基于分布式锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84"><span class="toc-number">5.</span> <span class="toc-text">消息丢失怎么解决的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E7%9A%84-3-%E4%B8%AA%E6%A0%B8%E5%BF%83%E7%8E%AF%E8%8A%82"><span class="toc-number">5.1.</span> <span class="toc-text">消息丢失的 3 个核心环节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%88%86%E6%9E%90"><span class="toc-number">5.2.</span> <span class="toc-text">具体分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%94%9F%E4%BA%A7%E8%80%85%E5%8F%91%E9%80%81%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E6%88%90%E5%8A%9F%E6%8A%95%E9%80%92%E5%88%B0-MQ"><span class="toc-number">5.2.1.</span> <span class="toc-text">1. 生产者发送阶段：确保消息成功投递到 MQ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MQ-%E5%AD%98%E5%82%A8%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E5%9C%A8-MQ-%E4%B8%AD%E5%8F%AF%E9%9D%A0%E5%AD%98%E5%82%A8"><span class="toc-number">5.2.2.</span> <span class="toc-text">2. MQ 存储阶段：确保消息在 MQ 中可靠存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%B6%88%E8%B4%B9%E8%80%85%E6%B6%88%E8%B4%B9%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E8%A2%AB%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%B9%B6%E7%A1%AE%E8%AE%A4"><span class="toc-number">5.2.3.</span> <span class="toc-text">3. 消费者消费阶段：确保消息被正确处理并确认</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E4%BF%9D%E9%9A%9C%EF%BC%9A%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%85%9C%E5%BA%95%E6%9C%BA%E5%88%B6"><span class="toc-number">5.2.4.</span> <span class="toc-text">额外保障：监控与兜底机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">消息保证顺序性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%A1%BA%E5%BA%8F%E6%B7%B7%E4%B9%B1%EF%BC%9F"><span class="toc-number">6.0.1.</span> <span class="toc-text">1. 为什么会出现顺序混乱？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E7%9A%84%E6%A0%B8%E5%BF%83%E6%96%B9%E6%A1%88"><span class="toc-number">6.0.2.</span> <span class="toc-text">2. 保证顺序的核心方案</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%A1%88-1%EF%BC%9A%E5%8D%95%E5%88%86%E5%8C%BA-%E9%98%9F%E5%88%97-%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%B6%88%E8%B4%B9%EF%BC%88%E6%9C%80%E5%BD%BB%E5%BA%95%EF%BC%89"><span class="toc-number">6.0.2.1.</span> <span class="toc-text">方案 1：单分区 &#x2F; 队列 + 单线程消费（最彻底）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%A1%88-2%EF%BC%9A%E4%B8%9A%E5%8A%A1%E6%A0%87%E8%AF%86%E5%88%86%E5%8C%BA-%E5%88%86%E5%8C%BA%E5%86%85%E5%8D%95%E7%BA%BF%E7%A8%8B%EF%BC%88%E5%B9%B3%E8%A1%A1%E5%90%9E%E5%90%90%E4%B8%8E%E9%A1%BA%E5%BA%8F%EF%BC%89"><span class="toc-number">6.0.2.2.</span> <span class="toc-text">方案 2：业务标识分区 + 分区内单线程（平衡吞吐与顺序）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%A1%88-3%EF%BC%9A%E6%B6%88%E8%B4%B9%E7%AB%AF%E6%8E%92%E5%BA%8F%EF%BC%88%E6%9D%BE%E8%80%A6%E5%90%88%E5%9C%BA%E6%99%AF%EF%BC%89"><span class="toc-number">6.0.2.3.</span> <span class="toc-text">方案 3：消费端排序（松耦合场景）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%B9%82%E7%AD%89%E5%86%99"><span class="toc-number">7.</span> <span class="toc-text">如何保证幂等写?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF"><span class="toc-number">8.</span> <span class="toc-text">如何解决消息堆积</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%B4%A7%E6%80%A5%E7%BC%93%E8%A7%A3%EF%BC%9A%E5%BF%AB%E9%80%9F%E9%99%8D%E4%BD%8E%E5%A0%86%E7%A7%AF%E9%87%8F"><span class="toc-number">8.0.1.</span> <span class="toc-text">1. 紧急缓解：快速降低堆积量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%B9%E6%BA%90%E4%BC%98%E5%8C%96%EF%BC%9A%E9%81%BF%E5%85%8D%E5%86%8D%E6%AC%A1%E5%A0%86%E7%A7%AF"><span class="toc-number">8.0.2.</span> <span class="toc-text">2. 根源优化：避免再次堆积</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%98%AF%E5%8F%82%E8%80%83%E5%93%AA%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">消息队列是参考哪种设计模式？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E5%8F%82%E8%80%83%EF%BC%9A%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%88Publish-Subscribe-Pattern%EF%BC%89"><span class="toc-number">9.1.</span> <span class="toc-text">1. 核心参考：发布 - 订阅模式（Publish-Subscribe Pattern）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%85%E5%8A%A9%E6%94%AF%E6%92%91%EF%BC%9A%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Mediator-Pattern%EF%BC%89"><span class="toc-number">9.2.</span> <span class="toc-text">2. 辅助支撑：中介者模式（Mediator Pattern）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">10.</span> <span class="toc-text">如何设计一个消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RocketMQ%E5%BB%B6%E6%97%B6%E6%B6%88%E6%81%AF%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">11.</span> <span class="toc-text">RocketMQ延时消息的底层原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF%E7%9A%84%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8"><span class="toc-number">11.1.</span> <span class="toc-text">1. 延迟消息的临时存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9A%E6%97%B6%E6%89%AB%E6%8F%8F%E4%B8%8E%E5%88%B0%E6%9C%9F%E5%88%A4%E6%96%AD"><span class="toc-number">11.2.</span> <span class="toc-text">2. 定时扫描与到期判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%B0%E6%9C%9F%E6%B6%88%E6%81%AF%E7%9A%84%E8%BF%81%E7%A7%BB%E4%B8%8E%E6%8A%95%E9%80%92"><span class="toc-number">11.3.</span> <span class="toc-text">3. 到期消息的迁移与投递</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RocektMQ%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9F"><span class="toc-number">12.</span> <span class="toc-text">RocektMQ怎么处理分布式事务？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%8F%91%E9%80%81-%E2%80%9C%E5%8D%8A%E6%B6%88%E6%81%AF%E2%80%9D%EF%BC%88%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%8D%A0%E5%9D%91%EF%BC%89"><span class="toc-number">12.0.1.</span> <span class="toc-text">1. 发送 “半消息”（第一阶段：占坑）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%89%A7%E8%A1%8C%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1"><span class="toc-number">12.0.2.</span> <span class="toc-text">2. 执行本地事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%8F%90%E4%BA%A4-%E5%9B%9E%E6%BB%9A%E6%B6%88%E6%81%AF%EF%BC%88%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%A1%AB%E5%9D%91-%E6%92%A4%E5%9D%91%EF%BC%89"><span class="toc-number">12.0.3.</span> <span class="toc-text">3. 提交 &#x2F; 回滚消息（第二阶段：填坑 &#x2F; 撤坑）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%EF%BC%9A%E8%A7%A3%E5%86%B3-%E2%80%9C%E6%8C%87%E4%BB%A4%E4%B8%A2%E5%A4%B1%E2%80%9D-%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%9F%A5%EF%BC%89"><span class="toc-number">12.1.</span> <span class="toc-text">关键：解决 “指令丢失” 问题（事务回查）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RocketMQ%E6%B6%88%E6%81%AF%E9%A1%BA%E5%BA%8F%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%EF%BC%9F"><span class="toc-number">13.</span> <span class="toc-text">RocketMQ消息顺序怎么保证？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%A1%BA%E5%BA%8F%EF%BC%9F"><span class="toc-number">13.1.</span> <span class="toc-text">1. 为什么需要顺序？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%EF%BC%9F%EF%BC%88%E4%B8%A4%E6%AD%A5%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="toc-number">13.2.</span> <span class="toc-text">2. 怎么保证顺序？（两步核心）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%94%9F%E4%BA%A7%E8%80%85%EF%BC%9A%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF-%E2%80%9C%E6%8C%89%E9%A1%BA%E5%BA%8F%E8%BF%9B%E5%90%8C%E4%B8%80%E4%B8%AA%E5%88%86%E5%8C%BA%E2%80%9D"><span class="toc-number">13.2.1.</span> <span class="toc-text">（1）生产者：确保消息 “按顺序进同一个分区”</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%B6%88%E8%B4%B9%E8%80%85%EF%BC%9A%E7%A1%AE%E4%BF%9D-%E2%80%9C%E4%B8%80%E4%B8%AA%E5%88%86%E5%8C%BA%E5%8F%AA%E8%A2%AB%E4%B8%80%E4%B8%AA%E6%B6%88%E8%B4%B9%E8%80%85%E5%A4%84%E7%90%86%E2%80%9D"><span class="toc-number">13.2.2.</span> <span class="toc-text">（2）消费者：确保 “一个分区只被一个消费者处理”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9Kafka%E6%9C%89%E4%BB%80%E4%B9%88%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">对Kafka有什么了解吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB%EF%BC%9F"><span class="toc-number">15.</span> <span class="toc-text">Kafka 为什么这么快？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%EF%BC%8Ckafka%E6%98%AF%E6%8E%A8%E9%80%81%E8%BF%98%E6%98%AF%E6%8B%89%E5%8F%96%EF%BC%9F"><span class="toc-number">16.</span> <span class="toc-text">kafka的模型介绍一下，kafka是推送还是拉取？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/fec99276.html" title="消息队列"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=3077ac68-bda1-8881-875d-14b9ff785cad" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="消息队列"/></a><div class="content"><a class="title" href="/posts/fec99276.html" title="消息队列">消息队列</a><time datetime="2025-10-31T05:50:36.000Z" title="发表于 2025-10-31 13:50:36">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a0d0ac1c.html" title="Mybatis面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/pH7DOX5rqdLCk4b.jpg?_r_=653934aa-4102-d615-704c-0c371867f9de" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mybatis面试题"/></a><div class="content"><a class="title" href="/posts/a0d0ac1c.html" title="Mybatis面试题">Mybatis面试题</a><time datetime="2025-10-30T04:31:36.000Z" title="发表于 2025-10-30 12:31:36">2025-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/adbd2430.html" title="Redis面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/wfbr2eNcL1VvXIn.png?_r_=203f7ee7-df7e-3a68-5a7c-a880080b78a3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis面试题"/></a><div class="content"><a class="title" href="/posts/adbd2430.html" title="Redis面试题">Redis面试题</a><time datetime="2025-10-30T04:31:36.000Z" title="发表于 2025-10-30 12:31:36">2025-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/489ef953.html" title="Spring面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/SurYK9kV8bRd2Ll.jpg?_r_=4ad029ab-aa84-aa1c-e60b-ca2bec0bb246" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring面试题"/></a><div class="content"><a class="title" href="/posts/489ef953.html" title="Spring面试题">Spring面试题</a><time datetime="2025-10-28T10:31:36.000Z" title="发表于 2025-10-28 18:31:36">2025-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c45230cb.html" title="mysql面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2025/10/23/YUHOf5MZEItlGd3.jpg?_r_=0d5efad5-63ca-58b2-9760-1a5a63653ee9" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="mysql面试题"/></a><div class="content"><a class="title" href="/posts/c45230cb.html" title="mysql面试题">mysql面试题</a><time datetime="2025-10-27T03:31:36.000Z" title="发表于 2025-10-27 11:31:36">2025-10-27</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E4%B8%8A%E7%8F%AD%E6%91%B8%E9%B1%BC-brightgreen?style=social&amp;logo=appveyor&amp;logoColor=blue&amp;logoSize=auto&amp;label=%E5%8C%97%E5%B7%9D&amp;labelColor=white&amp;color=white" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2021 - 2025 By <a class="footer-bar-link" href="/" title="北川" target="_blank">北川</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://gukeyang.github.io" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=2898229193&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 0.88rem;">JVM内存模型<sup>1</sup></a><a href="/tags/JVM%E8%B0%83%E4%BC%98/" style="font-size: 0.88rem;">JVM调优<sup>1</sup></a><a href="/tags/Kafka/" style="font-size: 0.88rem;">Kafka<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 0.88rem;">Mybatis<sup>1</sup></a><a href="/tags/RabbitMQ/" style="font-size: 0.88rem;">RabbitMQ<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 0.88rem;">SpringMVC<sup>1</sup></a><a href="/tags/Springboot/" style="font-size: 0.88rem;">Springboot<sup>1</sup></a><a href="/tags/java%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">java教程<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">复习<sup>1</sup></a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 0.88rem;">并发<sup>1</sup></a><a href="/tags/%E5%BA%93%E5%AD%98/" style="font-size: 0.88rem;">库存<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 0.88rem;">电商<sup>1</sup></a><a href="/tags/%E8%AE%A2%E5%8D%95/" style="font-size: 0.88rem;">订单<sup>1</sup></a><a href="/tags/%E8%B6%85%E5%8D%96/" style="font-size: 0.88rem;">超卖<sup>1</sup></a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 0.88rem;">集合<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="anzhiyufont anzhiyu-icon-comment-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8152976493&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2021 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 北川 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("04/01/2023 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      img.src = "https://img.shields.io/badge/%E4%B8%8B%E7%8F%AD%E5%93%88%E7%9A%AE-brightgreen?style=social&amp;logo=appveyor&amp;logoColor=blue&amp;logoSize=auto&amp;label=%E5%8C%97%E5%B7%9D&amp;labelColor=white&amp;color=white";
+      img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+      img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+      appKey: 'TjKeHNK7GJrGTYuKYzGzh8yg',
+      avatar: 'mp',
+      serverURLs: '',
+      emojiMaps: {"2023":"https://i0.hdslb.com/bfs/emote/fa6dda8b876ed38609de38aa604be5ad109b8591.png","14周年":"https://i0.hdslb.com/bfs/emote/53148f85bb7e2d8bada8cea57ee4b1f36f48237d.png","兔年":"https://i0.hdslb.com/bfs/emote/9cb6ee2c42986c56ec361d21d5ccbd096aefab0a.png","脱单doge":"https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png","微笑":"https://i0.hdslb.com/bfs/emote/685612eadc33f6bc233776c6241813385844f182.png","微笑-春节":"https://i0.hdslb.com/bfs/emote/f32e5d367c81fbb88b54d7fe46366de04fe4f38f.png","微笑-愚人节":"https://i0.hdslb.com/bfs/emote/774d19d2416eb5b30ac66b02ac580b1b0ca92a80.png","微笑-愚人节2":"https://i0.hdslb.com/bfs/emote/ff45294fbd469ed51eab492e15b8bc7f8e755f14.png","口罩":"https://i0.hdslb.com/bfs/emote/3ad2f66b151496d2a5fb0a8ea75f32265d778dd3.png","doge":"https://i0.hdslb.com/bfs/emote/3087d273a78ccaff4bb1e9972e2ba2a7583c9f11.png","doge-春节":"https://i0.hdslb.com/bfs/emote/feb9abf68df628803ff69a244e744470c2b7e136.png","doge-圣诞":"https://i0.hdslb.com/bfs/emote/1afb5eb96846e0876071eeecb47be95dbf55f08d.png","doge-愚人节":"https://i0.hdslb.com/bfs/emote/8ab62b33061d20bc27beec798a2f73c639e8bb6e.png","doge-愚人节2":"https://i0.hdslb.com/bfs/emote/94460b4e92163c4ca88684b1830ca182d56ddea7.png","妙啊":"https://i0.hdslb.com/bfs/emote/b4cb77159d58614a9b787b91b1cd22a81f383535.png","妙啊-春节":"https://i0.hdslb.com/bfs/emote/692f196da6a623a1634ea305618d37709c2c87f0.png","妙啊-圣诞":"https://i0.hdslb.com/bfs/emote/1cdb10e4b6c6743a1ec96f1579e3ef3045a8f225.png","妙啊-愚人节":"https://i0.hdslb.com/bfs/emote/5675a5d2f3e7fb6b29db0ca8c7703237a18c4271.png","妙啊-愚人节2":"https://i0.hdslb.com/bfs/emote/7b55232e0733afe509d4ac6282d7e604f6f2064f.png","OK":"https://i0.hdslb.com/bfs/emote/4683fd9ffc925fa6423110979d7dcac5eda297f4.png","OK-春节":"https://i0.hdslb.com/bfs/emote/ad17fceba45996104c8b8e2e3f4efd7e2f588368.png","OK-圣诞":"https://i0.hdslb.com/bfs/emote/75d1c99cce001d6d103a8fd406616be9f51621ab.png","OK-愚人节":"https://i0.hdslb.com/bfs/emote/76cc9da7f4a054cb02aad900f0ca3d3fda9c9667.png","OK-愚人节2":"https://i0.hdslb.com/bfs/emote/4ab30d0c384aa7fb112d6078777d46f73797869b.png","星星眼":"https://i0.hdslb.com/bfs/emote/63c9d1a31c0da745b61cdb35e0ecb28635675db2.png","星星眼-春节":"https://i0.hdslb.com/bfs/emote/f6f01068ac7f6548779b0e16daa61974f9299b17.png","星星眼-圣诞":"https://i0.hdslb.com/bfs/emote/195641c30c55f34f9cd82c5e5c32d66a425c7723.png","星星眼-愚人节":"https://i0.hdslb.com/bfs/emote/270e85c95c1ad919848b415601ed3a879bd08127.png","星星眼-愚人节2":"https://i0.hdslb.com/bfs/emote/99471a235923d29c00fa9fc46b82e74196f99722.png","辣眼睛":"https://i0.hdslb.com/bfs/emote/35d62c496d1e4ea9e091243fa812866f5fecc101.png","辣眼睛-春节":"https://i0.hdslb.com/bfs/emote/1ad7c9d351bd64332cc8520c165ee0b32a6e82fa.png","辣眼睛-圣诞":"https://i0.hdslb.com/bfs/emote/8080adfe5acdfd0b6b09bd91db24ea7334ac7b44.png","辣眼睛-愚人节":"https://i0.hdslb.com/bfs/emote/65ed9509df4d509a1cdf22e75a6d3b708f4e9afb.png","辣眼睛-愚人节2":"https://i0.hdslb.com/bfs/emote/60fcc72634bc1d2ad612a18b46256d5d50804ca2.png","吃瓜":"https://i0.hdslb.com/bfs/emote/4191ce3c44c2b3df8fd97c33f85d3ab15f4f3c84.png","吃瓜-春节":"https://i0.hdslb.com/bfs/emote/fbd58fe2465d84d32f37800af0fe6f25711ef397.png","吃瓜-圣诞":"https://i0.hdslb.com/bfs/emote/aa6a3022e47b441c7f84d02cacc063a728a561e0.png","吃瓜-愚人节":"https://i0.hdslb.com/bfs/emote/f05344578512ef18878de01d188657fbf81d31c8.png","吃瓜-愚人节2":"https://i0.hdslb.com/bfs/emote/39a3f88f2232bdd8b8116d952060c72fcf093b55.png","滑稽":"https://i0.hdslb.com/bfs/emote/d15121545a99ac46774f1f4465b895fe2d1411c3.png","滑稽-春节":"https://i0.hdslb.com/bfs/emote/e56b466b43dd6930756d5caf4c22bef4f963dd35.png","滑稽-圣诞":"https://i0.hdslb.com/bfs/emote/5874276ea716d0e9797f827dcfca4332acf8f0de.png","滑稽-愚人节":"https://i0.hdslb.com/bfs/emote/e8c1b263949c2617e6395b190d185b2f8cdf0747.png","滑稽-愚人节2":"https://i0.hdslb.com/bfs/emote/1d44d848b82fe0fcbd4d6f23e3c4a26a0fe4f40f.png","呲牙":"https://i0.hdslb.com/bfs/emote/b5a5898491944a4268360f2e7a84623149672eb6.png","呲牙-春节":"https://i0.hdslb.com/bfs/emote/6ae3b1008d2fee7e15b5eb447b2ccff18e664b88.png","呲牙-圣诞":"https://i0.hdslb.com/bfs/emote/ae4395c1e29e9a2db0c9ccc4c0db05c414816e68.png","呲牙-愚人节":"https://i0.hdslb.com/bfs/emote/299e5867bb79f42d8553023909f42e89707cb500.png","呲牙-愚人节2":"https://i0.hdslb.com/bfs/emote/3688061f6a90c8559dc4663f4d4971ea27d0c014.png","打call":"https://i0.hdslb.com/bfs/emote/431432c43da3ee5aab5b0e4f8931953e649e9975.png","打call-春节":"https://i0.hdslb.com/bfs/emote/bf990016e43b7111cab4566dea194ba837a1a88f.png","打call-圣诞":"https://i0.hdslb.com/bfs/emote/2b04dd2d0e55d978ee485e1f7f3c5e355493ab78.png","打call-愚人节":"https://i0.hdslb.com/bfs/emote/49240d8643d7702519fc4cc468e0003a7623c0e3.png","打call-愚人节2":"https://i0.hdslb.com/bfs/emote/7ffaa98f9f49489022815e38dbcb1a04677a8f13.png","歪嘴":"https://i0.hdslb.com/bfs/emote/4384050fbab0586259acdd170b510fe262f08a17.png","歪嘴-愚人节":"https://i0.hdslb.com/bfs/emote/6cc4c091d3f2cc540f64d8f10ffe516fd2f4ea2b.png","歪嘴-愚人节2":"https://i0.hdslb.com/bfs/emote/f24a5cd8e8400a3ab850ce68ac495fde66a03b64.png","调皮":"https://i0.hdslb.com/bfs/emote/8290b7308325e3179d2154327c85640af1528617.png","调皮-愚人节":"https://i0.hdslb.com/bfs/emote/a09481ceb0644f799d94805446fd52dce775b022.png","调皮-愚人节2":"https://i0.hdslb.com/bfs/emote/0da0b2049a4f7b310e3992afbcb7367b81707824.png","豹富":"https://i0.hdslb.com/bfs/emote/3d1dbe52ea16e12ff7b1c371196f728a4097fb33.png","嗑瓜子":"https://i0.hdslb.com/bfs/emote/28a91da1685d90124cfeead74622e1ebb417c0eb.png","嗑瓜子-春节":"https://i0.hdslb.com/bfs/emote/d2f9910f2d6e52ead3bf1ee29754cd1176f5fc2e.png","笑哭":"https://i0.hdslb.com/bfs/emote/c3043ba94babf824dea03ce500d0e73763bf4f40.png","捂脸-圣诞":"https://i0.hdslb.com/bfs/emote/9af59557383770c398daac81583e6c4d27d83da7.png","笑哭-春节":"https://i0.hdslb.com/bfs/emote/29ce59fb7f14351d195609ef297d30e336bdb240.png","藏狐":"https://i0.hdslb.com/bfs/emote/ba0937ef6f3ccca85e2e0047e6263f3b4da37201.png","脸红":"https://i0.hdslb.com/bfs/emote/0922c375da40e6b69002bd89b858572f424dcfca.png","脸红-旧":"https://i0.hdslb.com/bfs/emote/50cb2606c285614f5786bd387c4f00dff923c82b.png","给心心":"https://i0.hdslb.com/bfs/emote/1597302b98827463f5b75c7cac1f29ea6ce572c4.png","嘟嘟":"https://i0.hdslb.com/bfs/emote/abd7404537d8162720ccbba9e0a8cdf75547e07a.png","哦呼":"https://i0.hdslb.com/bfs/emote/362bded07ea5434886271d23fa25f5d85d8af06c.png","喜欢":"https://i0.hdslb.com/bfs/emote/8a10a4d73a89f665feff3d46ca56e83dc68f9eb8.png","酸了":"https://i0.hdslb.com/bfs/emote/92b1c8cbceea3ae0e8e32253ea414783e8ba7806.png","嫌弃":"https://i0.hdslb.com/bfs/emote/de4c0783aaa60ec03de0a2b90858927bfad7154b.png","害羞":"https://i0.hdslb.com/bfs/emote/9d2ec4e1fbd6cb1b4d12d2bbbdd124ccb83ddfda.png","大哭":"https://i0.hdslb.com/bfs/emote/2caafee2e5db4db72104650d87810cc2c123fc86.png","疑惑":"https://i0.hdslb.com/bfs/emote/b7840db4b1f9f4726b7cb23c0972720c1698d661.png","喜极而泣":"https://i0.hdslb.com/bfs/emote/485a7e0c01c2d70707daae53bee4a9e2e31ef1ed.png","笑":"https://i0.hdslb.com/bfs/emote/81edf17314cea3b48674312b4364df44d5c01f17.png","偷笑":"https://i0.hdslb.com/bfs/emote/6c49d226e76c42cd8002abc47b3112bc5a92f66a.png","惊讶":"https://i0.hdslb.com/bfs/emote/f8e9a59cad52ae1a19622805696a35f0a0d853f3.png","捂脸":"https://i0.hdslb.com/bfs/emote/6921bb43f0c634870b92f4a8ad41dada94a5296d.png","阴险":"https://i0.hdslb.com/bfs/emote/ba8d5f8e7d136d59aab52c40fd3b8a43419eb03c.png","呆":"https://i0.hdslb.com/bfs/emote/33ad6000d9f9f168a0976bc60937786f239e5d8c.png","抠鼻":"https://i0.hdslb.com/bfs/emote/cb89184c97e3f6d50acfd7961c313ce50360d70f.png","大笑":"https://i0.hdslb.com/bfs/emote/ca94ad1c7e6dac895eb5b33b7836b634c614d1c0.png","惊喜":"https://i0.hdslb.com/bfs/emote/0afecaf3a3499479af946f29749e1a6c285b6f65.png","无语":"https://i0.hdslb.com/bfs/emote/44667b7d9349957e903b1b62cb91fb9b13720f04.png","点赞":"https://i0.hdslb.com/bfs/emote/1a67265993913f4c35d15a6028a30724e83e7d35.png","鼓掌":"https://i0.hdslb.com/bfs/emote/895d1fc616b4b6c830cf96012880818c0e1de00d.png","尴尬":"https://i0.hdslb.com/bfs/emote/cb321684ed5ce6eacdc2699092ab8fe7679e4fda.png","灵魂出窍":"https://i0.hdslb.com/bfs/emote/43d3db7d97343c01b47e22cfabeca84b4251f35a.png","委屈":"https://i0.hdslb.com/bfs/emote/d2f26cbdd6c96960320af03f5514c5b524990840.png","傲娇":"https://i0.hdslb.com/bfs/emote/010540d0f61220a0db4922e4a679a1d8eca94f4e.png","疼":"https://i0.hdslb.com/bfs/emote/905fd9a99ec316e353b9bd4ecd49a5f0a301eabf.png","冷":"https://i0.hdslb.com/bfs/emote/cb0ebbd0668640f07ebfc0e03f7a18a8cd00b4ed.png","热":"https://i0.hdslb.com/bfs/emote/4e58a2a6f5f1580ac33df2d2cf7ecad7d9ab3635.png","生病":"https://i0.hdslb.com/bfs/emote/0f25ce04ae1d7baf98650986454c634f6612cb76.png","捂眼":"https://i0.hdslb.com/bfs/emote/c5c6d6982e1e53e478daae554b239f2b227b172b.png","嘘声":"https://i0.hdslb.com/bfs/emote/e64af664d20716e090f10411496998095f62f844.png","思考":"https://i0.hdslb.com/bfs/emote/cfa9b7e89e4bfe04bbcd34ccb1b0df37f4fa905c.png","再见":"https://i0.hdslb.com/bfs/emote/fc510306bae26c9aec7e287cdf201ded27b065b9.png","翻白眼":"https://i0.hdslb.com/bfs/emote/eba54707c7168925b18f6f8b1f48d532fe08c2b1.png","哈欠":"https://i0.hdslb.com/bfs/emote/888d877729cbec444ddbd1cf4c9af155a7a06086.png","奋斗":"https://i0.hdslb.com/bfs/emote/bb2060c15dba7d3fd731c35079d1617f1afe3376.png","墨镜":"https://i0.hdslb.com/bfs/emote/3a03aebfc06339d86a68c2d893303b46f4b85771.png","难过":"https://i0.hdslb.com/bfs/emote/a651db36701610aa70a781fa98c07c9789b11543.png","撇嘴":"https://i0.hdslb.com/bfs/emote/531863568e5668c5ac181d395508a0eeb1f0cda4.png","抓狂":"https://i0.hdslb.com/bfs/emote/4c87afff88c22439c45b79e9d2035d21d5622eba.png","生气":"https://i0.hdslb.com/bfs/emote/3195714219c4b582a4fb02033dd1519913d0246d.png","水稻":"https://i0.hdslb.com/bfs/emote/d530fcaa5100ba12a17a79b55bad342d530c54e3.png","奶茶干杯":"https://i0.hdslb.com/bfs/emote/d5a491990be551ce69f9660da948050df4eab331.png","汤圆":"https://i0.hdslb.com/bfs/emote/93609633a9d194cf336687eb19c01dca95bde719.png","锦鲤":"https://i0.hdslb.com/bfs/emote/643d6c19c8164ffd89e3e9cdf093cf5d773d979c.png","锦鲤-愚人节2":"https://i0.hdslb.com/bfs/emote/51b05d4c678f3880499f1cf2c5742c334cdd0a72.png","福到了":"https://i0.hdslb.com/bfs/emote/5de5373d354c373cf1617b6b836f3a8d53c5a655.png","鸡腿":"https://i0.hdslb.com/bfs/emote/c7860392815d345fa69c4f00ef18d67dccfbd574.png","雪花":"https://i0.hdslb.com/bfs/emote/a41813c4edf8782047e172c884ebd4507ce5e449.png","视频卫星":"https://i0.hdslb.com/bfs/emote/dce6fc7d6dfeafff01241924db60f8251cca5307.png","干杯":"https://i0.hdslb.com/bfs/emote/8da12d5f55a2c7e9778dcc05b40571979fe208e6.png","黑洞":"https://i0.hdslb.com/bfs/emote/e90ec4c799010f25391179118ccd9f66b3b279ba.png","黑洞2":"https://i0.hdslb.com/bfs/emote/c4e9f0e3f35961d5037cb071b16ddba2170b262c.png","爱心":"https://i0.hdslb.com/bfs/emote/ed04066ea7124106d17ffcaf75600700e5442f5c.png","胜利":"https://i0.hdslb.com/bfs/emote/b49fa9f4b1e7c3477918153b82c60b114d87347c.png","加油":"https://i0.hdslb.com/bfs/emote/c7aaeacb21e107292d3bb053e5abde4a4459ed30.png","抱拳":"https://i0.hdslb.com/bfs/emote/89516218158dbea18ab78e8873060bf95d33bbbe.png","响指":"https://i0.hdslb.com/bfs/emote/1b5c53cf14336903e1d2ae3527ca380a1256a077.png","保佑":"https://i0.hdslb.com/bfs/emote/fafe8d3de0dc139ebe995491d2dac458a865fb30.png","福":"https://i0.hdslb.com/bfs/emote/802429a301ac5b35a0480d9526a070ce67cd8097.png","支持":"https://i0.hdslb.com/bfs/emote/3c210366a5585706c09d4c686a9d942b39feeb50.png","拥抱":"https://i0.hdslb.com/bfs/emote/41780a4254750cdaaccb20735730a36044e98ef3.png","跪了":"https://i0.hdslb.com/bfs/emote/f2b3aee7e521de7799d4e3aa379b01be032698ac.png","怪我咯":"https://i0.hdslb.com/bfs/emote/07cc6077f7f7d75b8d2c722dd9d9828a9fb9e46d.png","老鼠":"https://i0.hdslb.com/bfs/emote/8e6fb491eb1bb0d5862e7ec8ccf9a3da12b6c155.png","牛年":"https://i0.hdslb.com/bfs/emote/9275275ff1f2659310648221107d20bc4970f106.png","三星堆":"https://i0.hdslb.com/bfs/emote/fc7dadaa6986e75b813aa26f3eff3281d5f1a6d1.png","桃源-给花花":"https://i0.hdslb.com/bfs/emote/085d41d0fa25453b58fdc87dc2df538183fea11e.png","桃源-缘分":"https://i0.hdslb.com/bfs/emote/cf1c441507689342713623965035f9bed72b1b17.png","桃源-傲娇":"https://i0.hdslb.com/bfs/emote/ce8314c9c2cfdbe235c239c28b819698e29a02d3.png","桃源-欢呼":"https://i0.hdslb.com/bfs/emote/1f439878d8160bd64a4464904064a10df880c921.png","桃源-乖巧":"https://i0.hdslb.com/bfs/emote/57d087b6437002c2ca9e225dcac0ef226d1f2654.png","洛天依":"https://i0.hdslb.com/bfs/emote/9fe06f3594d9afaf4ee2b74770f1c3086ae0ba11.png","坎公骑冠剑-吃鸡":"https://i0.hdslb.com/bfs/emote/c4248a7b6ab326d66c83fd1fb58f1a50f99df332.png","坎公骑冠剑-钻石":"https://i0.hdslb.com/bfs/emote/0b97c7e50e0cc963370e62fbb9b55f51bbe7f8ab.png","坎公骑冠剑-无语":"https://i0.hdslb.com/bfs/emote/80eba0ce64c3fc1279b4daede2f1979cb2380e78.png","来古-沉思":"https://i0.hdslb.com/bfs/emote/4ee07ff03266d62b246be0b950bebb2abf3d997c.png","来古-呆滞":"https://i0.hdslb.com/bfs/emote/9a70b365e523f2379f395031ceefcebb75a45903.png","来古-疑问":"https://i0.hdslb.com/bfs/emote/032fdc0d9d9fe6334776f6c39518a959b73b98f4.png","来古-震撼":"https://i0.hdslb.com/bfs/emote/8b40f228675602a317d32007de6b795c101135ec.png","来古-注意":"https://i0.hdslb.com/bfs/emote/4b671ba32a2581cf40e5cd41c67b111eb8010de0.png","初音未来-大笑":"https://i0.hdslb.com/bfs/emote/8e7f71cda83ce407b0684702983399f8ed982f17.png","原神-哇":"https://i0.hdslb.com/bfs/emote/8188ddf95bace929d382c7a83214afde79d83bfc.png","原神-哼":"https://i0.hdslb.com/bfs/emote/91ed33b74bc36873c3ac8b2648f70d7ab6d8ab78.png","原神-嗯":"https://i0.hdslb.com/bfs/emote/8b0a87e414f453a29730b6e0f45ca61f2f898688.png","原神-欸嘿":"https://i0.hdslb.com/bfs/emote/8fba438fcbe0550877b04efd768d857082307c5e.png","原神-喝茶":"https://i0.hdslb.com/bfs/emote/1de5789fbb3526ef7823c54db7081790a38e7044.png","原神-生气":"https://i0.hdslb.com/bfs/emote/90a38c34742899f8e84138ed55f56cad3ba611fb.png","保卫萝卜-白眼":"https://i0.hdslb.com/bfs/emote/9fce63f38288700bf7be84f3be336cf895ba0902.png","保卫萝卜-笔芯":"https://i0.hdslb.com/bfs/emote/5ff2ed5cb71b02010018cc5910ac7052a03769af.png","保卫萝卜-哭哭":"https://i0.hdslb.com/bfs/emote/7d249f7c990111d3e2982f7477af15b7eb29cbd9.png","保卫萝卜-哇":"https://i0.hdslb.com/bfs/emote/5f2370e561c32d841245f7b1aab2eef43aeb9544.png","保卫萝卜-问号":"https://i0.hdslb.com/bfs/emote/41eb93f09fc4a4d0692a310e8a1f85ba60e96060.png","无悔华夏-不愧是你":"https://i0.hdslb.com/bfs/emote/c58002c32ee78d45366e126f294cb3149dd64ac2.png","无悔华夏-吃瓜":"https://i0.hdslb.com/bfs/emote/273dcff577551bafff4f1eae18561f871e73a6ba.png","无悔华夏-达咩":"https://i0.hdslb.com/bfs/emote/cffab383f47bab7f6736ba9c8d6ac098113410d9.png","无悔华夏-点赞":"https://i0.hdslb.com/bfs/emote/b0f2e8db405ec667c3e6aaabd7c15155b6ea8710.png","无悔华夏-好耶":"https://i0.hdslb.com/bfs/emote/324cd79784aeb37dbf2f47f68bbe8ed5d01f975e.png","奥比岛-搬砖":"https://i0.hdslb.com/bfs/emote/1fab697214918d91087373a999cc7ef8040ddf85.png","奥比岛-点赞":"https://i0.hdslb.com/bfs/emote/fb0b476fe2ff30cd59385ea7d616627ac114161f.png","奥比岛-击爪":"https://i0.hdslb.com/bfs/emote/35bba1bb8f164c5e844155548438248e6eaa8382.png","奥比岛-委屈":"https://i0.hdslb.com/bfs/emote/fda155e7c33b40dbb94c24644e0635d47b6ef3cc.png","奥比岛-喜欢":"https://i0.hdslb.com/bfs/emote/ed64e0c81ee194138bd9df30c65077ed978fb88c.png"},
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script src="https://cdn.cbd.int/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=mp'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://4GK2IcRZ.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": '4GK2IcRZ0PX28gP4kGsW08qs-gzGzoHsz',
+        "X-LC-Key": 'TjKeHNK7GJrGTYuKYzGzh8yg',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="//code.tidio.co/4nifo6zdbrmyjsngh2yzxwbnlhrvshrf.js" async="async"></script><script>(() => {
+  const isChatBtn = true
+  const isChatHideShow = true
+
+  if (isChatBtn) {
+    let isShow = false
+    const close = () => {
+      window.tidioChatApi.hide()
+      isShow = false
+    }
+    
+    const open = () => {
+      window.tidioChatApi.open()
+      window.tidioChatApi.show()
+      isShow = true
+    }
+
+    const onTidioChatApiReady = () => {
+      window.tidioChatApi.hide()
+      window.tidioChatApi.on("close", close)
+    }
+    if (window.tidioChatApi) {
+      window.tidioChatApi.on("ready", onTidioChatApiReady)
+    } else {
+      document.addEventListener("tidioChat-ready", onTidioChatApiReady)
+    }
+
+    window.chatBtnFn = () => {
+      if (!window.tidioChatApi) return
+      isShow ? close() : open()
+    }
+  } else if (isChatHideShow) {
+    window.chatBtn = {
+      hide: () => {
+        window.tidioChatApi && window.tidioChatApi.hide()
+      },
+      show: () => {
+        window.tidioChatApi && window.tidioChatApi.show()
+      }
+    }
+  }
+})()</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
