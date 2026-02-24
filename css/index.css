@@ -20352,6 +20352,7 @@ a.catalog-more:hover {
   padding: 0.5rem 10px;
   background: var(--anzhiyu-card-bg);
   display: flex;
+  align-items: center;
   white-space: nowrap;
   overflow: hidden;
   border: var(--style-border);
