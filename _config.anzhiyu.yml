@@ -1,0 +1,165 @@
+# ============================================================
+# AnZhiYu（安知鱼）主题覆盖配置
+# 优先级高于 node_modules/hexo-theme-anzhiyu/_config.yml（Hexo 会深合并）
+# 这里只写需要改动的项，其余保持主题默认
+# 全部配置项与说明见主题自带 _config.yml / https://docs.anheyu.com/
+# ============================================================
+
+# ---------------- 顶部导航 ----------------
+menu:
+  文章:
+    归档: /archives/ || anzhiyu-icon-box-archive
+    分类: /categories/ || anzhiyu-icon-shapes
+    标签: /tags/ || anzhiyu-icon-tags
+  关于:
+    关于本站: /about/ || anzhiyu-icon-paper-plane
+    随便逛逛: 'javascript:toRandomPost() || anzhiyu-icon-shoe-prints1'
+
+nav:
+  enable: false
+  travelling: false
+  clock: false
+
+social:
+  Github: https://github.com/YOUR_GITHUB_USERNAME || anzhiyu-icon-github
+
+# ---------------- 站点图标与头像（本地 SVG，无需外部图床） ----------------
+favicon: /img/favicon.svg
+avatar:
+  img: /img/avatar.svg
+  effect: false
+
+index_img: false
+disable_top_img: false
+default_top_img: /img/cover-default.svg
+
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  position: left
+  default_cover:
+    - /img/cover-default.svg
+
+error_img:
+  flink: /img/cover-default.svg
+  post_page: /img/cover-default.svg
+
+error_404:
+  enable: true
+  subtitle: 页面走丢了，回首页看看吧
+  background: /img/cover-default.svg
+
+# ---------------- 首页顶部区块（安知鱼标志性布局） ----------------
+home_top:
+  enable: true
+  timemode: date
+  title: 生活明朗
+  subTitle: 万物可爱。
+  siteText: YOUR_GITHUB_USERNAME.github.io
+  category:
+    - name: 技术
+      path: /categories/技术笔记/
+      shadow: var(--anzhiyu-shadow-blue)
+      class: blue
+      icon: anzhiyu-icon-dove
+    - name: 折腾
+      path: /categories/折腾记录/
+      shadow: var(--anzhiyu-shadow-red)
+      class: red
+      icon: anzhiyu-icon-fire
+    - name: 生活
+      path: /categories/生活日常/
+      shadow: var(--anzhiyu-shadow-green)
+      class: green
+      icon: anzhiyu-icon-book
+  default_descr: 这里还没有摘要，点进去看看吧
+  swiper:
+    enable: false
+  banner:
+    tips: 新站上线
+    title: Hello, AnZhiYu
+    image: /img/cover-default.svg
+    link: /about/
+
+# ---------------- 首页副标题打字机 ----------------
+subtitle:
+  enable: true
+  effect: true
+  loop: true
+  source: false
+  sub:
+    - 记录生活与技术的一点一滴
+    - 保持好奇，慢慢变好
+
+preloader:
+  enable: true
+  source: 3
+  avatar: /img/avatar.svg
+
+# ---------------- 侧边栏 ----------------
+aside:
+  card_author:
+    enable: true
+    description: 一个用 Hexo 搭建的安静角落。
+    name_link: /
+  card_announcement:
+    enable: true
+    content: 欢迎来到我的博客，本站由 GitHub Pages 托管。
+  card_weixin:
+    enable: false
+  card_recent_post:
+    enable: true
+    limit: 5
+  card_tags:
+    enable: true
+  card_archives:
+    enable: true
+  card_webinfo:
+    enable: true
+
+# ---------------- 文章 ----------------
+# 依赖已安装的 hexo-wordcount
+wordcount:
+  enable: true
+  post_wordcount: true
+  min2read: true
+  total_wordcount: true
+
+post_copyright:
+  enable: true
+  location: 中国
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+# 打赏二维码属于主题作者，自己的站点默认关闭
+reward:
+  enable: false
+post_edit:
+  enable: false
+
+# ---------------- 页脚 ----------------
+footer:
+  owner:
+    enable: true
+    since: 2026
+  custom_text: '由 <a href="https://hexo.io/">Hexo</a> 与 <a href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu">AnZhiYu</a> 驱动，托管于 GitHub Pages'
+  runtime:
+    enable: false
+  bdageitem:
+    enable: false
+  socialBar:
+    enable: false
+
+# ---------------- 主题色（安知鱼蓝） ----------------
+theme_color:
+  enable: true
+  main: '#425AEF'
+  dark_main: '#f2b94b'
+  paginator: '#425AEF'
+
+# ---------------- 静态资源 ----------------
+# 主题内部资源打包进 public；第三方脚本走 CDN（无需自己托管）
+CDN:
+  internal_provider: local
+  third_party_provider: cbd

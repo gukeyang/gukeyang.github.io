@@ -1,0 +1,83 @@
+# ============================================================
+# Hexo 站点配置 —— AnZhiYu（安知鱼）主题 / GitHub Pages 版
+# 站点配置文档：https://hexo.io/zh-cn/docs/configuration.html
+# 主题相关配置一律写在 _config.anzhiyu.yml，不要写在这里
+# ============================================================
+
+# ---------------- 站点信息（按需修改） ----------------
+title: 安和鱼的博客
+subtitle: 记录生活、技术与一点奇思妙想
+description: 基于 Hexo 与安知鱼主题搭建的静态博客，托管于 GitHub Pages。
+keywords: Hexo, AnZhiYu, 安知鱼, 博客, GitHub Pages
+author: YOUR_NAME
+language: zh-CN
+timezone: Asia/Shanghai
+
+# ---------------- URL（部署关键配置） ----------------
+# 仓库类型为 <用户名>.github.io 主站，所以 root 必须是 /
+# ★ 上线前请把 YOUR_GITHUB_USERNAME 替换为你的 GitHub 用户名
+url: https://YOUR_GITHUB_USERNAME.github.io
+root: /
+permalink: posts/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# ---------------- 目录 ----------------
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# ---------------- 写作 ----------------
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  exclude: []
+  field: site
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+
+# 主题自带代码高亮样式，按 AnZhiYu / Butterfly 要求保留 Hexo 渲染、关闭 hljs
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# ---------------- 首页与分页 ----------------
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true
+  daily: false
+category_generator:
+  per_page: 15
+tag_generator:
+  per_page: 15
+
+# ---------------- 扩展 ----------------
+theme: anzhiyu
+
+# 本项目使用 GitHub Actions 自动发布，无需在此配置 deploy
