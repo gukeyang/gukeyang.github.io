@@ -29,11 +29,11 @@ nav:
     - title: 项目
       item:
         - name: GitHub
-          link: https://github.com/YOUR_GITHUB_USERNAME
+          link: https://github.com/gukeyang
           icon: /img/favicon.svg
 
 social:
-  Github: https://github.com/YOUR_GITHUB_USERNAME || anzhiyu-icon-github
+  Github: https://github.com/gukeyang || anzhiyu-icon-github
 
 # ---------------- 站点图标与头像（本地 SVG，无需外部图床） ----------------
 favicon: /img/favicon.svg
@@ -68,7 +68,7 @@ home_top:
   timemode: date
   title: 生活明朗
   subTitle: 万物可爱。
-  siteText: YOUR_GITHUB_USERNAME.github.io
+  siteText: gukeyang.github.io
   category:
     - name: 技术
       path: /categories/技术笔记/

@@ -9,14 +9,14 @@ title: 安和鱼的博客
 subtitle: 记录生活、技术与一点奇思妙想
 description: 基于 Hexo 与安知鱼主题搭建的静态博客，托管于 GitHub Pages。
 keywords: Hexo, AnZhiYu, 安知鱼, 博客, GitHub Pages
-author: YOUR_NAME
+author: gukeyang
 language: zh-CN
 timezone: Asia/Shanghai
 
 # ---------------- URL（部署关键配置） ----------------
-# 仓库类型为 <用户名>.github.io 主站，所以 root 必须是 /
-# ★ 上线前请把 YOUR_GITHUB_USERNAME 替换为你的 GitHub 用户名
-url: https://YOUR_GITHUB_USERNAME.github.io
+# 仓库类型为 gukeyang.github.io 主站，所以 root 必须是 /
+# 个人主页仓库，发布后访问 https://gukeyang.github.io
+url: https://gukeyang.github.io
 root: /
 permalink: posts/:title/
 permalink_defaults:

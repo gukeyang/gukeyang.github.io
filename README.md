@@ -1,6 +1,6 @@
 # AnZhiYu 博客 · GitHub Pages 版
 
-基于 **Hexo 8 + [hexo-theme-anzhiyu](https://github.com/anzhiyu-c/hexo-theme-anzhiyu) 1.7.0** 的纯静态博客，配 **GitHub Actions** 自动构建发布到 `<用户名>.github.io` 主站仓库。
+基于 **Hexo 8 + [hexo-theme-anzhiyu](https://github.com/anzhiyu-c/hexo-theme-anzhiyu) 1.7.0** 的纯静态博客，配 **GitHub Actions** 自动构建发布到 `gukeyang.github.io` 主站仓库。
 
 主题通过 npm 安装，`_config.anzhiyu.yml` 做覆盖配置，升级主题不会冲掉自定义内容；头像 / favicon / 封面都是仓库内的 SVG，不依赖外部图床。
 
@@ -18,42 +18,37 @@ npm run build   # 生成静态文件到 public/
 
 ---
 
-## 二、上线到 GitHub Pages（三步）
+## 二、上线到 GitHub Pages
 
-### 1. 替换占位符
+本项目已按 `gukeyang.github.io` 配置完毕：
 
-全项目搜索 `YOUR_GITHUB_USERNAME` 与 `YOUR_NAME`，换成自己的信息：
+| 项 | 值 |
+| --- | --- |
+| 仓库 | https://github.com/gukeyang/gukeyang.github.io |
+| 站点地址 | https://gukeyang.github.io |
+| 发布源 | GitHub Actions（仓库 Settings → Pages → Source） |
+| 工作流 | `.github/workflows/deploy.yml` |
 
-| 文件 | 字段 | 说明 |
-| --- | --- | --- |
-| `_config.yml` | `url` | `https://<用户名>.github.io` |
-| `_config.yml` | `title` / `subtitle` / `description` / `author` | 站点名称与作者 |
-| `_config.anzhiyu.yml` | `social.Github`、`home_top.siteText` | 社交链接与首页文字 |
-| `source/about/index.md` | 正文里的 GitHub 链接 | 关于页联系方式 |
-
-> 仓库必须是 `<用户名>.github.io` 主站仓库，所以 `_config.yml` 里 `root: /` 不要改。
-> 若改用普通项目仓库（访问路径带 `/仓库名/`），需要把 `root` 同步改成 `/仓库名/`。
-
-### 2. 建仓库并开启 Pages
-
-1. 在 GitHub 新建仓库 `<用户名>.github.io`，**不要**勾选 README / .gitignore / License（避免冲突）。
-2. 仓库 **Settings → Pages → Build and deployment → Source** 选 **GitHub Actions**。
-3. 若仓库默认分支不是 `main`，同步修改 `.github/workflows/deploy.yml` 里的 `branches: [main]`。
-
-### 3. 推送
+### 首次推送
 
 ```bash
-git init                       # 若本地还没有仓库
-git add .
-git commit -m "init: hexo + anzhiyu blog"
-git branch -M main
-git remote add origin https://github.com/<用户名>/<用户名>.github.io.git
+git remote add origin https://github.com/gukeyang/gukeyang.github.io.git  # 已配置，可跳过
 git push -u origin main
 ```
 
-推送后 Actions 自动执行 `npm ci → npm run build → deploy-pages`，约 1–2 分钟后访问 `https://<用户名>.github.io`。之后每次 `git push` 都会自动更新，也可以在 Actions 页面手动 `Run workflow`。
+推送后 Actions 自动执行 `npm ci → npm run build → deploy-pages`，约 1–2 分钟后访问 https://gukeyang.github.io。之后每次 `git push` 都会自动更新，也可以在 Actions 页面手动 `Run workflow`。
 
-> 部署用的是官方 Pages artifact 方案（`actions/deploy-pages`），不需要 SSH Key、不需要 Token、不需要 `gh-pages` 分支。
+> 部署用官方 Pages artifact 方案，不需要 SSH Key、不需要 Token、不需要 `gh-pages` 分支。仓库必须是 `gukeyang.github.io` 主站仓库，`root: /` 不要改；若换成普通项目仓库（访问路径带 `/仓库名/`），`root` 要同步改成 `/仓库名/`。
+
+### 想改站点信息
+
+| 文件 | 字段 |
+| --- | --- |
+| `_config.yml` | `title` / `subtitle` / `description` / `author` |
+| `_config.anzhiyu.yml` | `social.Github`、`home_top.siteText`、导航菜单 |
+| `source/about/index.md` | 关于页正文与联系方式 |
+
+改完 `git add . && git commit -m "..." && git push` 即可生效。
 
 ---
 
@@ -104,7 +99,7 @@ description: 一句话摘要
 
 - **本地搜索**：`npm i hexo-generator-searchdb`，在 `_config.yml` 增加 `search: {path: search.xml, field: post, content: true}`，再在 `_config.anzhiyu.yml` 打开 `local_search.enable: true`。
 - **评论**：主题支持 Twikoo / Waline / Artalk / Giscus，需要对应的后端或 GitHub Discussions，配置 `comments.use` 及对应段落。
-- **自定义域名**：在 `source/` 放 `CNAME` 文件（内容为域名），并把 `_config.yml` 的 `url` 改成该域名；域名 DNS 加 CNAME 指向 `<用户名>.github.io`。
+- **自定义域名**：在 `source/` 放 `CNAME` 文件（内容为域名），并把 `_config.yml` 的 `url` 改成该域名；域名 DNS 加 CNAME 指向 `gukeyang.github.io`。
 - **RSS / sitemap**：安装 `hexo-generator-feed`、`hexo-generator-sitemap` 后按需启用。
 - **主题升级**：`npm update hexo-theme-anzhiyu`；升级后对照主题新版本 `_config.yml` 检查 `_config.anzhiyu.yml` 是否有字段变更。
 

@@ -15,7 +15,7 @@ description: 用官方 Pages artifact 方式发布 Hexo 静态站，不需要 SS
 
 ## 仓库与 Pages 设置
 
-1. 新建仓库，名字必须是 `<用户名>.github.io`（用户主页仓库）。
+1. 新建仓库，名字必须是 `gukeyang.github.io`（用户主页仓库）。
 2. 仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
 3. 本地推送 `main` 分支即可，工作流会自动构建 `public/` 并部署。
 
@@ -48,10 +48,10 @@ npm run build    # 生成 public/
 
 ## 站点配置的两个坑
 
-- `url` 必须写最终访问地址，`root` 对 `<用户名>.github.io` 主站仓库必须保持 `/`。
+- `url` 必须写最终访问地址，`root` 对 `gukeyang.github.io` 主站仓库必须保持 `/`。
 - 若改用普通项目仓库（地址为 `/仓库名/`），`root` 要同步改成 `/仓库名/`，否则 CSS、JS 全部 404。
 
 ```yaml
-url: https://YOUR_GITHUB_USERNAME.github.io
+url: https://gukeyang.github.io
 root: /
 ```

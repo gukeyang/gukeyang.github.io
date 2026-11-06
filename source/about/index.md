@@ -21,4 +21,4 @@ date: 2026-11-06 12:00:00
 
 ## 联系
 
-可以在 [GitHub](https://github.com/YOUR_GITHUB_USERNAME) 找到我。
+可以在 [GitHub](https://github.com/gukeyang) 找到我。
