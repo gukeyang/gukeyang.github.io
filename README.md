@@ -108,3 +108,33 @@ description: 一句话摘要
 ## 六、已做的默认处理
 
 清掉了主题默认配置里属于原作者的内容（头像、微信名片、打赏二维码、页脚徽标、404 背景、预加载头像），关闭了需要额外服务的打赏 / 评论 / 搜索，开启了字数统计，页脚改为本站说明。站点内容可以直接替换成自己的。
+
+---
+
+## 七、在多台电脑上使用
+
+整套博客（文章、配置、部署工作流）都在 Git 仓库里，`node_modules/` 和 `public/` 不入库、由 npm 与 CI 自动还原，所以任何电脑 clone 之后装一次依赖即可开工。
+
+### 新电脑准备
+
+1. 安装 [Node.js](https://nodejs.org/)（≥ 20，建议 LTS）和 [Git](https://git-scm.com/)
+2. 克隆仓库并还原依赖：
+
+```bash
+git clone https://github.com/gukeyang/gukeyang.github.io.git
+cd gukeyang.github.io
+npm ci          # 按 package-lock.json 还原与原电脑完全一致的依赖
+npm run dev     # 本地预览 http://localhost:4000
+```
+
+3. 首次在这台电脑 `git push` 时完成 GitHub 认证：一般会弹出浏览器授权窗口；若不弹，去 Settings → Developer settings → Personal access tokens 生成勾了 `repo` 权限的 token，推送时当密码用。
+
+### 日常多设备同步
+
+- 每次开始写作前先 `git pull`，写完 `git add . && git commit -m "..." && git push`，推送后 1–2 分钟自动上线
+- 避免同时在两台电脑改同一篇文章，容易冲突
+- 主题升级后记得提交 `package.json` 和 `package-lock.json`，这样其他电脑 `git pull` + `npm ci` 才能同步升级
+
+> 国内网络直连 GitHub 不稳定时，`git push` 报 `CONNECT tunnel failed` / `schannel` 错误的解决办法：
+> ① 有代理软件：`git config --global http.proxy http://127.0.0.1:7890`（换成实际端口），不再需要时 `git config --global --unset http.proxy`；
+> ② 无代理：重试几次，或换网络环境再推。
