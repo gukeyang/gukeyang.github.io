@@ -15,10 +15,22 @@ menu:
     关于本站: /about/ || anzhiyu-icon-paper-plane
     随便逛逛: 'javascript:toRandomPost() || anzhiyu-icon-shoe-prints1'
 
+# nav.menu 即使 enable: false 也会被渲染进右键菜单，务必换成自己的链接
 nav:
   enable: false
   travelling: false
   clock: false
+  menu:
+    - title: 本站
+      item:
+        - name: 关于
+          link: /about/
+          icon: /img/favicon.svg
+    - title: 项目
+      item:
+        - name: GitHub
+          link: https://github.com/YOUR_GITHUB_USERNAME
+          icon: /img/favicon.svg
 
 social:
   Github: https://github.com/YOUR_GITHUB_USERNAME || anzhiyu-icon-github
